@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BRL.AbstractBRL">
+    <Position X="1.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>AbstractBRL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BRL.CategoriaBRL">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgBEAAIAQAAABAAAAAAAAAAAEAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>CategoriaBRL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BRL.ArticuloBRL">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAEAAIAAAAABAAAAAAAAAgAEAAIAAAAAAQAAAAAA=</HashCode>
+      <FileName>ArticuloBRL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BRL.ProvedorBRL">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProvedorBRL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

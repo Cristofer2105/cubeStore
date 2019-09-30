@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="cubeStore.UserControlAddProducts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:cubeStore"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    <Grid  Background="#EA5555" x:Name="GridMain">
+        <StackPanel Orientation="Vertical"  Background="#EA5555">
+            <StackPanel Height="60" VerticalAlignment="Top" Orientation="Horizontal" Background="#EA4A4A">
+                <ListView x:Name="ListViewMenu" Foreground="#CD1818" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
+                    <ListViewItem x:Name="ItemHome" Height="60" Foreground="White" VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal" Width="384">
+                            <materialDesign:PackIcon Kind="FormatHorizontalAlignLeft" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Volver" VerticalAlignment="Center" Margin="270 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+            
+            <StackPanel HorizontalAlignment="Left" Margin="20">
+                <Button Content="Articulo" d:LayoutOverrides="Height" Background="#F69B2D" Width="300" Margin="2" x:Name="btnArticulo" Click="BtnArticulo_Click"/>
+                <Button Content="Categoria" d:LayoutOverrides="Height" Background="#F69B2D" Width="300"  Margin="2" x:Name="btnCategoria" Click="BtnCategoria_Click"/>
+                <Button Content="Provedor" d:LayoutOverrides="Height" Background="#F69B2D" Width="300"  Margin="2" x:Name="btnUbicacion" Click="BtnUbicacion_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
