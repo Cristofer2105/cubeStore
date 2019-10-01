@@ -47,17 +47,17 @@ namespace Common
 			get { return fechaHoraActualizacion; }
 			set { fechaHoraActualizacion = value; }
 		}
-		private float latitud;
+		private double latitud;
 
-		public float Latitud
+		public double Latitud
 		{
 			get { return latitud; }
 			set { latitud = value; }
 		}
 
-		private float longitud;
+		private double longitud;
 
-		public float Longitud
+		public double Longitud
 		{
 			get { return longitud; }
 			set { longitud = value; }
@@ -69,7 +69,7 @@ namespace Common
 
 		}
 
-		public Provedor(int idProvedor, string nit,string razonSocial, byte estado, DateTime fechaHoraActualizacion, float latitud, float longitud)
+		public Provedor(int idProvedor, string nit,string razonSocial, byte estado, DateTime fechaHoraActualizacion, double latitud, double longitud)
 		{
 			this.idProvedor=idProvedor;
 			this.nit=nit;
@@ -79,7 +79,7 @@ namespace Common
 			this.latitud = latitud;
 			this.longitud = longitud;
 		}
-		public Provedor(string nit, string razonSocial, float latitud, float longitud)
+		public Provedor(string nit, string razonSocial, double latitud, double longitud)
 		{		
 			this.nit = nit;
 			this.razonSocial = razonSocial;

@@ -89,7 +89,7 @@ namespace cubeStore
 
 			mapaProv.Children.Add(marcador);
 
-			MessageBox.Show(pinUbicacion.Latitude + "  " + pinUbicacion.Longitude);
+			
 		}
 
 		private void BtnRegistrarProvedor_Click(object sender, RoutedEventArgs e)
@@ -97,7 +97,7 @@ namespace cubeStore
 			try
 			{
 				//Insertar
-				provedor = new Provedor(txtNit.Text,txtRazonSocial.Text,(float)pinUbicacion.Latitude,(float)pinUbicacion.Longitude);
+				provedor = new Provedor(txtNit.Text.Trim(),txtRazonSocial.Text.Trim(),(float)pinUbicacion.Latitude,(float)pinUbicacion.Longitude);
 				brl = new ProvedorBRL(provedor);
 				brl.Insert();
 				MessageBox.Show("Registro Exitoso");
@@ -117,6 +117,18 @@ namespace cubeStore
 		{
 
 			LoadDataGrid();
+		}
+
+		private void BtnVolverMenPro_Click(object sender, RoutedEventArgs e)
+		{
+			menuCRUDproductos menCrud = new menuCRUDproductos();
+			this.Close();
+			menCrud.Show();
+		}
+
+		private void BtnSalir_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
 		}
 	}
 }

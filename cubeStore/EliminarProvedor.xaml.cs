@@ -69,10 +69,24 @@ namespace cubeStore
 				{
 					DataRowView dataRow = (DataRowView)dgdDatos.SelectedItem;
 					int id = int.Parse(dataRow.Row.ItemArray[0].ToString());
+					double aux = double.Parse(dataRow.Row.ItemArray[3].ToString());
+					double aux2 = double.Parse(dataRow.Row.ItemArray[4].ToString());
+					//longitud = double.Parse(dataRow.Row.ItemArray[3].ToString());
 					brl = new ProvedorBRL();
 					provedor = brl.Get(id);
-
+					//MessageBox.Show(  " " + aux);
 					//Cargar Datos
+
+					Location location = new Location();
+					location.Latitude = aux;
+					location.Longitude = aux2;
+					Pushpin pushpin = new Pushpin();
+
+					pushpin.Location = location;
+					mapaProv.Children.Clear();
+					mapaProv.Children.Add(pushpin);
+					mapaProv.Center = location;
+
 					txtNit.Text = provedor.Nit;
 					txtRazonSocial.Text = provedor.RazonSocial;
 					
@@ -112,6 +126,11 @@ namespace cubeStore
 			menuCRUDproductos menu = new menuCRUDproductos();
 			this.Close();
 			menu.Show();
+		}
+
+		private void BtnSalir_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
 		}
 	}
 }

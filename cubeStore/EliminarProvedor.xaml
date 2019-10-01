@@ -21,7 +21,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="Account" Width="30" Height="30"/>
                 </Button>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir" Click="BtnSalir_Click">
                     <materialDesign:PackIcon Kind="Power" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
@@ -35,8 +35,8 @@
             <Grid HorizontalAlignment="Left" Width="350" Margin="10">
                 <Label Content="Eliminar Provedor" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5 80" Foreground="White" FontSize="18" FontWeight="Bold" />
                 <StackPanel VerticalAlignment="Center" Margin="15">
-                    <TextBox Foreground="White" Margin="0,10" materialDesign:HintAssist.Hint="Nit" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" FontWeight="Bold" x:Name="txtNit"/>
-                    <TextBox Foreground="White" Margin="0,10" materialDesign:HintAssist.Hint="Razon Social" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" FontWeight="Bold" x:Name="txtRazonSocial"/>
+                    <TextBox Foreground="White" Margin="0,10" materialDesign:HintAssist.Hint="Nit" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" FontWeight="Bold" x:Name="txtNit" IsEnabled="False"/>
+                    <TextBox Foreground="White" Margin="0,10" materialDesign:HintAssist.Hint="Razon Social" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" FontWeight="Bold" x:Name="txtRazonSocial" IsEnabled="False"/>
                 </StackPanel>
             </Grid>
             <Grid HorizontalAlignment="Center" Width="80" Margin="355,0,425,0">

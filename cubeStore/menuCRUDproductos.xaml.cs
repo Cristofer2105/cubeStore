@@ -86,5 +86,10 @@ namespace cubeStore
 			this.Close();
 			sle.Show();
 		}
+
+		private void BtnSalir_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
 	}
 }

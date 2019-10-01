@@ -66,8 +66,8 @@ namespace cubeStore
 				{
 					//Modificar
 					//categoria = new Categoria(txtnombreCategoria.Text);
-					provedor.Nit = txtNit.Text;
-					provedor.RazonSocial = txtRazonSocial.Text;
+					provedor.Nit = txtNit.Text.Trim();
+					provedor.RazonSocial = txtRazonSocial.Text.Trim();
 					provedor.Latitud = (float)pinUbicacion.Latitude;
 					provedor.Longitud = (float)pinUbicacion.Longitude;
 
@@ -96,10 +96,21 @@ namespace cubeStore
 				{
 					DataRowView dataRow = (DataRowView)dgdDatos.SelectedItem;
 					int id = int.Parse(dataRow.Row.ItemArray[0].ToString());
+					double aux = double.Parse(dataRow.Row.ItemArray[3].ToString());
+					double aux2 = double.Parse(dataRow.Row.ItemArray[4].ToString());
 					brl = new ProvedorBRL();
 					provedor = brl.Get(id);
 
 					//Cargar Datos
+					Location location = new Location();
+					location.Latitude = aux;
+					location.Longitude = aux2;
+					Pushpin pushpin = new Pushpin();
+
+					pushpin.Location = location;
+					mapaProv.Children.Clear();
+					mapaProv.Children.Add(pushpin);
+					mapaProv.Center = location;
 					txtNit.Text = provedor.Nit;
 					txtRazonSocial.Text = provedor.RazonSocial;
 
@@ -156,6 +167,11 @@ namespace cubeStore
 		{
 			mapaProv.Focus();
 			mapaProv.Mode = new AerialMode(true);
+		}
+
+		private void BtnSalir_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
 		}
 	}
 }

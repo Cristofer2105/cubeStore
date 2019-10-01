@@ -50,6 +50,12 @@ namespace BRL
 			return dal.Select();
 		}
 
+		public DataTable SelectTodo()
+		{
+			dal = new ProvedorDal();
+			return dal.SelectTodo();
+		}
+
 		public override void Update()
 		{
 			dal.Update();

@@ -21,7 +21,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="Account" Width="30" Height="30"/>
                 </Button>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir" Click="BtnSalir_Click">
                     <materialDesign:PackIcon Kind="Power" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
@@ -54,7 +54,7 @@
             </Grid>
 
             <Grid HorizontalAlignment="Right" Width="420" Margin="5" VerticalAlignment="Bottom" Height="230">
-                <DataGrid x:Name="dgdDatos" Height="220" CanUserAddRows="False" IsReadOnly="True" Margin="-210,5,0,5" />
+                <DataGrid x:Name="dgdDatos" Height="220" CanUserAddRows="False" IsReadOnly="True" Margin="-210,5,0,5" SelectionChanged="DgdDatos_SelectionChanged"/>
             </Grid>
             <Button Content="Volver" Background="#F69B2D" HorizontalAlignment="Left" Margin="10,339,0,0" VerticalAlignment="Top" Width="202" Height="44" FontSize="20" x:Name="btnRegistrarProvedor" Click="BtnRegistrarProvedor_Click" />
         </Grid>

@@ -69,7 +69,7 @@ namespace cubeStore
 		}
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
-			Close();
+			this.Close();
 		}
 
 		private void BtnCancelar_Click(object sender, RoutedEventArgs e)

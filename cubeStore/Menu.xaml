@@ -37,9 +37,12 @@
                     <DropShadowEffect BlurRadius="40" ShadowDepth="1"/>
                 </Grid.Effect>
                 <Button x:Name="btnProductos" Background="{x:Null}" BorderBrush="{x:Null}"  Height="300" Click="BtnProductos_Click">
+
                     <materialDesign:PackIcon Kind="DesktopClassic" Width="40" Height="40" IsEnabled="False"/>
+
+
                 </Button>
-                <TextBlock Text="Productos" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="154,171,150,95" Width="96" Height="34" IsEnabled="False"/>
+                <TextBlock Text="Productos" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="150,208,144,58" Width="106" Height="34" IsEnabled="False"/>
             </Grid>
 
             <Grid  Background="#EA5555" Height="180" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom">
@@ -49,7 +52,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180" Click="Button_Click">
                     <materialDesign:PackIcon Kind="Information" Width="40" Height="40" IsEnabled="False"/>
                 </Button>
-                <TextBlock Text="Acerca de cubestore" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="18,114,10,42" Width="172" IsEnabled="False"/>
+                <TextBlock Text="Acerca de cubestore" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="18,130,10,26" Width="172" IsEnabled="False"/>
             </Grid>
 
             <Grid  Background="#EA5555" Height="180" Width="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="205,0,0,0">
@@ -59,7 +62,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180">
                     <materialDesign:PackIcon Kind="Paper" Width="40" Height="40" IsEnabled="False"/>
                 </Button>
-                <TextBlock Text="Reportes" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="54,114,54,34" Width="82" Height="32" IsEnabled="False"/>
+                <TextBlock Text="Reportes" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="57,138,51,10" Width="82" Height="32" IsEnabled="False"/>
             </Grid>
 
             <Grid VerticalAlignment="Top" Background="#EA5555" Height="240" Width="460" HorizontalAlignment="Right">
@@ -69,7 +72,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="240">
                     <materialDesign:PackIcon Kind="AccountSupervisor" Width="40" Height="40" IsEnabled="False" />
                 </Button>
-                <TextBlock Text="Usuarios" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="192,132,182,81" Width="86" IsEnabled="False"/>
+                <TextBlock Text="Usuarios" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="189,170,185,44" Width="86" IsEnabled="False"/>
             </Grid>
 
             <Grid VerticalAlignment="Bottom" Background="#EA5555" Height="240" Width="460" HorizontalAlignment="Right" >
@@ -79,7 +82,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="240">
                     <materialDesign:PackIcon Kind="Cart" Width="40" Height="40" IsEnabled="False"/>
                 </Button>
-                <TextBlock Text="Ventas" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="202,140,199,74" IsEnabled="False"/>
+                <TextBlock Text="Ventas" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="202,174,199,38" IsEnabled="False"/>
             </Grid>
 
         </Grid>

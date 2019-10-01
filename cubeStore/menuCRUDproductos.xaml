@@ -20,7 +20,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="Account" Width="30" Height="30"/>
                 </Button>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir" Click="BtnSalir_Click">
                     <materialDesign:PackIcon Kind="Power" Width="30" Height="30"/>
                 </Button>
             </StackPanel>

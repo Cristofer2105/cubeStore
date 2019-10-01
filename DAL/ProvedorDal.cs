@@ -78,7 +78,24 @@ namespace DAL
 			}
 			return res;
 		}
+		
+		public  DataTable SelectTodo()
+		{
 
+			DataTable res = new DataTable();
+			string query = "SELECT * FROM vwProvedorSelectTodo";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return res;
+		}
 		public override void Update()
 		{
 
@@ -113,7 +130,7 @@ namespace DAL
 
 				while (dr.Read())
 				{
-					res = new Provedor( int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(),byte.Parse(dr[3].ToString()), Convert.ToDateTime(dr[6].ToString()),float.Parse(dr[4].ToString()), float.Parse(dr[5].ToString()));
+					res = new Provedor( int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(),byte.Parse(dr[3].ToString()), Convert.ToDateTime(dr[6].ToString()),double.Parse(dr[4].ToString()), double.Parse(dr[5].ToString()));
 				}
 			}
 			catch (Exception ex)
