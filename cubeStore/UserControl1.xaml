@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:cubeStore"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="480" d:DesignWidth="800">
     <Grid  Background="#EA5555" Height="300" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="GridMain">
              <!--<Button x:Name="btnProductos" Background="{x:Null}" BorderBrush="{x:Null}"  Height="300">
                     <materialDesign:PackIcon Kind="Add" Width="40" Height="40" IsEnabled="False"/>                   

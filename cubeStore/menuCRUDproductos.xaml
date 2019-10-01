@@ -56,23 +56,45 @@
              
             </Grid>
 
-            <Grid  Background="#EA5555" Height="180" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Grid  Background="#EA5555" Height="180" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="GridMain3">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180">
+                <materialDesign:PackIcon Kind="Edit" Width="40" Height="40" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                <ListView x:Name="ListViewMenuActM" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenuActM_SelectionChanged">
+                    <ListViewItem x:Name="ItemHome3" Height="60" Foreground="White" VerticalAlignment="Top" >
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="Actualizar a :" VerticalAlignment="Center"/>
+                            <materialDesign:PackIcon Kind="FormatHorizontalAlignRight" Height="25" Width="25" Margin="70 10" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <!--<Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180">
                     <materialDesign:PackIcon Kind="Edit" Width="40" Height="40" IsEnabled="False"/>
-                </Button>
+                </Button>-->
                 <TextBlock Text="Modificar" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="58,114,60,42" Width="82" IsEnabled="False"/>
             </Grid>
 
-            <Grid  Background="#EA5555" Height="180" Width="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="205,0,0,0">
+            <Grid  Background="#EA5555" Height="180" Width="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="205,0,0,0" x:Name="GridMain2">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180">
+
+                <materialDesign:PackIcon Kind="Remove" Width="40" Height="40" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                <ListView x:Name="ListViewMenuElimOf" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenuElimOf_SelectionChanged">
+                    <ListViewItem x:Name="ItemHome2" Height="60" Foreground="White" VerticalAlignment="Top" >
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="Eliminar a :" VerticalAlignment="Center"/>
+                            <materialDesign:PackIcon Kind="FormatHorizontalAlignRight" Height="25" Width="25" Margin="70 10" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+
+                <!--<Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180">
                     <materialDesign:PackIcon Kind="Remove" Width="40" Height="40" IsEnabled="False"/>
-                </Button>
+                </Button>-->
                 <TextBlock Text="Eliminar" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="61,110,60,38" Width="69" Height="32" IsEnabled="False"/>
             </Grid>
 
@@ -100,7 +122,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="240">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Height="240" x:Name="btnIrProvedores" Click="BtnIrProvedores_Click">
                     <materialDesign:PackIcon Kind="TruckDelivery" Width="40" Height="40" IsEnabled="False"/>
                 </Button>
                 <TextBlock Text="Provedores" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="177,140,179,74" IsEnabled="False" Width="104"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cubeStore.User_Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,41 @@ namespace cubeStore
 				default:
 					break;
 			}
+		}
+
+		private void ListViewMenuElimOf_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			UserControl usc = null;
+			GridMain2.Children.Clear();
+
+			switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+			{
+				case "ItemHome2":
+					usc = new UserControlOpcionesElim();
+					GridMain2.Children.Add(usc);
+					break;												
+			}
+		}
+
+		private void ListViewMenuActM_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			UserControl usc = null;
+			GridMain3.Children.Clear();
+
+			switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+			{
+				case "ItemHome3":
+					usc = new UserControlActualizarOptions();
+					GridMain3.Children.Add(usc);
+					break;
+			}
+		}
+
+		private void BtnIrProvedores_Click(object sender, RoutedEventArgs e)
+		{
+			ProvedoresVista sle = new ProvedoresVista();
+			this.Close();
+			sle.Show();
 		}
 	}
 }

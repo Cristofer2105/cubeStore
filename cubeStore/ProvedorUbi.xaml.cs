@@ -30,6 +30,26 @@ namespace cubeStore
 		{
 			InitializeComponent();
 		}
+		private void LoadDataGrid()
+		{
+			try
+			{
+				brl = new ProvedorBRL();
+				dgdDatos.ItemsSource = brl.Select().DefaultView;
+				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
+			}
+
+		}
+		private void LimpiarCampos()
+		{
+			txtNit.Clear();
+			txtRazonSocial.Clear();
+		}
 
 		private void BtnSatelite_Click(object sender, RoutedEventArgs e)
 		{
@@ -81,13 +101,22 @@ namespace cubeStore
 				brl = new ProvedorBRL(provedor);
 				brl.Insert();
 				MessageBox.Show("Registro Exitoso");
-				
+				LoadDataGrid();
+				LimpiarCampos();
+
+
 			}
 			catch (Exception ex)
 			{
 
 				MessageBox.Show(ex.Message);
 			}
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+
+			LoadDataGrid();
 		}
 	}
 }

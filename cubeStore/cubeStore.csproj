@@ -64,8 +64,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActualizarProvedor.xaml.cs">
+      <DependentUpon>ActualizarProvedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EliminarProvedor.xaml.cs">
+      <DependentUpon>EliminarProvedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProvedoresVista.xaml.cs">
+      <DependentUpon>ProvedoresVista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProvedorUbi.xaml.cs">
       <DependentUpon>ProvedorUbi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlActualizarOptions.xaml.cs">
+      <DependentUpon>UserControlActualizarOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlElimiMenu.xaml.cs">
+      <DependentUpon>UserControlElimiMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlOpcionesElim.xaml.cs">
+      <DependentUpon>UserControlOpcionesElim.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
@@ -77,7 +95,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ActualizarProvedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminProductos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EliminarProvedor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,7 +140,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ProvedoresVista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProvedorUbi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlActualizarOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlElimiMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlOpcionesElim.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,5 +226,6 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

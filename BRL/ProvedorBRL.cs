@@ -36,7 +36,7 @@ namespace BRL
 		}
 		public override void Delete()
 		{
-			throw new NotImplementedException();
+			dal.Delete();
 		}
 
 		public override void Insert()
@@ -46,12 +46,18 @@ namespace BRL
 
 		public override DataTable Select()
 		{
-			throw new NotImplementedException();
+			dal = new ProvedorDal();
+			return dal.Select();
 		}
 
 		public override void Update()
 		{
-			throw new NotImplementedException();
+			dal.Update();
+		}
+		public Provedor Get(int idProvedor)
+		{
+			dal = new ProvedorDal();
+			return dal.Get(idProvedor);
 		}
 	}
 }

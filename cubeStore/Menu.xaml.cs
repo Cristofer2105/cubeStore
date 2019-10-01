@@ -34,7 +34,7 @@ namespace cubeStore
 
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
-			Close();
+			this.Close();
 		}
 		private void BtnProductos_Click(object sender, RoutedEventArgs e)
 		{

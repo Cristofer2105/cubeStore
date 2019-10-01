@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="cubeStore.UserControlElimiMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:cubeStore"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+            d:DesignHeight="480" d:DesignWidth="800">
+    <Grid  Background="#EA5555" Height="180" Width="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="205,0,0,0" x:Name="GridMain">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
+        </Grid.Effect>
+
+        <materialDesign:PackIcon Kind="Remove" Width="40" Height="40" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        <ListView x:Name="ListViewMenuElim" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListViewItem x:Name="ItemHome" Height="60" Foreground="White" VerticalAlignment="Top" >
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="Eliminar a :" VerticalAlignment="Center"/>
+                    <materialDesign:PackIcon Kind="FormatHorizontalAlignRight" Height="25" Width="25" Margin="70 10" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </ListViewItem>
+        </ListView>
+
+        <!--<Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180">
+                    <materialDesign:PackIcon Kind="Remove" Width="40" Height="40" IsEnabled="False"/>
+                </Button>-->
+        <TextBlock Text="Eliminar" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="50,105,55,33" Width="75" Height="32" IsEnabled="False"/>
+    </Grid>
+</UserControl>
