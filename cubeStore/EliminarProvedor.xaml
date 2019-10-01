@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="AgregarProvedor" Height="600" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
     <StackPanel>
-
+      
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
@@ -50,7 +50,7 @@
             <Grid HorizontalAlignment="Right" Width="420" Margin="5" VerticalAlignment="Bottom" Height="230">
                 <DataGrid x:Name="dgdDatos" Height="220" CanUserAddRows="False" IsReadOnly="True" Margin="-69,5,0,5" SelectionChanged="DgdDatos_SelectionChanged"/>
             </Grid>
-            <Button Content="Eliminar" Background="#F69B2D" HorizontalAlignment="Left" Margin="10,324,0,0" VerticalAlignment="Top" Width="340" Height="44" FontSize="20" x:Name="btnEliminar" Click="BtnEliminar_Click_1"/>
+            <Button  Content="Eliminar" Background="#F69B2D" HorizontalAlignment="Left" Margin="10,324,0,0" VerticalAlignment="Top" Width="340" Height="44" FontSize="20" x:Name="btnEliminar" Click="BtnEliminar_Click_1" />
             <Button Content="Volver" Background="#F69B2D" HorizontalAlignment="Left" Margin="10,385,0,0" VerticalAlignment="Top" Width="340" Height="44" FontSize="20" x:Name="btnVolver" Click="BtnVolver_Click"/>
         </Grid>
 
