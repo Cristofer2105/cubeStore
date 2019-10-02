@@ -94,22 +94,32 @@ namespace cubeStore
 
 		private void BtnRegistrarProvedor_Click(object sender, RoutedEventArgs e)
 		{
-			try
+			txtNit.Text = txtNit.Text.Trim();
+			txtRazonSocial.Text = txtRazonSocial.Text.Trim();
+			if (Validate.OnlyLettersAndSpaces(txtRazonSocial.Text) && Validate.NitText(txtNit.Text)&&txtNit.Text!=" "&&txtRazonSocial.Text!=" ")
 			{
+				try
+				{												
 				//Insertar
 				provedor = new Provedor(txtNit.Text.Trim(),txtRazonSocial.Text.Trim(),(float)pinUbicacion.Latitude,(float)pinUbicacion.Longitude);
 				brl = new ProvedorBRL(provedor);
 				brl.Insert();
 				MessageBox.Show("Registro Exitoso");
-				LoadDataGrid();
+					mapaProv.Children.Clear();
+					LoadDataGrid();
 				LimpiarCampos();
 
 
-			}
-			catch (Exception ex)
-			{
+				}
+				catch (Exception ex)
+				{
 
-				MessageBox.Show(ex.Message);
+					MessageBox.Show(ex.Message);
+				}
+			}
+			else
+			{
+				MessageBox.Show("Ingrese Correctamente los campos");
 			}
 		}
 

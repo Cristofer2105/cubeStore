@@ -35,8 +35,8 @@
             <Grid HorizontalAlignment="Left" Width="350">
                 <Label Content="Registrar nuevo Provedor" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5 80" Foreground="White" FontSize="18" FontWeight="Bold" />
                 <StackPanel VerticalAlignment="Center" Margin="15">
-                    <TextBox Foreground="White" Margin="0,10" materialDesign:HintAssist.Hint="Nit" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" FontWeight="Bold" x:Name="txtNit"/>
-                    <TextBox Foreground="White" Margin="0,10" materialDesign:HintAssist.Hint="Razon Social" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" FontWeight="Bold" x:Name="txtRazonSocial"/>
+                    <TextBox Foreground="White" Margin="0,10" materialDesign:HintAssist.Hint="Nit" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" FontWeight="Bold" x:Name="txtNit" AutomationProperties.IsRequiredForForm="True"/>
+                    <TextBox Foreground="White" Margin="0,10" materialDesign:HintAssist.Hint="Razon Social" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" FontWeight="Bold" x:Name="txtRazonSocial" AutomationProperties.IsRequiredForForm="True"/>
                 </StackPanel>
             </Grid>
             <Grid HorizontalAlignment="Center" Width="80" Margin="355,0,425,235">

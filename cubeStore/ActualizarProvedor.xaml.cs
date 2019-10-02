@@ -74,6 +74,7 @@ namespace cubeStore
 					brl = new ProvedorBRL(provedor);
 					brl.Update();
 					MessageBox.Show("Registro Modificado Exitosamente");
+					mapaProv.Children.Clear();
 					LoadDataGrid();
 					LimpiarCampos();
 				}
