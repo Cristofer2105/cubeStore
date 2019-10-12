@@ -6,30 +6,46 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"        
-        Title="Login" Height="600" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
-    <StackPanel>
-
-        <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
-            <Grid.Effect>
+        Title="Login" Height="500" Width="350" 
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        FontFamily="Segoe UI Emoji">
+    <Grid  Background="#EA5555">
+        <Grid Height="70" VerticalAlignment="Top" Background="#EA5555">
+            <!--<Grid.Effect>
                 <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
             </Grid.Effect>
-
+-->
             <Image Source="imagenes/cubestore.png" HorizontalAlignment="Left" Margin="10 0" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-
-                <Button Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir" Click="BtnSalir_Click">
                     <materialDesign:PackIcon Kind="Power" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
-            <TextBlock Text="Login" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+            <TextBlock Text="INICIO DE SESION" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="42" Margin="90,131,84,-103" Width="176" FontWeight="Bold"/>
         </Grid>
+        <!--<Rectangle Height="280" VerticalAlignment="Top">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF33288B" Offset="0.546"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>-->
 
-        <Grid Margin="20" VerticalAlignment="Top" Background="#EA5555" Height="480">
-            <Grid.Effect>
-                <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
-            </Grid.Effect>
-           
+        <Rectangle Width="280" Height="240" VerticalAlignment="Bottom" Margin="0,80" RadiusY="10" RadiusX="10" Fill="White">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Grid VerticalAlignment="Bottom" Margin="35,80" Height="240">
+            <StackPanel VerticalAlignment="Center" Margin="15">
+                <TextBox Margin="0,10" materialDesign:HintAssist.Hint="USUARIO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                <PasswordBox Margin="0,10" materialDesign:HintAssist.Hint="CONTRASEÑA" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+            </StackPanel>
         </Grid>
-
-    </StackPanel>
+        <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="INGRESAR" Background="#F69B2D" FontWeight="Bold" x:Name="btnIngresar" Click="BtnIngresar_Click"/>
+    </Grid>
 </Window>

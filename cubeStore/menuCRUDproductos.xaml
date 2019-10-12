@@ -42,8 +42,8 @@
                     
                 </Button>-->
                 <materialDesign:PackIcon Kind="Add" Width="40" Height="40" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-                <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
-                    <ListViewItem x:Name="ItemHome" Height="60" Foreground="White" VerticalAlignment="Top" >
+                <ListView x:Name="ListViewMenu" Foreground="#EA5555" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
+                    <ListViewItem x:Name="ItemHome" Height="60" Foreground="White" VerticalAlignment="Top" Background="#E94949">
                         <StackPanel Orientation="Horizontal">
                            
                             <TextBlock Text="Agregar a :" VerticalAlignment="Center"/>
@@ -62,7 +62,7 @@
                 </Grid.Effect>
                 <materialDesign:PackIcon Kind="Edit" Width="40" Height="40" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
                 <ListView x:Name="ListViewMenuActM" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenuActM_SelectionChanged">
-                    <ListViewItem x:Name="ItemHome3" Height="60" Foreground="White" VerticalAlignment="Top" >
+                    <ListViewItem x:Name="ItemHome3" Height="60" Foreground="White" VerticalAlignment="Top" Background="#E94949" >
                         <StackPanel Orientation="Horizontal">
 
                             <TextBlock Text="Actualizar a :" VerticalAlignment="Center"/>
@@ -83,7 +83,7 @@
 
                 <materialDesign:PackIcon Kind="Remove" Width="40" Height="40" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
                 <ListView x:Name="ListViewMenuElimOf" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenuElimOf_SelectionChanged">
-                    <ListViewItem x:Name="ItemHome2" Height="60" Foreground="White" VerticalAlignment="Top" >
+                    <ListViewItem x:Name="ItemHome2" Height="60" Foreground="White" VerticalAlignment="Top" Background="#E94949">
                         <StackPanel Orientation="Horizontal">
 
                             <TextBlock Text="Eliminar a :" VerticalAlignment="Center"/>

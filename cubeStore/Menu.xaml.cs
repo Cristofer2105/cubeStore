@@ -34,13 +34,22 @@ namespace cubeStore
 
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
+			Login login = new Login();
 			this.Close();
+			login.Show();
 		}
 		private void BtnProductos_Click(object sender, RoutedEventArgs e)
 		{
 			menuCRUDproductos menuPr = new menuCRUDproductos();
 			this.Close();
 			menuPr.Show();
+		}
+
+		private void BtnUsuarios_Click(object sender, RoutedEventArgs e)
+		{
+			Usuarios usuarios = new Usuarios();
+			this.Close();
+			usuarios.Show();
 		}
 	}
 }

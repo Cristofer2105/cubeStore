@@ -15,21 +15,23 @@ using System.Windows.Shapes;
 namespace cubeStore
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Usuarios.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class Usuarios : Window
     {
-        public Login()
+        public Usuarios()
         {
             InitializeComponent();
         }
 
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
+			Login login = new Login();
 			this.Close();
+			login.Show();
 		}
 
-		private void BtnIngresar_Click(object sender, RoutedEventArgs e)
+		private void BtnVolver_Click(object sender, RoutedEventArgs e)
 		{
 			MainWindow main = new MainWindow();
 			this.Close();
