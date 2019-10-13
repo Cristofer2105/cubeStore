@@ -46,6 +46,7 @@
     <Compile Include="CategoriaBRL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvedorBRL.cs" />
+    <Compile Include="UsuarioBRL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

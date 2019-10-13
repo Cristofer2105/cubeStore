@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Common;
+using BRL;
+using System.Data;
 
 namespace cubeStore
 {
@@ -19,6 +22,7 @@ namespace cubeStore
     /// </summary>
     public partial class Login : Window
     {
+		UsuarioBRL brl;
         public Login()
         {
             InitializeComponent();
@@ -31,9 +35,40 @@ namespace cubeStore
 
 		private void BtnIngresar_Click(object sender, RoutedEventArgs e)
 		{
-			MainWindow main = new MainWindow();
-			this.Close();
-			main.Show();
+			txtUusario.Text = txtUusario.Text.Trim();
+			if (txtUusario.Text!=""&&txtContrasenia.Password!="")
+			{
+				try
+				{
+					brl = new UsuarioBRL();
+					DataTable dt = brl.Login(txtUusario.Text, txtContrasenia.Password);
+					if (dt.Rows.Count>0)
+					{
+						
+						Sesion.idSesion= int.Parse(dt.Rows[0][0].ToString());
+						Sesion.usuarioSesion= dt.Rows[0][1].ToString();
+						Sesion.rolSesion= dt.Rows[0][2].ToString();
+						MainWindow main = new MainWindow();
+						this.Visibility=Visibility.Hidden;
+						main.Show();
+
+					}
+					else
+					{
+						MessageBox.Show("Error Datos 2");
+					}
+				}
+				catch (Exception ex)
+				{
+
+					MessageBox.Show("Error"+ex.Message);
+				}
+			}
+			else
+			{
+				MessageBox.Show("Error Datos ");
+			}
+			
 		}
 	}
 }
