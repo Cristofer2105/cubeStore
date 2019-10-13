@@ -29,7 +29,18 @@ namespace DAL
 		#region metodos de la clase
 		public override void Delete()
 		{
-			throw new NotImplementedException();
+			string query = "UPDATE Empleado SET estadoEmpleado=0 WHERE idEmpleado = @idEmpleado";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				//Escribir Log
+				throw ex;
+			}
 		}
 
 		public override void Insert()
@@ -63,7 +74,28 @@ namespace DAL
 
 		public override void Update()
 		{
-			throw new NotImplementedException();
+			string query = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,sexo=@sexo,telefonosEmpleado=@telefonosEmpleado,usuario=@usuario,contrasenia=@contrasenia,rolEmpleado=@rolEmpleado,email=@email WHERE idEmpleado=@idEmpleado";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@nombres", user.Nombres);
+				cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
+				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
+				cmd.Parameters.AddWithValue("@sexo", user.Sexo);
+				cmd.Parameters.AddWithValue("@telefonosEmpleado", user.Telefonos);
+				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
+				cmd.Parameters.AddWithValue("@rolEmpleado", user.Rol);
+				cmd.Parameters.AddWithValue("@email", user.Correo);
+				cmd.Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
+
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				//Escribir Log
+				throw ex;
+			}
 		}
 		public DataTable Login(string usuario, string contrasenia)
 		{
