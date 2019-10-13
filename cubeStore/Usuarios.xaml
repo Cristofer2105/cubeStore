@@ -6,7 +6,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"
-        Title="Usuarios" Height="900" Width="1200"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+        Title="Usuarios" Height="700" Width="1200"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
     <StackPanel>
 
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
@@ -27,13 +27,13 @@
             </StackPanel>
             <TextBlock FontWeight="Bold" Text="Usuarios" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="44" Margin="434,26,475,10" Width="91"/>
         </Grid>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Height="618">
 
-            <Grid Height="810" Width="380" HorizontalAlignment="Left" Background="#EA5555" Margin="5">
+            <Grid Height="610" Width="380" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#EA5555" Margin="5">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Grid VerticalAlignment="Center" Margin="35,10,35,20" Height="476" Background="White">
+                <Grid VerticalAlignment="Center" Margin="30,20,30,20" Height="476" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="447*"/>
@@ -54,11 +54,11 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Grid VerticalAlignment="Top" Height="810" Width="410" Background="#EA5555" Margin="5">
+            <Grid VerticalAlignment="Center" Height="610" Width="410" Background="#EA5555" Margin="5" HorizontalAlignment="Center">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Grid VerticalAlignment="Bottom" Margin="35,10,35,20" Height="476" Background="White">
+                <Grid VerticalAlignment="Center" Margin="35,32,35,32" Height="516" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="447*"/>
@@ -67,7 +67,7 @@
                         <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                     </Grid.Effect>
                     <StackPanel Margin="15" Grid.RowSpan="2">
-                        <TextBlock Text="MODIFICAR USUARIO" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="Champagne &amp; Limousines"/>
+                        <TextBlock Text="MODIFICAR / ELIMINAR USUARIO" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="Champagne &amp; Limousines"/>
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NOMBRES" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO PATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO MATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
@@ -75,41 +75,32 @@
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="ROL DE EMPLEADO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="TELEFONOS" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="SEXO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <Button Content="MODIFICAR"  FontWeight="Bold" Click="BtnAgregarUsuario_Click" Background="#004E6F" Margin="0 10"/>
-                        </StackPanel>
-                  
-                </Grid>
-                <Grid x:Name="grdDatosUsuarios">
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
-                    </Grid.Effect>
-                    <DataGrid HorizontalAlignment="Left" Height="286" Margin="10,10,0,0" VerticalAlignment="Top" Width="390" x:Name="dgdDatos"/>
-                </Grid>
-            </Grid>
-            <Grid  VerticalAlignment="Top" Height="810" Width="380" Background="#EA5555" Margin="5">
-                <Grid.Effect>
-                    <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid VerticalAlignment="Center" Margin="35,10,35,20" Height="476" Background="White">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="29*"/>
-                        <RowDefinition Height="447*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.Effect>
-                    
-                        <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
-                    </Grid.Effect>
-                    <StackPanel Margin="15" Grid.RowSpan="2">
-                        <TextBlock Text="ELIMINAR USUARIO" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="Champagne &amp; Limousines"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NOMBRES" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO PATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO MATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="CORREO ELECTRONICO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="ROL DE EMPLEADO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="TELEFONOS" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="SEXO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <Button Content="ELIMINAR"  FontWeight="Bold" Click="BtnAgregarUsuario_Click" Background="#004E6F" Margin="0 10"/>
+                        <Button Content="MODIFICAR"  FontWeight="Bold" Background="#004E6F" Margin="0 10"/>
+                        <Button Content="ELIMINAR"  FontWeight="Bold"  Background="#004E6F" Margin="0 10"/>
                     </StackPanel>
+
+                </Grid>
+
+            </Grid>
+            <Grid  VerticalAlignment="Top" Height="610" Width="380" Background="#EA5555" Margin="5">
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
+                </Grid.Effect>
+                <Grid VerticalAlignment="Center" Margin="35,32,35,32" Height="516" Background="White">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="29*"/>
+                        <RowDefinition Height="447*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
+                    </Grid.Effect>
+                    <StackPanel Margin="15" Grid.RowSpan="2">
+                        <TextBlock Foreground="Black" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"  FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" Text="LISTA DE USUARIOS DEL SISTEMA" VerticalAlignment="Top"/>
+                        <DataGrid Width="260" Height="348" VerticalAlignment="Top" Margin="10"/>
+                        <Button Content="MODIFICAR"  FontWeight="Bold" Background="#004E6F" Margin="0 10"/>
+                        <Button Content="ELIMINAR"  FontWeight="Bold"  Background="#004E6F" Margin="0 10"/>
+                    </StackPanel>
+
                 </Grid>
             </Grid>
 
