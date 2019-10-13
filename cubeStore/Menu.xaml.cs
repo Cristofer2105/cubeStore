@@ -25,6 +25,21 @@ namespace cubeStore
 		{
 			InitializeComponent();
 			txbUsuarioSesion.Text = Sesion.VerInfo();
+	
+			switch (Sesion.rolSesion)
+			{
+				case "Editor":					
+					grdUsuarios.IsEnabled = false;
+					grdVentas.IsEnabled = false;
+					grdReportes.IsEnabled = false;
+					break;
+				case "Administrador":
+					break;
+				case "Vendedor":
+					grdProductos.IsEnabled = false;
+					grdUsuarios.IsEnabled = false;
+					break;
+			}
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)

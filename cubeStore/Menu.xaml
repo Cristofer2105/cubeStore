@@ -24,8 +24,8 @@
                     <materialDesign:PackIcon Kind="Power" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
-            <TextBlock Text="Inicio" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="417,26,420,24" Width="63"/>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="10" Height="30" Margin="614,40,134,10" x:Name="txbUsuarioSesion" Width="152"/>
+            <TextBlock Text="Inicio" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="400,26,420,24" Width="63"/>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="12" Width="250" Height="30" Margin="533,40,117,10" x:Name="txbUsuarioSesion" />
         </Grid>
 
         <Grid Margin="20" VerticalAlignment="Top" Background="#EA5555" Height="480">
@@ -33,7 +33,7 @@
                 <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
             </Grid.Effect>
 
-            <Grid  Background="#EA5555" Height="300" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid  Background="#EA5555" Height="300" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="grdProductos">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="40" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -56,7 +56,7 @@
                 <TextBlock Text="Acerca de cubestore" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="18,146,10,10" Width="172" IsEnabled="False"/>
             </Grid>
 
-            <Grid  Background="#EA5555" Height="180" Width="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="205,0,0,0">
+            <Grid x:Name="grdReportes" Background="#EA5555" Height="180" Width="190" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="205,0,0,0">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -66,7 +66,7 @@
                 <TextBlock Text="Reportes" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="55,138,53,10" Width="82" Height="32" IsEnabled="False"/>
             </Grid>
 
-            <Grid VerticalAlignment="Top" Background="#EA5555" Height="240" Width="460" HorizontalAlignment="Right">
+            <Grid x:Name="grdUsuarios" VerticalAlignment="Top" Background="#EA5555" Height="240" Width="460" HorizontalAlignment="Right">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -76,7 +76,7 @@
                 <TextBlock Text="Usuarios" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="194,172,180,42" Width="86" IsEnabled="False"/>
             </Grid>
 
-            <Grid VerticalAlignment="Bottom" Background="#EA5555" Height="240" Width="460" HorizontalAlignment="Right" >
+            <Grid VerticalAlignment="Bottom" Background="#EA5555" Height="240" Width="460" HorizontalAlignment="Right" x:Name="grdVentas">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
