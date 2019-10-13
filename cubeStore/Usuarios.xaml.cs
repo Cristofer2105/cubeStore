@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Common;
+using BRL;
 
 namespace cubeStore
 {
@@ -19,6 +21,8 @@ namespace cubeStore
     /// </summary>
     public partial class Usuarios : Window
     {
+		Usuario usuario;
+		UsuarioBRL brl;
         public Usuarios()
         {
             InitializeComponent();
@@ -45,8 +49,17 @@ namespace cubeStore
 
 		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
 		{
+			txtnombresAg.Text = txtnombresAg.Text.Trim();
+			txtprimerapellidoAg.Text = txtprimerapellidoAg.Text.Trim();
+			txtcorreoAg.Text = txtcorreoAg.Text.Trim();
+			txtrolad.Text = txtrolad.Text.Trim();
+			txtTelefonoAg.Text = txtTelefonoAg.Text.Trim();
+			txtsexoAg.Text = txtsexoAg.Text.Trim();
+
+			
+			#region enviar correo
 			System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-			msg.To.Add("cristoferhilaquita6@gmail.com");
+			msg.To.Add(txtcorreoAg.Text);
 			msg.Subject = "Registrado para usar el sistema cubestore";
 			msg.SubjectEncoding = System.Text.Encoding.UTF8;
 	
@@ -61,8 +74,13 @@ namespace cubeStore
 			client.Port = 587;
 			client.EnableSsl = true;
 			client.Host = "smtp.gmail.com";
+			#endregion
+
 			try
 			{
+				usuario = new Usuario(txtnombresAg.Text,txtprimerapellidoAg.Text,txtsegundoApellidoAg.Text,byte.Parse(txtsexoAg.Text),txtTelefonoAg.Text,"lucio","123456",txtrolad.Text,txtcorreoAg.Text);
+				brl = new UsuarioBRL(usuario);
+				brl.Insert();
 				client.Send(msg);
 				MessageBox.Show("Usuario Agregado Exitosamente");
 			}

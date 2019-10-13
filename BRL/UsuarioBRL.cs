@@ -12,11 +12,32 @@ namespace BRL
 {
 	public class UsuarioBRL : AbstractBRL
 	{
-		UsuarioDal dal;
+		
+		private Usuario user;
+
+		public Usuario User
+		{
+			get { return user; }
+			set { user = value; }
+		}
+		private UsuarioDal dal;
+
+		public UsuarioDal Dal
+		{
+			get { return dal; }
+			set { dal = value; }
+		}
 		public UsuarioBRL()
 		{
 
 		}
+		public UsuarioBRL(Usuario user)
+		{
+			this.user = user;
+			dal = new UsuarioDal(user);
+		}
+		
+
 		public override void Delete()
 		{
 			throw new NotImplementedException();
@@ -24,7 +45,7 @@ namespace BRL
 
 		public override void Insert()
 		{
-			throw new NotImplementedException();
+			dal.Insert();
 		}
 
 		public override DataTable Select()

@@ -43,13 +43,13 @@
                     </Grid.Effect>
                     <StackPanel Margin="15" Grid.RowSpan="2">
                         <TextBlock Text="AGREGAR NUEVO USUARIO" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="Champagne &amp; Limousines"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NOMBRES" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO PATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO MATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="CORREO ELECTRONICO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="ROL DE EMPLEADO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="TELEFONOS" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="SEXO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NOMBRES" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtnombresAg"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO PATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtprimerapellidoAg"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO MATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtsegundoApellidoAg"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="CORREO ELECTRONICO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtcorreoAg"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="ROL DE EMPLEADO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtrolad"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="TELEFONO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtTelefonoAg"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="SEXO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtsexoAg"/>
                         <Button Content="AGREGAR" x:Name="btnAgregarUsuario" FontWeight="Bold" Click="BtnAgregarUsuario_Click" Background="#004E6F" Margin="0 10"/>
                     </StackPanel>
                 </Grid>

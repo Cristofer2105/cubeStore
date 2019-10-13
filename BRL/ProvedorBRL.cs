@@ -34,6 +34,7 @@ namespace BRL
 			this.prov = prov;
 			dal = new ProvedorDal(prov);
 		}
+
 		public override void Delete()
 		{
 			dal.Delete();

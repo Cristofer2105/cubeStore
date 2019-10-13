@@ -4,14 +4,27 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using Common;
 
 namespace DAL
 {
 	public class UsuarioDal : AbstractDAL
 	{
+		private Usuario user;
+
+		public Usuario User
+		{
+			get { return user; }
+			set { user = value; }
+		}
+
 		public UsuarioDal()
 		{
 
+		}
+		public UsuarioDal(Usuario user)
+		{
+			this.user = user;
 		}
 		#region metodos de la clase
 		public override void Delete()
@@ -21,7 +34,26 @@ namespace DAL
 
 		public override void Insert()
 		{
-			throw new NotImplementedException();
+			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,telefonosEmpleado,usuario,contrasenia,rolEmpleado,email) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@telefonosEmpleado,@usuario,@contrasenia,@rolEmpleado,@email)";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@nombres", user.Nombres);
+				cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
+				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
+				cmd.Parameters.AddWithValue("@sexo", user.Sexo);
+				cmd.Parameters.AddWithValue("@telefonosEmpleado", user.Telefonos);
+				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
+				cmd.Parameters.AddWithValue("@rolEmpleado", user.Rol);
+				cmd.Parameters.AddWithValue("@email", user.Correo);
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				//Escribir Log
+				throw ex;
+			}
 		}
 
 		public override DataTable Select()
