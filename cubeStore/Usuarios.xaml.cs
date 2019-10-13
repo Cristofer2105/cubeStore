@@ -37,5 +37,42 @@ namespace cubeStore
 			this.Close();
 			main.Show();
 		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("prueba");
+		}
+
+		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
+		{
+			System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+			msg.To.Add("cristoferhilaquita6@gmail.com");
+			msg.Subject = "Registrado para usar el sistema cubestore";
+			msg.SubjectEncoding = System.Text.Encoding.UTF8;
+	
+
+			msg.Body = "Sus credenciales para ingreso son";
+			msg.BodyEncoding = System.Text.Encoding.UTF8;
+			msg.IsBodyHtml = true;
+			msg.From = new System.Net.Mail.MailAddress("cristoferhilaquita7@gmail.com");
+
+			System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+			client.Credentials = new System.Net.NetworkCredential("cristoferhilaquita7@gmail.com", "Cristofer246");
+			client.Port = 587;
+			client.EnableSsl = true;
+			client.Host = "smtp.gmail.com";
+			try
+			{
+				client.Send(msg);
+				MessageBox.Show("Usuario Agregado Exitosamente");
+			}
+			catch (Exception)
+			{
+
+				MessageBox.Show("Error al Enviar");
+			}
+
+
+		}
 	}
 }
