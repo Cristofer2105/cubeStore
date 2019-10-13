@@ -31,6 +31,7 @@ namespace cubeStore
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
 			this.Close();
+			
 		}
 
 		private void BtnIngresar_Click(object sender, RoutedEventArgs e)
@@ -55,7 +56,9 @@ namespace cubeStore
 					}
 					else
 					{
-						MessageBox.Show("Error Datos 2");
+						MessageBox.Show("Usuario o contrasenia Incorrectos");
+						txtUusario.Text = "";
+						txtContrasenia.Password = "";
 					}
 				}
 				catch (Exception ex)
@@ -66,7 +69,7 @@ namespace cubeStore
 			}
 			else
 			{
-				MessageBox.Show("Error Datos ");
+				MessageBox.Show("Tiene que llenar los campos para ingresar");
 			}
 			
 		}

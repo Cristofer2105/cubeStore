@@ -25,6 +25,7 @@
                 </Button>
             </StackPanel>
             <TextBlock Text="Inicio" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="417,26,420,24" Width="63"/>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="10" Height="30" Margin="614,40,134,10" x:Name="txbUsuarioSesion" Width="152"/>
         </Grid>
 
         <Grid Margin="20" VerticalAlignment="Top" Background="#EA5555" Height="480">

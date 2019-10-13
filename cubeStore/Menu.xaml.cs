@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Common;
 
 namespace cubeStore
 {
@@ -23,6 +24,7 @@ namespace cubeStore
 		public MainWindow()
 		{
 			InitializeComponent();
+			txbUsuarioSesion.Text = Sesion.VerInfo();
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
