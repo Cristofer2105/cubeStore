@@ -84,15 +84,68 @@ namespace cubeStore
 		{
 			LoadDataGrid();
 		}
-
+		void habilitarrol()
+		{
+			chkEdit.IsEnabled = true;
+			chkAdmin.IsEnabled = true;
+			chkVend.IsEnabled = true;
+		}
 		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
 		{
 			txtnombresAg.Text = txtnombresAg.Text.Trim();
 			txtprimerapellidoAg.Text = txtprimerapellidoAg.Text.Trim();
 			txtcorreoAg.Text = txtcorreoAg.Text.Trim();
-			txtrolad.Text = txtrolad.Text.Trim();
+			string rol="";
+			if (chkAdmin.IsChecked==true)
+			{
+				chkEdit.IsEnabled = false;
+				chkVend.IsEnabled = false;
+				rol = rol+"Administrador";
+			}
+			else if (chkEdit.IsChecked==true)
+			{
+				chkVend.IsEnabled = false;
+				chkAdmin.IsEnabled = false;
+				rol = rol+"Editor";
+			}
+			else if (chkVend.IsChecked==true)
+			{
+				chkAdmin.IsEnabled = false;
+				chkEdit.IsEnabled = false;
+				rol = rol+"Vendedor";
+			}
+
+
 			txtTelefonoAg.Text = txtTelefonoAg.Text.Trim();
-			txtsexoAg.Text = txtsexoAg.Text.Trim();
+			string sexo="";
+			if (chkhombre.IsChecked == true && chkmujer.IsChecked == false && chkotros.IsChecked == false)
+			{
+				sexo = sexo + "1";
+			}
+			else 
+			if (chkmujer.IsChecked == true && chkhombre.IsChecked == false && chkotros.IsChecked == false)
+			{
+				sexo = sexo + "2";
+			}else 
+			if (chkotros.IsChecked == true && chkhombre.IsChecked == false && chkmujer.IsChecked == false)
+			{
+				rol = sexo + "3";
+			}
+			else
+			{
+				MessageBox.Show("Solo puede seleccionar uno");
+			}
+			
+				
+				
+				
+				
+					
+				
+			
+			
+			
+			
 			string usuario1 = txtnombresAg.Text;
 			string usuario2 = txtprimerapellidoAg.Text;
 			string userName= usuario1.Substring(0, 3)+usuario2.Substring(0,2);
@@ -134,7 +187,7 @@ namespace cubeStore
 
 			try
 			{
-				usuario = new Usuario(txtnombresAg.Text,txtprimerapellidoAg.Text,txtsegundoApellidoAg.Text,byte.Parse(txtsexoAg.Text),txtTelefonoAg.Text,userName,contrasenia,txtrolad.Text,txtcorreoAg.Text);
+				usuario = new Usuario(txtnombresAg.Text,txtprimerapellidoAg.Text,txtsegundoApellidoAg.Text,byte.Parse(sexo),txtTelefonoAg.Text,userName,contrasenia,rol,txtcorreoAg.Text);
 				brl = new UsuarioBRL(usuario);
 				brl.Insert();
 				client.Send(msg);

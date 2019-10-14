@@ -47,9 +47,20 @@
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO PATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtprimerapellidoAg"/>
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO MATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtsegundoApellidoAg"/>
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="CORREO ELECTRONICO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtcorreoAg"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="ROL DE EMPLEADO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtrolad"/>
+                        <TextBlock Text="Rol de Empleado" HorizontalAlignment="Left"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="10 0">
+                            <CheckBox x:Name="chkAdmin" Content="Administrador"></CheckBox>
+                            <CheckBox x:Name="chkEdit" Content="Editor"></CheckBox>
+                            <CheckBox x:Name="chkVend" Content="Vendedor"></CheckBox>
+                        </StackPanel>
                         <TextBox Margin="0,10" materialDesign:HintAssist.Hint="TELEFONO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtTelefonoAg"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="SEXO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtsexoAg"/>
+                        <TextBlock Text="Sexo" HorizontalAlignment="Left"/>
+                        <StackPanel Orientation="Horizontal" Margin="10 0">
+                            <CheckBox x:Name="chkhombre" Content="Hombre"></CheckBox>
+                            <CheckBox x:Name="chkmujer" Content="Mujer"></CheckBox>
+                            <CheckBox x:Name="chkotros" Content="Otros"></CheckBox>
+                        </StackPanel>
                         <Button Content="AGREGAR" x:Name="btnAgregarUsuario" FontWeight="Bold" Click="BtnAgregarUsuario_Click" Background="#004E6F" Margin="0 10"/>
                     </StackPanel>
                 </Grid>
