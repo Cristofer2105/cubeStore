@@ -69,7 +69,19 @@ namespace DAL
 
 		public override DataTable Select()
 		{
-			throw new NotImplementedException();
+			DataTable res = new DataTable();
+			string query = "SELECT * FROM vwEmpleadoSelect";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return res;
 		}
 
 		public override void Update()
@@ -116,6 +128,35 @@ namespace DAL
 				throw ex;
 			}
 			return dt;
+		}
+		public Usuario Get(int idUsuario)
+		{
+			Usuario res = null;
+			SqlCommand cmd = null;
+			SqlDataReader dr = null;
+			string query = "SELECT idEmpleado,nombres,primerApellido,segundoApellido,sexo,estadoEmpleado,fechaHoraActualizacionEmpleado,telefonosEmpleado,usuario,contrasenia,rolEmpleado,contraseniaInicial,email FROM Empleado WHERE idEmpleado=@idEmpleado";
+			try
+			{
+				cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@idEmpleado", idUsuario);
+				dr = Methods.ExecuteDataReaderCommand(cmd);
+
+				while (dr.Read())
+				{
+					res = new Usuario(int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), byte.Parse(dr[4].ToString()), byte.Parse(dr[5].ToString()),Convert.ToDateTime(dr[6].ToString()),dr[7].ToString(),dr[8].ToString(),dr[9].ToString(),dr[10].ToString(), byte.Parse(dr[11].ToString()),dr[12].ToString());
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally
+			{
+				cmd.Connection.Close();
+				dr.Close();
+			}
+			return res;
 		}
 		#endregion;
 	}

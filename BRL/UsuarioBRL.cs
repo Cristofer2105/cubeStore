@@ -40,7 +40,7 @@ namespace BRL
 
 		public override void Delete()
 		{
-			throw new NotImplementedException();
+			dal.Delete();
 		}
 
 		public override void Insert()
@@ -50,17 +50,23 @@ namespace BRL
 
 		public override DataTable Select()
 		{
-			throw new NotImplementedException();
+			dal = new UsuarioDal();
+			return dal.Select();
 		}
 
 		public override void Update()
 		{
-			throw new NotImplementedException();
+			dal.Update();
 		}
 		public DataTable Login(string usuario, string contrasenia)
 		{
 			dal = new UsuarioDal();
 			return dal.Login(usuario, contrasenia);
+		}
+		public Usuario Get(int idUsuario)
+		{
+			dal = new UsuarioDal();
+			return dal.Get(idUsuario);
 		}
 	}
 }

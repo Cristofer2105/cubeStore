@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Common;
 using BRL;
+using System.Data;
 
 namespace cubeStore
 {
@@ -27,7 +28,21 @@ namespace cubeStore
         {
             InitializeComponent();
         }
+		private void LoadDataGrid()
+		{
+			try
+			{
+				brl = new UsuarioBRL();
+				dgdDatos.ItemsSource = brl.Select().DefaultView;
+				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
+			}
+			catch (Exception ex)
+			{
 
+				MessageBox.Show(ex.Message);
+			}
+
+		}
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
 			Login login = new Login();
@@ -44,7 +59,7 @@ namespace cubeStore
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("prueba");
+			LoadDataGrid();
 		}
 
 		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
@@ -83,6 +98,7 @@ namespace cubeStore
 				brl.Insert();
 				client.Send(msg);
 				MessageBox.Show("Usuario Agregado Exitosamente");
+				LoadDataGrid();
 			}
 			catch (Exception)
 			{
@@ -91,6 +107,91 @@ namespace cubeStore
 			}
 
 
+		}
+
+		private void DgdDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (dgdDatos.Items.Count > 0 && dgdDatos.SelectedItem != null)
+			{
+				//Realizamos Get
+				try
+				{
+					DataRowView dataRow = (DataRowView)dgdDatos.SelectedItem;
+					int id = int.Parse(dataRow.Row.ItemArray[0].ToString());
+					
+					
+					brl = new UsuarioBRL();
+					usuario = brl.Get(id);
+			
+
+					txtnombresactelim.Text = usuario.Nombres;
+					txtprimapellactelim.Text = usuario.PrimerApellido;
+					txtsegapellactelim.Text = usuario.SegundoApellido;
+					txtcorreoactelim.Text = usuario.Correo;
+					txtrolactelim.Text = usuario.Rol;
+					txttelefonoactelim.Text = usuario.Telefonos;					
+
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+			}
+		}
+
+		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
+		{
+			if (MessageBox.Show("Esta Seguro de Eliminar el Usuario?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+			{
+				//Eliminacion Logica
+				try
+				{
+					brl = new UsuarioBRL(usuario);
+					brl.Delete();
+					MessageBox.Show("Eliminado Exitosamente");
+					LoadDataGrid();
+		
+				}
+				catch (Exception ex)
+				{
+
+					MessageBox.Show(ex.Message);
+				}
+			}
+		}
+
+		private void BtnModificar_Click(object sender, RoutedEventArgs e)
+		{
+			txtnombresactelim.Text = txtnombresactelim.Text.Trim();
+			txtprimapellactelim.Text = txtprimapellactelim.Text.Trim();
+			txtsegapellactelim.Text = txtsegapellactelim.Text.Trim();
+			txtcorreoactelim.Text = txtcorreoactelim.Text.Trim();
+			txtrolactelim.Text = txtrolactelim.Text.Trim();
+			txttelefonoactelim.Text = txttelefonoactelim.Text.Trim();
+	
+
+			try
+			{
+				//Modificar
+				//categoria = new Categoria(txtnombreCategoria.Text);
+				usuario.Nombres = txtnombresactelim.Text.Trim();
+				usuario.PrimerApellido = txtprimapellactelim.Text.Trim();
+				usuario.SegundoApellido = txtsegapellactelim.Text.Trim();
+				usuario.Correo = txtcorreoactelim.Text.Trim();
+				usuario.Rol = txtrolactelim.Text.Trim();
+				usuario.Telefonos = txttelefonoactelim.Text.Trim();
+
+				brl = new UsuarioBRL(usuario);
+				brl.Update();
+				MessageBox.Show("Registro Modificado Exitosamente");				
+				LoadDataGrid();
+			
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
+			}
 		}
 	}
 }
