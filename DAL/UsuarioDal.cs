@@ -113,12 +113,12 @@ namespace DAL
 		{
 	
 			DataTable dt = new DataTable();
-			string query = "SELECT idEmpleado,usuario,rolEmpleado FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=@contrasenia";
+			string query = "SELECT idEmpleado,usuario,rolEmpleado FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@usuario", usuario);
-				cmd.Parameters.AddWithValue("@contrasenia", contrasenia);
+				cmd.Parameters.AddWithValue("@contrasenia", contrasenia).SqlDbType=SqlDbType.VarChar;
 				dt = Methods.ExecuteDataTableCommand(cmd);
 				
 			}

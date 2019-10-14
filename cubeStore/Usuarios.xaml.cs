@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Common;
 using BRL;
 using System.Data;
+using System.Security.Cryptography;
 
 namespace cubeStore
 {
@@ -43,6 +44,28 @@ namespace cubeStore
 			}
 
 		}
+		static string ToM5Hash(string contrasenia)
+		{
+			byte[] bytespass = Encoding.ASCII.GetBytes(contrasenia);
+			var md5 = new MD5CryptoServiceProvider();
+			var md5data = md5.ComputeHash(bytespass);
+			string strpass = Encoding.ASCII.GetString(md5data);
+			return strpass;
+		}
+
+		static string ToM5Hash2(string contrasenia)
+		{
+			StringBuilder sb = new StringBuilder();
+			using (MD5 md5 = MD5.Create())
+			{
+				byte[] md5HashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(contrasenia));
+				foreach (byte b in md5HashBytes)
+				{
+					sb.Append(b.ToString("X2"));
+				}
+			}
+			return sb.ToString();
+		}
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
 			Login login = new Login();
@@ -70,7 +93,12 @@ namespace cubeStore
 			txtrolad.Text = txtrolad.Text.Trim();
 			txtTelefonoAg.Text = txtTelefonoAg.Text.Trim();
 			txtsexoAg.Text = txtsexoAg.Text.Trim();
+			string usuario1 = txtnombresAg.Text;
+			string usuario2 = txtprimerapellidoAg.Text;
+			string userName= usuario1.Substring(0, 3)+usuario2.Substring(0,2);
 
+			string contrasenia = ToM5Hash2(txtnombresAg.Text);
+			
 			
 			#region enviar correo
 			System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
@@ -93,7 +121,7 @@ namespace cubeStore
 
 			try
 			{
-				usuario = new Usuario(txtnombresAg.Text,txtprimerapellidoAg.Text,txtsegundoApellidoAg.Text,byte.Parse(txtsexoAg.Text),txtTelefonoAg.Text,"lucio","123456",txtrolad.Text,txtcorreoAg.Text);
+				usuario = new Usuario(txtnombresAg.Text,txtprimerapellidoAg.Text,txtsegundoApellidoAg.Text,byte.Parse(txtsexoAg.Text),txtTelefonoAg.Text,userName,contrasenia,txtrolad.Text,txtcorreoAg.Text);
 				brl = new UsuarioBRL(usuario);
 				brl.Insert();
 				client.Send(msg);
