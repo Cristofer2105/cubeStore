@@ -97,17 +97,30 @@ namespace cubeStore
 			string usuario2 = txtprimerapellidoAg.Text;
 			string userName= usuario1.Substring(0, 3)+usuario2.Substring(0,2);
 
-			string contrasenia = ToM5Hash2(txtnombresAg.Text);
+
+			Random rdn = new Random();
+			string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+			int longitud = caracteres.Length;
+			char letra;
+			int longitudContrasenia = 6;
+			string contraseniaAleatoria = string.Empty;
+			for (int i = 0; i < longitudContrasenia; i++)
+			{
+				letra = caracteres[rdn.Next(longitud)];
+				contraseniaAleatoria += letra.ToString();
+			}
+			string contrasenia = contraseniaAleatoria;
+
 			
-			
+
 			#region enviar correo
 			System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
 			msg.To.Add(txtcorreoAg.Text);
 			msg.Subject = "Registrado para usar el sistema cubestore";
 			msg.SubjectEncoding = System.Text.Encoding.UTF8;
-	
 
-			msg.Body = "Sus credenciales para ingreso son";
+			msg.Body = "Hola que tal Bienvenido a cubestore "+txtnombresAg.Text+" "+txtprimerapellidoAg+"\n";
+			msg.Body = "Sus credenciales para ingreso son:\n"+"Usuario:  "+userName+"\nContrseña:  "+contrasenia;
 			msg.BodyEncoding = System.Text.Encoding.UTF8;
 			msg.IsBodyHtml = true;
 			msg.From = new System.Net.Mail.MailAddress("cristoferhilaquita7@gmail.com");
