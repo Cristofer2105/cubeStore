@@ -49,9 +49,25 @@ namespace cubeStore
 						Sesion.idSesion= int.Parse(dt.Rows[0][0].ToString());
 						Sesion.usuarioSesion= dt.Rows[0][1].ToString();
 						Sesion.rolSesion= dt.Rows[0][2].ToString();
-						MainWindow main = new MainWindow();
-						this.Visibility=Visibility.Hidden;
-						main.Show();
+						if (dt.Rows[0][2].ToString() == "Administrador")
+						{
+							MainWindow menu = new MainWindow();
+							this.Visibility = Visibility.Hidden;
+							menu.Show();
+						}
+						else if (dt.Rows[0][2].ToString() == "Editor")
+						{
+							MenuEditor menuedit = new MenuEditor();
+							this.Visibility = Visibility.Hidden;
+							menuedit.Show();
+						}
+						else if (dt.Rows[0][2].ToString() == "Vendedor")
+						{
+							MenuVendedor menVend = new MenuVendedor();
+							this.Visibility = Visibility.Hidden;
+							menVend.Show();
+						}
+						
 
 					}
 					else

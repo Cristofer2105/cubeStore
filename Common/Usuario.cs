@@ -57,13 +57,6 @@ namespace Common
 			get { return fechaHoraActualizacion; }
 			set { fechaHoraActualizacion = value; }
 		}
-		private string telefonos;
-
-		public string Telefonos
-		{
-			get { return telefonos; }
-			set { telefonos = value; }
-		}
 		private string nombreUsuario;
 
 		public string NombreUsuario
@@ -103,7 +96,7 @@ namespace Common
 		{
 
 		}
-		public Usuario(int idUsuario, string nombres, string primerApellido, string segundoApellido, byte sexo, byte estadoUsuario, DateTime fechaHoraActualizacion, string telefonos, string nombreUsuario, string contrasenia, string rol, byte contraseniaInicaial, string correo)
+		public Usuario(int idUsuario, string nombres, string primerApellido, string segundoApellido, byte sexo, byte estadoUsuario, DateTime fechaHoraActualizacion, string nombreUsuario, string contrasenia, string rol, byte contraseniaInicaial, string correo)
 		{
 			this.idUsuario = idUsuario;
 			this.nombres = nombres;
@@ -112,24 +105,30 @@ namespace Common
 			this.sexo = sexo;
 			this.estadoUsuario = estadoUsuario;
 			this.fechaHoraActualizacion = fechaHoraActualizacion;
-			this.telefonos = telefonos;
 			this.nombreUsuario = nombreUsuario;
 			this.contrasenia = contrasenia;
 			this.rol = rol;
 			this.contraseniaInicaial = contraseniaInicaial;
 			this.correo = correo;
 		}
-		public Usuario(string nombres, string primerApellido, string segundoApellido, byte sexo, string telefonos, string nombreUsuario, string contrasenia, string rol, string correo)
+		public Usuario(string nombres, string primerApellido, string segundoApellido, byte sexo, string nombreUsuario, string contrasenia, string rol, string correo)
 		{
 		
 			this.nombres = nombres;
 			this.primerApellido = primerApellido;
 			this.segundoApellido = segundoApellido;
 			this.sexo = sexo;		
-			this.telefonos = telefonos;
 			this.nombreUsuario = nombreUsuario;
 			this.contrasenia = contrasenia;
 			this.rol = rol;		
+			this.correo = correo;
+		}
+		public Usuario(int idUsuario, string nombres, string primerApellido, string segundoApellido, string correo)
+		{
+			this.idUsuario = idUsuario;
+			this.nombres = nombres;
+			this.primerApellido = primerApellido;
+			this.segundoApellido = segundoApellido;
 			this.correo = correo;
 		}
 

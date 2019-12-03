@@ -50,6 +50,7 @@ namespace cubeStore
 			btnCancelar.IsEnabled = true;
 			txtnombreArticulo.IsEnabled = true;
 
+
 			btnInsertar.IsEnabled = false;
 			btnModificar.IsEnabled = false;
 			btnEliminar.IsEnabled = false;

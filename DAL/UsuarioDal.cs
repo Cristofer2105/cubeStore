@@ -45,7 +45,7 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,telefonosEmpleado,usuario,contrasenia,rolEmpleado,email) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@telefonosEmpleado,@usuario,@contrasenia,@rolEmpleado,@email)";
+			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,usuario,contrasenia,rolEmpleado,email) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@usuario,@contrasenia,@rolEmpleado,@email)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
@@ -53,7 +53,6 @@ namespace DAL
 				cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
 				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
 				cmd.Parameters.AddWithValue("@sexo", user.Sexo);
-				cmd.Parameters.AddWithValue("@telefonosEmpleado", user.Telefonos);
 				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
 				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
 				cmd.Parameters.AddWithValue("@rolEmpleado", user.Rol);
@@ -86,19 +85,14 @@ namespace DAL
 
 		public override void Update()
 		{
-			string query = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,sexo=@sexo,telefonosEmpleado=@telefonosEmpleado,usuario=@usuario,contrasenia=@contrasenia,rolEmpleado=@rolEmpleado,email=@email WHERE idEmpleado=@idEmpleado";
+			string query = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,email=@email WHERE idEmpleado=@idEmpleado";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombres", user.Nombres);
 				cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
-				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
-				cmd.Parameters.AddWithValue("@sexo", user.Sexo);
-				cmd.Parameters.AddWithValue("@telefonosEmpleado", user.Telefonos);
-				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
-				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
-				cmd.Parameters.AddWithValue("@rolEmpleado", user.Rol);
-				cmd.Parameters.AddWithValue("@email", user.Correo);
+				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);												
+				cmd.Parameters.AddWithValue("@email", user.SegundoApellido);
 				cmd.Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
 
 				Methods.ExecuteBasicCommand(cmd);
@@ -134,7 +128,7 @@ namespace DAL
 			Usuario res = null;
 			SqlCommand cmd = null;
 			SqlDataReader dr = null;
-			string query = "SELECT idEmpleado,nombres,primerApellido,segundoApellido,sexo,estadoEmpleado,fechaHoraActualizacionEmpleado,telefonosEmpleado,usuario,contrasenia,rolEmpleado,contraseniaInicial,email FROM Empleado WHERE idEmpleado=@idEmpleado";
+			string query = "SELECT idEmpleado,nombres,primerApellido,segundoApellido,sexo,estadoEmpleado,fechaHoraActualizacionEmpleado,usuario,contrasenia,rolEmpleado,contraseniaInicial,email FROM Empleado WHERE idEmpleado=@idEmpleado";
 			try
 			{
 				cmd = Methods.CreateBasicCommand(query);
@@ -143,7 +137,7 @@ namespace DAL
 
 				while (dr.Read())
 				{
-					res = new Usuario(int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), byte.Parse(dr[4].ToString()), byte.Parse(dr[5].ToString()),Convert.ToDateTime(dr[6].ToString()),dr[7].ToString(),dr[8].ToString(),dr[9].ToString(),dr[10].ToString(), byte.Parse(dr[11].ToString()),dr[12].ToString());
+					res = new Usuario(int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), byte.Parse(dr[4].ToString()), byte.Parse(dr[5].ToString()),Convert.ToDateTime(dr[6].ToString()),dr[7].ToString(),dr[8].ToString(),dr[9].ToString(), byte.Parse(dr[10].ToString()),dr[11].ToString());
 				}
 			}
 			catch (Exception ex)

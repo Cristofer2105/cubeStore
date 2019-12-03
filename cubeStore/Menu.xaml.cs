@@ -36,7 +36,7 @@ namespace cubeStore
 				case "Administrador":
 					break;
 				case "Vendedor":
-					grdProductos.IsEnabled = false;
+				
 					grdUsuarios.IsEnabled = false;
 					break;
 			}

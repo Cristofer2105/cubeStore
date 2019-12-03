@@ -6,7 +6,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"
-        Title="Usuarios" Height="700" Width="1200"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+        Title="Usuarios" Height="700" Width="900"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
     <StackPanel>
 
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
@@ -33,7 +33,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Grid VerticalAlignment="Center" Margin="30,20,30,20" Height="476" Background="White">
+                <Grid VerticalAlignment="Center" Margin="30,25,30,30" Height="555" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="447*"/>
@@ -43,60 +43,39 @@
                     </Grid.Effect>
                     <StackPanel Margin="15" Grid.RowSpan="2">
                         <TextBlock Text="AGREGAR NUEVO USUARIO" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="Champagne &amp; Limousines"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NOMBRES" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtnombresAg"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO PATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtprimerapellidoAg"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO MATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtsegundoApellidoAg"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="CORREO ELECTRONICO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtcorreoAg"/>
-                        <TextBlock Text="Rol de Empleado" HorizontalAlignment="Left"/>
+                        <TextBox Margin="0,10" IsEnabled="False" materialDesign:HintAssist.Hint="NOMBRES" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="12" x:Name="txtnombresAg"/>
+                        <TextBox Margin="0,10" IsEnabled="False" materialDesign:HintAssist.Hint="APELLIDO PATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="12" x:Name="txtprimerapellidoAg"/>
+                        <TextBox Margin="0,10" IsEnabled="False" materialDesign:HintAssist.Hint="APELLIDO MATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="12" x:Name="txtsegundoApellidoAg"/>
+                        <TextBox Margin="0,10" IsEnabled="False" materialDesign:HintAssist.Hint="CORREO ELECTRONICO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="12" x:Name="txtcorreoAg"/>
+                        <TextBlock Text="Rol de Empleado:" FontSize="15" HorizontalAlignment="Left" Height="31"/>
 
                         <StackPanel Orientation="Horizontal" Margin="10 0">
-                            <CheckBox x:Name="chkAdmin" Content="Administrador"></CheckBox>
-                            <CheckBox x:Name="chkEdit" Content="Editor"></CheckBox>
-                            <CheckBox x:Name="chkVend" Content="Vendedor"></CheckBox>
+                            <RadioButton IsEnabled="False" x:Name="rbtAdmin" Content="Administrador   " Height="33"></RadioButton>
+                            <RadioButton IsEnabled="False" x:Name="rbtEditor" Content="Editor   "></RadioButton>
+                            <RadioButton IsEnabled="False" x:Name="rbtVend"  IsChecked="True" Content="Vendedor"></RadioButton>
                         </StackPanel>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="TELEFONO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtTelefonoAg"/>
-                        <TextBlock Text="Sexo" HorizontalAlignment="Left"/>
-                        <StackPanel Orientation="Horizontal" Margin="10 0">
-                            <CheckBox x:Name="chkhombre" Content="Hombre"></CheckBox>
-                            <CheckBox x:Name="chkmujer" Content="Mujer"></CheckBox>
-                            <CheckBox x:Name="chkotros" Content="Otros"></CheckBox>
+                        <TextBlock Text="Sexo:" FontSize="15" HorizontalAlignment="Left" Height="35"/>
+                        <StackPanel Orientation="Horizontal" Margin="10 0" Height="36">
+                            <RadioButton IsEnabled="False" x:Name="rbtHombre" Content="Hombre   "></RadioButton>
+                            <RadioButton IsEnabled="False" x:Name="rbtMujer" IsChecked="True" Content="Mujer"/>
                         </StackPanel>
-                        <Button Content="AGREGAR" x:Name="btnAgregarUsuario" FontWeight="Bold" Click="BtnAgregarUsuario_Click" Background="#004E6F" Margin="0 10"/>
+                        <Grid VerticalAlignment="Bottom" Height="150">
+                            <Button Content="MODIFICAR" x:Name="btnModificar" FontWeight="Bold" Click="BtnModificar_Click" Background="#004E6F" Margin="160,58,10,60"/>
+                            <Button Content="AGREGAR" x:Name="btnAgregarUsuario" FontWeight="Bold" Click="BtnAgregarUsuario_Click" Background="#004E6F" Margin="10,10,10,108"/>
+                            <Button Content="ELIMINAR" x:Name="btnEliminar" FontWeight="Bold" Click="BtnEliminar_Click" Background="#004E6F" Margin="10,58,159,60"/>
+                            <Button Content="GUARDAR" IsEnabled="False" x:Name="btnGuardarUsuario" FontWeight="Bold" Click="BtnGuardarUsuario_Click" Background="#004E6F" Margin="10,108,159,10"/>
+                            <Button Content="CANCELAR" IsEnabled="False" x:Name="btncancelarAcion" FontWeight="Bold" Click="BtncancelarAcion_Click" Background="#004E6F" Margin="159,108,10,10"/>
+                        </Grid>
+
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Grid VerticalAlignment="Center" Height="610" Width="410" Background="#EA5555" Margin="5" HorizontalAlignment="Center">
+
+            <Grid  VerticalAlignment="Top" Height="610" Width="500" Background="#EA5555" Margin="5">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Grid VerticalAlignment="Center" Margin="35,32,35,32" Height="516" Background="White">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="29*"/>
-                        <RowDefinition Height="447*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
-                    </Grid.Effect>
-                    <StackPanel Margin="15" Grid.RowSpan="2">
-                        <TextBlock Text="MODIFICAR / ELIMINAR USUARIO" HorizontalAlignment="Center" Margin="10 25" FontWeight="Bold" FontSize="15" FontFamily="Champagne &amp; Limousines"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NOMBRES" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtnombresactelim"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO PATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"  x:Name="txtprimapellactelim"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="APELLIDO MATERNO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"  x:Name="txtsegapellactelim"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="CORREO ELECTRONICO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txtcorreoactelim"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="ROL DE EMPLEADO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10"  x:Name="txtrolactelim"/>
-                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="TELEFONO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="10" x:Name="txttelefonoactelim"/>
-                        <Button Content="MODIFICAR"  FontWeight="Bold" Background="#004E6F" Margin="0 10" x:Name="btnModificar" Click="BtnModificar_Click"/>
-                        <Button Content="ELIMINAR"  FontWeight="Bold"  Background="#004E6F" Margin="0 10" x:Name="btnEliminar" Click="BtnEliminar_Click"/>
-                    </StackPanel>
-
-                </Grid>
-
-            </Grid>
-            <Grid  VerticalAlignment="Top" Height="610" Width="380" Background="#EA5555" Margin="5">
-                <Grid.Effect>
-                    <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Grid VerticalAlignment="Center" Margin="35,32,35,32" Height="516" Background="White">
+                <Grid VerticalAlignment="Center" Margin="35,23,35,34" Height="553" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="447*"/>
@@ -106,9 +85,7 @@
                     </Grid.Effect>
                     <StackPanel Margin="15" Grid.RowSpan="2">
                         <TextBlock Foreground="Black" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"  FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" Text="LISTA DE USUARIOS DEL SISTEMA" VerticalAlignment="Top"/>
-                        <DataGrid  CanUserAddRows="False" IsReadOnly="True" Width="260" Height="348" VerticalAlignment="Top" Margin="10" x:Name="dgdDatos" SelectionChanged="DgdDatos_SelectionChanged"/>
-                        <Button Content="MODIFICAR"  FontWeight="Bold" Background="#004E6F" Margin="0 10" x:Name="btnmodificaroption"/>
-                        <Button Content="ELIMINAR"  FontWeight="Bold"  Background="#004E6F" Margin="0 10" x:Name="btneliminaroption"/>
+                        <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="446" VerticalAlignment="Top" Margin="10" x:Name="dgdDatos" SelectionChanged="DgdDatos_SelectionChanged"/>
                     </StackPanel>
 
                 </Grid>

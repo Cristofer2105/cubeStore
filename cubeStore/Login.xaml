@@ -47,5 +47,6 @@
             </StackPanel>
         </Grid>
         <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="INGRESAR" Background="#F69B2D" FontWeight="Bold" x:Name="btnIngresar" Click="BtnIngresar_Click"/>
+        <Button Width="216" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="70,0,64,28" Content="OLVIDE MI CONTRASEÑA" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold" x:Name="btnRestablecerContraseña" />
     </Grid>
 </Window>
