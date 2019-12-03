@@ -45,7 +45,13 @@ namespace cubeStore
 					DataTable dt = brl.Login(txtUusario.Text, txtContrasenia.Password);
 					if (dt.Rows.Count>0)
 					{
-						
+						if (byte.Parse(dt.Rows[0][3].ToString()) == 1)
+						{
+							CambiarContrasenia cambia = new CambiarContrasenia();
+							this.Close();
+							cambia.Show();
+						}
+						else { 
 						Sesion.idSesion= int.Parse(dt.Rows[0][0].ToString());
 						Sesion.usuarioSesion= dt.Rows[0][1].ToString();
 						Sesion.rolSesion= dt.Rows[0][2].ToString();
@@ -67,7 +73,8 @@ namespace cubeStore
 							this.Visibility = Visibility.Hidden;
 							menVend.Show();
 						}
-						
+						}
+
 
 					}
 					else
@@ -88,6 +95,13 @@ namespace cubeStore
 				MessageBox.Show("Tiene que llenar los campos para ingresar");
 			}
 			
+		}
+
+		private void BtnRestablecerContraseña_Click(object sender, RoutedEventArgs e)
+		{
+			RestablecerContraseña restablecerContraseña = new RestablecerContraseña();
+			this.Close();
+			restablecerContraseña.Show();
 		}
 	}
 }

@@ -22,8 +22,21 @@ namespace cubeStore
     {
         public MenuVendedor()
         {
-            InitializeComponent();
-			txbUsuarioSesion.Text = Sesion.VerInfo();
+            InitializeComponent();			
 		}
-    }
+
+		private void BtnPerfilUsVendedor_Click(object sender, RoutedEventArgs e)
+		{
+			PerfilVendedor perfilVendedor = new PerfilVendedor();
+			this.Close();
+			perfilVendedor.Show();
+		}
+
+		private void BtnSalir1UsVendedor_Click(object sender, RoutedEventArgs e)
+		{
+			Login login = new Login();
+			this.Close();
+			login.Show();
+		}
+	}
 }

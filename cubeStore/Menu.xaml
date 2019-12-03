@@ -17,7 +17,7 @@
             <Image Source="imagenes/cubestore.png" HorizontalAlignment="Left" Margin="10 0" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
 
-                <Button Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnPerfilAdministrador" Click="BtnPerfilAdministrador_Click">
                     <materialDesign:PackIcon Kind="Account" Width="30" Height="30"/>
                 </Button>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir" Click="BtnSalir_Click">
@@ -25,7 +25,6 @@
                 </Button>
             </StackPanel>
             <TextBlock Text="Inicio" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="400,26,420,24" Width="63"/>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="12" Width="250" Height="30" Margin="533,40,117,10" x:Name="txbUsuarioSesion" />
         </Grid>
 
         <Grid Margin="20" VerticalAlignment="Top" Background="#EA5555" Height="480">

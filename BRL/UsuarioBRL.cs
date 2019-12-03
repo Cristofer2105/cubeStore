@@ -58,10 +58,24 @@ namespace BRL
 		{
 			dal.Update();
 		}
+		public void UpdateContrasenia()
+		{
+			dal.UpdateContrasenia();
+		}
+		public void UpdateContraseniaRestablecida()
+		{
+			dal.UpdateContraseniaRestablecida();
+		}
+		
 		public DataTable Login(string usuario, string contrasenia)
 		{
 			dal = new UsuarioDal();
 			return dal.Login(usuario, contrasenia);
+		}
+		public DataTable RestablecerContrasenia(string usuario)
+		{
+			dal = new UsuarioDal();
+			return dal.RestablecerContrasenia(usuario);
 		}
 		public Usuario Get(int idUsuario)
 		{

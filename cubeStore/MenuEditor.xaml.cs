@@ -22,8 +22,21 @@ namespace cubeStore
     {
         public MenuEditor()
         {
-            InitializeComponent();
-			txbUsuarioSesion.Text = Sesion.VerInfo();
+            InitializeComponent();			
 		}
-    }
+
+		private void BtnPerfilUsEditor_Click(object sender, RoutedEventArgs e)
+		{
+			PerfilEditor perfilEditor = new PerfilEditor();
+			this.Close();
+			perfilEditor.Show();
+		}
+
+		private void BtnSalirUsEditor_Click(object sender, RoutedEventArgs e)
+		{
+			Login login = new Login();
+			this.Close();
+			login.Show();
+		}
+	}
 }

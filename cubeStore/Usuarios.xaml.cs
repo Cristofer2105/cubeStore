@@ -113,7 +113,7 @@ namespace cubeStore
 		}
 		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Rellene los campos para agregar un usuario");
+			MessageBox.Show("Complete los campos para agregar un usuario");
 			Habilitar(1);			
 		}
 
@@ -245,7 +245,7 @@ namespace cubeStore
 						
 						string usuario1 = txtnombresAg.Text;
 						string usuario2 = txtprimerapellidoAg.Text;
-						string userName = usuario1.Substring(0, 3) + usuario2.Substring(0, 2);
+						string userName = usuario1.Substring(0, 3) + usuario2.Substring(0, 3);
 
 
 						Random rdn = new Random();
@@ -301,6 +301,7 @@ namespace cubeStore
 						}
 					}
 					break;
+
 				case 2:
 					if (txtnombresAg.Text == "")
 					{

@@ -70,6 +70,9 @@
     <Compile Include="ActualizarProvedor.xaml.cs">
       <DependentUpon>ActualizarProvedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CambiarContrasenia.xaml.cs">
+      <DependentUpon>CambiarContrasenia.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EliminarProvedor.xaml.cs">
       <DependentUpon>EliminarProvedor.xaml</DependentUpon>
     </Compile>
@@ -79,11 +82,23 @@
     <Compile Include="MenuVendedor.xaml.cs">
       <DependentUpon>MenuVendedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PerfilAdministrador.xaml.cs">
+      <DependentUpon>PerfilAdministrador.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PerfilEditor.xaml.cs">
+      <DependentUpon>PerfilEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PerfilVendedor.xaml.cs">
+      <DependentUpon>PerfilVendedor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProvedoresVista.xaml.cs">
       <DependentUpon>ProvedoresVista.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProvedorUbi.xaml.cs">
       <DependentUpon>ProvedorUbi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RestablecerContraseña.xaml.cs">
+      <DependentUpon>RestablecerContraseña.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlActualizarOptions.xaml.cs">
       <DependentUpon>UserControlActualizarOptions.xaml</DependentUpon>
@@ -112,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminProductos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CambiarContrasenia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +175,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PerfilAdministrador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PerfilEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PerfilVendedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Productos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProvedorUbi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RestablecerContraseña.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

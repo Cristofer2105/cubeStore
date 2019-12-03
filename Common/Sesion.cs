@@ -13,7 +13,7 @@ namespace Common
 		public static string rolSesion;
 		public static string VerInfo()
 		{
-			return "Usuario:  " + usuarioSesion + ", Rol: " + rolSesion;
+			return "Usuario:  " + usuarioSesion +"\n"+ "\n" + "Rol:  " + rolSesion;
 		}
 		
 	}

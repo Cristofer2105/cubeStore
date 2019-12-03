@@ -103,11 +103,43 @@ namespace DAL
 				throw ex;
 			}
 		}
+		public void UpdateContrasenia()
+		{
+			string query = "UPDATE Empleado SET contrasenia=@contrasenia,contraseniaInicial=0 WHERE usuario=@usuario";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
+				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);				
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				//Escribir Log
+				throw ex;
+			}
+		}
+		public void UpdateContraseniaRestablecida()
+		{
+			string query = "UPDATE Empleado SET contrasenia=@contrasenia,contraseniaInicial=1 WHERE usuario=@usuario";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
+				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				//Escribir Log
+				throw ex;
+			}
+		}
 		public DataTable Login(string usuario, string contrasenia)
 		{
 	
 			DataTable dt = new DataTable();
-			string query = "SELECT idEmpleado,usuario,rolEmpleado FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=@contrasenia";
+			string query = "SELECT idEmpleado,usuario,rolEmpleado,contraseniaInicial FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=@contrasenia";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
@@ -115,6 +147,25 @@ namespace DAL
 				cmd.Parameters.AddWithValue("@contrasenia", contrasenia);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 				
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return dt;
+		}
+		public DataTable RestablecerContrasenia(string usuario)
+		{
+
+			DataTable dt = new DataTable();
+			string query = "SELECT idEmpleado,usuario,rolEmpleado,contraseniaInicial,contrasenia FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@usuario", usuario);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+
 			}
 			catch (Exception ex)
 			{

@@ -19,6 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserControls", "UserControl
 		cubeStore\UserControlAddProducts.xaml.cs = cubeStore\UserControlAddProducts.xaml.cs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{8E477D2F-DB04-483A-AC20-487E9A400E3F}"
+	ProjectSection(SolutionItems) = preProject
+		..\DBcubestore12032019.bak = ..\DBcubestore12032019.bak
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

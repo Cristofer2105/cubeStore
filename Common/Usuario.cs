@@ -131,6 +131,12 @@ namespace Common
 			this.segundoApellido = segundoApellido;
 			this.correo = correo;
 		}
+		public Usuario(string contrasenia,string nombreUsuario,byte contraseniaInicaial)
+		{
+			this.contrasenia = contrasenia;	
+			this.nombreUsuario = nombreUsuario;
+			this.contraseniaInicaial = contraseniaInicaial;
+		}
 
 
 

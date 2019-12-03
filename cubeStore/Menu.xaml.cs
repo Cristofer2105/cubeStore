@@ -23,23 +23,7 @@ namespace cubeStore
 	{
 		public MainWindow()
 		{
-			InitializeComponent();
-			txbUsuarioSesion.Text = Sesion.VerInfo();
-	
-			switch (Sesion.rolSesion)
-			{
-				case "Editor":					
-					grdUsuarios.IsEnabled = false;
-					grdVentas.IsEnabled = false;
-					grdReportes.IsEnabled = false;
-					break;
-				case "Administrador":
-					break;
-				case "Vendedor":
-				
-					grdUsuarios.IsEnabled = false;
-					break;
-			}
+			InitializeComponent();						
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -67,6 +51,13 @@ namespace cubeStore
 			Usuarios usuarios = new Usuarios();
 			this.Close();
 			usuarios.Show();
+		}
+
+		private void BtnPerfilAdministrador_Click(object sender, RoutedEventArgs e)
+		{
+			PerfilAdministrador perfilAdministrador = new PerfilAdministrador();
+			this.Close();
+			perfilAdministrador.Show();
 		}
 	}
 }
