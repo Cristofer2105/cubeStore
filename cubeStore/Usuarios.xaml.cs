@@ -114,7 +114,8 @@ namespace cubeStore
 		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Complete los campos para agregar un usuario");
-			Habilitar(1);			
+			Habilitar(1);
+			LimpiarCamposAg();
 		}
 
 		private void DgdDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -199,7 +200,8 @@ namespace cubeStore
 		private void BtnModificar_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
-			Habilitar(2);			
+			Habilitar(2);
+			LimpiarCamposAg();
 		}
 
 		private void BtnGuardarUsuario_Click(object sender, RoutedEventArgs e)
@@ -285,7 +287,8 @@ namespace cubeStore
 
 						try
 						{
-							usuario = new Usuario(txtnombresAg.Text.Trim(), txtprimerapellidoAg.Text.Trim(), txtsegundoApellidoAg.Text.Trim(), byte.Parse(sexo), userName, contrasenia, rol, txtcorreoAg.Text);
+							DateTime fecha = DateTime.Now;						
+							usuario = new Usuario(txtnombresAg.Text.Trim(), txtprimerapellidoAg.Text.Trim(), txtsegundoApellidoAg.Text.Trim(), byte.Parse(sexo), userName, contrasenia, rol, txtcorreoAg.Text, fecha);
 							brl = new UsuarioBRL(usuario);
 							brl.Insert();
 							client.Send(msg);
@@ -339,6 +342,7 @@ namespace cubeStore
 		private void BtncancelarAcion_Click(object sender, RoutedEventArgs e)
 		{
 			DesHabilitar();
+			LimpiarCamposAg();
 		}
 	}
 }

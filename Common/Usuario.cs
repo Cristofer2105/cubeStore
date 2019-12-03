@@ -92,11 +92,19 @@ namespace Common
 			get { return correo; }
 			set { correo = value; }
 		}
+		private DateTime fechaRegistro;
+
+		public DateTime FechaRegistro
+		{
+			get { return fechaRegistro; }
+			set { fechaRegistro = value; }
+		}
+
 		public Usuario()
 		{
 
 		}
-		public Usuario(int idUsuario, string nombres, string primerApellido, string segundoApellido, byte sexo, byte estadoUsuario, DateTime fechaHoraActualizacion, string nombreUsuario, string contrasenia, string rol, byte contraseniaInicaial, string correo)
+		public Usuario(int idUsuario, string nombres, string primerApellido, string segundoApellido, byte sexo, byte estadoUsuario, DateTime fechaHoraActualizacion, string nombreUsuario, string contrasenia, string rol, byte contraseniaInicaial, string correo,DateTime fechaRegistro)
 		{
 			this.idUsuario = idUsuario;
 			this.nombres = nombres;
@@ -110,8 +118,9 @@ namespace Common
 			this.rol = rol;
 			this.contraseniaInicaial = contraseniaInicaial;
 			this.correo = correo;
+			this.fechaRegistro = fechaRegistro;
 		}
-		public Usuario(string nombres, string primerApellido, string segundoApellido, byte sexo, string nombreUsuario, string contrasenia, string rol, string correo)
+		public Usuario(string nombres, string primerApellido, string segundoApellido, byte sexo, string nombreUsuario, string contrasenia, string rol, string correo,DateTime fechaRegistro)
 		{
 		
 			this.nombres = nombres;
@@ -122,6 +131,7 @@ namespace Common
 			this.contrasenia = contrasenia;
 			this.rol = rol;		
 			this.correo = correo;
+			this.fechaRegistro = fechaRegistro;
 		}
 		public Usuario(int idUsuario, string nombres, string primerApellido, string segundoApellido, string correo)
 		{

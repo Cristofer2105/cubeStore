@@ -45,7 +45,7 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,usuario,contrasenia,rolEmpleado,email) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@usuario,@contrasenia,@rolEmpleado,@email)";
+			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,usuario,contrasenia,rolEmpleado,email,fechaRegistro) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@usuario,@contrasenia,@rolEmpleado,@email,@fechaRegistro)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
@@ -57,6 +57,7 @@ namespace DAL
 				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
 				cmd.Parameters.AddWithValue("@rolEmpleado", user.Rol);
 				cmd.Parameters.AddWithValue("@email", user.Correo);
+				cmd.Parameters.AddWithValue("@fechaRegistro", user.FechaRegistro);
 				Methods.ExecuteBasicCommand(cmd);
 			}
 			catch (Exception ex)
@@ -179,7 +180,7 @@ namespace DAL
 			Usuario res = null;
 			SqlCommand cmd = null;
 			SqlDataReader dr = null;
-			string query = "SELECT idEmpleado,nombres,primerApellido,segundoApellido,sexo,estadoEmpleado,fechaHoraActualizacionEmpleado,usuario,contrasenia,rolEmpleado,contraseniaInicial,email FROM Empleado WHERE idEmpleado=@idEmpleado";
+			string query = "SELECT idEmpleado,nombres,primerApellido,segundoApellido,sexo,estadoEmpleado,fechaHoraActualizacionEmpleado,usuario,contrasenia,rolEmpleado,contraseniaInicial,email,fechaRegistro FROM Empleado WHERE idEmpleado=@idEmpleado";
 			try
 			{
 				cmd = Methods.CreateBasicCommand(query);
@@ -188,7 +189,7 @@ namespace DAL
 
 				while (dr.Read())
 				{
-					res = new Usuario(int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), byte.Parse(dr[4].ToString()), byte.Parse(dr[5].ToString()),Convert.ToDateTime(dr[6].ToString()),dr[7].ToString(),dr[8].ToString(),dr[9].ToString(), byte.Parse(dr[10].ToString()),dr[11].ToString());
+					res = new Usuario(int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), byte.Parse(dr[4].ToString()), byte.Parse(dr[5].ToString()),Convert.ToDateTime(dr[6].ToString()),dr[7].ToString(),dr[8].ToString(),dr[9].ToString(), byte.Parse(dr[10].ToString()),dr[11].ToString(), Convert.ToDateTime(dr[12].ToString()));
 				}
 			}
 			catch (Exception ex)
