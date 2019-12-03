@@ -76,6 +76,9 @@
     <Compile Include="EliminarProvedor.xaml.cs">
       <DependentUpon>EliminarProvedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuCRUDproductosEditor.xaml.cs">
+      <DependentUpon>MenuCRUDproductosEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenuEditor.xaml.cs">
       <DependentUpon>MenuEditor.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="menuCRUDproductos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuCRUDproductosEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

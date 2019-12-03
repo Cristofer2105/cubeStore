@@ -1,5 +1,4 @@
-﻿using cubeStore.User_Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +15,23 @@ using System.Windows.Shapes;
 namespace cubeStore
 {
 	/// <summary>
-	/// Interaction logic for menuCRUDproductos.xaml
+	/// Interaction logic for MenuCRUDproductosEditor.xaml
 	/// </summary>
-	public partial class menuCRUDproductos : Window
+	public partial class MenuCRUDproductosEditor : Window
 	{
-		public menuCRUDproductos()
+		public MenuCRUDproductosEditor()
 		{
 			InitializeComponent();
+		}
+
+		private void BtnArticulos_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void BtnCategorias_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 
 		private void BtnItems_Click(object sender, RoutedEventArgs e)
@@ -34,36 +43,27 @@ namespace cubeStore
 		{
 
 		}
-
-		private void BtnArticulos_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-		private void BtnCategorias_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
-			MainWindow mainWindow = new MainWindow();
+			MenuEditor menuEditor = new MenuEditor();
 			this.Close();
-			mainWindow.Show();
+			menuEditor.Show();
 		}
 		private void BtnVolver_Click(object sender, RoutedEventArgs e)
 		{
-			MainWindow mainWindow = new MainWindow();
+			MenuEditor menuEditor = new MenuEditor();
 			this.Close();
-			mainWindow.Show();
+			menuEditor.Show();
 		}
 
-		private void BtnPerfilAdministrador_Click(object sender, RoutedEventArgs e)
+		private void BtnPerfilEditor_Click(object sender, RoutedEventArgs e)
 		{
-			PerfilAdministrador perfilAdministrador = new PerfilAdministrador();
+			PerfilEditor perfilEditor = new PerfilEditor();
 			this.Close();
-			perfilAdministrador.Show();
+			perfilEditor.Show();
 		}
 
-		private void BtnSalirAdministrador_Click(object sender, RoutedEventArgs e)
+		private void BtnSalirEditor_Click(object sender, RoutedEventArgs e)
 		{
 			if (MessageBox.Show("Esta Seguro de Salir?", "Salir", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 			{
