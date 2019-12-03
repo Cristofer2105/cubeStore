@@ -38,5 +38,19 @@ namespace cubeStore
 			this.Close();
 			login.Show();
 		}
+
+		private void BtnProductosUsEditor_Click(object sender, RoutedEventArgs e)
+		{
+			MenuCRUDproductosEditor menuCRUDproductosEditor = new MenuCRUDproductosEditor();
+			this.Close();
+			menuCRUDproductosEditor.Show();
+		}
+
+		private void BtnAcercaDeUsEditor_Click(object sender, RoutedEventArgs e)
+		{
+			AcercaDe acercaDe = new AcercaDe();
+			acercaDe.ShowDialog();
+
+		}
 	}
 }

@@ -23,16 +23,9 @@ namespace cubeStore
         {
             InitializeComponent();
         }
-		private void Btnsalir_Click(object sender, RoutedEventArgs e)
+		private void Btnsalir_Click_1(object sender, RoutedEventArgs e)
 		{
-			Close();
-		}
-
-		private void BtnVolverMenu_Click(object sender, RoutedEventArgs e)
-		{
-			MainWindow menu = new MainWindow();
-			Close();
-			menu.Show();
+			this.Close();
 		}
 	}
 }

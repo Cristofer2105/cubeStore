@@ -29,8 +29,7 @@ namespace cubeStore
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			AcercaDe acerc = new AcercaDe();
-			this.Close();
-			acerc.Show();
+			acerc.ShowDialog();
 		}
 
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)

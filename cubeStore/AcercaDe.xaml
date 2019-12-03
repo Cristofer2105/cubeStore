@@ -16,12 +16,8 @@
 
             <Image Source="imagenes/cubestore.png" HorizontalAlignment="Left" Margin="10 0" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-
-                <Button Background="{x:Null}" BorderBrush="{x:Null}">
-                    <materialDesign:PackIcon Kind="Account" Width="30" Height="30"/>
-                </Button>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnsalir" Click="Btnsalir_Click">
-                    <materialDesign:PackIcon Kind="Power" Width="30" Height="30"/>
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnsalir" Click="Btnsalir_Click_1">
+                    <materialDesign:PackIcon Kind="Close" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
             <TextBlock Text="Acerca de Cubestore" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="341,27,366,23" Width="193"/>
@@ -30,16 +26,6 @@
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="40" ShadowDepth="1"/>
             </Grid.Effect>
-
-            <Grid  Background="#EA5555" Height="100" Width="200" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Margin="5">
-                <Grid.Effect>
-                    <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
-                </Grid.Effect>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="100" x:Name="btnVolverMenu" Click="BtnVolverMenu_Click" Width="200">
-                    <materialDesign:PackIcon Kind="Information" Width="30" Height="30" IsEnabled="False" RenderTransformOrigin="0.543,0.224"/>
-                </Button>
-                <TextBlock Text="Volver a Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="43,66,36,10" Width="121" IsEnabled="False"/>
-            </Grid>
 
             <TextBlock Text="cubestore" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="30" Margin="84,100,0,0" IsEnabled="False"/>
             <TextBlock Text="Desarrollado por Cristofer Hilaquita Yujra" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Margin="84,174,0,0" IsEnabled="False"/>

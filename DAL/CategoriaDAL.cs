@@ -46,11 +46,12 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Categoria(nombreCategoria) VALUES(@nombreCategoria)";
+			string query = "INSERT INTO Categoria(nombreCategoria,fechaRegistro) VALUES(@nombreCategoria,@fechaRegistro)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombreCategoria",cat.NombreCategoria);
+				cmd.Parameters.AddWithValue("@fechaRegistro", cat.FechaHoraRegistroCat);
 				Methods.ExecuteBasicCommand(cmd);
 			}
 			catch (Exception ex)

@@ -37,6 +37,14 @@ namespace Common
 			get { return fechaHoraActualizacionCategoria; }
 			set { fechaHoraActualizacionCategoria = value; }
 		}
+		private DateTime fechaHoraRegistroCat;
+
+		public DateTime FechaHoraRegistroCat
+		{
+			get { return fechaHoraRegistroCat; }
+			set { fechaHoraRegistroCat = value; }
+		}
+
 
 		#endregion
 
@@ -52,9 +60,10 @@ namespace Common
 		/// Constructor para el metodo Insert
 		/// </summary>
 		/// <param name="nombreCategoria"></param>
-		public Categoria(string nombreCategoria)
+		public Categoria(string nombreCategoria,DateTime fechaHoraRegistroCat)
 		{			
 			this.nombreCategoria = nombreCategoria;			
+			this.fechaHoraRegistroCat = fechaHoraRegistroCat;
 		}
 		#endregion
 	}

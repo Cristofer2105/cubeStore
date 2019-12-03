@@ -36,7 +36,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="40" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button x:Name="btnProductosUsEditor" Background="{x:Null}" BorderBrush="{x:Null}" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300">
+                <Button Click="BtnProductosUsEditor_Click" x:Name="btnProductosUsEditor" Background="{x:Null}" BorderBrush="{x:Null}" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300">
                     <Grid Width="385">
                         <materialDesign:PackIcon Kind="DesktopClassic" Width="40" Height="40" IsEnabled="False" Margin="157,142,0,0"/>
                         <TextBlock Text="Productos" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="124,187,133,71" Width="111" Height="34" IsEnabled="False"/>
@@ -48,7 +48,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180" x:Name="btnAcercaDeUsEditor">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180" x:Name="btnAcercaDeUsEditor" Click="BtnAcercaDeUsEditor_Click">
                     <Grid Width="390">
                         <materialDesign:PackIcon Kind="Information" Width="40" Height="40" IsEnabled="False" Margin="160,55,0,0"/>
                         <TextBlock Text="Acerca de cubestore" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="0,95,0,53" Width="190" IsEnabled="False"/>

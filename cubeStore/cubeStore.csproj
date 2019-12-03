@@ -73,6 +73,9 @@
     <Compile Include="CambiarContrasenia.xaml.cs">
       <DependentUpon>CambiarContrasenia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Categorias.xaml.cs">
+      <DependentUpon>Categorias.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EliminarProvedor.xaml.cs">
       <DependentUpon>EliminarProvedor.xaml</DependentUpon>
     </Compile>
@@ -103,21 +106,6 @@
     <Compile Include="RestablecerContraseña.xaml.cs">
       <DependentUpon>RestablecerContraseña.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlActualizarOptions.xaml.cs">
-      <DependentUpon>UserControlActualizarOptions.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControlElimiMenu.xaml.cs">
-      <DependentUpon>UserControlElimiMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControlOpcionesElim.xaml.cs">
-      <DependentUpon>UserControlOpcionesElim.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControlAddProducts.xaml.cs">
-      <DependentUpon>UserControlAddProducts.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Usuarios.xaml.cs">
       <DependentUpon>Usuarios.xaml</DependentUpon>
     </Compile>
@@ -134,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CambiarContrasenia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Categorias.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,10 +186,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Productos.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ProvedoresVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -210,26 +198,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlActualizarOptions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControlElimiMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControlOpcionesElim.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControlAddProducts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Usuarios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -238,9 +206,6 @@
   <ItemGroup>
     <Compile Include="menuCRUDproductos.xaml.cs">
       <DependentUpon>menuCRUDproductos.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Productos.xaml.cs">
-      <DependentUpon>Productos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

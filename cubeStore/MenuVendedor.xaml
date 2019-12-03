@@ -48,7 +48,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180" x:Name="btnAcercaDeUsVendedor">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180" x:Name="btnAcercaDeUsVendedor" Click="BtnAcercaDeUsVendedor_Click">
                     <Grid Width="390">
                         <materialDesign:PackIcon Kind="Information" Width="40" Height="40" IsEnabled="False" Margin="160,55,0,0"/>
                         <TextBlock Text="Acerca de cubestore" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="0,95,0,53" Width="190" IsEnabled="False"/>

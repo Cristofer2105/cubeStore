@@ -38,5 +38,11 @@ namespace cubeStore
 			this.Close();
 			login.Show();
 		}
+
+		private void BtnAcercaDeUsVendedor_Click(object sender, RoutedEventArgs e)
+		{
+			AcercaDe acercaDe = new AcercaDe();
+			acercaDe.ShowDialog();
+		}
 	}
 }
