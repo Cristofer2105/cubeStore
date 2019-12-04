@@ -144,7 +144,7 @@ namespace cubeStore
 
 			mapaProv.Children.Add(marcador);
 
-			MessageBox.Show(pinUbicacion.Latitude + "  " + pinUbicacion.Longitude);
+			MessageBox.Show("Ubicacion Capturada");
 		}
 		private void BtmAcercar_Click(object sender, RoutedEventArgs e)
 		{

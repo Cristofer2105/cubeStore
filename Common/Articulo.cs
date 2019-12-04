@@ -43,27 +43,50 @@ namespace Common
 			get { return idCategoria; }
 			set { idCategoria = value; }
 		}
+		private int idProvedor;
+
+		public int IdProvedor
+		{
+			get { return idProvedor; }
+			set { idProvedor = value; }
+		}
+		private DateTime fechaHoraRegistro;
+
+		public DateTime FechaHoraRegistro
+		{
+			get { return fechaHoraRegistro; }
+			set { fechaHoraRegistro = value; }
+		}
+
+
 
 		#endregion
 
 		#region Constructores de la clase
-		public Articulo(int idArticulo, string nombreArticulo, byte estadoArticulo, DateTime fechaHoraActualizacionArticulo, byte idCategoria)
+		public Articulo(int idArticulo, string nombreArticulo, byte estadoArticulo, DateTime fechaHoraActualizacionArticulo, byte idCategoria, int idProvedor,DateTime fechaHoraRegistro)
 		{
 			this.idArticulo = idArticulo;
 			this.nombreArticulo = nombreArticulo;
 			this.estadoArticulo = estadoArticulo;
 			this.fechaHoraActualizacionArticulo = fechaHoraActualizacionArticulo;
 			this.idCategoria = idCategoria;
+			this.idProvedor = idProvedor;
+			this.fechaHoraRegistro = fechaHoraRegistro;
 
 		}
 		/// <summary>
-		/// Constructor para el metodo Insert
+		/// Constructor para Insertar
 		/// </summary>
 		/// <param name="nombreArticulo"></param>
-		public Articulo(string nombreArticulo, byte idCategoria)
+		/// <param name="idCategoria"></param>
+		/// <param name="idProvedor"></param>
+		/// <param name="fechaHoraRegistro"></param>
+		public Articulo(string nombreArticulo, byte idCategoria,int idProvedor,DateTime fechaHoraRegistro)
 		{
 			this.nombreArticulo = nombreArticulo;
 			this.idCategoria = idCategoria;
+			this.idProvedor = idProvedor;
+			this.fechaHoraRegistro = fechaHoraRegistro;
 		}
 		#endregion
 	}

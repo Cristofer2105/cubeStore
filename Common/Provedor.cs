@@ -62,29 +62,44 @@ namespace Common
 			get { return longitud; }
 			set { longitud = value; }
 		}
+		private DateTime fechaHoraRegistro;
 
+		public DateTime FechaHoraRegistro
+		{
+			get { return fechaHoraRegistro; }
+			set { fechaHoraRegistro = value; }
+		}
 
 		public Provedor()
 		{
 
 		}
 
-		public Provedor(int idProvedor, string nit,string razonSocial, byte estado, DateTime fechaHoraActualizacion, double latitud, double longitud)
+		public Provedor(int idProvedor,string razonSocial, byte estado, DateTime fechaHoraActualizacion, double latitud, double longitud, DateTime fechaHoraRegistro)
 		{
 			this.idProvedor=idProvedor;
-			this.nit=nit;
 			this.razonSocial=razonSocial;
 			this.estado=estado;
 			this.fechaHoraActualizacion=fechaHoraActualizacion;
 			this.latitud = latitud;
 			this.longitud = longitud;
+			this.fechaHoraRegistro = fechaHoraRegistro;
+
 		}
-		public Provedor(string nit, string razonSocial, double latitud, double longitud)
+		/// <summary>
+		/// Constructor para Insertar
+		/// </summary>
+		/// <param name="razonSocial"></param>
+		/// <param name="latitud"></param>
+		/// <param name="longitud"></param>
+		/// <param name="fechaHoraRegistro"></param>
+		public Provedor(string razonSocial, double latitud, double longitud,DateTime fechaHoraRegistro)
 		{		
-			this.nit = nit;
+			
 			this.razonSocial = razonSocial;
 			this.latitud = latitud;
 			this.longitud = longitud;
+			this.fechaHoraRegistro = fechaHoraRegistro;
 		}
 
 

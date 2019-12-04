@@ -44,14 +44,14 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Provedor(nit,razonSocialProvedor,latitud,longitud) VALUES(@nit,@razonSocialProvedor,@latitud,@longitud)";
+			string query = "INSERT INTO Provedor(razonSocialProvedor,latitud,longitud,fechaRegistro) VALUES(@razonSocialProvedor,@latitud,@longitud,@fechaRegistro)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@nit", prov.Nit);
 				cmd.Parameters.AddWithValue("@razonSocialProvedor", prov.RazonSocial);
 				cmd.Parameters.AddWithValue("@latitud", prov.Latitud);
 				cmd.Parameters.AddWithValue("@longitud", prov.Longitud);
+				cmd.Parameters.AddWithValue("@fechaRegistro", prov.FechaHoraRegistro);
 				Methods.ExecuteBasicCommand(cmd);
 			}
 			catch (Exception ex)
@@ -99,12 +99,11 @@ namespace DAL
 		public override void Update()
 		{
 
-			string query = "UPDATE Provedor SET nit=@nit,razonSocialProvedor=@razonSocialProvedor,latitud=@latitud,longitud=@longitud,fechaHoraActualizacionProvedor=CURRENT_TIMESTAMP WHERE idProvedor = @idProvedor";
+			string query = "UPDATE Provedor SET razonSocialProvedor=@razonSocialProvedor,latitud=@latitud,longitud=@longitud,fechaHoraActualizacionProvedor=CURRENT_TIMESTAMP WHERE idProvedor = @idProvedor";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@idProvedor", prov.IdProvedor);
-				cmd.Parameters.AddWithValue("@nit", prov.Nit);
+				cmd.Parameters.AddWithValue("@idProvedor", prov.IdProvedor);		
 				cmd.Parameters.AddWithValue("@razonSocialProvedor", prov.RazonSocial);
 				cmd.Parameters.AddWithValue("@latitud", prov.Latitud);
 				cmd.Parameters.AddWithValue("@longitud", prov.Longitud);
@@ -121,7 +120,7 @@ namespace DAL
 			Provedor res = null;
 			SqlCommand cmd = null;
 			SqlDataReader dr = null;
-			string query = "SELECT idProvedor,nit,razonSocialProvedor,estadoProvedor,latitud,longitud,fechaHoraActualizacionProvedor FROM Provedor WHERE idProvedor=@idProvedor";
+			string query = "SELECT idProvedor,razonSocialProvedor,estadoProvedor,fechaHoraActualizacionProvedor,latitud,longitud,fechaRegistro FROM Provedor WHERE idProvedor=@idProvedor";
 			try
 			{
 				cmd = Methods.CreateBasicCommand(query);
@@ -130,7 +129,7 @@ namespace DAL
 
 				while (dr.Read())
 				{
-					res = new Provedor( int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(),byte.Parse(dr[3].ToString()), Convert.ToDateTime(dr[6].ToString()),double.Parse(dr[4].ToString()), double.Parse(dr[5].ToString()));
+					res = new Provedor( int.Parse(dr[0].ToString()), dr[1].ToString(),byte.Parse(dr[2].ToString()), Convert.ToDateTime(dr[3].ToString()),double.Parse(dr[4].ToString()), double.Parse(dr[5].ToString()), Convert.ToDateTime(dr[6].ToString()));
 				}
 			}
 			catch (Exception ex)

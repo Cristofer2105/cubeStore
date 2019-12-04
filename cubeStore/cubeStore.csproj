@@ -97,11 +97,11 @@
     <Compile Include="PerfilVendedor.xaml.cs">
       <DependentUpon>PerfilVendedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Provedores.xaml.cs">
+      <DependentUpon>Provedores.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProvedoresVista.xaml.cs">
       <DependentUpon>ProvedoresVista.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProvedorUbi.xaml.cs">
-      <DependentUpon>ProvedorUbi.xaml</DependentUpon>
     </Compile>
     <Compile Include="RestablecerContraseña.xaml.cs">
       <DependentUpon>RestablecerContraseña.xaml</DependentUpon>
@@ -186,11 +186,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProvedoresVista.xaml">
+    <Page Include="Provedores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProvedorUbi.xaml">
+    <Page Include="ProvedoresVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

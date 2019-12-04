@@ -46,7 +46,7 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria) VALUES(@nombreCategoria,@idCategoria)";
+			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
@@ -100,7 +100,7 @@ namespace DAL
 			Articulo res = null;
 			SqlCommand cmd = null;
 			SqlDataReader dr = null;
-			string query = "SELECT idArticulo,nombreArticulo,estadoArticulo,fechaHoraActualizacionArticulo,idCategoria FROM Articulo WHERE idArticulo=@idArticulo";
+			string query = "SELECT idArticulo,nombreArticulo,estadoArticulo,fechaHoraActualizacionArticulo,idCategoria,idProvedor,fechaHoraRegistro FROM Articulo WHERE idArticulo=@idArticulo";
 			try
 			{
 				cmd = Methods.CreateBasicCommand(query);
@@ -109,7 +109,7 @@ namespace DAL
 
 				while (dr.Read())
 				{
-					res = new Articulo (int.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()),byte.Parse(dr[4].ToString()));
+					res = new Articulo(int.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()), byte.Parse(dr[4].ToString()), int.Parse(dr[5].ToString()), DateTime.Parse(dr[6].ToString()));
 				}
 			}
 			catch (Exception ex)

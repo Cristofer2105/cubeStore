@@ -80,7 +80,8 @@ namespace cubeStore
 						try
 						{
 							//Insertar
-							articulo = new Articulo(txtnombreArticulo.Text,1);
+							DateTime fecha = DateTime.Now;
+							articulo = new Articulo(txtnombreArticulo.Text,1,1,fecha);
 							brl = new ArticuloBRL(articulo);
 							brl.Insert();
 							MessageBox.Show("Registro Exitoso");
