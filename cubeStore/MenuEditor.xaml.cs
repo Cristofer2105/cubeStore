@@ -34,9 +34,12 @@ namespace cubeStore
 
 		private void BtnSalirUsEditor_Click(object sender, RoutedEventArgs e)
 		{
-			Login login = new Login();
-			this.Close();
-			login.Show();
+			if (MessageBox.Show("Esta Seguro de Salir?", "Salir", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+			{
+				Login login = new Login();
+				this.Close();
+				login.Show();
+			}
 		}
 
 		private void BtnProductosUsEditor_Click(object sender, RoutedEventArgs e)

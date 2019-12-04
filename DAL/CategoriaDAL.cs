@@ -123,5 +123,21 @@ namespace DAL
 			}
 			return res;
 		}
+		public DataTable SelectCategorias()
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT idCategoria,nombreCategoria FROM Categoria WHERE estadoCategoria=1";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return res;
+		}
 	}
 }

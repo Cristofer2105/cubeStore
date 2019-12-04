@@ -27,7 +27,7 @@ namespace BRL
 		}
 		public ProvedorBRL()
 		{
-
+			Dal = new ProvedorDal();
 		}
 		public ProvedorBRL(Provedor prov)
 		{
@@ -65,6 +65,10 @@ namespace BRL
 		{
 			dal = new ProvedorDal();
 			return dal.Get(idProvedor);
+		}
+		public DataTable SelectProvedores()
+		{
+			return Dal.SelectProvedores();
 		}
 	}
 }

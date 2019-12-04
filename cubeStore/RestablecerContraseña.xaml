@@ -19,9 +19,7 @@
             
             <Image Source="imagenes/cubestore.png" HorizontalAlignment="Left" Margin="10 0" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnVolver" Click="BtnVolver_Click">
-                    <materialDesign:PackIcon Kind="ArrowLeft" Width="30" Height="30"/>
-                </Button>
+               
             </StackPanel>
             <TextBlock Text="RESTABLECER CONTRASEÑA" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="42" Margin="42,133,40,-105" Width="268" FontWeight="Bold"/>
         </Grid>

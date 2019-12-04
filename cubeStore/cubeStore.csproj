@@ -67,17 +67,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ActualizarProvedor.xaml.cs">
-      <DependentUpon>ActualizarProvedor.xaml</DependentUpon>
+    <Compile Include="Articulos.xaml.cs">
+      <DependentUpon>Articulos.xaml</DependentUpon>
     </Compile>
     <Compile Include="CambiarContrasenia.xaml.cs">
       <DependentUpon>CambiarContrasenia.xaml</DependentUpon>
     </Compile>
     <Compile Include="Categorias.xaml.cs">
       <DependentUpon>Categorias.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EliminarProvedor.xaml.cs">
-      <DependentUpon>EliminarProvedor.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenuCRUDproductosEditor.xaml.cs">
       <DependentUpon>MenuCRUDproductosEditor.xaml</DependentUpon>
@@ -100,9 +97,6 @@
     <Compile Include="Provedores.xaml.cs">
       <DependentUpon>Provedores.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProvedoresVista.xaml.cs">
-      <DependentUpon>ProvedoresVista.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RestablecerContraseña.xaml.cs">
       <DependentUpon>RestablecerContraseña.xaml</DependentUpon>
     </Compile>
@@ -113,11 +107,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ActualizarProvedor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AdminProductos.xaml">
+    <Page Include="Articulos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,10 +116,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Categorias.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EliminarProvedor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,9 +129,6 @@
     </Page>
     <Compile Include="AcercaDe.xaml.cs">
       <DependentUpon>AcercaDe.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AdminProductos.xaml.cs">
-      <DependentUpon>AdminProductos.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -187,10 +170,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Provedores.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ProvedoresVista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

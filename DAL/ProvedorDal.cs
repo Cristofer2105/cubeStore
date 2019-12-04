@@ -144,6 +144,22 @@ namespace DAL
 			}
 			return res;
 		}
+		public DataTable SelectProvedores()
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT idProvedor,razonSocialProvedor FROM Provedor WHERE estadoProvedor=1";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return res;
+		}
 	}
 
 

@@ -31,7 +31,8 @@ namespace cubeStore
 
 		private void BtnCategorias_Click(object sender, RoutedEventArgs e)
 		{
-
+			Categorias categorias = new Categorias();
+			categorias.ShowDialog();
 		}
 
 		private void BtnItems_Click(object sender, RoutedEventArgs e)
@@ -41,7 +42,8 @@ namespace cubeStore
 
 		private void BtnProvedores_Click(object sender, RoutedEventArgs e)
 		{
-
+			Provedores provedores = new Provedores();
+			provedores.ShowDialog();
 		}
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{

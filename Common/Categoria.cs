@@ -65,6 +65,11 @@ namespace Common
 			this.nombreCategoria = nombreCategoria;			
 			this.fechaHoraRegistroCat = fechaHoraRegistroCat;
 		}
+		public Categoria(byte idCategoria, string nombreCategoria)
+		{
+			this.idCategoria = idCategoria;
+			this.nombreCategoria = nombreCategoria;
+		}
 		#endregion
 	}
 }

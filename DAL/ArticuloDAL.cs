@@ -52,6 +52,8 @@ namespace DAL
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombreCategoria", art.NombreArticulo);
 				cmd.Parameters.AddWithValue("@idCategoria", art.IdCategoria);
+				cmd.Parameters.AddWithValue("@idProvedor", art.IdProvedor);
+				cmd.Parameters.AddWithValue("@fechaHoraRegistro", art.FechaHoraRegistro);
 				Methods.ExecuteBasicCommand(cmd);
 			}
 			catch (Exception ex)
@@ -80,13 +82,14 @@ namespace DAL
 
 		public override void Update()
 		{
-			string query = "";
+			string query = "UPDATE Articulo SET nombreArticulo=@nombreArticulo,fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP, idCategoria=@idCategoria,idProvedor=@idProvedor WHERE idArticulo = @idArticulo";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombreArticulo", art.NombreArticulo);
 				cmd.Parameters.AddWithValue("@idCategoria", art.IdCategoria);
 				cmd.Parameters.AddWithValue("@idArticulo", art.IdArticulo);
+				cmd.Parameters.AddWithValue("@idProvedor", art.IdProvedor);
 				Methods.ExecuteBasicCommand(cmd);
 			}
 			catch (Exception ex)
@@ -124,5 +127,6 @@ namespace DAL
 			}
 			return res;
 		}
+		
 	}
 }

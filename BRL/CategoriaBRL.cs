@@ -26,9 +26,10 @@ namespace BRL
 			get { return dal; }
 			set { dal = value; }
 		}
+		
 		public CategoriaBRL()
 		{
-		
+			Dal = new CategoriaDAL();
 		}
 		public CategoriaBRL(Categoria cat)
 		{
@@ -62,6 +63,10 @@ namespace BRL
 		{
 			dal = new CategoriaDAL();
 			return dal.Get(idCategoria);
+		}
+		public DataTable SelectCategorias()
+		{
+			return Dal.SelectCategorias();
 		}
 		#endregion
 	}

@@ -30,7 +30,10 @@ namespace cubeStore
 
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
-			this.Close();
+			if (MessageBox.Show("Esta Seguro de Salir?", "Salir", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+			{
+				this.Close();
+			}
 			
 		}
 

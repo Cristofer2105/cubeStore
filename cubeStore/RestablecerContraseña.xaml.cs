@@ -122,12 +122,5 @@ namespace cubeStore
 				MessageBox.Show("Tiene que llenar los campos para restablecer su contrasenia");
 			}
 		}
-
-		private void BtnVolver_Click(object sender, RoutedEventArgs e)
-		{
-			Login login = new Login();
-			this.Close();
-			login.Show();
-		}
 	}
 }
