@@ -67,6 +67,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdministrarItem.xaml.cs">
+      <DependentUpon>AdministrarItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarItem.xaml.cs">
+      <DependentUpon>AgregarItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Articulos.xaml.cs">
       <DependentUpon>Articulos.xaml</DependentUpon>
     </Compile>
@@ -107,6 +113,14 @@
       <DependentUpon>Usuarios.xaml</DependentUpon>
     </Compile>
     <Page Include="AcercaDe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdministrarItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AgregarItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

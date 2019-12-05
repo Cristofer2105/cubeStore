@@ -14,25 +14,19 @@ using System.Windows.Shapes;
 
 namespace cubeStore
 {
-	/// <summary>
-	/// Interaction logic for Items.xaml
-	/// </summary>
-	public partial class Items : Window
-	{
-		public Items()
-		{
-			InitializeComponent();
-		}
+    /// <summary>
+    /// Interaction logic for AdministrarItem.xaml
+    /// </summary>
+    public partial class AdministrarItem : Window
+    {
+        public AdministrarItem()
+        {
+            InitializeComponent();
+        }
 
 		private void BtnCerrar_Click(object sender, RoutedEventArgs e)
 		{
-			this.Close();	
-		}
-
-		private void BtnAgregarItem_Click(object sender, RoutedEventArgs e)
-		{
-			AgregarItem agregarItem = new AgregarItem();
-			agregarItem.ShowDialog();
+			this.Close();
 		}
 	}
 }
