@@ -28,10 +28,10 @@
                 </Grid.Effect>
                 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10 40">
                     <StackPanel Orientation="Vertical">
-                        <TextBox Margin="0 10" Foreground="Black" Background="White" IsEnabled="False" FontWeight="Bold" materialDesign:HintAssist.Hint="Nombre del Producto" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtnombreproducto" Width="424"/>
-                        <TextBox Margin="0 10" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Codigo del Item" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtcodigo" Width="424"/>
-                        <TextBox Margin="0 10" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Precio base del item" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtpreciobase" Width="424"/>
-                        <Button x:Name="btnAgregarItem" Margin="0 10" Background="#004E6F" BorderBrush="{x:Null}" Height="Auto">
+                        <TextBox Margin="0 10" Foreground="Black" Background="White" IsEnabled="False" FontWeight="Bold" materialDesign:HintAssist.Hint="Nombre del Producto" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtnombreproductoinsert" Width="424"/>
+                        <TextBox Margin="0 10" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Codigo del Item" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtcodigoinsert" Width="424"/>
+                        <TextBox Margin="0 10" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Precio base del item" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtpreciobaseinsert" Width="424"/>
+                        <Button x:Name="btnAgregarItem" Margin="0 10" Background="#004E6F" BorderBrush="{x:Null}" Height="Auto" Click="BtnAgregarItem_Click">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock Text="Agregar Item" Foreground="White" FontSize="20" IsEnabled="False"/>
                             </StackPanel>
@@ -39,6 +39,7 @@
                     </StackPanel>
 
                 </StackPanel>
+                <TextBox x:Name="txtIdProductoInsertar" HorizontalAlignment="Left" Height="23" Margin="38,17,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             </Grid>
 
         </StackPanel>

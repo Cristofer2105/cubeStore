@@ -30,12 +30,12 @@
                     <StackPanel Orientation="Vertical">
                         <TextBox Margin="0 10" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Codigo del Item" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtcodigo" Width="424"/>
                         <TextBox Margin="0 10" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Precio base del item" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtpreciobase" Width="424"/>
-                        <Button x:Name="btnActualizarItem" Margin="0 10" Background="#004E6F" BorderBrush="{x:Null}" Height="Auto">
+                        <Button Click="BtnActualizarItem_Click" x:Name="btnActualizarItem" Margin="0 10" Background="#004E6F" BorderBrush="{x:Null}" Height="Auto">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock Text="Actualizar Item" Foreground="White" FontSize="20" IsEnabled="False"/>
                             </StackPanel>
                         </Button>
-                        <Button x:Name="btnEliminarItem" Margin="0 5" Background="#004E6F" BorderBrush="{x:Null}" Height="Auto">
+                        <Button Click="BtnEliminarItem_Click" x:Name="btnEliminarItem" Margin="0 5" Background="#004E6F" BorderBrush="{x:Null}" Height="Auto">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock Text="Eliminar Item" Foreground="White" FontSize="20" IsEnabled="False"/>
                             </StackPanel>

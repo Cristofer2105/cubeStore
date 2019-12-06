@@ -32,6 +32,8 @@ namespace cubeStore
 		private void BtnAgregarItem_Click(object sender, RoutedEventArgs e)
 		{
 			AgregarItem agregarItem = new AgregarItem();
+			agregarItem.txtnombreproductoinsert.Text = txtnombreproductobuscado.Text;
+			agregarItem.txtIdProductoInsertar.Text = txtidProductoBuscado.Text;
 			agregarItem.ShowDialog();
 		}
 	}

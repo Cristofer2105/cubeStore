@@ -24,7 +24,7 @@
 
         <StackPanel Orientation="Horizontal" Height="520">
 
-            <Grid Height="510" Width="380" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#EA5555" Margin="5">
+            <Grid Height="520" Width="380" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#EA5555">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -38,12 +38,14 @@
                     </Grid.Effect>
                     <StackPanel Margin="15" Grid.RowSpan="2">
                         <TextBlock Text="ADMINISTRAR ARTICULOS" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="Champagne &amp; Limousines" Height="41" Margin="45,0"/>
-                        <TextBox FontWeight="Bold" Margin="0,10" IsEnabled="False" materialDesign:HintAssist.Hint="NOMBRE DEL ARTICULO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="12" x:Name="txtnombreArticulo"/>
-                        <TextBlock Text="CATEGORIA" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" FontFamily="Champagne &amp; Limousines" Height="24" />
+                        <TextBox Margin="0 10" IsEnabled="False" materialDesign:HintAssist.Hint="NOMBRE DEL ARTICULO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="12" x:Name="txtnombreArticulo"/>
+                        <ComboBox Margin="0 5" materialDesign:HintAssist.Hint="Categoria" IsEnabled="False" FontSize="15"  x:Name="cbxCategoria"/>
+                        <ComboBox Margin="0 5" materialDesign:HintAssist.Hint="Provedor" IsEnabled="False" x:Name="cbxProvedor" FontSize="15"/>
+                        <StackPanel Margin="0 15" Orientation="Horizontal">
+                            <TextBox IsEnabled="False" materialDesign:HintAssist.Hint="Imagen del Articulo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="15" x:Name="txturlImagen" Width="278"/>
+                            <Button Click="BtnBuscarImagen_Click" x:Name="btnBuscarImagen" Content="..." FontWeight="Bold" Background="#004E6F" Height="40" Width="53"/>
+                        </StackPanel>
 
-                        <ComboBox IsEnabled="False" FontSize="15" FontWeight="Bold" x:Name="cbxCategoria"/>
-                        <TextBlock Text="PROVEDOR" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" FontFamily="Champagne &amp; Limousines" Height="27"/>
-                        <ComboBox IsEnabled="False" x:Name="cbxProvedor" FontSize="15" FontWeight="Bold"/>
                         <Grid VerticalAlignment="Bottom" Height="170">
                             <Button Content="MODIFICAR" Click="BtnModificar_Click" x:Name="btnModificar" FontWeight="Bold" Background="#004E6F" Margin="181,68,10,70"/>
                             <Button Content="AGREGAR"  Click="BtnAgregar_Click" x:Name="btnAgregar" FontWeight="Bold" Background="#004E6F" Margin="10,10,10,108"/>
@@ -56,7 +58,7 @@
                 </Grid>
             </Grid>
 
-            <Grid  VerticalAlignment="Top" Height="510" Width="432" Background="#EA5555" Margin="5,5,5,0">
+            <Grid  VerticalAlignment="Top" Height="520" Width="460" Background="#EA5555">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -78,6 +80,8 @@
                     </StackPanel>
 
                 </Grid>
+                <Image x:Name="imgArticulo" Stretch="Fill" HorizontalAlignment="Left" Height="190" Margin="103,34,0,0" VerticalAlignment="Top" Width="250"/>
+                <TextBlock Foreground="White" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="158,0,0,0" TextWrapping="Wrap" Text="Imagen del Articulo" VerticalAlignment="Top"/>
             </Grid>
 
         </StackPanel>

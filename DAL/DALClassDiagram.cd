@@ -8,31 +8,45 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DAL.AbstractDAL">
-    <Position X="1.25" Y="2.25" Width="1.5" />
+    <Position X="1" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>AbstractDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DAL.CategoriaDAL">
-    <Position X="1.5" Y="5" Width="1.5" />
+    <Position X="0.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQABEAAAAQAAABAAAAAAAAAAAEAAAAAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAQABEAAAAQAAABAAAAAAAAAAQEAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>CategoriaDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DAL.ArticuloDAL">
-    <Position X="3.5" Y="4.25" Width="1.5" />
+    <Position X="3.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAEAAAAAAAABAAAAAAAAAgAEAAIAAAAAAQAAAAAA=</HashCode>
       <FileName>ArticuloDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DAL.UsuarioDal">
-    <Position X="4" Y="3" Width="1.5" />
+    <Position X="6.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAEAAAAQAAABAAAAAAAAAAAEAABAAAAARQAAAAQA=</HashCode>
+      <FileName>UsuarioDal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.ItemDAL">
+    <Position X="3.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAABAAAAAAAAAAAEAAICAAAAAQAAAAAA=</HashCode>
+      <FileName>ItemDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.ConfigDAL">
+    <Position X="6.75" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>UsuarioDal.cs</FileName>
+      <FileName>ConfigDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

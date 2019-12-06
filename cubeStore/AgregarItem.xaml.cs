@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Common;
+using BRL;
 
 namespace cubeStore
 {
@@ -19,7 +21,9 @@ namespace cubeStore
     /// </summary>
     public partial class AgregarItem : Window
     {
-        public AgregarItem()
+		ItemBRL brl;
+		Item item;
+		public AgregarItem()
         {
             InitializeComponent();
         }
@@ -27,6 +31,19 @@ namespace cubeStore
 		private void BtnCerrar_Click(object sender, RoutedEventArgs e)
 		{
 			this.Close();
+		}
+
+		private void BtnAgregarItem_Click(object sender, RoutedEventArgs e)
+		{
+			//Insertar
+			/*
+				DateTime fechahora = DateTime.Now;
+				item = new Item("asus4566",2,60.2,fechahora);
+				brl = new ItemBRL(item);
+				brl.Insert();
+				MessageBox.Show("Registro Exitoso");
+				*/
+			
 		}
 	}
 }

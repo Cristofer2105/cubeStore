@@ -55,9 +55,15 @@ namespace cubeStore
 							cambia.Show();
 						}
 						else { 
+							//Iniciamos variable de sesion
 						Sesion.idSesion= int.Parse(dt.Rows[0][0].ToString());
 						Sesion.usuarioSesion= dt.Rows[0][1].ToString();
 						Sesion.rolSesion= dt.Rows[0][2].ToString();
+
+						//Iniciamos variables de configuracion
+						ConfigBRL configBRL = new ConfigBRL();
+						DataTable dtConfig = configBRL.Select();
+						Config.configPathImagen = dtConfig.Rows[0][0].ToString();
 						if (dt.Rows[0][2].ToString() == "Administrador")
 						{
 							MainWindow menu = new MainWindow();

@@ -46,7 +46,7 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro)";
+			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro,urlFoto) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro,@urlFoto)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
@@ -54,6 +54,8 @@ namespace DAL
 				cmd.Parameters.AddWithValue("@idCategoria", art.IdCategoria);
 				cmd.Parameters.AddWithValue("@idProvedor", art.IdProvedor);
 				cmd.Parameters.AddWithValue("@fechaHoraRegistro", art.FechaHoraRegistro);
+				cmd.Parameters.AddWithValue("@urlFoto", art.Foto);
+
 				Methods.ExecuteBasicCommand(cmd);
 			}
 			catch (Exception ex)
@@ -112,7 +114,7 @@ namespace DAL
 
 				while (dr.Read())
 				{
-					res = new Articulo(int.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()), byte.Parse(dr[4].ToString()), int.Parse(dr[5].ToString()), DateTime.Parse(dr[6].ToString()));
+					res = new Articulo(int.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()), byte.Parse(dr[4].ToString()), int.Parse(dr[5].ToString()), DateTime.Parse(dr[6].ToString()), byte.Parse(dr[7].ToString()));
 				}
 			}
 			catch (Exception ex)

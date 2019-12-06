@@ -28,5 +28,32 @@ namespace cubeStore
 		{
 			this.Close();
 		}
+
+		private void BtnActualizarItem_Click(object sender, RoutedEventArgs e)
+		{
+			/*
+			//Modificar
+			item = new Item();
+			item.IdItem = 2;
+			item.CodigoItem = "corsair34566";
+			item.PrecioBaseItem = 90.99;
+			brl = new ItemBRL(item);
+			brl.Update();
+			MessageBox.Show("Registro modificado exitosamente");
+			*/
+		
+		}
+
+		private void BtnEliminarItem_Click(object sender, RoutedEventArgs e)
+		{
+			//Eliminar
+			/*
+			item = new Item();
+			item.IdItem = 2;
+			brl = new ItemBRL(item);
+			brl.Delete();
+			MessageBox.Show("Eliminado Exitosamente");
+			*/
+		}
 	}
 }

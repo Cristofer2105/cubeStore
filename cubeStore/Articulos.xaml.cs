@@ -1,8 +1,10 @@
 ﻿using BRL;
 using Common;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,7 @@ namespace cubeStore
 	/// </summary>
 	public partial class Articulos : Window
 	{
+		string pathImagen = string.Empty;
 		byte operacion = 0;
 		ArticuloBRL brl;
 		Articulo articulo;
@@ -170,9 +173,9 @@ namespace cubeStore
 			{
 				case 1:
 					//Insertar
-					if (txtnombreArticulo.Text == "")
+					if (txtnombreArticulo.Text == "" && pathImagen!=string.Empty)
 					{
-						MessageBox.Show("Debe Llenar los campos para poder agregar un registro");
+						MessageBox.Show("Debe completar todos los campos del formulario");
 					}
 					else
 					{
@@ -183,9 +186,12 @@ namespace cubeStore
 							{
 								//Insertar
 								DateTime fecha = DateTime.Now;
-								articulo = new Articulo(txtnombreArticulo.Text, byte.Parse(cbxCategoria.SelectedValue.ToString()), int.Parse(cbxProvedor.SelectedValue.ToString()), fecha);
+								articulo = new Articulo(txtnombreArticulo.Text, byte.Parse(cbxCategoria.SelectedValue.ToString()), int.Parse(cbxProvedor.SelectedValue.ToString()), fecha,1);
 								brl = new ArticuloBRL(articulo);
 								brl.Insert();
+
+								File.Copy(pathImagen, Config.configPathImagen+"foto8.jpg");
+
 								MessageBox.Show("Registro Exitoso");
 								LoadDataGrid();
 								dgdDatos.IsEnabled = true;
@@ -234,6 +240,19 @@ namespace cubeStore
 		{
 			DesHabilitar();
 			LimpiarCampos();
+		}
+
+		private void BtnBuscarImagen_Click(object sender, RoutedEventArgs e)
+		{
+			OpenFileDialog ofd = new OpenFileDialog();
+			ofd.Filter = "Imagenes jpg|*.jpg|Imagenes png|*.png";
+
+			if (ofd.ShowDialog()==true)
+			{
+				imgArticulo.Source = new BitmapImage(new Uri(ofd.FileName));
+				pathImagen = ofd.FileName;
+			}
+			
 		}
 	}
 }
