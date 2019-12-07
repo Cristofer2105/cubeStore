@@ -100,6 +100,9 @@
     <Compile Include="MenuVentas.xaml.cs">
       <DependentUpon>MenuVentas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuVentasVendedor.xaml.cs">
+      <DependentUpon>MenuVentasVendedor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PerfilAdministrador.xaml.cs">
       <DependentUpon>PerfilAdministrador.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MenuVentas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuVentasVendedor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

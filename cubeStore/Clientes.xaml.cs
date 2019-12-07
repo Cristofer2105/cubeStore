@@ -78,9 +78,7 @@ namespace cubeStore
 
 		private void BtnCerrarClientes_Click(object sender, RoutedEventArgs e)
 		{
-			MenuVentas menuVentas = new MenuVentas();
 			this.Close();
-			menuVentas.Show();
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -103,7 +101,7 @@ namespace cubeStore
 
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
 		{
-			if (cliente != null && txtnombre.Text != "" && txtprimerapellido.Text != "" && txtsegundoapellido.Text != "")
+			if (cliente != null)
 			{
 				if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 				{

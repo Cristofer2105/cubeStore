@@ -46,7 +46,7 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro,urlFoto) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro)";
+			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
