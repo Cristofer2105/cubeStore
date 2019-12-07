@@ -16,14 +16,13 @@ namespace Common
 			get { return idSession; }
 			set { idSession = value; }
 		}
-		private DateTime fecha;
+		private DateTime inicioSesion;
 
-		public DateTime Fecha
+		public DateTime InicioSesion
 		{
-			get { return fecha; }
-			set { fecha = value; }
+			get { return inicioSesion; }
+			set { inicioSesion = value; }
 		}
-		
 		private int idEmpleado;
 
 		public int IdEmpleado
@@ -41,9 +40,9 @@ namespace Common
 		{
 
 		}
-		public Session(DateTime fecha,int idEmpleado)
+		public Session(DateTime inicioSesion, int idEmpleado)
 		{
-			this.fecha = fecha;
+			this.inicioSesion = inicioSesion;
 			this.idEmpleado = idEmpleado;
 		}
 		#endregion

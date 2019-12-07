@@ -80,7 +80,7 @@ namespace cubeStore
 						{
 							//Insertar session
 							DateTime fechahora = DateTime.Now;
-							ses = new Session(fechahora, int.Parse(dt.Rows[0][0].ToString()));
+							ses = new Session(fechahora,int.Parse(dt.Rows[0][0].ToString()));
 							sesBRL = new SessionBRL(ses);
 							sesBRL.Insert();
 							MenuEditor menuedit = new MenuEditor();

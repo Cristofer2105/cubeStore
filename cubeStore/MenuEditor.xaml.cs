@@ -55,5 +55,11 @@ namespace cubeStore
 			acercaDe.ShowDialog();
 
 		}
+
+		private void BtnVentasUsEditor_Click(object sender, RoutedEventArgs e)
+		{
+			MenuVentas menuVentas = new MenuVentas();
+			menuVentas.ShowDialog();
+		}
 	}
 }

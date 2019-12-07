@@ -36,9 +36,14 @@ namespace BRL
 		}
 
 		#endregion
+		#region metodos de la clase
+		/// <summary>
+		/// Metodo insert sesion BRL
+		/// </summary>
 		public void Insert()
 		{
 			dal.Insert();
 		}
+		#endregion
 	}
 }

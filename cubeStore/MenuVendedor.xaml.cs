@@ -47,5 +47,11 @@ namespace cubeStore
 			AcercaDe acercaDe = new AcercaDe();
 			acercaDe.ShowDialog();
 		}
+
+		private void BtnVentasUsVendedor_Click(object sender, RoutedEventArgs e)
+		{
+			MenuVentas menuVentas = new MenuVentas();
+			menuVentas.ShowDialog();
+		}
 	}
 }

@@ -61,5 +61,11 @@ namespace cubeStore
 			this.Close();
 			perfilAdministrador.Show();
 		}
+
+		private void BtnVentas_Click(object sender, RoutedEventArgs e)
+		{
+			MenuVentas menuVentas = new MenuVentas();
+			menuVentas.ShowDialog();
+		}
 	}
 }

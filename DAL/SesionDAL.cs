@@ -29,13 +29,16 @@ namespace DAL
 
 		#endregion
 		#region metodos
+		/// <summary>
+		/// Metodo insert sesion
+		/// </summary>
 		public void Insert()
 		{
-			string query = "INSERT INTO Session(fecha,idEmpleado) VALUES(@fecha,@idEmpleado)";
+			string query = "INSERT INTO Session(inicioSesion,idEmpleado) VALUES(@inicioSesion,@idEmpleado)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@fecha", ses.Fecha);
+				cmd.Parameters.AddWithValue("@inicioSesion", ses.InicioSesion);
 				cmd.Parameters.AddWithValue("@idEmpleado", ses.IdEmpleado);
 				Methods.ExecuteBasicCommand(cmd);
 			}
@@ -45,6 +48,6 @@ namespace DAL
 				throw ex;
 			}
 		}
+		}
 		#endregion
 	}
-}
