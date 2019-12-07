@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Common;
 using BRL;
 using System.Data;
+using System.Timers;
 
 namespace cubeStore
 {
@@ -44,7 +45,7 @@ namespace cubeStore
 				MessageBox.Show(ex.Message);
 			}
 		}
-		private void LoadDataGridItems()
+		public void LoadDataGridItems()
 		{
 			try
 			{
@@ -75,11 +76,16 @@ namespace cubeStore
 			{
 				agregarItem.txtnombreproductoinsert.Text = txtnombreproductobuscado.Text;
 				agregarItem.txtIdProductoInsertar.Text = txtidProductoBuscado.Text;
-				agregarItem.ShowDialog();
+				agregarItem.Show();
 				txtnombreproductobuscado.Text = "";
+				this.Close();
 			}
 		}
-
+		/// <summary>
+		/// Evento selection changed para busqueda de articulos
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Dgdbusqueda_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (dgdbusqueda.Items.Count > 0 && dgdbusqueda.SelectedItem != null)
@@ -96,7 +102,20 @@ namespace cubeStore
 
 					txtidProductoBuscado.Text = Convert.ToInt32(id).ToString();
 					txtnombreproductobuscado.Text = articulo.NombreArticulo;
-					
+					AgregarItem agregarItem = new AgregarItem();
+					if (txtnombreproductobuscado.Text == "" && txtidProductoBuscado.Text == "")
+					{
+						MessageBox.Show("Busque un producto para agregar item");
+					}
+					else
+					{
+						agregarItem.txtnombreproductoinsert.Text = txtnombreproductobuscado.Text;
+						agregarItem.txtIdProductoInsertar.Text = txtidProductoBuscado.Text;
+						agregarItem.ShowDialog();
+						txtnombreproductobuscado.Text = "";
+						this.Close();
+					}
+
 				}
 				catch (Exception ex)
 				{
@@ -125,7 +144,11 @@ namespace cubeStore
 		{
 			LoadDataGridItems();
 		}
-
+		/// <summary>
+		/// Evento selection changed para administrar items del datagrid
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void DgdDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (dgdDatos.Items.Count > 0 && dgdDatos.SelectedItem != null)
@@ -139,7 +162,16 @@ namespace cubeStore
 					item = brl.Get(id);
 
 					//Cargar Datos
-					MessageBox.Show("Desea Administrar este item?"+item.CodigoItem);
+					if (MessageBox.Show("Desea administrar este item?", "Administrar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+					{
+						AdministrarItem administrarItem = new AdministrarItem();
+						administrarItem.txtcodigo.Text = item.CodigoItem;
+						administrarItem.txtidItem.Text = Convert.ToInt32(id).ToString(); ;
+						administrarItem.txtpreciobase.Text = Convert.ToDouble(item.PrecioBaseItem).ToString();
+						administrarItem.Show();
+						this.Close();
+					}
+					
 				}
 				catch (Exception ex)
 				{

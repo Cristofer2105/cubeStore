@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"
-        Title="Usuarios" Height="370" Width="500"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="Usuarios" Height="326.114" Width="500"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <StackPanel>
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
             <Grid.Effect>
@@ -30,19 +30,22 @@
                     <StackPanel Orientation="Vertical">
                         <TextBox Margin="0 10" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Codigo del Item" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtcodigo" Width="424"/>
                         <TextBox Margin="0 10" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Precio base del item" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtpreciobase" Width="424"/>
-                        <Button Click="BtnActualizarItem_Click" x:Name="btnActualizarItem" Margin="0 10" Background="#004E6F" BorderBrush="{x:Null}" Height="Auto">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Text="Actualizar Item" Foreground="White" FontSize="20" IsEnabled="False"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="BtnEliminarItem_Click" x:Name="btnEliminarItem" Margin="0 5" Background="#004E6F" BorderBrush="{x:Null}" Height="Auto">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Text="Eliminar Item" Foreground="White" FontSize="20" IsEnabled="False"/>
-                            </StackPanel>
-                        </Button>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button Margin="10" Click="BtnActualizarItem_Click" x:Name="btnActualizarItem" Background="#004E6F" BorderBrush="{x:Null}" Height="40">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock Text="Actualizar Item" Foreground="White" FontSize="20" IsEnabled="False"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Margin="10" Click="BtnEliminarItem_Click" x:Name="btnEliminarItem"  Background="#004E6F" BorderBrush="{x:Null}" Height="40" >
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <TextBlock Text="Eliminar Item" Foreground="White" FontSize="20" IsEnabled="False"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
 
                 </StackPanel>
+                <TextBox Visibility="Hidden" x:Name="txtidItem" HorizontalAlignment="Left" Height="23" Margin="38,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
             </Grid>
 
         </StackPanel>

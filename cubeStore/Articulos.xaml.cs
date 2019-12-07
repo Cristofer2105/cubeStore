@@ -24,7 +24,6 @@ namespace cubeStore
 	/// </summary>
 	public partial class Articulos : Window
 	{
-		string pathImagen = string.Empty;
 		byte operacion = 0;
 		ArticuloBRL brl;
 		Articulo articulo;
@@ -214,6 +213,9 @@ namespace cubeStore
 					{
 						MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 					}
+					else
+					{
+
 					txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();
 				
 						try
@@ -234,6 +236,8 @@ namespace cubeStore
 
 							MessageBox.Show(ex.Message);
 						}
+
+					}
 					break;
 			}
 		}

@@ -6,7 +6,7 @@
                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"
-        Title="Usuarios" Height="500" Width="600"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+        Title="Usuarios" Height="600" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
     <StackPanel>
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
             <Grid.Effect>
@@ -22,7 +22,7 @@
         </Grid>
         <StackPanel Orientation="Horizontal" Height="420">
 
-            <Grid Height="420" Width="600" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#EA5555">
+            <Grid Height="519" Width="600" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#EA5555" Margin="0,0,0,-99">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -32,7 +32,7 @@
                         <materialDesign:PackIcon Kind="Check" IsEnabled="False"/>
                     </Button>
                 </StackPanel>
-                <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="194" VerticalAlignment="Top" Margin="10,216,10,0" x:Name="dgdDatos" SelectionChanged="DgdDatos_SelectionChanged"/>
+                <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="293" VerticalAlignment="Top" Margin="10,216,10,0" x:Name="dgdDatos" SelectionChanged="DgdDatos_SelectionChanged"/>
                 <TextBlock Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="139,191,0,0" TextWrapping="Wrap" Text="Lista de Items seleccione uno para administrar" VerticalAlignment="Top" Width="360"/>
                 <TextBlock Foreground="White"  FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="218,10,0,0" TextWrapping="Wrap" Text="Agregar nuevo Item" VerticalAlignment="Top"/>
                 <TextBox Visibility="Hidden" x:Name="txtidProductoBuscado" Text="idproducto" HorizontalAlignment="Left" Height="23" Margin="74,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>

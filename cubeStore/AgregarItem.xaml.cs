@@ -30,7 +30,9 @@ namespace cubeStore
 
 		private void BtnCerrar_Click(object sender, RoutedEventArgs e)
 		{
+			Items items = new Items();
 			this.Close();
+			items.ShowDialog();
 		}
 
 		private void BtnAgregarItem_Click(object sender, RoutedEventArgs e)
@@ -62,7 +64,10 @@ namespace cubeStore
 					itemswin.dgdbusqueda.Visibility = Visibility.Hidden;
 					itemswin.txtnombreproductobuscado.Text = "";
 					this.Close();
-	
+					itemswin.Show();
+
+
+
 				}
 				catch (Exception ex)
 				{
