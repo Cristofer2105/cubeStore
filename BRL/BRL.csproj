@@ -47,10 +47,10 @@
     <Compile Include="AbstractBRL.cs" />
     <Compile Include="ArticuloBRL.cs" />
     <Compile Include="CategoriaBRL.cs" />
-    <Compile Include="ConfigBRL.cs" />
     <Compile Include="ItemBRL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvedorBRL.cs" />
+    <Compile Include="SessionBRL.cs" />
     <Compile Include="UsuarioBRL.cs" />
   </ItemGroup>
   <ItemGroup>

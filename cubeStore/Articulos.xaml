@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"
-        Title="Usuarios" Height="600" Width="834"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+        Title="Usuarios" Height="600" Width="840"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
     <StackPanel>
 
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
@@ -28,7 +28,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Grid VerticalAlignment="Center" Margin="10" Height="490" Background="White">
+                <Grid VerticalAlignment="Center" Margin="10,20,10,10" Height="490" Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="447*"/>
@@ -39,13 +39,8 @@
                     <StackPanel Margin="15" Grid.RowSpan="2">
                         <TextBlock Text="ADMINISTRAR ARTICULOS" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" FontFamily="Champagne &amp; Limousines" Height="41" Margin="45,0"/>
                         <TextBox Margin="0 10" IsEnabled="False" materialDesign:HintAssist.Hint="NOMBRE DEL ARTICULO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="12" x:Name="txtnombreArticulo"/>
-                        <ComboBox Margin="0 5" materialDesign:HintAssist.Hint="Categoria" IsEnabled="False" FontSize="15"  x:Name="cbxCategoria"/>
-                        <ComboBox Margin="0 5" materialDesign:HintAssist.Hint="Provedor" IsEnabled="False" x:Name="cbxProvedor" FontSize="15"/>
-                        <StackPanel Margin="0 15" Orientation="Horizontal">
-                            <TextBox IsEnabled="False" materialDesign:HintAssist.Hint="Imagen del Articulo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="15" x:Name="txturlImagen" Width="278"/>
-                            <Button Click="BtnBuscarImagen_Click" x:Name="btnBuscarImagen" Content="..." FontWeight="Bold" Background="#004E6F" Height="40" Width="53"/>
-                        </StackPanel>
-
+                        <ComboBox Margin="0 10" materialDesign:HintAssist.Hint="Categoria" IsEnabled="False" FontSize="15"  x:Name="cbxCategoria"/>
+                        <ComboBox Margin="0 10" materialDesign:HintAssist.Hint="Provedor" IsEnabled="False" x:Name="cbxProvedor" FontSize="15" Height="37"/>
                         <Grid VerticalAlignment="Bottom" Height="170">
                             <Button Content="MODIFICAR" Click="BtnModificar_Click" x:Name="btnModificar" FontWeight="Bold" Background="#004E6F" Margin="181,68,10,70"/>
                             <Button Content="AGREGAR"  Click="BtnAgregar_Click" x:Name="btnAgregar" FontWeight="Bold" Background="#004E6F" Margin="10,10,10,108"/>
@@ -62,7 +57,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Grid VerticalAlignment="Bottom" Margin="10,0,10,10" Height="272" Background="White">
+                <Grid VerticalAlignment="Bottom" Margin="0,0,10,10" Height="491" Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="17*"/>
                         <ColumnDefinition Width="26*"/>
@@ -76,12 +71,9 @@
                     </Grid.Effect>
                     <StackPanel Margin="15" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <TextBlock Foreground="Black" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"  FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" Text="LISTA DE ARTICULOS" VerticalAlignment="Top"/>
-                        <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" Height="220" VerticalAlignment="Top" Margin="0,10" x:Name="dgdDatos" SelectionMode="Single"/>
+                        <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" Height="433" VerticalAlignment="Top" Margin="0,10" x:Name="dgdDatos" SelectionMode="Single"/>
                     </StackPanel>
-
                 </Grid>
-                <Image x:Name="imgArticulo" Stretch="Fill" HorizontalAlignment="Left" Height="190" Margin="103,34,0,0" VerticalAlignment="Top" Width="250"/>
-                <TextBlock Foreground="White" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="158,0,0,0" TextWrapping="Wrap" Text="Imagen del Articulo" VerticalAlignment="Top"/>
             </Grid>
 
         </StackPanel>

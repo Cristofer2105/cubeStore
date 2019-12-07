@@ -42,11 +42,11 @@
       <FileName>ItemDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DAL.ConfigDAL">
-    <Position X="6.75" Y="7" Width="1.5" />
+  <Class Name="DAL.ClienteDAL">
+    <Position X="6.25" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ConfigDAL.cs</FileName>
+      <FileName>ClienteDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

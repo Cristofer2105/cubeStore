@@ -147,6 +147,7 @@ namespace cubeStore
 					//Eliminacion Logica
 					try
 					{
+						dgdDatos.IsEnabled = true;
 						brl = new ArticuloBRL(articulo);
 						brl.Delete();
 						MessageBox.Show("Eliminado Exitosamente");
@@ -186,11 +187,11 @@ namespace cubeStore
 							{
 								//Insertar
 								DateTime fecha = DateTime.Now;
-								articulo = new Articulo(txtnombreArticulo.Text, byte.Parse(cbxCategoria.SelectedValue.ToString()), int.Parse(cbxProvedor.SelectedValue.ToString()), fecha,1);
+								articulo = new Articulo(txtnombreArticulo.Text, byte.Parse(cbxCategoria.SelectedValue.ToString()), int.Parse(cbxProvedor.SelectedValue.ToString()), fecha);
 								brl = new ArticuloBRL(articulo);
 								brl.Insert();
 
-								File.Copy(pathImagen, Config.configPathImagen+"foto8.jpg");
+								
 
 								MessageBox.Show("Registro Exitoso");
 								LoadDataGrid();
@@ -220,7 +221,7 @@ namespace cubeStore
 							//Modificar
 							//categoria = new Categoria(txtnombreCategoria.Text);
 							articulo.NombreArticulo = txtnombreArticulo.Text;
-
+							dgdDatos.IsEnabled = true;
 							brl = new ArticuloBRL(articulo);
 							brl.Update();
 							MessageBox.Show("Registro Modificado Exitosamente");
@@ -238,21 +239,9 @@ namespace cubeStore
 		}
 		private void BtnCancelar_Click(object sender, RoutedEventArgs e)
 		{
+			dgdDatos.IsEnabled = true;
 			DesHabilitar();
 			LimpiarCampos();
-		}
-
-		private void BtnBuscarImagen_Click(object sender, RoutedEventArgs e)
-		{
-			OpenFileDialog ofd = new OpenFileDialog();
-			ofd.Filter = "Imagenes jpg|*.jpg|Imagenes png|*.png";
-
-			if (ofd.ShowDialog()==true)
-			{
-				imgArticulo.Source = new BitmapImage(new Uri(ofd.FileName));
-				pathImagen = ofd.FileName;
-			}
-			
 		}
 	}
 }

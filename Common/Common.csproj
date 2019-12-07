@@ -46,11 +46,12 @@
   <ItemGroup>
     <Compile Include="Articulo.cs" />
     <Compile Include="Categoria.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Cliente.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provedor.cs" />
     <Compile Include="Sesion.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Validate.cs" />
   </ItemGroup>

@@ -14,7 +14,6 @@ namespace Common
 		public static string VerInfo()
 		{
 			return "Usuario:  " + usuarioSesion +"\n"+ "\n" + "Rol:  " + rolSesion;
-		}
-		
+		}		
 	}
 }

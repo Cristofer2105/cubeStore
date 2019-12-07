@@ -33,7 +33,7 @@
                     </Button>
                 </StackPanel>
                 <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="252" VerticalAlignment="Top" Margin="10,142,10,0" x:Name="dgdDatos"/>
-                <TextBlock Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="150,108,0,0" TextWrapping="Wrap" Text="Lista de Items seleccione para administrar" VerticalAlignment="Top" Width="300"/>
+                <TextBlock Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="138,106,0,0" TextWrapping="Wrap" Text="Lista de Items seleccione uno para administrar" VerticalAlignment="Top" Width="360"/>
                 <TextBlock Foreground="White"  FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="218,10,0,0" TextWrapping="Wrap" Text="Agregar nuevo Item" VerticalAlignment="Top"/>
                 <TextBox x:Name="txtidProductoBuscado" Text="idproducto" HorizontalAlignment="Left" Height="23" Margin="74,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
             </Grid>

@@ -57,15 +57,6 @@ namespace Common
 			get { return fechaHoraRegistro; }
 			set { fechaHoraRegistro = value; }
 		}
-		private byte foto;
-
-		public byte Foto
-		{
-			get { return foto; }
-			set { foto = value; }
-		}
-
-
 
 
 		#endregion
@@ -81,7 +72,7 @@ namespace Common
 		/// <param name="idCategoria"></param>
 		/// <param name="idProvedor"></param>
 		/// <param name="fechaHoraRegistro"></param>
-		public Articulo(int idArticulo, string nombreArticulo, byte estadoArticulo, DateTime fechaHoraActualizacionArticulo, byte idCategoria, int idProvedor,DateTime fechaHoraRegistro, byte foto)
+		public Articulo(int idArticulo, string nombreArticulo, byte estadoArticulo, DateTime fechaHoraActualizacionArticulo, byte idCategoria, int idProvedor,DateTime fechaHoraRegistro)
 		{
 			this.idArticulo = idArticulo;
 			this.nombreArticulo = nombreArticulo;
@@ -89,8 +80,7 @@ namespace Common
 			this.fechaHoraActualizacionArticulo = fechaHoraActualizacionArticulo;
 			this.idCategoria = idCategoria;
 			this.idProvedor = idProvedor;
-			this.fechaHoraRegistro = fechaHoraRegistro;
-			this.foto = foto;		}
+			this.fechaHoraRegistro = fechaHoraRegistro;	}
 		/// <summary>
 		/// Constructor para Insertar
 		/// </summary>
@@ -98,13 +88,12 @@ namespace Common
 		/// <param name="idCategoria"></param>
 		/// <param name="idProvedor"></param>
 		/// <param name="fechaHoraRegistro"></param>
-		public Articulo(string nombreArticulo, byte idCategoria,int idProvedor,DateTime fechaHoraRegistro, byte foto)
+		public Articulo(string nombreArticulo, byte idCategoria,int idProvedor,DateTime fechaHoraRegistro)
 		{
 			this.nombreArticulo = nombreArticulo;
 			this.idCategoria = idCategoria;
 			this.idProvedor = idProvedor;
-			this.fechaHoraRegistro = fechaHoraRegistro;
-			this.foto = foto;		
+			this.fechaHoraRegistro = fechaHoraRegistro;	
 		}
 		/// <summary>
 		/// Constructor por defecto

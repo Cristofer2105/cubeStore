@@ -48,7 +48,7 @@
     <Compile Include="AbstractDAL.cs" />
     <Compile Include="ArticuloDAL.cs" />
     <Compile Include="CategoriaDAL.cs" />
-    <Compile Include="ConfigDAL.cs" />
+    <Compile Include="ClienteDAL.cs" />
     <Compile Include="DBcubestoreDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -63,6 +63,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ProvedorDal.cs" />
+    <Compile Include="SesionDAL.cs" />
     <Compile Include="UsuarioDal.cs" />
   </ItemGroup>
   <ItemGroup>
