@@ -27,15 +27,16 @@
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
                 <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Height="40" Margin="10 40">
-                    <TextBox Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Producto" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtnombreproductobuscado" Width="253"/>
+                    <TextBox TextChanged="Txtnombreproductobuscado_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Producto" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="14" x:Name="txtnombreproductobuscado" Width="253"/>
                     <Button Click="BtnAgregarItem_Click" x:Name="btnAgregarItem" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto">
                         <materialDesign:PackIcon Kind="Check" IsEnabled="False"/>
                     </Button>
                 </StackPanel>
-                <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="252" VerticalAlignment="Top" Margin="10,142,10,0" x:Name="dgdDatos"/>
-                <TextBlock Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="138,106,0,0" TextWrapping="Wrap" Text="Lista de Items seleccione uno para administrar" VerticalAlignment="Top" Width="360"/>
+                <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="194" VerticalAlignment="Top" Margin="10,216,10,0" x:Name="dgdDatos"/>
+                <TextBlock Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="139,191,0,0" TextWrapping="Wrap" Text="Lista de Items seleccione uno para administrar" VerticalAlignment="Top" Width="360"/>
                 <TextBlock Foreground="White"  FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="218,10,0,0" TextWrapping="Wrap" Text="Agregar nuevo Item" VerticalAlignment="Top"/>
                 <TextBox x:Name="txtidProductoBuscado" Text="idproducto" HorizontalAlignment="Left" Height="23" Margin="74,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                <DataGrid HeadersVisibility="None" SelectionChanged="Dgdbusqueda_SelectionChanged" x:Name="dgdbusqueda" HorizontalAlignment="Left" Height="101" Margin="150,80,0,0" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
             </Grid>
 
         </StackPanel>
