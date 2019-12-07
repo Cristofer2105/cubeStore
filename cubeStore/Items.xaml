@@ -6,7 +6,7 @@
                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"
-        Title="Usuarios" Height="500" Width="600"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="Usuarios" Height="500" Width="600"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
     <StackPanel>
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
             <Grid.Effect>
@@ -32,11 +32,11 @@
                         <materialDesign:PackIcon Kind="Check" IsEnabled="False"/>
                     </Button>
                 </StackPanel>
-                <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="194" VerticalAlignment="Top" Margin="10,216,10,0" x:Name="dgdDatos"/>
+                <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="194" VerticalAlignment="Top" Margin="10,216,10,0" x:Name="dgdDatos" SelectionChanged="DgdDatos_SelectionChanged"/>
                 <TextBlock Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="139,191,0,0" TextWrapping="Wrap" Text="Lista de Items seleccione uno para administrar" VerticalAlignment="Top" Width="360"/>
                 <TextBlock Foreground="White"  FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="218,10,0,0" TextWrapping="Wrap" Text="Agregar nuevo Item" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtidProductoBuscado" Text="idproducto" HorizontalAlignment="Left" Height="23" Margin="74,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                <DataGrid HeadersVisibility="None" SelectionChanged="Dgdbusqueda_SelectionChanged" x:Name="dgdbusqueda" HorizontalAlignment="Left" Height="101" Margin="150,80,0,0" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
+                <TextBox Visibility="Hidden" x:Name="txtidProductoBuscado" Text="idproducto" HorizontalAlignment="Left" Height="23" Margin="74,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+                <DataGrid CanUserAddRows="False" IsReadOnly="True" HeadersVisibility="None" SelectionChanged="Dgdbusqueda_SelectionChanged" x:Name="dgdbusqueda" HorizontalAlignment="Left" Height="101" SelectionMode="Single" Margin="150,80,0,0" VerticalAlignment="Top" Width="252" Visibility="Hidden"/>
             </Grid>
 
         </StackPanel>

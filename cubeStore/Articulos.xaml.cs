@@ -174,7 +174,7 @@ namespace cubeStore
 			{
 				case 1:
 					//Insertar
-					if (txtnombreArticulo.Text == "" && pathImagen!=string.Empty)
+					if (txtnombreArticulo.Text == "")
 					{
 						MessageBox.Show("Debe completar todos los campos del formulario");
 					}
