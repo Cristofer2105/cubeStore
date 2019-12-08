@@ -34,5 +34,12 @@ namespace cubeStore
 			Clientes clientes = new Clientes();
 			clientes.ShowDialog();
 		}
+
+		private void BtnVender_Click(object sender, RoutedEventArgs e)
+		{
+			Vender vender = new Vender();
+			this.Close();
+			vender.ShowDialog();
+		}
 	}
 }

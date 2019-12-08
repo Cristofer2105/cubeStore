@@ -67,6 +67,11 @@ namespace BRL
 			dal = new ItemDAL();
 			return dal.SelectArticulos(texto);
 		}
-			#endregion
+		public DataTable SelectItems(string texto)
+		{
+			dal = new ItemDAL();
+			return dal.SelectItems(texto);
 		}
+		#endregion
+	}
 }

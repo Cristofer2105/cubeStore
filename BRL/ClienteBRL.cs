@@ -63,6 +63,11 @@ namespace BRL
 			dal = new ClienteDAL();
 			return dal.Get(id);
 		}
+		public DataTable SelectClientesBusqueda(string texto)
+		{
+			dal = new ClienteDAL();
+			return dal.SelectClientesBusqueda(texto);
+		}
 		#endregion
 	}
 }

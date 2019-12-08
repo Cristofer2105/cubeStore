@@ -58,7 +58,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button Background="{x:Null}" x:Name="btnVender" BorderBrush="{x:Null}" Height="480">
+                <Button Background="{x:Null}" x:Name="btnVender" BorderBrush="{x:Null}" Height="480" Click="BtnVender_Click">
                     <Grid Width="450">
                         <materialDesign:PackIcon Kind="Shopify" Width="40" Height="40" IsEnabled="False" Margin="194,87,0,0"/>
                         <TextBlock Text="Vender" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="184,132,188,73" IsEnabled="False" RenderTransformOrigin="0.612,0.037" Width="78"/>

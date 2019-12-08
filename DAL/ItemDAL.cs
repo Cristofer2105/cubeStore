@@ -145,6 +145,24 @@ namespace DAL
 			}
 			return res;
 		}
+		public DataTable SelectItems(string texto)
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT * FROM vwSelectItemsBusq ";
+			query = query + " WHERE Articulo LIKE @texto";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return res;
+		}
 		#endregion
 	}
 }

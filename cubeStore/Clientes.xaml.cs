@@ -133,9 +133,9 @@ namespace cubeStore
 			{
 				case 1:
 					//Insertar
-					if (txtnombre.Text == "" && txtprimerapellido.Text == "" && txtsegundoapellido.Text == "")
+					if (txtnombre.Text == "")
 					{
-						MessageBox.Show("Debe Llenar los campos para poder agregar un registro");
+						MessageBox.Show("Debe Llenar el nombre");
 					}
 					else
 					{

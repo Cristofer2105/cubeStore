@@ -1,0 +1,67 @@
+﻿<Window x:Class="cubeStore.Vender"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:cubeStore"
+        mc:Ignorable="d"
+        Title="Menu del Editor" Height="948" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <StackPanel>
+
+        <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
+            </Grid.Effect>
+
+            <Image Source="imagenes/cubestore.png" HorizontalAlignment="Left" Margin="10 0" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalirVender" Click="BtnSalirVender_Click">
+                    <materialDesign:PackIcon Kind="Close" Width="30" Height="30"/>
+                </Button>
+            </StackPanel>
+            <TextBlock Text="Vender" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="400,26,420,24" Width="63"/>
+        </Grid>
+
+        <Grid Margin="20" VerticalAlignment="Top" Background="#EA5555" Height="830">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
+            </Grid.Effect>
+            <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Height="Auto" Margin="50 100">
+                <TextBox TextChanged="TxtnombreitemBuscado_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Articulo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtnombreitemBuscado" Height="50" Width="324"/>
+                <Button x:Name="btnConfirmarItem" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto">
+                    <materialDesign:PackIcon Kind="Check" IsEnabled="False"/>
+                </Button>
+            </StackPanel>
+            <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="50,36,0,0" TextWrapping="Wrap" FontWeight="Bold" FontSize="20" Text="Formulario de Venta" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="420" Margin="10,400,0,0" VerticalAlignment="Top" Width="645"/>
+            <Grid  VerticalAlignment="Top" HorizontalAlignment="Right" Width="500" Margin="0 60">
+                <StackPanel VerticalAlignment="Center" Margin="15">
+                    <TextBlock Margin="10" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" FontWeight="Bold" FontSize="20" Text="Cliente" VerticalAlignment="Top"/>
+                    <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Height="Auto">
+                        <TextBox Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Cliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" TextChanged="Txtbuscarcliente_TextChanged" x:Name="txtbuscarcliente" Width="324" Height="50"/>
+                        <Button x:Name="btnConfirmarCliente" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto">
+                            <materialDesign:PackIcon Kind="UserCheck" IsEnabled="False"/>
+                        </Button>
+                        <Button x:Name="btnAgregarCliente" Click="BtnAgregarCliente_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto">
+                            <materialDesign:PackIcon Kind="UserAdd" IsEnabled="False"/>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Vertical" Margin="0 210" Height="Auto" Width="460">
+                        <TextBlock Text="A nombre de:" Foreground="White" FontWeight="Bold" FontSize="20" Margin="0 5"/>
+                        <TextBox IsEnabled="False" FontWeight="Bold" Margin="0,5,42,5" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Nombres de Cliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtnombre" Height="50"/>
+                        <TextBox Margin="5" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Id Cliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" x:Name="txtidCliente" Width="100" Height="20"/>
+                        <TextBlock Text="Total:" Foreground="White" FontWeight="Bold" FontSize="20"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <TextBlock Foreground="White" FontWeight="Bold" FontSize="22" HorizontalAlignment="Left" Margin="50,344,0,0" TextWrapping="Wrap" Text="Detalle de Venta" VerticalAlignment="Top"/>
+            <DataGrid Visibility="Hidden" CanUserAddRows="False" IsReadOnly="True" HeadersVisibility="None" x:Name="dgdbusquedaProducto" HorizontalAlignment="Left" Height="184" Margin="50,155,0,0" VerticalAlignment="Top" Width="372"/>
+            <DataGrid Visibility="Hidden" x:Name="dgdBusquedaCliente" HeadersVisibility="None" HorizontalAlignment="Left" Height="197" Margin="675,176,0,0" VerticalAlignment="Top" Width="419"/>
+            <TextBox IsEnabled="False" FontWeight="Bold" x:Name="txttotalVenta" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Total Venta" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" HorizontalAlignment="Left" Height="53" Margin="675,565,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
+
+            <TextBox IsEnabled="False" FontWeight="Bold" x:Name="txtCantidadArticulos" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Cantidad de Articulos" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" HorizontalAlignment="Left" Height="53" Margin="675,646,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
+            <Button Background="#004E6F" Content="Listo" FontSize="18" HorizontalAlignment="Left" Margin="675,720,0,0" VerticalAlignment="Top" Width="419" Height="50"/>
+        </Grid>
+    </StackPanel>
+</Window>

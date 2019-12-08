@@ -74,7 +74,7 @@ namespace DAL
 		public override DataTable Select()
 		{
 			DataTable res = new DataTable();
-			string query = "SELECT * FROM vwClientesSelect ORDER BY 2";
+			string query = "SELECT * FROM vwClientsSel ORDER BY 2";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
@@ -134,6 +134,25 @@ namespace DAL
 			{
 				cmd.Connection.Close();
 				dr.Close();
+			}
+			return res;
+		}
+		public DataTable SelectClientesBusqueda(string texto)
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT * FROM vwClientsBusqSelect ";
+			query = query + " WHERE Clientes LIKE @texto";
+			query = query + " ORDER BY 3 DESC ";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
 			}
 			return res;
 		}
