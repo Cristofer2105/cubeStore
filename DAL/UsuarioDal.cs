@@ -45,7 +45,7 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,usuario,contrasenia,rolEmpleado,email,fechaRegistro) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@usuario,@contrasenia,@rolEmpleado,@email,@fechaRegistro)";
+			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,usuario,contrasenia,rolEmpleado,email,fechaRegistro) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@usuario,HASHBYTES('md5',@contrasenia),@rolEmpleado,@email,@fechaRegistro)";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
@@ -54,7 +54,7 @@ namespace DAL
 				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
 				cmd.Parameters.AddWithValue("@sexo", user.Sexo);
 				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
-				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
 				cmd.Parameters.AddWithValue("@rolEmpleado", user.Rol);
 				cmd.Parameters.AddWithValue("@email", user.Correo);
 				cmd.Parameters.AddWithValue("@fechaRegistro", user.FechaRegistro);
@@ -106,11 +106,11 @@ namespace DAL
 		}
 		public void UpdateContrasenia()
 		{
-			string query = "UPDATE Empleado SET contrasenia=@contrasenia,contraseniaInicial=0 WHERE usuario=@usuario";
+			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=0 WHERE usuario=@usuario";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
 				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);				
 				Methods.ExecuteBasicCommand(cmd);
 			}
@@ -122,11 +122,11 @@ namespace DAL
 		}
 		public void UpdateContraseniaRestablecida()
 		{
-			string query = "UPDATE Empleado SET contrasenia=@contrasenia,contraseniaInicial=1 WHERE usuario=@usuario";
+			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=1 WHERE usuario=@usuario";
 			try
 			{
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
 				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
 				Methods.ExecuteBasicCommand(cmd);
 			}
@@ -138,16 +138,15 @@ namespace DAL
 		}
 		public DataTable Login(string usuario, string contrasenia)
 		{
-	
 			DataTable dt = new DataTable();
-			string query = "SELECT idEmpleado,usuario,rolEmpleado,contraseniaInicial FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=@contrasenia";
+			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
 			try
 			{
+				
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@usuario", usuario);
-				cmd.Parameters.AddWithValue("@contrasenia", contrasenia);
-				dt = Methods.ExecuteDataTableCommand(cmd);
-				
+				cmd.Parameters.AddWithValue("@contrasenia", contrasenia).SqlDbType=SqlDbType.VarChar;
+				dt = Methods.ExecuteDataTableCommand(cmd);			
 			}
 			catch (Exception ex)
 			{
