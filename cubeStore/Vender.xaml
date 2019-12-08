@@ -29,12 +29,26 @@
             </Grid.Effect>
             <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Height="Auto" Margin="50 100">
                 <TextBox TextChanged="TxtnombreitemBuscado_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Articulo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtnombreitemBuscado" Height="50" Width="324"/>
-                <Button x:Name="btnConfirmarItem" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto">
+                <Button x:Name="btnConfirmarItem" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto" Click="BtnConfirmarItem_Click">
                     <materialDesign:PackIcon Kind="Check" IsEnabled="False"/>
                 </Button>
             </StackPanel>
             <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="50,36,0,0" TextWrapping="Wrap" FontWeight="Bold" FontSize="20" Text="Formulario de Venta" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Left" Height="420" Margin="10,400,0,0" VerticalAlignment="Top" Width="645"/>
+            <DataGrid HorizontalAlignment="Left" Height="420" Margin="10,400,0,0" VerticalAlignment="Top" Width="645" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="dtcnombreproducto" Header="Nombre del Producto" Width="180"/>
+                    <DataGridTextColumn x:Name="dtcitem" Header="Item" Width="120"/>
+                    <DataGridTextColumn x:Name="dtcprecioItem" Header="Precio" Width="100"/>
+                    <DataGridTextColumn x:Name="dtcidItem" Header="idItem" Width="110" />
+                    <DataGridTemplateColumn Header="Eliminar" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnelimianrVenta" Content="Eliminar"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
             <Grid  VerticalAlignment="Top" HorizontalAlignment="Right" Width="500" Margin="0 60">
                 <StackPanel VerticalAlignment="Center" Margin="15">
                     <TextBlock Margin="10" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" FontWeight="Bold" FontSize="20" Text="Cliente" VerticalAlignment="Top"/>
@@ -50,18 +64,19 @@
                     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Vertical" Margin="0 210" Height="Auto" Width="460">
                         <TextBlock Text="A nombre de:" Foreground="White" FontWeight="Bold" FontSize="20" Margin="0 5"/>
                         <TextBox IsEnabled="False" FontWeight="Bold" Margin="0,5,42,5" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Nombres de Cliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtnombre" Height="50"/>
-                        <TextBox Margin="5" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Id Cliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" x:Name="txtidCliente" Width="100" Height="20"/>
+                        <TextBox FontSize="10" Margin="5" Foreground="Black" Background="White"  x:Name="txtidCliente" Width="100" Height="20"/>
                         <TextBlock Text="Total:" Foreground="White" FontWeight="Bold" FontSize="20"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
             <TextBlock Foreground="White" FontWeight="Bold" FontSize="22" HorizontalAlignment="Left" Margin="50,344,0,0" TextWrapping="Wrap" Text="Detalle de Venta" VerticalAlignment="Top"/>
-            <DataGrid Visibility="Hidden" CanUserAddRows="False" IsReadOnly="True" HeadersVisibility="None" x:Name="dgdbusquedaProducto" HorizontalAlignment="Left" Height="184" Margin="50,155,0,0" VerticalAlignment="Top" Width="372"/>
-            <DataGrid Visibility="Hidden" x:Name="dgdBusquedaCliente" HeadersVisibility="None" HorizontalAlignment="Left" Height="197" Margin="675,176,0,0" VerticalAlignment="Top" Width="419"/>
+            <DataGrid SelectionChanged="DgdbusquedaProducto_SelectionChanged" Visibility="Hidden" CanUserAddRows="False" IsReadOnly="True" HeadersVisibility="None" x:Name="dgdbusquedaProducto" HorizontalAlignment="Left" Height="184" Margin="50,155,0,0" VerticalAlignment="Top" Width="372"/>
+            <DataGrid SelectionChanged="DgdBusquedaCliente_SelectionChanged" Visibility="Hidden" x:Name="dgdBusquedaCliente" HeadersVisibility="None" HorizontalAlignment="Left" Height="197" Margin="675,176,0,0" VerticalAlignment="Top" Width="419"/>
             <TextBox IsEnabled="False" FontWeight="Bold" x:Name="txttotalVenta" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Total Venta" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" HorizontalAlignment="Left" Height="53" Margin="675,565,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
 
             <TextBox IsEnabled="False" FontWeight="Bold" x:Name="txtCantidadArticulos" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Cantidad de Articulos" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" HorizontalAlignment="Left" Height="53" Margin="675,646,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
             <Button Background="#004E6F" Content="Listo" FontSize="18" HorizontalAlignment="Left" Margin="675,720,0,0" VerticalAlignment="Top" Width="419" Height="50"/>
+            <TextBox x:Name="txtidItem" HorizontalAlignment="Left" Height="22" Margin="427,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         </Grid>
     </StackPanel>
 </Window>

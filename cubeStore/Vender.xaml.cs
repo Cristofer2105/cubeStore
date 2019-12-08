@@ -101,5 +101,65 @@ namespace cubeStore
 				LoadDataGridClientes();
 			}
 		}
+
+		private void BtnConfirmarItem_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void DgdbusquedaProducto_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (dgdbusquedaProducto.Items.Count > 0 && dgdbusquedaProducto.SelectedItem != null)
+			{
+				//Realizamos Get
+				try
+				{
+					DataRowView dataRow = (DataRowView)dgdbusquedaProducto.SelectedItem;
+					int id = int.Parse(dataRow.Row.ItemArray[2].ToString());
+					int idpro = int.Parse(dataRow.Row.ItemArray[0].ToString());
+					brlart = new ArticuloBRL();
+					brl = new ItemBRL();
+					item = brl.Get(id);
+					articulo = brlart.Get(idpro);
+
+					//Cargar Datos
+
+					txtidItem.Text = Convert.ToInt32(id).ToString();
+					txtnombreitemBuscado.Text = articulo.NombreArticulo;
+
+
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+			}
+		}
+
+		private void DgdBusquedaCliente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (dgdBusquedaCliente.Items.Count > 0 && dgdBusquedaCliente.SelectedItem != null)
+			{
+				//Realizamos Get
+				try
+				{
+					DataRowView dataRow = (DataRowView)dgdBusquedaCliente.SelectedItem;
+					int idper = int.Parse(dataRow.Row.ItemArray[0].ToString());
+					brlcli = new ClienteBRL();
+					cliente = brlcli.Get(idper);
+
+					//Cargar Datos
+					txtbuscarcliente.Text = cliente.Nombres + " " + cliente.PrimerApellido + " " + cliente.SegundoApellido;
+					txtidCliente.Text = Convert.ToInt32(idper).ToString();
+					txtnombre.Text = cliente.Nombres + " " + cliente.PrimerApellido + " " + cliente.SegundoApellido;
+
+
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+			}
+		}
 	}
 }
