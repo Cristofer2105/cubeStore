@@ -72,6 +72,31 @@ namespace BRL
 			dal = new ItemDAL();
 			return dal.SelectItems(texto);
 		}
+		public void UpdateEstadoParaComprar()
+		{
+			dal.UpdateEstadoParaComprar();
+		}
+		public void UpdateEstadoQuitarCompra()
+		{
+			dal.UpdateEstadoQuitarCompra();
+		}
+		
+		public DataTable SelectItemsComprar()
+		{
+			dal = new ItemDAL();
+			return dal.SelectItemsComprar();
+		}
+		public DataTable TotalVenta()
+		{
+			dal = new ItemDAL();
+			return dal.TotalVenta();
+		}
+		public DataTable CantidadVenta()
+		{
+			dal = new ItemDAL();
+			return dal.CantidadVenta();
+		}
+
 		#endregion
 	}
 }

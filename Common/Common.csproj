@@ -54,6 +54,7 @@
     <Compile Include="Session.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Validate.cs" />
+    <Compile Include="Venta.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

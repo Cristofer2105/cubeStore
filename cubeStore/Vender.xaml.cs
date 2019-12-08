@@ -28,9 +28,39 @@ namespace cubeStore
 		Item item;
 		ClienteBRL brlcli;
 		Cliente cliente;
+		Venta venta;
+		VentaBRL brlvent;
 		public Vender()
 		{
 			InitializeComponent();
+		}
+		private void LoadTotalVenta()
+		{
+			try
+			{
+				brl = new ItemBRL();
+				DataTable dt = brl.TotalVenta();
+				txttotalVenta.Text = dt.Rows[0][0].ToString();			
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
+			}
+		}
+		private void LoadCantidadVenta()
+		{
+			try
+			{
+				brl = new ItemBRL();
+				DataTable dt = brl.CantidadVenta();
+				txtCantidadArticulos.Text = dt.Rows[0][0].ToString();
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
+			}
 		}
 		private void LoadDataGrid()
 		{
@@ -54,6 +84,20 @@ namespace cubeStore
 				brlcli = new ClienteBRL();
 				dgdBusquedaCliente.ItemsSource = brlcli.SelectClientesBusqueda(txtbuscarcliente.Text).DefaultView;
 				dgdBusquedaCliente.Columns[0].Visibility = Visibility.Hidden;
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
+			}
+		}
+		private void LoadDataGridItemsComprar()
+		{
+			try
+			{
+				brl = new ItemBRL();
+				dgdItemsComprar.ItemsSource = brl.SelectItemsComprar().DefaultView;
+				dgdItemsComprar.Columns[1].Visibility = Visibility.Hidden;
 			}
 			catch (Exception ex)
 			{
@@ -126,7 +170,14 @@ namespace cubeStore
 
 					txtidItem.Text = Convert.ToInt32(id).ToString();
 					txtnombreitemBuscado.Text = articulo.NombreArticulo;
-
+					item = new Item();					
+					item.IdItem = int.Parse(txtidItem.Text.ToString());
+					brl = new ItemBRL(item);
+					brl.UpdateEstadoParaComprar();
+					LoadDataGridItemsComprar();
+					txtnombreitemBuscado.Text = "";
+					LoadCantidadVenta();
+					LoadTotalVenta();
 
 				}
 				catch (Exception ex)
@@ -152,13 +203,49 @@ namespace cubeStore
 					txtbuscarcliente.Text = cliente.Nombres + " " + cliente.PrimerApellido + " " + cliente.SegundoApellido;
 					txtidCliente.Text = Convert.ToInt32(idper).ToString();
 					txtnombre.Text = cliente.Nombres + " " + cliente.PrimerApellido + " " + cliente.SegundoApellido;
-
+					txtbuscarcliente.Text = "";
 
 				}
 				catch (Exception ex)
 				{
 					MessageBox.Show(ex.Message);
 				}
+			}
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			LoadDataGridItemsComprar();
+			LoadCantidadVenta();
+			LoadTotalVenta();
+		}
+
+		private void BtnCambiarEstadoItemsComprar_Click(object sender, RoutedEventArgs e)
+		{
+			if (dgdItemsComprar.Items.Count > 0 && dgdItemsComprar.SelectedItem != null)
+			{
+				try
+				{
+					DataRowView dataRow = (DataRowView)dgdItemsComprar.SelectedItem;
+					int id = int.Parse(dataRow.Row.ItemArray[0].ToString());
+					brl = new ItemBRL();
+					item = brl.Get(id);
+					item = new Item();
+					item.IdItem = int.Parse(id.ToString());
+					brl = new ItemBRL(item);
+					brl.UpdateEstadoQuitarCompra();
+					LoadDataGridItemsComprar();
+					LoadCantidadVenta();
+					LoadTotalVenta();
+				}
+				catch (Exception)
+				{
+
+					throw;
+				}
+					
+				
+				
 			}
 		}
 	}

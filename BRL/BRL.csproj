@@ -53,6 +53,7 @@
     <Compile Include="ProvedorBRL.cs" />
     <Compile Include="SessionBRL.cs" />
     <Compile Include="UsuarioBRL.cs" />
+    <Compile Include="VentaBRL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

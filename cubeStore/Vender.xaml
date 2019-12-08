@@ -6,7 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"
-        Title="Menu del Editor" Height="948" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="Menu del Editor" Height="948" Width="1200" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded" WindowStyle="None">
     <StackPanel>
 
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
@@ -27,23 +27,17 @@
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
             </Grid.Effect>
-            <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Height="Auto" Margin="50 100">
+            <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Height="Auto" Margin="50,100,0,0" Width="372">
                 <TextBox TextChanged="TxtnombreitemBuscado_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Articulo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtnombreitemBuscado" Height="50" Width="324"/>
-                <Button x:Name="btnConfirmarItem" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto" Click="BtnConfirmarItem_Click">
-                    <materialDesign:PackIcon Kind="Check" IsEnabled="False"/>
-                </Button>
+                <materialDesign:PackIcon Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"  Kind="Search" IsEnabled="False" Height="30" Width="48"/>
             </StackPanel>
             <TextBlock Foreground="White" HorizontalAlignment="Left" Margin="50,36,0,0" TextWrapping="Wrap" FontWeight="Bold" FontSize="20" Text="Formulario de Venta" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Left" Height="420" Margin="10,400,0,0" VerticalAlignment="Top" Width="645" AutoGenerateColumns="False">
+            <DataGrid IsReadOnly="True" CanUserSortColumns="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"  CanUserReorderColumns="False" x:Name="dgdItemsComprar" HorizontalAlignment="Left" CanUserAddRows="False" Height="420" Margin="50,400,0,0" VerticalAlignment="Top" Width="564">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="dtcnombreproducto" Header="Nombre del Producto" Width="180"/>
-                    <DataGridTextColumn x:Name="dtcitem" Header="Item" Width="120"/>
-                    <DataGridTextColumn x:Name="dtcprecioItem" Header="Precio" Width="100"/>
-                    <DataGridTextColumn x:Name="dtcidItem" Header="idItem" Width="110" />
-                    <DataGridTemplateColumn Header="Eliminar" Width="100">
+                    <DataGridTemplateColumn Header="Eliminar" Width="130">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="btnelimianrVenta" Content="Eliminar"></Button>
+                                <Button Background="#004E6F" x:Name="btnCambiarEstadoItemsComprar" Click="BtnCambiarEstadoItemsComprar_Click" Content="Eliminar"></Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -54,9 +48,6 @@
                     <TextBlock Margin="10" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" FontWeight="Bold" FontSize="20" Text="Cliente" VerticalAlignment="Top"/>
                     <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal" Height="Auto">
                         <TextBox Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Cliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" TextChanged="Txtbuscarcliente_TextChanged" x:Name="txtbuscarcliente" Width="324" Height="50"/>
-                        <Button x:Name="btnConfirmarCliente" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto">
-                            <materialDesign:PackIcon Kind="UserCheck" IsEnabled="False"/>
-                        </Button>
                         <Button x:Name="btnAgregarCliente" Click="BtnAgregarCliente_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto">
                             <materialDesign:PackIcon Kind="UserAdd" IsEnabled="False"/>
                         </Button>
@@ -64,19 +55,19 @@
                     <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Vertical" Margin="0 210" Height="Auto" Width="460">
                         <TextBlock Text="A nombre de:" Foreground="White" FontWeight="Bold" FontSize="20" Margin="0 5"/>
                         <TextBox IsEnabled="False" FontWeight="Bold" Margin="0,5,42,5" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Nombres de Cliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtnombre" Height="50"/>
-                        <TextBox FontSize="10" Margin="5" Foreground="Black" Background="White"  x:Name="txtidCliente" Width="100" Height="20"/>
+                        <TextBox Visibility="Hidden" FontSize="10" Margin="5" Foreground="Black" Background="White"  x:Name="txtidCliente" Width="100" Height="20"/>
                         <TextBlock Text="Total:" Foreground="White" FontWeight="Bold" FontSize="20"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
             <TextBlock Foreground="White" FontWeight="Bold" FontSize="22" HorizontalAlignment="Left" Margin="50,344,0,0" TextWrapping="Wrap" Text="Detalle de Venta" VerticalAlignment="Top"/>
-            <DataGrid SelectionChanged="DgdbusquedaProducto_SelectionChanged" Visibility="Hidden" CanUserAddRows="False" IsReadOnly="True" HeadersVisibility="None" x:Name="dgdbusquedaProducto" HorizontalAlignment="Left" Height="184" Margin="50,155,0,0" VerticalAlignment="Top" Width="372"/>
-            <DataGrid SelectionChanged="DgdBusquedaCliente_SelectionChanged" Visibility="Hidden" x:Name="dgdBusquedaCliente" HeadersVisibility="None" HorizontalAlignment="Left" Height="197" Margin="675,176,0,0" VerticalAlignment="Top" Width="419"/>
+            <DataGrid  CanUserDeleteRows="False"  SelectionChanged="DgdbusquedaProducto_SelectionChanged" Visibility="Hidden" CanUserAddRows="False" IsReadOnly="True" HeadersVisibility="None" x:Name="dgdbusquedaProducto" HorizontalAlignment="Left" Height="184" Margin="50,155,0,0" VerticalAlignment="Top" Width="372"/>
+            <DataGrid CanUserAddRows="False" SelectionChanged="DgdBusquedaCliente_SelectionChanged" Visibility="Hidden" x:Name="dgdBusquedaCliente" HeadersVisibility="None" HorizontalAlignment="Left" Height="197" Margin="675,176,0,0" VerticalAlignment="Top" Width="419"/>
             <TextBox IsEnabled="False" FontWeight="Bold" x:Name="txttotalVenta" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Total Venta" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" HorizontalAlignment="Left" Height="53" Margin="675,565,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
 
             <TextBox IsEnabled="False" FontWeight="Bold" x:Name="txtCantidadArticulos" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Cantidad de Articulos" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" HorizontalAlignment="Left" Height="53" Margin="675,646,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
             <Button Background="#004E6F" Content="Listo" FontSize="18" HorizontalAlignment="Left" Margin="675,720,0,0" VerticalAlignment="Top" Width="419" Height="50"/>
-            <TextBox x:Name="txtidItem" HorizontalAlignment="Left" Height="22" Margin="427,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Visibility="Hidden" x:Name="txtidItem" HorizontalAlignment="Left" Height="22" Margin="427,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         </Grid>
     </StackPanel>
 </Window>

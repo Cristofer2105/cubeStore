@@ -38,15 +38,22 @@
   <Class Name="DAL.ItemDAL">
     <Position X="3.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAQAAEAAAAAAAABAAAAAAAAAAAEAAICAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAUAAEAAAAAAAABAAAAAAAAAAAEAAICAAAAAQAAAIAA=</HashCode>
       <FileName>ItemDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DAL.ClienteDAL">
     <Position X="6.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAEAAAAAAAABAAAAAAAAAAAEAAAAAACAASAAgAAA=</HashCode>
       <FileName>ClienteDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.VentaDAL">
+    <Position X="9.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VentaDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

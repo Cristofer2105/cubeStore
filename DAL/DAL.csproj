@@ -65,6 +65,7 @@
     <Compile Include="ProvedorDal.cs" />
     <Compile Include="SesionDAL.cs" />
     <Compile Include="UsuarioDal.cs" />
+    <Compile Include="VentaDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

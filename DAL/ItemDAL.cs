@@ -163,6 +163,88 @@ namespace DAL
 			}
 			return res;
 		}
+		public DataTable SelectItemsComprar()
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT * FROM vwSelectItemsComprar";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return res;
+		}
+		public void UpdateEstadoParaComprar()
+		{
+			string query = "UPDATE Item SET estadoItem=2 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@idItem", itm.IdItem);
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				//Escribir Log
+				throw ex;
+			}
+		}
+		public void UpdateEstadoQuitarCompra()
+		{
+			string query = "UPDATE Item SET estadoItem=1 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@idItem", itm.IdItem);
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				//Escribir Log
+				throw ex;
+			}
+		}
+		public DataTable TotalVenta()
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT SUM(precioBase) FROM Item WHERE estadoItem=2";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return res;
+		}
+	
+		public DataTable CantidadVenta()
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT COUNT(idArticulo) FROM Item WHERE estadoItem=2";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				res = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			return res;
+		}
+		
+
+
 		#endregion
 	}
 }
