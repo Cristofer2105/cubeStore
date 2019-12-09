@@ -209,6 +209,20 @@ namespace DAL
 				throw ex;
 			}
 		}
+		public void UpdateEstadoNormalItem()
+		{
+			string query = "UPDATE Item SET estadoItem=1 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE estadoItem = 2";
+			try
+			{
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				//Escribir Log
+				throw ex;
+			}
+		}
 		public DataTable TotalVenta()
 		{
 			DataTable res = new DataTable();

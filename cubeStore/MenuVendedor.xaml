@@ -36,7 +36,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="40" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button x:Name="btnSalirUsVendedor" Background="{x:Null}" BorderBrush="{x:Null}" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300">
+                <Button x:Name="btnSalirUsVendedor" Background="{x:Null}" BorderBrush="{x:Null}" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300" Click="BtnSalirUsVendedor_Click">
                     <Grid Width="385">
                         <materialDesign:PackIcon Kind="Close" Width="40" Height="40" IsEnabled="False" Margin="157,142,0,0"/>
                         <TextBlock Text="Salir" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="157,187,181,71" Width="47" Height="34" IsEnabled="False"/>

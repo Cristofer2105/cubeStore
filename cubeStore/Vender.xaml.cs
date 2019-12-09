@@ -111,6 +111,13 @@ namespace cubeStore
 		private void BtnSalirVender_Click(object sender, RoutedEventArgs e)
 		{
 			this.Close();
+			item = new Item();
+			brl = new ItemBRL(item);
+			brl.UpdateEstadoNormalItem();
+			LoadDataGridItemsComprar();
+			txtnombre.Text = "";
+			txtCantidadArticulos.Text = "";
+			txttotalVenta.Text = "";
 		}
 
 		private void BtnAgregarCliente_Click(object sender, RoutedEventArgs e)
@@ -249,36 +256,49 @@ namespace cubeStore
 
 		private void BtnRealizarVenta_Click(object sender, RoutedEventArgs e)
 		{
-			
-			try
-			{
-				DateTime fecha = DateTime.Now;
-				brl = new ItemBRL();
-				DataTable dt = brl.SelectItemsComprar();
-				int cont = int.Parse(txtCantidadArticulos.Text.ToString());
-				List<VentaItem> productos = new List<VentaItem>();
-
-				for (int i = 0; i < int.Parse(txtCantidadArticulos.Text.ToString()); i++)
+			if (txtnombre.Text!=" " &&txttotalVenta.Text!=" "&&txtCantidadArticulos.Text!="")
 				{
-					productos.Add(new VentaItem(int.Parse(dt.Rows[i][0].ToString()), double.Parse(dt.Rows[i][3].ToString())));					
-					cont--;
-				}
+					try
+					{
 
-				this.venta = new Venta(int.Parse(txtidCliente.Text.ToString()), double.Parse(txttotalVenta.Text.ToString()), Sesion.idSesion, fecha);
+						DateTime fecha = DateTime.Now;
+						brl = new ItemBRL();
+						DataTable dt = brl.SelectItemsComprar();
+						int cont = int.Parse(txtCantidadArticulos.Text.ToString());
+						List<VentaItem> productos = new List<VentaItem>();
 
-				this.garantia = new Garantia(fecha, fecha.AddMonths(3), fecha);
-				VentaBRL brlventa = new VentaBRL(venta, productos, garantia);
-				brlventa.InsertVentas();
-				LoadDataGridItemsComprar();
-				MessageBox.Show("exito");
+						for (int i = 0; i < int.Parse(txtCantidadArticulos.Text.ToString()); i++)
+						{
+							productos.Add(new VentaItem(int.Parse(dt.Rows[i][0].ToString()), double.Parse(dt.Rows[i][3].ToString())));
+							cont--;
+						}
+
+						this.venta = new Venta(int.Parse(txtidCliente.Text.ToString()), double.Parse(txttotalVenta.Text.ToString()), Sesion.idSesion, fecha);
+
+						this.garantia = new Garantia(fecha, fecha.AddMonths(3), fecha);
+						VentaBRL brlventa = new VentaBRL(venta, productos, garantia);
+						if (MessageBox.Show("Esta Seguro de realizar la venta?", "Vender", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+						{
+							brlventa.InsertVentas();
+							LoadDataGridItemsComprar();
+							MessageBox.Show("Venta realizada con exito");
+							txttotalVenta.Text = "";
+							txtCantidadArticulos.Text = "";
+							txtnombre.Text = "";
+						}
+
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Complete el formulario");
+						LoadDataGridItemsComprar();
+					}
 
 			}
-			catch (Exception ex)
+			else
 			{
-
-				MessageBox.Show(ex.Message);
-				LoadDataGridItemsComprar();
-			}
+				MessageBox.Show("Debe Completar el formulario por favor");					
+			}		
 		}
 	}
 }

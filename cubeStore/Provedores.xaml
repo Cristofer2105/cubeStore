@@ -57,23 +57,24 @@
                 </Grid.Effect>
                 <Grid Margin="10,23,10,10" Background="White">
 
-                    <m:Map MouseDoubleClick="MapaProv_MouseDoubleClick" x:Name="mapaProv" Mode="AerialWithLabels" ZoomLevel="13" CredentialsProvider="Av0hFgl1wVKpQobXEVHSVnwbFy1ZYVDtHYAYcdLj9FQSOcDNoIu6F4RnKLSSa5wE" Center="-17.380907, -66.163573" Margin="76,10,10,277"/>
+                    <m:Map MouseDoubleClick="MapaProv_MouseDoubleClick" x:Name="mapaProv" Mode="AerialWithLabels" ZoomLevel="13" CredentialsProvider="Av0hFgl1wVKpQobXEVHSVnwbFy1ZYVDtHYAYcdLj9FQSOcDNoIu6F4RnKLSSa5wE" Center="-17.380907, -66.163573" Margin="76,37,10,277"/>
 
                     <TextBlock Foreground="Black" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"  FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" Text="LISTA DE PROVEDORES" VerticalAlignment="Top" Height="28" Margin="196,337,218,0"/>
-                    <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" x:Name="dgdDatos" Margin="0,370,62,10" HorizontalAlignment="Right" Width="466"/>
+                    <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" x:Name="dgdDatos" Margin="0,370,62,10" HorizontalAlignment="Right" Width="440"/>
 
-                    <Button Click="Btnacercar_Click" x:Name="btnacercar" Background="#004E6F" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="61" Height="47">
+                    <Button Click="Btnacercar_Click" x:Name="btnacercar" Background="#004E6F" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="61" Height="47">
                         <materialDesign:PackIcon Kind="ZoomIn" Width="30" Height="40" IsEnabled="False"/>
                     </Button>
-                    <Button Click="Btnalejar_Click" x:Name="btnalejar" Background="#004E6F" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="61" Height="47">
+                    <Button Click="Btnalejar_Click" x:Name="btnalejar" Background="#004E6F" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="61" Height="47">
                         <materialDesign:PackIcon Kind="ZoomOut" Width="30" Height="40" IsEnabled="False"/>
                     </Button>
-                    <Button Click="Btnvistacalles_Click" x:Name="btnvistacalles" Background="#004E6F" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Width="61" Height="47">
+                    <Button Click="Btnvistacalles_Click" x:Name="btnvistacalles" Background="#004E6F" HorizontalAlignment="Left" Margin="10,179,0,0" VerticalAlignment="Top" Width="61" Height="47">
                         <materialDesign:PackIcon Kind="LocationCity" Width="30" Height="40" IsEnabled="False"/>
                     </Button>
                     <Button Click="Btnvistasatelite_Click" x:Name="btnvistasatelite" Background="#004E6F" HorizontalAlignment="Left" Margin="10,253,0,0" VerticalAlignment="Top" Width="61" Height="47">
                         <materialDesign:PackIcon Kind="Mountain" Width="30" Height="40" IsEnabled="False"/>
                     </Button>
+                    <TextBlock Foreground="Black" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"  FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" Text="UBICACION DEL PROVEDOR" VerticalAlignment="Top" Height="28" Margin="174,10,191,0" Width="213"/>
 
 
                 </Grid>

@@ -76,7 +76,11 @@ namespace BRL
 		{
 			dal.UpdateEstadoParaComprar();
 		}
-		public void UpdateEstadoQuitarCompra()
+		public void UpdateEstadoNormalItem()
+		{
+			dal.UpdateEstadoNormalItem();
+		}
+			public void UpdateEstadoQuitarCompra()
 		{
 			dal.UpdateEstadoQuitarCompra();
 		}

@@ -67,10 +67,11 @@ namespace DAL
 		{
 			throw new NotImplementedException();
 		}
-
+		/// <summary>
+		/// Metodo Insert Ventas con transacciones
+		/// </summary>
 		public void InsertVentas()
 		{
-
 			SqlConnection connection = Methods.GetConnection();
 			connection.Open();
 
@@ -85,12 +86,15 @@ namespace DAL
 			{
 				int id = Methods.GetCurrentValueIDTable("Venta");
 				//query 1 Venta
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert con Transacciones de una Venta", DateTime.Now));
 				command.CommandText = "INSERT INTO Venta(idCliente,total,idEmpleado,fechaRegistro) VALUES(@idCliente,@total,@idEmpleado,@fechaRegistro)";
 				command.Parameters.AddWithValue("@idCliente", vtn.IdCliente);
 				command.Parameters.AddWithValue("@total", vtn.Total);
 				command.Parameters.AddWithValue("@idEmpleado", vtn.IdEmpleado);
 				command.Parameters.AddWithValue("@fechaRegistro", vtn.FechaRegistroVenta);
 				command.ExecuteNonQuery();
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Venta Insertado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 
 
 				//query Venta Item
@@ -119,6 +123,8 @@ namespace DAL
 
 				// Attempt to commit the transaction.
 				transaction.Commit();
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro con Transacciones Insertado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
@@ -126,9 +132,7 @@ namespace DAL
 				string query = "UPDATE Item SET estadoItem=1 WHERE estadoItem=2";
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				Methods.ExecuteBasicCommand(cmd);
-				//Escribir Log
-				throw ex;
-
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 

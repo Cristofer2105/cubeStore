@@ -145,7 +145,7 @@ namespace cubeStore
 							catch (Exception ex)
 							{
 
-								MessageBox.Show(ex.Message);
+								MessageBox.Show("Existe un problema al insertar el registro, comuniquese con el administrador de sistemas");
 							}
 
 						}

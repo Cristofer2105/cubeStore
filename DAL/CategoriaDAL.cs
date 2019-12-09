@@ -33,30 +33,35 @@ namespace DAL
 			string query = "UPDATE Categoria SET estadoCategoria=0 , fechaHoraActualizacionCategoria=CURRENT_TIMESTAMP WHERE idCategoria = @idCategoria";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de eliminacion de una Categoria", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idCategoria", cat.IdCategoria);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Categoria: {1}, Usuario:{2}", DateTime.Now, cat.NombreCategoria, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-
+		
 		public override void Insert()
 		{
 			string query = "INSERT INTO Categoria(nombreCategoria,fechaRegistro) VALUES(@nombreCategoria,@fechaRegistro)";
-			try
+			try 
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Insercion de una Categoria",DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombreCategoria",cat.NombreCategoria);
 				cmd.Parameters.AddWithValue("@fechaRegistro", cat.FechaHoraRegistroCat);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Categoria: {1}, Usuario:{2}", DateTime.Now,cat.NombreCategoria,Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
-			{
-				//Escribir Log
+			{				
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 				throw ex;
 			}
 		}
@@ -67,12 +72,13 @@ namespace DAL
 			string query = "SELECT * FROM vwCategoriaSelect ORDER BY 2";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Seleccion de una Categoria", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res=Methods.ExecuteDataTableCommand(cmd);
 			}
 			catch (Exception ex)
 			{
-
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 				throw ex;
 			}
 			return res;
@@ -83,14 +89,16 @@ namespace DAL
 			string query = "UPDATE Categoria SET nombreCategoria=@nombreCategoria,fechaHoraActualizacionCategoria=CURRENT_TIMESTAMP WHERE idCategoria = @idCategoria";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Actualizacion de una Categoria", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idCategoria", cat.IdCategoria);
 				cmd.Parameters.AddWithValue("@nombreCategoria", cat.NombreCategoria);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Modificado,Nombre Categoria: {1}, Usuario:{2}", DateTime.Now,cat.NombreCategoria, Sesion.usuarioSesion));
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 				throw ex;
 			}
 		}
@@ -102,10 +110,11 @@ namespace DAL
 			string query = "SELECT idCategoria,nombreCategoria,estadoCategoria,fechaHoraActualizacionCategoria FROM Categoria WHERE idCategoria=@idCategoria";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Get de una Categoria", DateTime.Now));
 				cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idCategoria", idCategoria);
 				dr = Methods.ExecuteDataReaderCommand(cmd);
-
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Conseguido, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 				while (dr.Read())
 				{
 					res = new Categoria(byte.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()));
@@ -113,7 +122,7 @@ namespace DAL
 			}
 			catch (Exception ex)
 			{
-
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 				throw ex;
 			}
 			finally
@@ -129,12 +138,15 @@ namespace DAL
 			string query = "SELECT idCategoria,nombreCategoria FROM Categoria WHERE estadoCategoria=1";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Seleccion de una Categoria", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Seleccionado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 				throw ex;
 			}
 			return res;

@@ -53,5 +53,15 @@ namespace cubeStore
 			MenuVentasVendedor menuVentas = new MenuVentasVendedor();
 			menuVentas.ShowDialog();
 		}
+
+		private void BtnSalirUsVendedor_Click(object sender, RoutedEventArgs e)
+		{
+			if (MessageBox.Show("Esta Seguro de Salir?", "Salir", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+			{
+				Login login = new Login();
+				this.Close();
+				login.Show();
+			}
+		}
 	}
 }

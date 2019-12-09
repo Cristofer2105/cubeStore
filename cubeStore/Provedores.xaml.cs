@@ -61,6 +61,8 @@ namespace cubeStore
 				brl = new ProvedorBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
 				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
+				dgdDatos.Columns[3].Visibility = Visibility.Hidden;
+				dgdDatos.Columns[4].Visibility = Visibility.Hidden;
 			}
 			catch (Exception ex)
 			{
