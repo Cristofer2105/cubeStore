@@ -40,5 +40,11 @@ namespace cubeStore
 			Vender venders = new Vender();
 			venders.ShowDialog();
 		}
+
+		private void BtnVentas_Click(object sender, RoutedEventArgs e)
+		{
+			AdministrarVentas administrarVentas = new AdministrarVentas();
+			administrarVentas.ShowDialog();
+		}
 	}
 }

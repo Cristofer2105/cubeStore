@@ -34,14 +34,18 @@ namespace DAL
 			string query = "UPDATE Item SET estadoItem=0 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Delete de un Item", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idItem", itm.IdItem);
 				Methods.ExecuteBasicCommand(cmd);
+
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Codigo Item: {1}, Usuario:{2}", DateTime.Now, itm.CodigoItem, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 
@@ -50,17 +54,20 @@ namespace DAL
 			string query = "INSERT INTO Item(codigoItem,idArticulo,precioBase,fechaRegistro) VALUES(@codigoItem,@idArticulo,@precioBase,@fechaRegistro)";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert de un Item", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@codigoItem", itm.CodigoItem);
 				cmd.Parameters.AddWithValue("@idArticulo", itm.IdArticulo);
 				cmd.Parameters.AddWithValue("@precioBase", itm.PrecioBaseItem);
 				cmd.Parameters.AddWithValue("@fechaRegistro", itm.FehaRegistroItem);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Codigo Item: {1}, Usuario:{2}", DateTime.Now, itm.CodigoItem, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 
@@ -70,13 +77,15 @@ namespace DAL
 			string query = "SELECT * FROM vwItemSelect ORDER BY 5";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de Items", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}
@@ -86,16 +95,17 @@ namespace DAL
 			string query = "UPDATE Item SET codigoItem=@codigoItem,precioBase=@precioBase WHERE idItem = @idItem";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de Item", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@codigoItem", itm.CodigoItem);
 				cmd.Parameters.AddWithValue("@precioBase", itm.PrecioBaseItem);
 				cmd.Parameters.AddWithValue("@idItem", itm.IdItem);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Actualizado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 		public Item Get(int id)
@@ -106,9 +116,12 @@ namespace DAL
 			string query = "SELECT idItem,codigoItem,idArticulo,estadoItem,fechaHoraActualizacionItem,precioBase,fechaRegistro FROM Item WHERE idItem=@idItem";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Get de Item", DateTime.Now));
+
 				cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idItem",id);
 				dr = Methods.ExecuteDataReaderCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Conseguido, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 				while (dr.Read())
 				{
@@ -117,8 +130,7 @@ namespace DAL
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			finally
 			{
@@ -134,14 +146,17 @@ namespace DAL
 			query = query + " WHERE Articulo LIKE @texto";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Articulos", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%"+texto+"%");
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}
@@ -152,14 +167,17 @@ namespace DAL
 			query = query + " WHERE Articulo LIKE @texto";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Items", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}
@@ -169,29 +187,36 @@ namespace DAL
 			string query = "SELECT * FROM vwSelectItemsComprar";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de Items para Comprar", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}
 		public void UpdateEstadoParaComprar()
 		{
+
 			string query = "UPDATE Item SET estadoItem=2 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de Items para Comprar", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idItem", itm.IdItem);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Actualizados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 		public void UpdateEstadoQuitarCompra()
@@ -199,14 +224,17 @@ namespace DAL
 			string query = "UPDATE Item SET estadoItem=1 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de Items para cancelar Compra", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idItem", itm.IdItem);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Actualizados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 		public void UpdateEstadoNormalItem()
@@ -214,13 +242,15 @@ namespace DAL
 			string query = "UPDATE Item SET estadoItem=1 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE estadoItem = 2";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de Items Modificados", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Actualizados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 		public DataTable TotalVenta()
@@ -229,13 +259,14 @@ namespace DAL
 			string query = "SELECT SUM(precioBase) FROM Item WHERE estadoItem=2";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Total Venta de Items", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Total Venta Conseguido, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}
@@ -246,13 +277,16 @@ namespace DAL
 			string query = "SELECT COUNT(idArticulo) FROM Item WHERE estadoItem=2";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Cantidad Venta de Items", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Cantidad Venta Conseguido, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}

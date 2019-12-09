@@ -1,0 +1,54 @@
+﻿<Window x:Class="cubeStore.AdministrarVentas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:cubeStore"
+        mc:Ignorable="d"
+        Title="Acerca de cubestore" Height="600" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+    <StackPanel>
+
+        <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
+            </Grid.Effect>
+
+            <Image Source="imagenes/cubestore.png" HorizontalAlignment="Left" Margin="10 0" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnsalir" Click="Btnsalir_Click">
+                    <materialDesign:PackIcon Kind="Close" Width="30" Height="30"/>
+                </Button>
+            </StackPanel>
+            <TextBlock Text="Ventas" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="341,27,366,23" Width="193"/>
+        </Grid>
+        <Grid Margin="20" VerticalAlignment="Top" Background="#EA5555" Height="480">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="40" ShadowDepth="1"/>
+            </Grid.Effect>
+            <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Height="Auto" Margin="0 50" Width="372">
+                <TextBox TextChanged="Txtventabuscar_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Venta por Cliente" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtventabuscar" Height="50" Width="324"/>
+                <materialDesign:PackIcon Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"  Kind="Search" IsEnabled="False" Height="30" Width="48"/>
+            </StackPanel>
+            <DataGrid  x:Name="dgdListaVentas" CanUserAddRows="False" IsReadOnly="True" CanUserSortColumns="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False"  CanUserReorderColumns="False"  HorizontalAlignment="Left" Height="281" Margin="66,168,0,0" VerticalAlignment="Top" Width="720">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Anular" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Background="#004E6F" Click="BtnAnularVenta_Click" x:Name="btnAnularVenta"  Content="Anular"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Ver Mas" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Background="#004E6F" Click="BtnVerDetalleVenta_Click" x:Name="btnVerDetalleVenta"  Content="Ver Mas"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+    </StackPanel>
+</Window>

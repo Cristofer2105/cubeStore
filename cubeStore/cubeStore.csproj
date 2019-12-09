@@ -70,6 +70,9 @@
     <Compile Include="AdministrarItem.xaml.cs">
       <DependentUpon>AdministrarItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdministrarVentas.xaml.cs">
+      <DependentUpon>AdministrarVentas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AgregarItem.xaml.cs">
       <DependentUpon>AgregarItem.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdministrarItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdministrarVentas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -246,7 +246,7 @@ namespace cubeStore
 				catch (Exception)
 				{
 
-					throw;
+					MessageBox.Show("No se pudo cambiar estado comuniquese con el administrador de sistemas");
 				}
 					
 				

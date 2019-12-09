@@ -88,8 +88,21 @@ namespace BRL
 		
 		public override DataTable Select()
 		{
-			throw new NotImplementedException();
+			dal = new VentaDAL();
+			return dal.Select();
 		}
+		public DataTable SelectBusquedaVenta(string texto)
+		{
+			dal = new VentaDAL();
+			return dal.SelectBusquedaVenta(texto);
+		}
+		public Venta Get(int id)
+		{
+			dal = new VentaDAL();
+			return dal.Get(id);
+		}
+
+
 
 		public override void Update()
 		{

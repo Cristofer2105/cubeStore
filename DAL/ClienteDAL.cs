@@ -36,7 +36,7 @@ namespace DAL
 			string query = "UPDATE Cliente SET estadoCliente=0 , fechaHoraActualizacionCliente=CURRENT_TIMESTAMP WHERE idCliente = @idCliente";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Delete de un Cliente", DateTime.Now));
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Delete de un Cliente", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idCliente", cli.IdCliente);
 				Methods.ExecuteBasicCommand(cmd);
@@ -56,17 +56,19 @@ namespace DAL
 			string query = "INSERT INTO Cliente(nombres,primerApellido,segundoApellido,fechaHoraRegistro) VALUES(@nombres,@primerApellido,@segundoApellido,@fechaHoraRegistro)";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert de un Cliente", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombres", cli.Nombres);
 				cmd.Parameters.AddWithValue("@primerApellido", cli.PrimerApellido);
 				cmd.Parameters.AddWithValue("@segundoApellido", cli.SegundoApellido);
 				cmd.Parameters.AddWithValue("@fechaHoraRegistro", cli.FechaHoraRegistro);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Cliente: {1}, Usuario:{2}", DateTime.Now, cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 		/// <summary>
@@ -79,13 +81,15 @@ namespace DAL
 			string query = "SELECT * FROM vwClientsSel ORDER BY 2";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de Clientes", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros seleccionados Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}
@@ -97,17 +101,20 @@ namespace DAL
 			string query = "UPDATE Cliente SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,fechaHoraActualizacionCliente=CURRENT_TIMESTAMP WHERE idCliente = @idCliente";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de un Cliente", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombres", cli.Nombres);
 				cmd.Parameters.AddWithValue("@primerApellido", cli.PrimerApellido);
 				cmd.Parameters.AddWithValue("@segundoApellido", cli.SegundoApellido);
 				cmd.Parameters.AddWithValue("@idCliente", cli.IdCliente);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Actualizado Nombre Cliente: {1} Usuario:{2}", DateTime.Now, cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 		public Cliente Get(int id)
@@ -118,9 +125,12 @@ namespace DAL
 			string query = "SELECT idCliente,nombres,primerApellido,segundoApellido,estadoCliente,fechaHoraActualizacionCliente,fechaHoraRegistro FROM Cliente WHERE idCliente=@idCliente";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Get de un Cliente", DateTime.Now));
+
 				cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idCliente", id);
 				dr = Methods.ExecuteDataReaderCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Conseguido Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 				while (dr.Read())
 				{
@@ -129,8 +139,7 @@ namespace DAL
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			finally
 			{
@@ -147,14 +156,17 @@ namespace DAL
 			query = query + " ORDER BY 3 DESC ";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select Busqueda de Clientes", DateTime.Now));
+
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}
