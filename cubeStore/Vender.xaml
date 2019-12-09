@@ -66,7 +66,7 @@
             <TextBox IsEnabled="False" FontWeight="Bold" x:Name="txttotalVenta" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Total Venta" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" HorizontalAlignment="Left" Height="53" Margin="675,565,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
 
             <TextBox IsEnabled="False" FontWeight="Bold" x:Name="txtCantidadArticulos" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Cantidad de Articulos" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" HorizontalAlignment="Left" Height="53" Margin="675,646,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="291"/>
-            <Button Background="#004E6F" Content="Listo" FontSize="18" HorizontalAlignment="Left" Margin="675,720,0,0" VerticalAlignment="Top" Width="419" Height="50"/>
+            <Button Click="BtnRealizarVenta_Click" x:Name="btnRealizarVenta" Background="#004E6F" Content="Vender" FontSize="18" HorizontalAlignment="Left" Margin="675,720,0,0" VerticalAlignment="Top" Width="419" Height="50"/>
             <TextBox Visibility="Hidden" x:Name="txtidItem" HorizontalAlignment="Left" Height="22" Margin="427,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         </Grid>
     </StackPanel>

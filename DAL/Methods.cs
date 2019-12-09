@@ -15,6 +15,31 @@ namespace DAL
 		/// Cadena de conexion obtenida del app config
 		/// </summary>
 		private static string connectionString = ConfigurationManager.ConnectionStrings["BDDConectionStrings"].ConnectionString;
+
+		public static SqlConnection GetConnection()
+		{
+			SqlConnection connection = new SqlConnection(connectionString);
+			return connection;
+		}
+
+		public static int GetCurrentValueIDTable(string tabla)
+		{
+			int res = -1;
+			string query= "SELECT IDENT_CURRENT('"+tabla+"') + IDENT_INCR('"+tabla+"')";
+			try
+			{
+				SqlCommand cmd = CreateBasicCommand(query);
+				res=int.Parse(ExecuteScalarCommand(cmd));
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+			
+			return res;
+		}
+
 		#region Creacion de SqlCommanmd
 		/// <summary>
 		/// Crea un sqlCommand y relaciona a una conexion
@@ -59,6 +84,23 @@ namespace DAL
 		#endregion
 
 		#region Ejecucion de SqlCommand
+		public static string ExecuteScalarCommand(SqlCommand cmd)
+		{
+			try
+			{
+				cmd.Connection.Open();
+				return cmd.ExecuteScalar().ToString();
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally
+			{
+				cmd.Connection.Close();
+			}
+		}
 
 		public static void ExecuteBasicCommand(SqlCommand cmd)
 		{
@@ -75,6 +117,61 @@ namespace DAL
 			finally
 			{
 				cmd.Connection.Close();
+			}
+		}
+		public static void Execute4BasicCommand(SqlCommand cmd1,SqlCommand cmd2, SqlCommand cmd3, SqlCommand cmd4)
+		{
+			SqlTransaction tran = null;
+			try
+			{
+				cmd1.Connection.Open();
+				tran = cmd1.Connection.BeginTransaction();
+
+				cmd1.Transaction = tran;
+				cmd1.ExecuteNonQuery();
+
+				cmd2.Transaction = tran;
+				cmd2.ExecuteNonQuery();
+
+				cmd3.Transaction = tran;
+				cmd3.ExecuteNonQuery();
+
+				cmd4.Transaction = tran;
+				cmd4.ExecuteNonQuery();
+
+				tran.Commit();
+			}
+			catch (Exception ex)
+			{
+				tran.Rollback();
+				throw ex;
+			}
+			finally
+			{
+				cmd1.Connection.Close();
+			}
+		}
+		public static void Execute1BasicCommand(SqlCommand cmd1)
+		{
+			SqlTransaction tran = null;
+			try
+			{
+				cmd1.Connection.Open();
+				tran = cmd1.Connection.BeginTransaction();
+
+				cmd1.Transaction = tran;
+				cmd1.ExecuteNonQuery();
+
+				tran.Commit();
+			}
+			catch (Exception ex)
+			{
+				tran.Rollback();
+				throw ex;
+			}
+			finally
+			{
+				cmd1.Connection.Close();
 			}
 		}
 
@@ -134,6 +231,7 @@ namespace DAL
 			
 			return res;
 		}
+
 		#endregion
 	}
 }

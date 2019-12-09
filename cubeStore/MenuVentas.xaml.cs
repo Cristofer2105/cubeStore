@@ -37,9 +37,8 @@ namespace cubeStore
 
 		private void BtnVender_Click(object sender, RoutedEventArgs e)
 		{
-			Vender vender = new Vender();
-			this.Close();
-			vender.ShowDialog();
+			Vender venders = new Vender();
+			venders.ShowDialog();
 		}
 	}
 }

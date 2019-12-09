@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{8E477D2F-DB04-
 	ProjectSection(SolutionItems) = preProject
 		..\DBcubestore12032019.bak = ..\DBcubestore12032019.bak
 		..\DBcubestore12082019.bak = ..\DBcubestore12082019.bak
+		..\DBcubestore12092019.bak = ..\DBcubestore12092019.bak
 	EndProjectSection
 EndProject
 Global

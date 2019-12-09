@@ -18,7 +18,34 @@ namespace BRL
 			get { return vtn; }
 			set { vtn = value; }
 		}
+		private List<VentaItem> vti;
 
+		public List<VentaItem> Vti
+		{
+			get { return vti; }
+			set { vti = value; }
+		}
+		private Garantia grt;
+
+		public Garantia Grt
+		{
+			get { return grt; }
+			set { grt = value; }
+		}
+		private Cliente cli;
+
+		public Cliente Cli
+		{
+			get { return cli; }
+			set { cli = value; }
+		}
+		private Item itm;
+
+		public Item Art
+		{
+			get { return itm; }
+			set { itm = value; }
+		}
 		private VentaDAL dal;
 
 		public VentaDAL Dal
@@ -28,6 +55,15 @@ namespace BRL
 		}
 		public VentaBRL()
 		{
+
+		}
+
+		public VentaBRL(Venta vtn,List<VentaItem> vti, Garantia grt)
+		{
+			this.Vtn = vtn;
+			this.Vti = vti;
+			this.Grt = grt;
+			dal = new VentaDAL(vtn,vti,grt);
 
 		}
 		public VentaBRL(Venta vtn)
@@ -45,7 +81,11 @@ namespace BRL
 		{
 			throw new NotImplementedException();
 		}
-
+		public void InsertVentas()
+		{
+			dal.InsertVentas();
+		}
+		
 		public override DataTable Select()
 		{
 			throw new NotImplementedException();

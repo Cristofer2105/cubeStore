@@ -75,7 +75,7 @@ namespace Common
 			this.idEmpleado=idEmpleado;
 			this.fechaRegistroVenta=fechaRegistroVenta;
 		}
-		public Venta(int idCliente, double total, int idEmpleado, DateTime fechaRegistroVenta)
+		public Venta(int idCliente, double total, int idEmpleado,DateTime fechaRegistroVenta)
 		{
 			this.idCliente = idCliente;
 			this.total = total;

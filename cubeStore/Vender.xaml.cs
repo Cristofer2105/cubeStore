@@ -29,7 +29,9 @@ namespace cubeStore
 		ClienteBRL brlcli;
 		Cliente cliente;
 		Venta venta;
-		VentaBRL brlvent;
+		VentaItem ventaitem;
+		Garantia garantia;
+		DataTable dtItemsComprar;
 		public Vender()
 		{
 			InitializeComponent();
@@ -97,7 +99,8 @@ namespace cubeStore
 			{
 				brl = new ItemBRL();
 				dgdItemsComprar.ItemsSource = brl.SelectItemsComprar().DefaultView;
-				dgdItemsComprar.Columns[1].Visibility = Visibility.Hidden;
+				//dgdItemsComprar.Columns[1].Visibility = Visibility.Hidden;
+				dtItemsComprar = brl.SelectItemsComprar();
 			}
 			catch (Exception ex)
 			{
@@ -144,11 +147,6 @@ namespace cubeStore
 				dgdBusquedaCliente.Visibility = Visibility.Visible;
 				LoadDataGridClientes();
 			}
-		}
-
-		private void BtnConfirmarItem_Click(object sender, RoutedEventArgs e)
-		{
-
 		}
 
 		private void DgdbusquedaProducto_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -246,6 +244,40 @@ namespace cubeStore
 					
 				
 				
+			}
+		}
+
+		private void BtnRealizarVenta_Click(object sender, RoutedEventArgs e)
+		{
+			
+			try
+			{
+				DateTime fecha = DateTime.Now;
+				brl = new ItemBRL();
+				DataTable dt = brl.SelectItemsComprar();
+				int cont = int.Parse(txtCantidadArticulos.Text.ToString());
+				List<VentaItem> productos = new List<VentaItem>();
+
+				for (int i = 0; i < int.Parse(txtCantidadArticulos.Text.ToString()); i++)
+				{
+					productos.Add(new VentaItem(int.Parse(dt.Rows[i][0].ToString()), double.Parse(dt.Rows[i][3].ToString())));					
+					cont--;
+				}
+
+				this.venta = new Venta(int.Parse(txtidCliente.Text.ToString()), double.Parse(txttotalVenta.Text.ToString()), Sesion.idSesion, fecha);
+
+				this.garantia = new Garantia(fecha, fecha.AddMonths(3), fecha);
+				VentaBRL brlventa = new VentaBRL(venta, productos, garantia);
+				brlventa.InsertVentas();
+				LoadDataGridItemsComprar();
+				MessageBox.Show("exito");
+
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
+				LoadDataGridItemsComprar();
 			}
 		}
 	}
