@@ -36,14 +36,16 @@ namespace DAL
 			string query = "UPDATE Cliente SET estadoCliente=0 , fechaHoraActualizacionCliente=CURRENT_TIMESTAMP WHERE idCliente = @idCliente";
 			try
 			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Delete de un Cliente", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idCliente", cli.IdCliente);
 				Methods.ExecuteBasicCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Cliente: {1}, Usuario:{2}", DateTime.Now, cli.Nombres+" "+cli.PrimerApellido+" "+cli.SegundoApellido, Sesion.usuarioSesion));
+
 			}
 			catch (Exception ex)
 			{
-				//Escribir Log
-				throw ex;
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
 		/// <summary>
