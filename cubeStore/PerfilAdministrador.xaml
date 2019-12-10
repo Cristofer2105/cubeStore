@@ -32,17 +32,25 @@
             </Grid.Effect>
             <TextBlock Text="Hola!" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="36,43,761,407" Width="63"/>
             <TextBlock x:Name="txbnombreRolUs" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="168" Margin="36,91,397,221" Width="427" RenderTransformOrigin="0.316,3.192"/>
-            <Grid Width="300" HorizontalAlignment="Right" Height="150" VerticalAlignment="Bottom" Background="#EA5555">
+            <Grid Width="300" HorizontalAlignment="Right" Height="70" VerticalAlignment="Bottom" Background="#EA5555">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="10" ShadowDepth="1"/>
                 </Grid.Effect>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnRestablecerContrasenia" FontWeight="Bold" Height="Auto" Click="BtnRestablecerContrasenia_Click">
                     <Grid Width="255" >
-                        <materialDesign:PackIcon Kind="PasswordReset" Width="40" Height="40" IsEnabled="False" Margin="107,30,0,0"/>
-                        <TextBlock Text="RESTABLECER CONTRASEÑA" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="12" Margin="50,75,36,33" Width="163" Height="34" IsEnabled="False"/>
+                        <materialDesign:PackIcon Kind="PasswordReset" Width="40" Height="40" IsEnabled="False" Margin="109,0,0,0"/>
+                        <TextBlock Text="RESTABLECER CONTRASEÑA" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="12" Margin="53,40,39,-12" Width="163" Height="34" IsEnabled="False"/>
                     </Grid>
                 </Button>
             </Grid>
+            <TextBox IsEnabled="False" x:Name="txtNombre" Background="White" materialDesign:HintAssist.Hint="NOMBRE" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" HorizontalAlignment="Left" Height="50" Margin="515,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="307"/>
+            <TextBox IsEnabled="False" x:Name="txtprimerApellido" Background="White" materialDesign:HintAssist.Hint="PRIMER APELLIDO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" HorizontalAlignment="Left" Height="50" Margin="515,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="307"/>
+            <TextBox IsEnabled="False" x:Name="txtsegundoApellido" Background="White" materialDesign:HintAssist.Hint="SEGUNDO APELLIDO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" HorizontalAlignment="Left" Height="50" Margin="515,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="307"/>
+            <TextBlock Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="586,43,0,0" TextWrapping="Wrap" Text="Datos Personales" VerticalAlignment="Top"/>
+            <TextBox Visibility="Hidden" x:Name="txtContrasenia" Background="White" materialDesign:HintAssist.Hint="TU CONTRASENIA" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" HorizontalAlignment="Left" Height="50" Margin="515,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="307"/>
+            <Button Click="EditarPerfil_Click" Background="#004E6F" x:Name="EditarPerfil" Content="Editar Perfil" HorizontalAlignment="Left" Margin="515,306,0,0" VerticalAlignment="Top" Width="307"/>
+            <Button Click="BtnGuardarCambios_Click" IsEnabled="False" Background="#004E6F" x:Name="btnGuardarCambios" Content="Guardar Cambios" HorizontalAlignment="Left" Margin="671,343,0,0" VerticalAlignment="Top" Width="151"/>
+            <Button Click="BtnCancelarCambios_Click" IsEnabled="False" Background="#004E6F" x:Name="btnCancelarCambios" Content="Cancelar Cambios" HorizontalAlignment="Left" Margin="515,343,0,0" VerticalAlignment="Top" Width="151"/>
         </Grid>
 
     </StackPanel>

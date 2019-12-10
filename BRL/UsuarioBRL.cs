@@ -52,6 +52,10 @@ namespace BRL
 		{
 			dal.Update();
 		}
+		public void UpdateDatosPerfil()
+		{
+			dal.UpdateDatosPerfil();
+		}
 		public void UpdateContrasenia()
 		{
 			dal.UpdateContrasenia();

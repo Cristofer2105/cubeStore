@@ -101,6 +101,11 @@ namespace BRL
 			dal = new VentaDAL();
 			return dal.Get(id);
 		}
+		public DataTable SelectIdItemsAnular(int id)
+		{
+			dal = new VentaDAL();
+			return dal.SelectIdItemsAnular(id);
+		}
 
 
 

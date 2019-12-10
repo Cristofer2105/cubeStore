@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using BRL;
+using Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,39 @@ namespace cubeStore
     /// </summary>
     public partial class PerfilAdministrador : Window
     {
-        public PerfilAdministrador()
+		UsuarioBRL usbrl;
+		public PerfilAdministrador()
         {
             InitializeComponent();
-			txbnombreRolUs.Text = Sesion.VerInfo();		
+			txbnombreRolUs.Text = Sesion.VerInfo();
+			txtNombre.Text = Sesion.nombre;
+			txtprimerApellido.Text = Sesion.primerapellido;
+			txtsegundoApellido.Text = Sesion.segundoapellido;
+			txtContrasenia.Text = Sesion.contrasenia;
+		}
+		private void Habilitar()
+		{
+			btnGuardarCambios.IsEnabled = true;
+			btnCancelarCambios.IsEnabled = true;
+			txtNombre.IsEnabled = true;
+			txtprimerApellido.IsEnabled = true;
+			txtsegundoApellido.IsEnabled = true;
+			txtContrasenia.Visibility = Visibility.Visible;
+
+			EditarPerfil.IsEnabled = false;
 		}
 
+		private void DesHabilitar()
+		{
+			btnGuardarCambios.IsEnabled = false;
+			btnCancelarCambios.IsEnabled = false;
+			txtNombre.IsEnabled = false;
+			txtprimerApellido.IsEnabled = false;
+			txtsegundoApellido.IsEnabled = false;
+			txtContrasenia.Visibility = Visibility.Hidden;
+			EditarPerfil.IsEnabled = true;
+
+		}
 		private void BtnVolverUsAdministrador_Click(object sender, RoutedEventArgs e)
 		{
 			MainWindow mainWindow = new MainWindow();
@@ -52,6 +80,53 @@ namespace cubeStore
 				this.Close();
 				restablecerContraseña.Show();
 			}
+		}
+
+		private void EditarPerfil_Click(object sender, RoutedEventArgs e)
+		{
+			Habilitar();
+		}
+
+		private void BtnGuardarCambios_Click(object sender, RoutedEventArgs e)
+		{
+			if (txtNombre.Text != "" && txtContrasenia.Text != "" && txtprimerApellido.Text != "")
+			{
+				if (MessageBox.Show("Esta seguro de Editar su Perfil?", "Editar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+				{
+					try
+					{
+						Usuario usuario = new Usuario();
+						usuario.Nombres = txtNombre.Text.Trim();
+						usuario.PrimerApellido = txtprimerApellido.Text.Trim();
+						usuario.SegundoApellido = txtsegundoApellido.Text.Trim();
+						usuario.Contrasenia = txtContrasenia.Text.Trim();
+						usuario.IdUsuario = Sesion.idSesion;
+						usbrl = new UsuarioBRL(usuario);
+						usbrl.UpdateDatosPerfil();
+						MessageBox.Show("Perfil editado exitosamente");
+						DesHabilitar();
+					}
+					catch (Exception)
+					{
+
+						MessageBox.Show("No se pudo editar el perfil comuniquese con el administrador de sistemas");
+					}
+
+				}
+			}
+			else
+			{
+				MessageBox.Show("Complete los campos porfavor");
+			}
+		}
+
+		private void BtnCancelarCambios_Click(object sender, RoutedEventArgs e)
+		{
+			DesHabilitar();
+			txtContrasenia.Text = Sesion.contrasenia;
+			txtNombre.Text = Sesion.nombre;
+			txtprimerApellido.Text = Sesion.primerapellido;
+			txtsegundoApellido.Text = Sesion.segundoapellido;
 		}
 	}
 }

@@ -246,7 +246,7 @@ namespace cubeStore
 				catch (Exception)
 				{
 
-					MessageBox.Show("No se pudo cambiar estado comuniquese con el administrador de sistemas");
+					MessageBox.Show("No se pudo cambiar comuniquese con el administrador de sistemas");
 				}
 					
 				
@@ -288,7 +288,7 @@ namespace cubeStore
 						}
 
 					}
-					catch (Exception ex)
+					catch (Exception)
 					{
 						MessageBox.Show("Complete el formulario");
 						LoadDataGridItemsComprar();

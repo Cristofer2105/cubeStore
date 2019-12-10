@@ -108,6 +108,29 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+
+		public void UpdateDatosPerfil()
+		{
+			string query = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,contrasenia=HASHBYTES('md5',@contrasenia) WHERE idEmpleado=@idEmpleado";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Update de Perfil de Usuarios", DateTime.Now));
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@nombres", user.Nombres);
+				cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
+				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
+				cmd.Parameters.AddWithValue("@idEmpleado", Sesion.idSesion);
+
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Actualizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
+
+				Methods.ExecuteBasicCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+		}
 		public void UpdateContrasenia()
 		{
 			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=0 WHERE usuario=@usuario";
@@ -150,7 +173,7 @@ namespace DAL
 		public DataTable Login(string usuario, string contrasenia)
 		{
 			DataTable dt = new DataTable();
-			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
+			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Login de Usuarios", DateTime.Now));

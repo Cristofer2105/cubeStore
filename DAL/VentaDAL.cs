@@ -219,7 +219,25 @@ namespace DAL
 			}
 			return res;
 		}
-		
+		public DataTable SelectIdItemsAnular(int id)
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT VI.idItem FROM VentaItem VI INNER JOIN Venta V ON VI.idVenta= V.idVenta WHERE VI.idVenta=@id";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Select de Ventas", DateTime.Now));
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@id", id);
+				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return res;
+		}
+
 		public DataTable SelectBusquedaVenta(string texto)
 		{
 			DataTable res = new DataTable();

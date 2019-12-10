@@ -98,6 +98,10 @@ namespace Common
 			this.precioBaseItem = precioBaseItem;
 			this.fehaRegistroItem = fehaRegistroItem;
 		}
+		public Item(int idItem)
+		{
+			this.idItem = idItem;
+		}
 		#endregion
 	}
 }

@@ -11,6 +11,10 @@ namespace Common
 		public static int idSesion;
 		public static string usuarioSesion;
 		public static string rolSesion;
+		public static string nombre;
+		public static string primerapellido;
+		public static string segundoapellido;
+		public static string contrasenia;
 		public static string VerInfo()
 		{
 			return "Usuario:  " + usuarioSesion +"\n"+ "\n" + "Rol:  " + rolSesion;

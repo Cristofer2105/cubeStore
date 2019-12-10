@@ -24,6 +24,9 @@ namespace cubeStore
 	{
 		VentaBRL brl;
 		Venta venta;
+		Item item;
+		Item brlit;
+		int idVen;
 		public AdministrarVentas()
 		{
 			InitializeComponent();
@@ -36,6 +39,19 @@ namespace cubeStore
 				dgdListaVentas.ItemsSource = brl.Select().DefaultView;
 				dgdListaVentas.ItemsSource = brl.SelectBusquedaVenta(txtventabuscar.Text).DefaultView; 
 				dgdListaVentas.Columns[2].Visibility = Visibility.Hidden;
+			}
+			catch (Exception ex)
+			{
+
+				MessageBox.Show(ex.Message);
+			}
+		}
+		private void LoadDataGridIdItems()
+		{
+			try
+			{
+				brl = new VentaBRL();
+				dgdIdItems.ItemsSource = brl.SelectIdItemsAnular(idVen).DefaultView;
 			}
 			catch (Exception ex)
 			{
@@ -96,14 +112,40 @@ namespace cubeStore
 				try
 				{
 					DataRowView dataRow = (DataRowView)dgdListaVentas.SelectedItem;
-					int idVen = int.Parse(dataRow.Row.ItemArray[0].ToString());
+					idVen = int.Parse(dataRow.Row.ItemArray[0].ToString());
 					brl = new VentaBRL();
 					venta = brl.Get(idVen);
-
-
-					//Cargar Datos
 					MessageBox.Show("Anular" + idVen+" "+venta.Total);
+					LoadDataGridIdItems();
 
+					//Anular Venta
+					DateTime fecha = DateTime.Now;
+					brl = new VentaBRL();
+					DataTable dt = brl.SelectIdItemsAnular(idVen);
+					int cantItems=dt.Rows.Count;
+					MessageBox.Show("Cantidad" + cantItems);
+					
+					List<Items> items = new List<Items>();
+					/*
+					for (int i = 0; i < cantItems; i++)
+					{
+						items.Add(new Item(int.Parse(dt.Rows[i][0].ToString()));
+					}
+
+					this.venta = new Venta(int.Parse(txtidCliente.Text.ToString()), double.Parse(txttotalVenta.Text.ToString()), Sesion.idSesion, fecha);
+
+					this.garantia = new Garantia(fecha, fecha.AddMonths(3), fecha);
+					VentaBRL brlventa = new VentaBRL(venta, productos, garantia);
+					if (MessageBox.Show("Esta Seguro de realizar la venta?", "Vender", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+					{
+						brlventa.InsertVentas();
+						LoadDataGridItemsComprar();
+						MessageBox.Show("Venta realizada con exito");
+						txttotalVenta.Text = "";
+						txtCantidadArticulos.Text = "";
+						txtnombre.Text = "";
+					}
+					///*/
 				}
 				catch (Exception ex)
 				{

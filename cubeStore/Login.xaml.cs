@@ -62,10 +62,13 @@ namespace cubeStore
 						Sesion.idSesion= int.Parse(dt.Rows[0][0].ToString());
 						Sesion.usuarioSesion= dt.Rows[0][1].ToString();
 						Sesion.rolSesion= dt.Rows[0][2].ToString();
+						Sesion.nombre= dt.Rows[0][4].ToString();
+						Sesion.primerapellido= dt.Rows[0][5].ToString();
+						Sesion.segundoapellido= dt.Rows[0][6].ToString();
+						Sesion.contrasenia = txtContrasenia.Password;
+							//Iniciamos variables de configuracion
 
-						//Iniciamos variables de configuracion
-						
-						if (dt.Rows[0][2].ToString() == "Administrador")
+							if (dt.Rows[0][2].ToString() == "Administrador")
 						{
 							//Insertar session
 							DateTime fechahora = DateTime.Now;
