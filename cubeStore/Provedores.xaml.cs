@@ -60,6 +60,7 @@ namespace cubeStore
 			{
 				brl = new ProvedorBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
+				dgdDatos.ItemsSource = brl.SelectBusquedaProvedores(txtbuscarProvedor.Text).DefaultView;
 				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
 				dgdDatos.Columns[3].Visibility = Visibility.Hidden;
 				dgdDatos.Columns[4].Visibility = Visibility.Hidden;
@@ -134,6 +135,7 @@ namespace cubeStore
 			DesHabilitar();
 			LimpiarCampos();
 			mapaProv.Children.Clear();
+			dgdDatos.IsEnabled = true;
 		}
 		/// <summary>
 		/// Evento Click Acercar Mapa
@@ -212,12 +214,12 @@ namespace cubeStore
 								brl = new ProvedorBRL(provedor);
 								brl.Insert();
 								MessageBox.Show("Registro Exitoso");
-								dgdDatos.IsEnabled = true;
+								
 								mapaProv.Children.Clear();
 								LoadDataGrid();
 								LimpiarCampos();
 								DesHabilitar();
-
+								dgdDatos.IsEnabled = true;
 
 							}
 							catch (Exception ex)
@@ -256,6 +258,7 @@ namespace cubeStore
 							LoadDataGrid();
 							LimpiarCampos();
 							DesHabilitar();
+							dgdDatos.IsEnabled = true;
 						}
 						catch (Exception ex)
 						{
@@ -327,6 +330,18 @@ namespace cubeStore
 				}
 			}
 			
+		}
+
+		private void TxtbuscarProvedor_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (txtbuscarProvedor.Text == "")
+			{
+				LoadDataGrid();
+			}
+			else
+			{
+				LoadDataGrid();
+			}
 		}
 	}
 }

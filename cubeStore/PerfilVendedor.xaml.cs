@@ -77,8 +77,11 @@ namespace cubeStore
 			if (MessageBox.Show("Esta Seguro de restablecer tu contraseña?", "Restablecer", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 			{
 				RestablecerContraseña restablecerContraseña = new RestablecerContraseña();
+				string user= Sesion.usuarioSesion;
+				restablecerContraseña.txtUusario.Text = user;
 				this.Close();
 				restablecerContraseña.Show();
+				
 			}
 		}
 

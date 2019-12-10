@@ -26,7 +26,9 @@ namespace cubeStore
 		byte operacion = 0;
 		Usuario usuario;
 		UsuarioBRL brl;
-        public Usuarios()
+		string userName;
+
+		public Usuarios()
         {
             InitializeComponent();
         }
@@ -36,6 +38,7 @@ namespace cubeStore
 			{
 				brl = new UsuarioBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
+				dgdDatos.ItemsSource = brl.SelectBusquedaUsarios(txtbuscarUsuarios.Text).DefaultView;
 				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
 			}
 			catch (Exception ex)
@@ -52,7 +55,6 @@ namespace cubeStore
 			txtnombresAg.IsEnabled = true;
 			txtprimerapellidoAg.IsEnabled = true;
 			txtsegundoApellidoAg.IsEnabled = true;
-			txtcorreoAg.IsEnabled = true;
 
 			rbtAdmin.IsEnabled = true;
 			rbtEditor.IsEnabled = true;
@@ -73,7 +75,6 @@ namespace cubeStore
 			txtnombresAg.IsEnabled=false;
 			txtprimerapellidoAg.IsEnabled = false;
 			txtsegundoApellidoAg.IsEnabled = false;
-			txtcorreoAg.IsEnabled = false;
 
 			rbtAdmin.IsEnabled = false;
 			rbtEditor.IsEnabled = false;
@@ -90,7 +91,8 @@ namespace cubeStore
 			txtnombresAg.Text = "";	
 			txtprimerapellidoAg.Text = "";	
 			txtsegundoApellidoAg.Text = "";	
-			txtcorreoAg.Text = "";						
+			txtcorreoAg.Text = "";
+			txtbuscarUsuarios.Text = "";
 		}
 		
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
@@ -119,6 +121,7 @@ namespace cubeStore
 			MessageBox.Show("Complete los campos para agregar un usuario");
 			Habilitar(1);
 			LimpiarCamposAg();
+			txtcorreoAg.IsEnabled = true;
 		}
 
 		private void DgdDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -158,7 +161,8 @@ namespace cubeStore
 					txtnombresAg.Text = usuario.Nombres;
 					txtprimerapellidoAg.Text = usuario.PrimerApellido;
 					txtsegundoApellidoAg.Text = usuario.SegundoApellido;
-					txtcorreoAg.Text = usuario.Correo;	
+					txtcorreoAg.Text = usuario.Correo;
+					txtcorreoAg.IsEnabled = false;
 					
 				}
 				catch (Exception ex)
@@ -187,7 +191,7 @@ namespace cubeStore
 						brl.Delete();
 						LimpiarCamposAg();
 						MessageBox.Show("Eliminado Exitosamente");
-					
+						txtcorreoAg.IsEnabled = false;
 						LoadDataGrid();
 		
 					}
@@ -205,14 +209,16 @@ namespace cubeStore
 			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 			Habilitar(2);
 			LimpiarCamposAg();
+			txtcorreoAg.IsEnabled = false;
 		}
 
 		private void BtnGuardarUsuario_Click(object sender, RoutedEventArgs e)
 		{
+			txtcorreoAg.IsEnabled = true;
 			switch (operacion)
 			{
 				case 1:
-					if (txtnombresAg.Text == "" && txtprimerapellidoAg.Text == "" && txtsegundoApellidoAg.Text == "" && txtcorreoAg.Text == "")
+					if (txtnombresAg.Text == ""&&txtnombresAg.Text.Length<3 && txtprimerapellidoAg.Text == "" && txtprimerapellidoAg.Text.Length < 3 && txtsegundoApellidoAg.Text.Length < 3&&txtsegundoApellidoAg.Text == "" && txtcorreoAg.Text == "")
 					{
 						MessageBox.Show("Debe Llenar los campos para poder agregar un registro");
 					}
@@ -220,7 +226,8 @@ namespace cubeStore
 					{
 						txtnombresAg.Text = txtnombresAg.Text.Trim();
 						txtprimerapellidoAg.Text = txtprimerapellidoAg.Text.Trim();
-						txtcorreoAg.Text = txtcorreoAg.Text.Trim();
+						
+						
 						string rol = "";
 						if (rbtAdmin.IsChecked == true)
 						{
@@ -247,12 +254,31 @@ namespace cubeStore
 						{
 							sexo = sexo + "2";
 						}
-						
+						//Ususario
+						Random rdno = new Random();
+						string caracteres1 = "abcdefghijklmnopqrstuvwxyzaawe1234567890";
+						int longitud1 = caracteres1.Length;
+						char letra1;
+						int longituddat = 3;
+						string datosaleatorios = string.Empty;
+						for (int i = 0; i < longituddat; i++)
+						{
+							letra1 = caracteres1[rdno.Next(longitud1)];
+							datosaleatorios += letra1.ToString();
+						}
+						string datosRan = datosaleatorios;
 						string usuario1 = txtnombresAg.Text;
 						string usuario2 = txtprimerapellidoAg.Text;
-						string userName = usuario1.Substring(0, 3) + usuario2.Substring(0, 3);
+						if (usuario1.Length>2&&usuario2.Length>2)
+						{
+						 userName = usuario1.Substring(0, 3) + usuario2.Substring(0, 3)+datosRan;
+						}
+						else
+						{
+							MessageBox.Show("Ingrese correctamente los datos");
+						}
 
-
+						//Contrasenia
 						Random rdn = new Random();
 						string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 						int longitud = caracteres.Length;
@@ -266,45 +292,56 @@ namespace cubeStore
 						}
 						string contrasenia = contraseniaAleatoria;
 
-
-
-						#region enviar correo
-						System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-						msg.To.Add(txtcorreoAg.Text);
-						msg.Subject = "Registrado para usar el sistema cubestore";
-						msg.SubjectEncoding = System.Text.Encoding.UTF8;
-
-						msg.Body = "Hola que tal Bienvenido a cubestore " + txtnombresAg.Text + " " + txtprimerapellidoAg + "\n";
-						msg.Body = "Sus credenciales para ingreso son:\n" + "Usuario:  " + userName + "\nContrseña:  " + contrasenia;
-						msg.BodyEncoding = System.Text.Encoding.UTF8;
-						msg.IsBodyHtml = true;
-						msg.From = new System.Net.Mail.MailAddress("cristoferhilaquita7@gmail.com");
-
-						System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
-						client.Credentials = new System.Net.NetworkCredential("cristoferhilaquita7@gmail.com", "Cristofer246");
-						client.Port = 587;
-						client.EnableSsl = true;
-						client.Host = "smtp.gmail.com";
-						#endregion
-
-
-						try
+						if (txtcorreoAg.Text.Contains("gmail.com"))
 						{
-							DateTime fecha = DateTime.Now;						
-							usuario = new Usuario(txtnombresAg.Text.Trim(), txtprimerapellidoAg.Text.Trim(), txtsegundoApellidoAg.Text.Trim(), byte.Parse(sexo), userName, contrasenia, rol, txtcorreoAg.Text, fecha);
-							brl = new UsuarioBRL(usuario);
-							brl.Insert();
-							client.Send(msg);
-							MessageBox.Show("Usuario Agregado Exitosamente");
-							LimpiarCamposAg();
-							DesHabilitar();
-							LoadDataGrid();
-						}
-						catch (Exception)
-						{
+							txtcorreoAg.Text = txtcorreoAg.Text.Trim();
+							#region enviar correo
+							System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+							msg.To.Add(txtcorreoAg.Text);
+							msg.Subject = "Registrado para usar el sistema cubestore";
+							msg.SubjectEncoding = System.Text.Encoding.UTF8;
 
-							MessageBox.Show("Error al Enviar");
+							msg.Body = "Hola que tal Bienvenido a cubestore " + txtnombresAg.Text + " " + txtprimerapellidoAg + "\n";
+							msg.Body = "Sus credenciales para ingreso son:\n" + "Usuario:  " + userName + "\nContrseña:  " + contrasenia;
+							msg.BodyEncoding = System.Text.Encoding.UTF8;
+							msg.IsBodyHtml = true;
+							msg.From = new System.Net.Mail.MailAddress("cristoferhilaquita7@gmail.com");
+
+							System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+							client.Credentials = new System.Net.NetworkCredential("cristoferhilaquita7@gmail.com", "Cristofer246");
+							client.Port = 587;
+							client.EnableSsl = true;
+							client.Host = "smtp.gmail.com";
+							#endregion
+
+							try
+							{
+								DateTime fecha = DateTime.Now;
+								usuario = new Usuario(txtnombresAg.Text.Trim(), txtprimerapellidoAg.Text.Trim(), txtsegundoApellidoAg.Text.Trim(), byte.Parse(sexo), userName, contrasenia, rol, txtcorreoAg.Text, fecha);
+								brl = new UsuarioBRL(usuario);
+								brl.Insert();
+								client.Send(msg);
+								MessageBox.Show("Usuario Agregado Exitosamente");
+								LimpiarCamposAg();
+								DesHabilitar();
+								txtcorreoAg.IsEnabled = false;
+								LoadDataGrid();
+							}
+							catch (Exception)
+							{
+
+								MessageBox.Show("Error al Enviar");
+							}
 						}
+						else
+						{
+							MessageBox.Show("El correo debe estar en un formato correcto");
+						}
+
+						
+
+
+						
 					}
 					break;
 
@@ -317,6 +354,7 @@ namespace cubeStore
 					{
 						try
 						{
+							txtcorreoAg.IsEnabled = false;
 							//Modificar
 							//categoria = new Categoria(txtnombreCategoria.Text);
 							usuario.Nombres = txtnombresAg.Text.Trim();
@@ -346,6 +384,19 @@ namespace cubeStore
 		{
 			DesHabilitar();
 			LimpiarCamposAg();
+			txtcorreoAg.IsEnabled = false;
+		}
+
+		private void TxtbuscarUsuarios_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (txtbuscarUsuarios.Text == "")
+			{
+				LoadDataGrid();
+			}
+			else
+			{
+				LoadDataGrid();
+			}
 		}
 	}
 }

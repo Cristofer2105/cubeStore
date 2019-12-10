@@ -56,7 +56,12 @@ namespace BRL
 			dal = new ProvedorDal();
 			return dal.SelectTodo();
 		}
-
+		public DataTable SelectBusquedaProvedores(string texto)
+		{
+			dal = new ProvedorDal();
+			return dal.SelectBusquedaProvedores(texto);
+		}
+		
 		public override void Update()
 		{
 			dal.Update();

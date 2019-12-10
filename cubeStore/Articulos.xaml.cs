@@ -39,6 +39,7 @@ namespace cubeStore
 			{
 				brl = new ArticuloBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
+				dgdDatos.ItemsSource = brl.SelectBusquedaArticulos(txtBuscarArticulo.Text).DefaultView;
 				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
 
 				catBRL = new CategoriaBRL();
@@ -246,6 +247,18 @@ namespace cubeStore
 			dgdDatos.IsEnabled = true;
 			DesHabilitar();
 			LimpiarCampos();
+		}
+
+		private void TxtBuscarArticulo_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (txtBuscarArticulo.Text == "")
+			{
+				LoadDataGrid();
+			}
+			else
+			{
+				LoadDataGrid();
+			}
 		}
 	}
 }

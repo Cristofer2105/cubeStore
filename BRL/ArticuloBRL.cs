@@ -52,7 +52,12 @@ namespace BRL
 			dal = new ArticuloDAL();
 			return dal.Select();
 		}
-
+		public DataTable SelectBusquedaArticulos(string texto)
+		{
+			dal = new ArticuloDAL();
+			return dal.SelectBusquedaArticulos(texto);
+		}
+		
 		public override void Update()
 		{
 			dal.Update();

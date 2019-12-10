@@ -29,7 +29,9 @@ namespace cubeStore
         }
 		private void BtnCerrar_Click(object sender, RoutedEventArgs e)
 		{
+			Items items= new Items();
 			this.Close();
+			items.Show();
 		}
 
 		private void BtnActualizarItem_Click(object sender, RoutedEventArgs e)

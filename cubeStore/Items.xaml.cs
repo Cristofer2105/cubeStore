@@ -65,22 +65,6 @@ namespace cubeStore
 			this.Close();	
 		}
 
-		private void BtnAgregarItem_Click(object sender, RoutedEventArgs e)
-		{
-			AgregarItem agregarItem = new AgregarItem();
-			if (txtnombreproductobuscado.Text==""&& txtidProductoBuscado.Text=="")
-			{
-				MessageBox.Show("Busque un producto para agregar item");
-			}
-			else
-			{
-				agregarItem.txtnombreproductoinsert.Text = txtnombreproductobuscado.Text;
-				agregarItem.txtIdProductoInsertar.Text = txtidProductoBuscado.Text;
-				agregarItem.Show();
-				txtnombreproductobuscado.Text = "";
-				this.Close();
-			}
-		}
 		/// <summary>
 		/// Evento selection changed para busqueda de articulos
 		/// </summary>

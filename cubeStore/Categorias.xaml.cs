@@ -35,6 +35,7 @@ namespace cubeStore
 			{
 				brl = new CategoriaBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
+				dgdDatos.ItemsSource = brl.SelectBusquedaCategorias(txtBuscarCategorias.Text).DefaultView;
 				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
 			}
 			catch (Exception ex)
@@ -72,19 +73,23 @@ namespace cubeStore
 
 		private void BtnCerrarArticulos_Click(object sender, RoutedEventArgs e)
 		{
+			dgdDatos.IsEnabled = true;
 			this.Close();
+
 		}
 
 		private void BtnModificar_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 			Habilitar(2);
+			dgdDatos.IsEnabled = true;
 		}
 
 		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
 		{			
 			Habilitar(1);
 			LimpiarCampos();
+			dgdDatos.IsEnabled = false;
 		}
 
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
@@ -132,6 +137,7 @@ namespace cubeStore
 						{
 							try
 							{
+								dgdDatos.IsEnabled = false;
 								//Insertar
 								DateTime fechahora = DateTime.Now;
 								categoria = new Categoria(txtnombreCategoria.Text, fechahora);
@@ -141,8 +147,9 @@ namespace cubeStore
 								LoadDataGrid();
 								DesHabilitar();
 								LimpiarCampos();
+								dgdDatos.IsEnabled = true;
 							}
-							catch (Exception ex)
+							catch (Exception)
 							{
 
 								MessageBox.Show("Existe un problema al insertar el registro, comuniquese con el administrador de sistemas");
@@ -169,6 +176,7 @@ namespace cubeStore
 						{
 							try
 							{
+								dgdDatos.IsEnabled = true;
 								//Modificar
 								//categoria = new Categoria(txtnombreCategoria.Text);
 								categoria.NombreCategoria = txtnombreCategoria.Text;
@@ -200,15 +208,18 @@ namespace cubeStore
 		{
 			DesHabilitar();
 			LimpiarCampos();
+			dgdDatos.IsEnabled = true;
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadDataGrid();
+			dgdDatos.IsEnabled = true;
 		}
 
 		private void DgdDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+
 			if (dgdDatos.Items.Count > 0 && dgdDatos.SelectedItem != null)
 			{
 				//Realizamos Get
@@ -226,6 +237,18 @@ namespace cubeStore
 				{
 					MessageBox.Show(ex.Message);
 				}
+			}
+		}
+
+		private void TxtBuscarCategorias_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (txtBuscarCategorias.Text == "")
+			{
+				LoadDataGrid();
+			}
+			else
+			{
+				LoadDataGrid();
 			}
 		}
 	}

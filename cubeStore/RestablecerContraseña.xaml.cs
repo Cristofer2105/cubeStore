@@ -37,7 +37,7 @@ namespace cubeStore
 					try
 					{
 						brl = new UsuarioBRL();
-						DataTable dt = brl.RestablecerContrasenia(txtUusario.Text);
+						DataTable dt = brl.VerificarUser(txtUusario.Text,txtUusarioemail.Text);
 						if (dt.Rows.Count > 0)
 						{
 							if (dt.Rows[0][1].ToString() == txtUusario.Text)

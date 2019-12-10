@@ -68,7 +68,11 @@
                     </Grid.Effect>
                     <StackPanel Margin="15" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <TextBlock Foreground="Black" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"  FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" Text="LISTA DE CATEGORIAS" VerticalAlignment="Top"/>
-                        <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" Height="220" VerticalAlignment="Top" Margin="0,10" x:Name="dgdDatos" SelectionMode="Single"/>
+                        <StackPanel Background="#004E6F" VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Height="Auto" Margin="0 10" Width="350">
+                            <TextBox TextChanged="TxtBuscarCategorias_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Categoria" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtBuscarCategorias" Width="300"/>
+                            <materialDesign:PackIcon Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"  Kind="Search" IsEnabled="False" Height="30" Width="48"/>
+                        </StackPanel>
+                        <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" Height="172" VerticalAlignment="Top" Margin="0" x:Name="dgdDatos" SelectionMode="Single"/>
                     </StackPanel>
 
                 </Grid>

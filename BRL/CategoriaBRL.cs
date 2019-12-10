@@ -54,7 +54,11 @@ namespace BRL
 			dal = new CategoriaDAL();
 			return dal.Select();
 		}
-
+		public DataTable SelectBusquedaCategorias(string texto)
+		{
+			dal = new CategoriaDAL();
+			return dal.SelectBusquedaCategorias(texto);
+		}	
 		public override void Update()
 		{
 			dal.Update();

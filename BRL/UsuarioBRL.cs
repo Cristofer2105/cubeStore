@@ -70,6 +70,12 @@ namespace BRL
 			dal = new UsuarioDal();
 			return dal.Login(usuario, contrasenia);
 		}
+		public DataTable VerificarUser(string usuario, string correo)
+		{
+			dal = new UsuarioDal();
+			return dal.Login(usuario, correo);
+		}
+		
 		public DataTable RestablecerContrasenia(string usuario)
 		{
 			dal = new UsuarioDal();
@@ -80,5 +86,11 @@ namespace BRL
 			dal = new UsuarioDal();
 			return dal.Get(idUsuario);
 		}
+		public DataTable SelectBusquedaUsarios(string texto)
+		{
+			dal = new UsuarioDal();
+			return dal.SelectBusquedaUsarios(texto);
+		}
+		
 	}
 }

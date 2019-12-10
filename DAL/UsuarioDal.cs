@@ -192,6 +192,28 @@ namespace DAL
 			}
 			return dt;
 		}
+		public DataTable VerificarUser(string usuario, string correo)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND email=@email";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@usuario", usuario);
+				cmd.Parameters.AddWithValue("@email", correo);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Login realizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
+
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
 		public DataTable RestablecerContrasenia(string usuario)
 		{
 
@@ -242,6 +264,28 @@ namespace DAL
 			{
 				cmd.Connection.Close();
 				dr.Close();
+			}
+			return res;
+		}
+		
+		public DataTable SelectBusquedaUsarios(string texto)
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT * FROM vwEmpleadoSelect ";
+			query = query + " WHERE  [Nombre Completo] LIKE @texto ";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Articulo", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
+				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 			return res;
 		}

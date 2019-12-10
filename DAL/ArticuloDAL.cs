@@ -142,6 +142,27 @@ namespace DAL
 			}
 			return res;
 		}
+		public DataTable SelectBusquedaArticulos(string texto)
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT * FROM vwArticuloSelect ";
+			query = query + " WHERE  [Nombre del Articulo] LIKE @texto ";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Articulo", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
+				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return res;
+		}
 		
 	}
 }

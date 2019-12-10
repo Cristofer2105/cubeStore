@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using Common;
 using BRL;
 using System.Data;
+using System.Threading;
+using System.Timers;
 
 namespace cubeStore
 {
@@ -28,7 +30,8 @@ namespace cubeStore
         public Login()
         {
             InitializeComponent();
-        }
+			txtUusario.Focus();
+		}
 
 		private void BtnSalir_Click(object sender, RoutedEventArgs e)
 		{
@@ -42,14 +45,15 @@ namespace cubeStore
 
 		private void BtnIngresar_Click(object sender, RoutedEventArgs e)
 		{
+
 			txtUusario.Text = txtUusario.Text.Trim();
-			if (txtUusario.Text!=""&&txtContrasenia.Password!="")
+			if (txtUusario.Text != "" && txtContrasenia.Password != "")
 			{
 				try
 				{
 					brl = new UsuarioBRL();
 					DataTable dt = brl.Login(txtUusario.Text, txtContrasenia.Password);
-					if (dt.Rows.Count>0)
+					if (dt.Rows.Count > 0)
 					{
 						if (byte.Parse(dt.Rows[0][3].ToString()) == 1)
 						{
@@ -57,50 +61,51 @@ namespace cubeStore
 							this.Close();
 							cambia.Show();
 						}
-						else { 
+						else
+						{
 							//Iniciamos variable de sesion
-						Sesion.idSesion= int.Parse(dt.Rows[0][0].ToString());
-						Sesion.usuarioSesion= dt.Rows[0][1].ToString();
-						Sesion.rolSesion= dt.Rows[0][2].ToString();
-						Sesion.nombre= dt.Rows[0][4].ToString();
-						Sesion.primerapellido= dt.Rows[0][5].ToString();
-						Sesion.segundoapellido= dt.Rows[0][6].ToString();
-						Sesion.contrasenia = txtContrasenia.Password;
+							Sesion.idSesion = int.Parse(dt.Rows[0][0].ToString());
+							Sesion.usuarioSesion = dt.Rows[0][1].ToString();
+							Sesion.rolSesion = dt.Rows[0][2].ToString();
+							Sesion.nombre = dt.Rows[0][4].ToString();
+							Sesion.primerapellido = dt.Rows[0][5].ToString();
+							Sesion.segundoapellido = dt.Rows[0][6].ToString();
+							Sesion.contrasenia = txtContrasenia.Password;
 							//Iniciamos variables de configuracion
 
 							if (dt.Rows[0][2].ToString() == "Administrador")
-						{
-							//Insertar session
-							DateTime fechahora = DateTime.Now;
-							ses = new Session(fechahora,int.Parse(dt.Rows[0][0].ToString()));
-							sesBRL = new SessionBRL(ses);
-							sesBRL.Insert();
-							MainWindow menu = new MainWindow();
-							this.Visibility = Visibility.Hidden;
-							menu.Show();
-						}
-						else if (dt.Rows[0][2].ToString() == "Editor")
-						{
-							//Insertar session
-							DateTime fechahora = DateTime.Now;
-							ses = new Session(fechahora,int.Parse(dt.Rows[0][0].ToString()));
-							sesBRL = new SessionBRL(ses);
-							sesBRL.Insert();
-							MenuEditor menuedit = new MenuEditor();
-							this.Visibility = Visibility.Hidden;
-							menuedit.Show();
-						}
-						else if (dt.Rows[0][2].ToString() == "Vendedor")
-						{
-							//Insertar session
-							DateTime fechahora = DateTime.Now;
-							ses = new Session(fechahora, int.Parse(dt.Rows[0][0].ToString()));
-							sesBRL = new SessionBRL(ses);
-							sesBRL.Insert();
-							MenuVendedor menVend = new MenuVendedor();
-							this.Visibility = Visibility.Hidden;
-							menVend.Show();
-						}
+							{
+								//Insertar session
+								DateTime fechahora = DateTime.Now;
+								ses = new Session(fechahora, int.Parse(dt.Rows[0][0].ToString()));
+								sesBRL = new SessionBRL(ses);
+								sesBRL.Insert();
+								MainWindow menu = new MainWindow();
+								this.Visibility = Visibility.Hidden;
+								menu.Show();
+							}
+							else if (dt.Rows[0][2].ToString() == "Editor")
+							{
+								//Insertar session
+								DateTime fechahora = DateTime.Now;
+								ses = new Session(fechahora, int.Parse(dt.Rows[0][0].ToString()));
+								sesBRL = new SessionBRL(ses);
+								sesBRL.Insert();
+								MenuEditor menuedit = new MenuEditor();
+								this.Visibility = Visibility.Hidden;
+								menuedit.Show();
+							}
+							else if (dt.Rows[0][2].ToString() == "Vendedor")
+							{
+								//Insertar session
+								DateTime fechahora = DateTime.Now;
+								ses = new Session(fechahora, int.Parse(dt.Rows[0][0].ToString()));
+								sesBRL = new SessionBRL(ses);
+								sesBRL.Insert();
+								MenuVendedor menVend = new MenuVendedor();
+								this.Visibility = Visibility.Hidden;
+								menVend.Show();
+							}
 						}
 
 
@@ -115,14 +120,13 @@ namespace cubeStore
 				catch (Exception ex)
 				{
 
-					MessageBox.Show("Error"+ex.Message);
+					MessageBox.Show("Error" + ex.Message);
 				}
 			}
 			else
 			{
 				MessageBox.Show("Tiene que llenar los campos para ingresar");
 			}
-			
 		}
 
 		private void BtnRestablecerContraseña_Click(object sender, RoutedEventArgs e)
@@ -130,6 +134,94 @@ namespace cubeStore
 			RestablecerContraseña restablecerContraseña = new RestablecerContraseña();
 			this.Close();
 			restablecerContraseña.Show();
+		}
+
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				txtUusario.Text = txtUusario.Text.Trim();
+				if (txtUusario.Text != "" && txtContrasenia.Password != "")
+				{
+					try
+					{
+						brl = new UsuarioBRL();
+						DataTable dt = brl.Login(txtUusario.Text, txtContrasenia.Password);
+						if (dt.Rows.Count > 0)
+						{
+							if (byte.Parse(dt.Rows[0][3].ToString()) == 1)
+							{
+								CambiarContrasenia cambia = new CambiarContrasenia();
+								this.Close();
+								cambia.Show();
+							}
+							else
+							{
+								//Iniciamos variable de sesion
+								Sesion.idSesion = int.Parse(dt.Rows[0][0].ToString());
+								Sesion.usuarioSesion = dt.Rows[0][1].ToString();
+								Sesion.rolSesion = dt.Rows[0][2].ToString();
+								Sesion.nombre = dt.Rows[0][4].ToString();
+								Sesion.primerapellido = dt.Rows[0][5].ToString();
+								Sesion.segundoapellido = dt.Rows[0][6].ToString();
+								Sesion.contrasenia = txtContrasenia.Password;
+								//Iniciamos variables de configuracion
+
+								if (dt.Rows[0][2].ToString() == "Administrador")
+								{
+									//Insertar session
+									DateTime fechahora = DateTime.Now;
+									ses = new Session(fechahora, int.Parse(dt.Rows[0][0].ToString()));
+									sesBRL = new SessionBRL(ses);
+									sesBRL.Insert();
+									MainWindow menu = new MainWindow();
+									this.Visibility = Visibility.Hidden;
+									menu.Show();
+								}
+								else if (dt.Rows[0][2].ToString() == "Editor")
+								{
+									//Insertar session
+									DateTime fechahora = DateTime.Now;
+									ses = new Session(fechahora, int.Parse(dt.Rows[0][0].ToString()));
+									sesBRL = new SessionBRL(ses);
+									sesBRL.Insert();
+									MenuEditor menuedit = new MenuEditor();
+									this.Visibility = Visibility.Hidden;
+									menuedit.Show();
+								}
+								else if (dt.Rows[0][2].ToString() == "Vendedor")
+								{
+									//Insertar session
+									DateTime fechahora = DateTime.Now;
+									ses = new Session(fechahora, int.Parse(dt.Rows[0][0].ToString()));
+									sesBRL = new SessionBRL(ses);
+									sesBRL.Insert();
+									MenuVendedor menVend = new MenuVendedor();
+									this.Visibility = Visibility.Hidden;
+									menVend.Show();
+								}
+							}
+
+
+						}
+						else
+						{
+							MessageBox.Show("Usuario o contrasenia Incorrectos");
+							txtUusario.Text = "";
+							txtContrasenia.Password = "";
+						}
+					}
+					catch (Exception ex)
+					{
+
+						MessageBox.Show("Error" + ex.Message);
+					}
+				}
+				else
+				{
+					MessageBox.Show("Tiene que llenar los campos para ingresar");
+				}
+			}
 		}
 	}
 }

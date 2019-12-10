@@ -10,6 +10,7 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
+        KeyDown="Window_KeyDown"
         FontFamily="Segoe UI Emoji">
     <Grid  Background="#EA5555">
         <Grid Height="70" VerticalAlignment="Top" Background="#EA5555">

@@ -7,7 +7,7 @@
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:local="clr-namespace:cubeStore"
         mc:Ignorable="d"
-        Title="Usuarios" Height="700" Width="1000"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+        Title="Usuarios" Height="805" Width="1000"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
     <StackPanel>
 
         <Grid Height="80" VerticalAlignment="Top" Background="#EA5555">
@@ -24,7 +24,7 @@
         </Grid>
         <StackPanel Orientation="Horizontal" Height="618">
 
-            <Grid Height="610" Width="380" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#EA5555" Margin="4">
+            <Grid Height="715" Width="380" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#EA5555" Margin="4,4,4,-101">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
@@ -51,16 +51,20 @@
                 </Grid>
             </Grid>
 
-            <Grid  Height="610" Width="598" Background="#EA5555" Margin="5,5,5,3">
+            <Grid Width="598" Background="#EA5555" Margin="5,5,5,-101">
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
                 <Grid Margin="10,23,10,10" Background="White">
 
-                    <m:Map MouseDoubleClick="MapaProv_MouseDoubleClick" x:Name="mapaProv" Mode="AerialWithLabels" ZoomLevel="13" CredentialsProvider="Av0hFgl1wVKpQobXEVHSVnwbFy1ZYVDtHYAYcdLj9FQSOcDNoIu6F4RnKLSSa5wE" Center="-17.380907, -66.163573" Margin="76,37,10,277"/>
+                    <m:Map MouseDoubleClick="MapaProv_MouseDoubleClick" x:Name="mapaProv" Mode="AerialWithLabels" ZoomLevel="13" CredentialsProvider="Av0hFgl1wVKpQobXEVHSVnwbFy1ZYVDtHYAYcdLj9FQSOcDNoIu6F4RnKLSSa5wE" Center="-17.380907, -66.163573" Margin="76,37,10,381"/>
 
-                    <TextBlock Foreground="Black" FontWeight="Bold" FontSize="15" HorizontalAlignment="Center"  FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" Text="LISTA DE PROVEDORES" VerticalAlignment="Top" Height="28" Margin="196,337,218,0"/>
-                    <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" x:Name="dgdDatos" Margin="0,370,62,10" HorizontalAlignment="Right" Width="440"/>
+                    <TextBlock Foreground="Black" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"  FontFamily="Champagne &amp; Limousines" TextWrapping="Wrap" Text="LISTA DE PROVEDORES" VerticalAlignment="Top" Height="46" Margin="10,320,373,0" Width="195"/>
+                    <StackPanel Background="#004E6F" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Height="Auto" Margin="10" Width="350">
+                        <TextBox  TextChanged="TxtbuscarProvedor_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Provedor" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtbuscarProvedor" Width="300"/>
+                        <materialDesign:PackIcon Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"  Kind="Search" IsEnabled="False" Height="30" Width="48"/>
+                    </StackPanel>
+                    <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" x:Name="dgdDatos" Margin="0,398,50,10" HorizontalAlignment="Right" Width="489"/>
 
                     <Button Click="Btnacercar_Click" x:Name="btnacercar" Background="#004E6F" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="61" Height="47">
                         <materialDesign:PackIcon Kind="ZoomIn" Width="30" Height="40" IsEnabled="False"/>
