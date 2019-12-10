@@ -106,6 +106,9 @@
     <Compile Include="MenuVentasVendedor.xaml.cs">
       <DependentUpon>MenuVentasVendedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MotivoAnulacionVenta.xaml.cs">
+      <DependentUpon>MotivoAnulacionVenta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PerfilAdministrador.xaml.cs">
       <DependentUpon>PerfilAdministrador.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MenuVentasVendedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MotivoAnulacionVenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -107,7 +107,10 @@ namespace BRL
 			return dal.SelectIdItemsAnular(id);
 		}
 
-
+		public void AnularVentas(Venta venta, Garantia garantia, List<Item> items, VentaAnulada ventaAnulada)
+		{
+			dal.AnularVenta(venta, garantia, items, ventaAnulada);
+		}
 
 		public override void Update()
 		{

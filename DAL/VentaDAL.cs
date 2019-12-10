@@ -11,12 +11,12 @@ namespace DAL
 	public class VentaDAL : AbstractDAL
 	{
 		#region Atributos Propiedades y Constructores de clase
-		private VentaAnulada ventAn;
+		private VentaAnulada ventaAnulada;
 
 		public VentaAnulada VentAn
 		{
-			get { return ventAn; }
-			set { ventAn = value; }
+			get { return ventaAnulada; }
+			set { ventaAnulada = value; }
 		}
 
 		private Venta vtn;
@@ -142,7 +142,7 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-		public void AnularVenta()
+		public void AnularVenta(Venta venta, Garantia garantia, List<Item> items, VentaAnulada ventaAnulada)
 		{
 			SqlConnection connection = Methods.GetConnection();
 			connection.Open();
@@ -160,7 +160,7 @@ namespace DAL
 				//query 1 Venta
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo AnularVenta con Transacciones de una Venta", DateTime.Now));
 				command.CommandText = "UPDATE Venta SET estadoVenta=0, total=0 WHERE idVenta=@idVenta";
-				command.Parameters.AddWithValue("@idVenta", vtn.IdVenta);
+				command.Parameters.AddWithValue("@idVenta", venta.IdVenta);
 				command.ExecuteNonQuery();
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Venta Anulado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
@@ -168,7 +168,7 @@ namespace DAL
 
 				//query Venta Item
 				command.CommandText = "UPDATE Item SET estadoItem=1 WHERE idItem=@idItem";
-				foreach (var producto in this.vti)
+				foreach (Item producto in items)
 				{
 					command.Parameters.AddWithValue("@idItem", producto.IdItem);
 					command.ExecuteNonQuery();
@@ -178,15 +178,15 @@ namespace DAL
 
 				//query Garantia
 				command.CommandText = "UPDATE Garantia SET estadoGarantia=0 WHERE idGarantia=@idGarantia";
-				command.Parameters.AddWithValue("@idGarantia",grt.IdGarantia);
+				command.Parameters.AddWithValue("@idGarantia",garantia.IdGarantia);
 				command.ExecuteNonQuery();
 
 				//query Venta Anulada
 				command.CommandText = "INSERT INTO VentaAnulada(idVentaAnulada,idEmpleado,fechaHora,motivo) VALUES (@idVentaAnulada,@idEmpleado,@fechaHora,@motivo)";
-				command.Parameters.AddWithValue("@idVentaAnulada", ventAn.IdVentaAnulada);
+				command.Parameters.AddWithValue("@idVentaAnulada", ventaAnulada.IdVentaAnulada);
 				command.Parameters.AddWithValue("@idEmpleado", Sesion.idSesion);
-				command.Parameters.AddWithValue("@fechaHora", ventAn.FechaRegistro);
-				command.Parameters.AddWithValue("@motivo", ventAn.Motivo);
+				command.Parameters.AddWithValue("@fechaHora", ventaAnulada.FechaRegistro);
+				command.Parameters.AddWithValue("@motivo", ventaAnulada.Motivo);
 				command.ExecuteNonQuery();
 
 
@@ -200,7 +200,8 @@ namespace DAL
 				transaction.Rollback();
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
-		
+
+
 		}
 		public override DataTable Select()
 		{

@@ -20,7 +20,7 @@
                     <materialDesign:PackIcon Kind="Close" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
-            <TextBlock Text="Ventas" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="341,27,366,23" Width="193"/>
+            <TextBlock Text="Ventas" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="30" Margin="383,28,324,22" Width="193"/>
         </Grid>
         <Grid Margin="20" VerticalAlignment="Top" Background="#EA5555" Height="480">
             <Grid.Effect>
@@ -48,7 +48,8 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="dgdIdItems" HorizontalAlignment="Left" Height="153" Margin="10,10,0,0" VerticalAlignment="Top" Width="105"/>
+            <DataGrid Visibility="Hidden" x:Name="dgdIdItems" HorizontalAlignment="Left" Height="153" Margin="10,10,0,0" VerticalAlignment="Top" Width="105"/>
+            <TextBox Visibility="Hidden" x:Name="txtmotivodeAnulacion" HorizontalAlignment="Left" Height="23" Margin="730,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         </Grid>
 
     </StackPanel>

@@ -106,50 +106,40 @@ namespace cubeStore
 
 		private void BtnAnularVenta_Click(object sender, RoutedEventArgs e)
 		{
-			if (dgdListaVentas.Items.Count > 0 && dgdListaVentas.SelectedItem != null)
+			if (MessageBox.Show("Esta Seguro de Anular esta venta?", "Anular Venta", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 			{
-				//Realizamos Get
-				try
+				if (dgdListaVentas.Items.Count > 0 && dgdListaVentas.SelectedItem != null)
 				{
-					DataRowView dataRow = (DataRowView)dgdListaVentas.SelectedItem;
-					idVen = int.Parse(dataRow.Row.ItemArray[0].ToString());
-					brl = new VentaBRL();
-					venta = brl.Get(idVen);
-					MessageBox.Show("Anular" + idVen+" "+venta.Total);
-					LoadDataGridIdItems();
-
-					//Anular Venta
-					DateTime fecha = DateTime.Now;
-					brl = new VentaBRL();
-					DataTable dt = brl.SelectIdItemsAnular(idVen);
-					int cantItems=dt.Rows.Count;
-					MessageBox.Show("Cantidad" + cantItems);
-					
-					List<Items> items = new List<Items>();
-					/*
-					for (int i = 0; i < cantItems; i++)
+					//Realizamos Get
+					try
 					{
-						items.Add(new Item(int.Parse(dt.Rows[i][0].ToString()));
+						DataRowView dataRow = (DataRowView)dgdListaVentas.SelectedItem;
+						idVen = int.Parse(dataRow.Row.ItemArray[0].ToString());
+						brl = new VentaBRL();
+						venta = brl.Get(idVen);
+						LoadDataGridIdItems();
+						MotivoAnulacionVenta motivoAnulacionVenta = new MotivoAnulacionVenta();
+						motivoAnulacionVenta.ShowDialog();
+						txtmotivodeAnulacion.Text=motivoAnulacionVenta.txtmotivoAnulacion.Text;
+						//Anular Venta
+						DateTime fecha = DateTime.Now;
+						brl = new VentaBRL();
+						DataTable dt = brl.SelectIdItemsAnular(idVen);
+						List<Item> items = new List<Item>();
+						for (int i = 0; i < dt.Rows.Count; i++)
+						{
+							items.Add(new Item() { IdItem = int.Parse(dt.Rows[i][0].ToString()) });
+						}
+						Venta ventaa = new Venta() { IdVenta = idVen };
+						Garantia garantia = new Garantia() { IdGarantia = idVen };
+						VentaAnulada ventaNull = new VentaAnulada() { IdVentaAnulada = idVen, IdEmpleado = Sesion.idSesion, FechaRegistro = fecha, Motivo = txtmotivodeAnulacion.Text };
+						brl.AnularVentas(ventaa, garantia, items, ventaNull);
+						LoadDataGrid();
 					}
-
-					this.venta = new Venta(int.Parse(txtidCliente.Text.ToString()), double.Parse(txttotalVenta.Text.ToString()), Sesion.idSesion, fecha);
-
-					this.garantia = new Garantia(fecha, fecha.AddMonths(3), fecha);
-					VentaBRL brlventa = new VentaBRL(venta, productos, garantia);
-					if (MessageBox.Show("Esta Seguro de realizar la venta?", "Vender", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+					catch (Exception ex)
 					{
-						brlventa.InsertVentas();
-						LoadDataGridItemsComprar();
-						MessageBox.Show("Venta realizada con exito");
-						txttotalVenta.Text = "";
-						txtCantidadArticulos.Text = "";
-						txtnombre.Text = "";
+						MessageBox.Show(ex.Message);
 					}
-					///*/
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message);
 				}
 			}
 		}
