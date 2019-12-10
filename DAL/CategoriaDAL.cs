@@ -172,6 +172,41 @@ namespace DAL
 			}
 			return res;
 		}
-		
+		public DataTable VerificarCategoria(string categoria)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT * FROM Categoria WHERE nombreCategoria=@nombreCategoria";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@nombreCategoria", categoria);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
+		public DataTable VerificarCategoriaEliminar(int id)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT * FROM Categoria C INNER JOIN Articulo A ON A.idCategoria=C.idCategoria WHERE C.idCategoria=@id AND A.estadoArticulo=1";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@id", id);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
 	}
 }

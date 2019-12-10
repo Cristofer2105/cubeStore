@@ -290,7 +290,24 @@ namespace DAL
 			}
 			return res;
 		}
-		
+		public DataTable VerificarItem(string item)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT * FROM Item WHERE codigoItem=@codigoItem";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar item", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@codigoItem", item);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
 
 
 		#endregion

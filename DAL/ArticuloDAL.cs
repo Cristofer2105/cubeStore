@@ -183,6 +183,23 @@ namespace DAL
 			}
 			return dt;
 		}
+		public DataTable VerificarArticuloEliminar(int id)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT * FROM Articulo A INNER JOIN Item I ON I.idArticulo=A.idArticulo WHERE A.idArticulo=@id AND I.estadoItem=1";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
 
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@id", id);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
 	}
 }

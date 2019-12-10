@@ -72,5 +72,10 @@ namespace BRL
 			dal = new ArticuloDAL();
 			return dal.VerificarArticulo(articulo);
 		}
+		public DataTable VerificarArticuloEliminar(int id)
+		{
+			dal = new ArticuloDAL();
+			return dal.VerificarArticuloEliminar(id);
+		}
 	}
 }

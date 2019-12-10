@@ -30,10 +30,10 @@ namespace Common
 			}
 			return true;
 		}
-		public static bool TextoNumeros(string value)
+		public static bool Numeros(string value)
 		{
-			string regular_expression = "^[0-9_a-zA-Z_áéíóúÁÉÍÓÚ  ]*$";
-			Regex regex = new Regex(regular_expression);
+			string regular_expression = "/^[0-9a]+$/"; 
+			  Regex regex = new Regex(regular_expression);
 			if (regex.IsMatch(value))
 			{
 				return true;

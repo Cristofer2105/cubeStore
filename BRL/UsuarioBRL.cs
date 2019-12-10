@@ -73,7 +73,7 @@ namespace BRL
 		public DataTable VerificarUser(string usuario, string correo)
 		{
 			dal = new UsuarioDal();
-			return dal.Login(usuario, correo);
+			return dal.VerificarUser(usuario, correo);
 		}
 		
 		public DataTable RestablecerContrasenia(string usuario)

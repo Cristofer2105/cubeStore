@@ -100,7 +100,12 @@ namespace BRL
 			dal = new ItemDAL();
 			return dal.CantidadVenta();
 		}
-
+		public DataTable VerificarItem(string item)
+		{
+			dal = new ItemDAL();
+			return dal.VerificarItem(item);
+		}
+		
 		#endregion
 	}
 }

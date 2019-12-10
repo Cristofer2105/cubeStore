@@ -97,32 +97,41 @@ namespace cubeStore
 		/// <param name="e"></param>
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
 		{
-			if (provedor != null && txtnombreprovedor.Text != "")
+			brl = new ProvedorBRL();
+			DataTable dt = brl.VerificarProvedorEliminar(provedor.IdProvedor);
+			if (dt.Rows.Count == 0)
 			{
-				if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+				if (provedor != null && txtnombreprovedor.Text != "")
 				{
-					//Eliminacion Logica
-					try
+					if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 					{
-						brl = new ProvedorBRL(provedor);
-						brl.Delete();
-						MessageBox.Show("Eliminado Exitosamente");
-						LoadDataGrid();
-						LimpiarCampos();
-						mapaProv.Children.Clear();
-						
+						//Eliminacion Logica
+						try
+						{
+							brl = new ProvedorBRL(provedor);
+							brl.Delete();
+							MessageBox.Show("Eliminado Exitosamente");
+							LoadDataGrid();
+							LimpiarCampos();
+							mapaProv.Children.Clear();
 
-					}
-					catch (Exception ex)
-					{
 
-						MessageBox.Show(ex.Message);
+						}
+						catch (Exception ex)
+						{
+
+							MessageBox.Show(ex.Message);
+						}
 					}
+				}
+				else
+				{
+					MessageBox.Show("Tiene que seleccionar un registro de la lista para eliminarlo");
 				}
 			}
 			else
 			{
-				MessageBox.Show("Tiene que seleccionar un registro de la lista para eliminarlo");
+				MessageBox.Show("No puedes Eliminar este provedor");
 			}
 		}
 		/// <summary>
@@ -204,33 +213,42 @@ namespace cubeStore
 					else
 					{					
 						txtnombreprovedor.Text = txtnombreprovedor.Text.Trim();
-						if (Validate.OnlyLettersAndSpaces(txtnombreprovedor.Text))
+						brl = new ProvedorBRL();
+						DataTable dt = brl.VerificarProvedor(txtnombreprovedor.Text);
+						if (dt.Rows.Count == 0)
 						{
-							try
+							if (Validate.OnlyLettersAndSpaces(txtnombreprovedor.Text))
 							{
-								//Insertar
-								DateTime fecha = DateTime.Now;
-								provedor = new Provedor(txtnombreprovedor.Text.Trim(), (float)pinUbicacion.Latitude, (float)pinUbicacion.Longitude, fecha);
-								brl = new ProvedorBRL(provedor);
-								brl.Insert();
-								MessageBox.Show("Registro Exitoso");
-								
-								mapaProv.Children.Clear();
-								LoadDataGrid();
-								LimpiarCampos();
-								DesHabilitar();
-								dgdDatos.IsEnabled = true;
+								try
+								{
+									//Insertar
+									DateTime fecha = DateTime.Now;
+									provedor = new Provedor(txtnombreprovedor.Text.Trim(), (float)pinUbicacion.Latitude, (float)pinUbicacion.Longitude, fecha);
+									brl = new ProvedorBRL(provedor);
+									brl.Insert();
+									MessageBox.Show("Registro Exitoso");
 
+									mapaProv.Children.Clear();
+									LoadDataGrid();
+									LimpiarCampos();
+									DesHabilitar();
+									dgdDatos.IsEnabled = true;
+
+								}
+								catch (Exception)
+								{
+
+									MessageBox.Show("Debe Elegir Una Ubicacion");
+								}
 							}
-							catch (Exception ex)
+							else
 							{
-
-								MessageBox.Show("Debe Elegir Una Ubicacion");
+								MessageBox.Show("Ingrese Correctamente los campos");
 							}
 						}
 						else
 						{
-							MessageBox.Show("Ingrese Correctamente los campos");
+							MessageBox.Show("El Provedor ya existe");
 						}
 					}
 				break;
@@ -243,26 +261,36 @@ namespace cubeStore
 					else
 					{
 						txtnombreprovedor.Text = txtnombreprovedor.Text.Trim();
-						try
+						brl = new ProvedorBRL();
+						DataTable dt = brl.VerificarProvedor(txtnombreprovedor.Text);
+						if (dt.Rows.Count == 0)
 						{
-							//Modificar
-							//categoria = new Categoria(txtnombreCategoria.Text);						
-							provedor.RazonSocial = txtnombreprovedor.Text.Trim();
-							provedor.Latitud = (float)pinUbicacion.Latitude;
-							provedor.Longitud = (float)pinUbicacion.Longitude;
+							try
+							{
+								//Modificar
+								//categoria = new Categoria(txtnombreCategoria.Text);						
+								provedor.RazonSocial = txtnombreprovedor.Text.Trim();
+								provedor.Latitud = (float)pinUbicacion.Latitude;
+								provedor.Longitud = (float)pinUbicacion.Longitude;
+								
+								brl = new ProvedorBRL(provedor);
+								brl.Update();
+								MessageBox.Show("Registro Modificado Exitosamente");
+								mapaProv.Children.Clear();
+								LoadDataGrid();
+								LimpiarCampos();
+								DesHabilitar();
+								dgdDatos.IsEnabled = true;
+							}
 
-							brl = new ProvedorBRL(provedor);
-							brl.Update();
-							MessageBox.Show("Registro Modificado Exitosamente");
-							mapaProv.Children.Clear();
-							LoadDataGrid();
-							LimpiarCampos();
-							DesHabilitar();
-							dgdDatos.IsEnabled = true;
+							catch (Exception)
+							{
+								MessageBox.Show("Debe Elegir Una Ubicacion");
+							}
 						}
-						catch (Exception ex)
+						else
 						{
-							MessageBox.Show("Debe Elegir Una Ubicacion");
+							MessageBox.Show("El provedor ya existe");
 						}
 					}
 					break;

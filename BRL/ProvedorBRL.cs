@@ -61,7 +61,7 @@ namespace BRL
 			dal = new ProvedorDal();
 			return dal.SelectBusquedaProvedores(texto);
 		}
-		
+
 		public override void Update()
 		{
 			dal.Update();
@@ -74,6 +74,16 @@ namespace BRL
 		public DataTable SelectProvedores()
 		{
 			return Dal.SelectProvedores();
+		}
+		public DataTable VerificarProvedor(string provedor)
+		{
+			return Dal.VerificarProvedor(provedor);
+		}
+		
+		public DataTable VerificarProvedorEliminar(int id)
+		{
+			dal = new ProvedorDal();
+			return dal.VerificarProvedorEliminar(id);
 		}
 	}
 }

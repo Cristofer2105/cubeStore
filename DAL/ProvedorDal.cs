@@ -182,5 +182,41 @@ namespace DAL
 			}
 			return res;
 		}
+		public DataTable VerificarProvedor(string provedor)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT * FROM Provedor WHERE razonSocialProvedor=@razonSocialProvedor";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@razonSocialProvedor", provedor);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
+		public DataTable VerificarProvedorEliminar(int id)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT * FROM Categoria C INNER JOIN Articulo A ON A.idCategoria=C.idCategoria WHERE C.idCategoria=@id AND A.estadoArticulo=1";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@id", id);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
 	}
 }

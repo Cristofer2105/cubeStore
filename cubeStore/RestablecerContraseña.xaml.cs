@@ -96,14 +96,14 @@ namespace cubeStore
 									throw ex;
 								}
 								
-						}
-						else
-							{
-								MessageBox.Show("El usuario no Existe");
-								txtUusario.Text = "";
-								txtUusarioemail.Text = "";
 							}
-						}
+							else
+								{
+									MessageBox.Show("El usuario no Existe");
+									txtUusario.Text = "";
+									txtUusarioemail.Text = "";
+								}
+							}
 						else
 						{
 							MessageBox.Show("Usuario o email incorrectos");

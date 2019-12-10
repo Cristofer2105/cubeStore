@@ -94,29 +94,38 @@ namespace cubeStore
 
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
 		{
-			if (categoria != null&&txtnombreCategoria.Text!="")
+			brl = new CategoriaBRL();
+			DataTable dt = brl.VerificarCategoriaEliminar(categoria.IdCategoria);
+			if (dt.Rows.Count == 0)
 			{
-				if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+				if (categoria != null && txtnombreCategoria.Text != "")
 				{
-					//Eliminacion Logica
-					try
+					if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 					{
-						brl = new CategoriaBRL(categoria);
-						brl.Delete();
-						MessageBox.Show("Eliminado Exitosamente");
-						LoadDataGrid();
-						LimpiarCampos();
-					}
-					catch (Exception ex)
-					{
+						//Eliminacion Logica
+						try
+						{
+							brl = new CategoriaBRL(categoria);
+							brl.Delete();
+							MessageBox.Show("Eliminado Exitosamente");
+							LoadDataGrid();
+							LimpiarCampos();
+						}
+						catch (Exception ex)
+						{
 
-						MessageBox.Show(ex.Message);
+							MessageBox.Show(ex.Message);
+						}
 					}
+				}
+				else
+				{
+					MessageBox.Show("Tiene que seleccionar un registro de la lista para eliminarlo");
 				}
 			}
 			else
 			{
-				MessageBox.Show("Tiene que seleccionar un registro de la lista para eliminarlo");
+				MessageBox.Show("No puede Eliminar esta categoria");
 			}
 		}
 
@@ -133,33 +142,42 @@ namespace cubeStore
 					else
 					{
 						txtnombreCategoria.Text = txtnombreCategoria.Text.Trim();
-						if (Validate.OnlyLettersAndSpaces(txtnombreCategoria.Text))
+						brl = new CategoriaBRL();
+						DataTable dt = brl.VerificarCategoria(txtnombreCategoria.Text);
+						if (dt.Rows.Count == 0)
 						{
-							try
+							if (Validate.OnlyLettersAndSpaces(txtnombreCategoria.Text))
 							{
-								dgdDatos.IsEnabled = false;
-								//Insertar
-								DateTime fechahora = DateTime.Now;
-								categoria = new Categoria(txtnombreCategoria.Text, fechahora);
-								brl = new CategoriaBRL(categoria);
-								brl.Insert();
-								MessageBox.Show("Registro Exitoso");
-								LoadDataGrid();
-								DesHabilitar();
+								try
+								{
+									dgdDatos.IsEnabled = false;
+									//Insertar
+									DateTime fechahora = DateTime.Now;
+									categoria = new Categoria(txtnombreCategoria.Text, fechahora);
+									brl = new CategoriaBRL(categoria);
+									brl.Insert();
+									MessageBox.Show("Registro Exitoso");
+									LoadDataGrid();
+									DesHabilitar();
+									LimpiarCampos();
+									dgdDatos.IsEnabled = true;
+								}
+								catch (Exception)
+								{
+
+									MessageBox.Show("Existe un problema al insertar el registro, comuniquese con el administrador de sistemas");
+								}
+
+							}
+							else
+							{
+								MessageBox.Show("Ingrese Correctamente el nombre");
 								LimpiarCampos();
-								dgdDatos.IsEnabled = true;
 							}
-							catch (Exception)
-							{
-
-								MessageBox.Show("Existe un problema al insertar el registro, comuniquese con el administrador de sistemas");
-							}
-
 						}
 						else
 						{
-							MessageBox.Show("Ingrese Correctamente el nombre");
-							LimpiarCampos();
+							MessageBox.Show("La categoria ya existe");
 						}
 					}
 					break;
@@ -170,34 +188,44 @@ namespace cubeStore
 						MessageBox.Show("Tiene que seleccionar un registro de la lista para modificarlo");
 					}
 					else
-					{				
+					{
 						txtnombreCategoria.Text = txtnombreCategoria.Text.Trim();
-						if (Validate.OnlyLettersAndSpaces(txtnombreCategoria.Text))
+						brl = new CategoriaBRL();
+						DataTable dt = brl.VerificarCategoria(txtnombreCategoria.Text);
+						if (dt.Rows.Count == 0)
 						{
-							try
+
+							if (Validate.OnlyLettersAndSpaces(txtnombreCategoria.Text))
 							{
-								dgdDatos.IsEnabled = true;
-								//Modificar
-								//categoria = new Categoria(txtnombreCategoria.Text);
-								categoria.NombreCategoria = txtnombreCategoria.Text;
+								try
+								{
+									dgdDatos.IsEnabled = true;
+									//Modificar
+									//categoria = new Categoria(txtnombreCategoria.Text);
+									categoria.NombreCategoria = txtnombreCategoria.Text;
 
-								brl = new CategoriaBRL(categoria);
-								brl.Update();
-								MessageBox.Show("Registro Modificado Exitosamente");
-								LoadDataGrid();
-								DesHabilitar();
-								LimpiarCampos();
+									brl = new CategoriaBRL(categoria);
+									brl.Update();
+									MessageBox.Show("Registro Modificado Exitosamente");
+									LoadDataGrid();
+									DesHabilitar();
+									LimpiarCampos();
+								}
+								catch (Exception ex)
+								{
+
+									MessageBox.Show(ex.Message);
+								}
+
 							}
-							catch (Exception ex)
+							else
 							{
-
-								MessageBox.Show(ex.Message);
+								MessageBox.Show("Ingrese Correctamente el nombre");
 							}
-
 						}
 						else
 						{
-							MessageBox.Show("Ingrese Correctamente el nombre");
+							MessageBox.Show("La categoria ya existe");
 						}
 					}
 					break;

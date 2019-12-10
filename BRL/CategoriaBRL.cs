@@ -26,7 +26,7 @@ namespace BRL
 			get { return dal; }
 			set { dal = value; }
 		}
-		
+
 		public CategoriaBRL()
 		{
 			Dal = new CategoriaDAL();
@@ -58,7 +58,7 @@ namespace BRL
 		{
 			dal = new CategoriaDAL();
 			return dal.SelectBusquedaCategorias(texto);
-		}	
+		}
 		public override void Update()
 		{
 			dal.Update();
@@ -71,6 +71,15 @@ namespace BRL
 		public DataTable SelectCategorias()
 		{
 			return Dal.SelectCategorias();
+		}
+		public DataTable VerificarCategoria(string categoria)
+		{
+			return Dal.VerificarCategoria(categoria);
+		}
+		public DataTable VerificarCategoriaEliminar(int id)
+		{
+			dal = new CategoriaDAL();
+			return dal.VerificarCategoriaEliminar(id);
 		}
 		#endregion
 	}

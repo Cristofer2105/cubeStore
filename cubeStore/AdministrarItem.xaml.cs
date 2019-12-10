@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BRL;
+using System.Data;
 
 namespace cubeStore
 {
@@ -47,30 +48,37 @@ namespace cubeStore
 				txtcodigo.Text = txtcodigo.Text.Trim();
 				txtidItem.Text = txtidItem.Text.Trim();
 				txtpreciobase.Text = txtpreciobase.Text.Trim();
-
-				try
+				brl = new ItemBRL();
+				DataTable dt = brl.VerificarItem(txtcodigo.Text);
+				if (dt.Rows.Count == 0)
 				{
-					//Modificar
-					item= new Item();
-					item.CodigoItem = txtcodigo.Text;
-					item.PrecioBaseItem = double.Parse(txtpreciobase.Text.ToString());
-					item.IdItem = int.Parse(txtidItem.Text.ToString());
-					brl = new ItemBRL(item);
-					brl.Update();
-					MessageBox.Show("Registro Modificado Exitosamente");
-					Items itemss = new Items();
-					txtidItem.Text = "";
-					txtcodigo.Text = "";
-					txtpreciobase.Text = "";
-					this.Close();
-					itemss.Show();
+					try
+					{
+						//Modificar
+						item = new Item();
+						item.CodigoItem = txtcodigo.Text;
+						item.PrecioBaseItem = double.Parse(txtpreciobase.Text.ToString());
+						item.IdItem = int.Parse(txtidItem.Text.ToString());
+						brl = new ItemBRL(item);
+						brl.Update();
+						MessageBox.Show("Registro Modificado Exitosamente");
+						Items itemss = new Items();
+						txtidItem.Text = "";
+						txtcodigo.Text = "";
+						txtpreciobase.Text = "";
+						this.Close();
+						itemss.Show();
+					}
+					catch (Exception ex)
+					{
+
+						MessageBox.Show(ex.Message);
+					}
 				}
-				catch (Exception ex)
+				else
 				{
-
-					MessageBox.Show(ex.Message);
+					MessageBox.Show("El item ya existe");
 				}
-
 			}		
 
 		}

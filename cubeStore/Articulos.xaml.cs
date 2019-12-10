@@ -42,7 +42,8 @@ namespace cubeStore
 				brl = new ArticuloBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
 				dgdDatos.ItemsSource = brl.SelectBusquedaArticulos(txtBuscarArticulo.Text).DefaultView;
-				//dgdDatos.Columns[0].Visibility = Visibility.Hidden;
+				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
+				dgdDatos.Columns[3].Visibility = Visibility.Hidden;
 
 				catBRL = new CategoriaBRL();
 				cbxCategoria.DisplayMemberPath = "nombreCategoria";
@@ -176,31 +177,40 @@ namespace cubeStore
 
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
 		{
-			if (articulo != null&&txtnombreArticulo.Text!="")
+			brl = new ArticuloBRL();
+			DataTable dt = brl.VerificarArticuloEliminar(articulo.IdArticulo);
+			if (dt.Rows.Count == 0)
 			{
-				if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+				if (articulo != null && txtnombreArticulo.Text != "")
 				{
-					//Eliminacion Logica
-					try
+					if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 					{
-						dgdDatos.IsEnabled = true;
-						brl = new ArticuloBRL(articulo);
-						brl.Delete();
-						MessageBox.Show("Eliminado Exitosamente");
-						LoadDataGrid();
-						LimpiarCampos();
-					
-					}
-					catch (Exception ex)
-					{
+						//Eliminacion Logica
+						try
+						{
+							dgdDatos.IsEnabled = true;
+							brl = new ArticuloBRL(articulo);
+							brl.Delete();
+							MessageBox.Show("Eliminado Exitosamente");
+							LoadDataGrid();
+							LimpiarCampos();
 
-						MessageBox.Show(ex.Message);
+						}
+						catch (Exception ex)
+						{
+
+							MessageBox.Show(ex.Message);
+						}
 					}
+				}
+				else
+				{
+					MessageBox.Show("Debe seleccionar un registro de la lista");
 				}
 			}
 			else
 			{
-				MessageBox.Show("Debe seleccionar un registro de la lista");
+				MessageBox.Show("No puede eliminar este Articulo");
 			}
 		}
 
@@ -211,14 +221,14 @@ namespace cubeStore
 				case 1:
 					//Insertar
 					
-					if (txtnombreArticulo.Text == "")
+					if (txtnombreArticulo.Text == "" && txtnombreArticulo.Text.Length<3)
 					{
 						MessageBox.Show("Complete correctamente el formulario");
 					}
 					else
 					{
-							dgdDatos.IsEnabled = false;
-							txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();
+						dgdDatos.IsEnabled = false;
+						txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();
 						brl = new ArticuloBRL();
 						DataTable dt = brl.VerificarArticulo(txtnombreArticulo.Text);
 						if (dt.Rows.Count==0)
@@ -275,37 +285,45 @@ namespace cubeStore
 					else
 					{
 
-					txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();
-				
-						try
+						txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();
+						brl = new ArticuloBRL();
+						DataTable dt = brl.VerificarArticulo(txtnombreArticulo.Text);
+						if (dt.Rows.Count == 0)
 						{
-							//Modificar
-							//categoria = new Categoria(txtnombreCategoria.Text);
-							articulo.NombreArticulo = txtnombreArticulo.Text;
-							dgdDatos.IsEnabled = true;
-							brl = new ArticuloBRL(articulo);
-
-							//Cambiamos imagen
-							if (pathImagen!=pathFotoCarteroServer)
+							try
 							{
-								System.GC.Collect();
-								System.GC.WaitForPendingFinalizers();
-								File.Delete(pathFotoCarteroServer);
-								File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
+								//Modificar
+								//categoria = new Categoria(txtnombreCategoria.Text);
+								articulo.NombreArticulo = txtnombreArticulo.Text;
+								dgdDatos.IsEnabled = true;
+								brl = new ArticuloBRL(articulo);
+
+								//Cambiamos imagen
+								if (pathImagen != pathFotoCarteroServer)
+								{
+									System.GC.Collect();
+									System.GC.WaitForPendingFinalizers();
+									File.Delete(pathFotoCarteroServer);
+									File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
+								}
+
+								brl.Update();
+								MessageBox.Show("Registro Modificado Exitosamente");
+								LoadDataGrid();
+								DesHabilitar();
+								LimpiarCampos();
+								imgArticulo.Source = null;
+
 							}
+							catch (Exception ex)
+							{
 
-							brl.Update();
-							MessageBox.Show("Registro Modificado Exitosamente");
-							LoadDataGrid();
-							DesHabilitar();
-							LimpiarCampos();
-							imgArticulo.Source = null;
-							
+								MessageBox.Show(ex.Message);
+							}
 						}
-						catch (Exception ex)
+						else
 						{
-
-							MessageBox.Show(ex.Message);
+							MessageBox.Show("El Articulo ya existe");
 						}
 
 					}
