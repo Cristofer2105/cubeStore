@@ -67,6 +67,7 @@ namespace cubeStore
 		{
 			btnGuardarAccion.IsEnabled = true;
 			btnCancelar.IsEnabled = true;
+			btnBuscarImagenArtivculo.IsEnabled = true;
 			txtnombreArticulo.IsEnabled = true;
 			cbxCategoria.IsEnabled = true;
 			cbxProvedor.IsEnabled = true;
@@ -80,6 +81,7 @@ namespace cubeStore
 		{
 			btnGuardarAccion.IsEnabled = false;
 			btnCancelar.IsEnabled = false;
+			btnBuscarImagenArtivculo.IsEnabled = false;
 			txtnombreArticulo.Text = string.Empty;
 			txtnombreArticulo.IsEnabled = false;
 			cbxCategoria.IsEnabled = false;
@@ -171,6 +173,7 @@ namespace cubeStore
 			LimpiarCampos();
 			imgArticulo.Source = null;
 			opcion = 0;
+			txtBuscarArticulo.Text = "";
 		}
 
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)

@@ -43,7 +43,7 @@
                         <ComboBox Margin="0 10" materialDesign:HintAssist.Hint="Provedor" IsEnabled="False" x:Name="cbxProvedor" FontSize="15" Height="37"/>
                         <StackPanel Orientation="Horizontal" >
                             <TextBox  IsEnabled="False" materialDesign:HintAssist.Hint="Imagen del Articulo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="15" x:Name="txtnombreArticulo_Copy" Width="266"/>
-                            <Button x:Name="btnBuscarImagenArtivculo" Click="BtnBuscarImagenArtivculo_Click" Background="#004E6F" Content="..." Width="64"/>
+                            <Button IsEnabled="False" x:Name="btnBuscarImagenArtivculo" Click="BtnBuscarImagenArtivculo_Click" Background="#004E6F" Content="..." Width="64"/>
                         </StackPanel>
 
 
