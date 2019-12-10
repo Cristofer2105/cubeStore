@@ -29,6 +29,8 @@ namespace cubeStore
 		Articulo articulo;
 		CategoriaBRL catBRL;
 		ProvedorBRL provBRL;
+		byte opcion=0;
+		string pathImagen = string.Empty,pathFotoCarteroServer=string.Empty;
 		public Articulos()
 		{
 			InitializeComponent();
@@ -40,7 +42,7 @@ namespace cubeStore
 				brl = new ArticuloBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
 				dgdDatos.ItemsSource = brl.SelectBusquedaArticulos(txtBuscarArticulo.Text).DefaultView;
-				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
+				//dgdDatos.Columns[0].Visibility = Visibility.Hidden;
 
 				catBRL = new CategoriaBRL();
 				cbxCategoria.DisplayMemberPath = "nombreCategoria";
@@ -108,9 +110,38 @@ namespace cubeStore
 					articulo = brl.Get(id);
 
 					//Cargar Datos
-					txtnombreArticulo.Text = articulo.NombreArticulo;
-					cbxCategoria.SelectedValue = byte.Parse(articulo.IdCategoria.ToString());
-					cbxProvedor.SelectedValue = int.Parse(articulo.IdProvedor.ToString());
+					if (articulo!=null)
+					{
+						txtnombreArticulo.Text = articulo.NombreArticulo;
+						cbxCategoria.SelectedValue = byte.Parse(articulo.IdCategoria.ToString());
+						cbxProvedor.SelectedValue = int.Parse(articulo.IdProvedor.ToString());
+						try
+						{
+							if ( int.Parse(dataRow.Row.ItemArray[3].ToString())== 1)
+							{
+								imgArticulo.Source = new BitmapImage(new Uri(Config.configpathImagenArticulo + id + ".jpg"));
+								pathImagen = Config.configpathImagenArticulo + id + ".jpg";
+								pathFotoCarteroServer = pathImagen;
+							}
+							else
+							{
+								imgArticulo.Source = new BitmapImage(new Uri(Config.configpathImagenArticulo + "0.jpg"));
+								pathImagen = Config.configpathImagenArticulo + id + "0.jpg";
+								pathFotoCarteroServer = pathImagen;
+
+							}
+
+						}
+						catch (Exception)
+						{
+							imgArticulo.Source = null;
+							pathImagen = string.Empty
+								;
+							MessageBox.Show("No se pudo cargar la imagen comuniquese con el administrador de sistemas");
+
+						}
+					}
+					
 				}
 				catch (Exception ex)
 				{
@@ -128,6 +159,8 @@ namespace cubeStore
 		{
 			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 			Habilitar(2);
+			opcion = 1;
+			imgArticulo.Source = null;
 		}
 
 		private void BtnAgregar_Click(object sender, RoutedEventArgs e)
@@ -136,6 +169,8 @@ namespace cubeStore
 			dgdDatos.IsEnabled = false;
 			Habilitar(1);
 			LimpiarCampos();
+			imgArticulo.Source = null;
+			opcion = 0;
 		}
 
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
@@ -186,22 +221,38 @@ namespace cubeStore
 							try
 							{
 								//Insertar
-								DateTime fecha = DateTime.Now;
-								articulo = new Articulo(txtnombreArticulo.Text, byte.Parse(cbxCategoria.SelectedValue.ToString()), int.Parse(cbxProvedor.SelectedValue.ToString()), fecha);
-								brl = new ArticuloBRL(articulo);
-								brl.Insert();
-
 								
 
-								MessageBox.Show("Registro Exitoso");
-								LoadDataGrid();
-								dgdDatos.IsEnabled = true;
-								DesHabilitar();
+							//cAPTURAMOS EL NOMBRE DE LA IMAGEN A TRAVEZ DEL ID
+								if (imgArticulo.Source!=null)
+								{
+									DateTime fecha = DateTime.Now;
+									articulo = new Articulo(txtnombreArticulo.Text, byte.Parse(cbxCategoria.SelectedValue.ToString()), int.Parse(cbxProvedor.SelectedValue.ToString()), fecha, 1);
+									brl = new ArticuloBRL(articulo);
+									brl.Insert();
+
+									int id = MethodsBRL.GetMaxIDTable("idArticulo", "Articulo");
+
+									File.Copy(pathImagen, Config.configpathImagenArticulo + id + ".jpg");
+
+
+									MessageBox.Show("Registro Exitoso");
+									imgArticulo.Source = null;
+									LoadDataGrid();
+									dgdDatos.IsEnabled = true;
+									DesHabilitar();
+							}
+							else
+							{
+								MessageBox.Show("Elija una imagen por favor");
+							}
+
+								
 							}
 							catch (Exception ex)
 							{
 
-								MessageBox.Show(ex.Message);
+								MessageBox.Show("Error al agregar Articulo comuniquese con el administrador de sistemas ");
 							}
 
 					
@@ -210,7 +261,7 @@ namespace cubeStore
 				break;
 				case 2:
 					//Modificar
-					if (txtnombreArticulo.Text == "")
+					if (txtnombreArticulo.Text == ""&&imgArticulo.Source==null&&articulo==null)
 					{
 						MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 					}
@@ -226,11 +277,23 @@ namespace cubeStore
 							articulo.NombreArticulo = txtnombreArticulo.Text;
 							dgdDatos.IsEnabled = true;
 							brl = new ArticuloBRL(articulo);
+
+							//Cambiamos imagen
+							if (pathImagen!=pathFotoCarteroServer)
+							{
+								System.GC.Collect();
+								System.GC.WaitForPendingFinalizers();
+								File.Delete(pathFotoCarteroServer);
+								File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
+							}
+
 							brl.Update();
 							MessageBox.Show("Registro Modificado Exitosamente");
 							LoadDataGrid();
 							DesHabilitar();
 							LimpiarCampos();
+							imgArticulo.Source = null;
+							
 						}
 						catch (Exception ex)
 						{
@@ -258,6 +321,18 @@ namespace cubeStore
 			else
 			{
 				LoadDataGrid();
+			}
+		}
+
+		private void BtnBuscarImagenArtivculo_Click(object sender, RoutedEventArgs e)
+		{
+			OpenFileDialog opd = new OpenFileDialog();
+			opd.Filter = "Archivos de Imagenes|*.jpg";
+			
+			if (opd.ShowDialog()==true)
+			{
+				imgArticulo.Source = new BitmapImage(new Uri(opd.FileName));
+				pathImagen = opd.FileName;
 			}
 		}
 	}

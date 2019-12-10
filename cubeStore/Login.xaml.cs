@@ -71,8 +71,11 @@ namespace cubeStore
 							Sesion.primerapellido = dt.Rows[0][5].ToString();
 							Sesion.segundoapellido = dt.Rows[0][6].ToString();
 							Sesion.contrasenia = txtContrasenia.Password;
-							//Iniciamos variables de configuracion
 
+							//Iniciamos variables de configuracion
+							ConfigBRL configBRL = new ConfigBRL();
+							DataTable dtConfig = configBRL.Select();
+							Config.configpathImagenArticulo = dtConfig.Rows[0][0].ToString();
 							if (dt.Rows[0][2].ToString() == "Administrador")
 							{
 								//Insertar session

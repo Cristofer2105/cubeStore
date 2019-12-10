@@ -50,7 +50,7 @@ namespace DAL
 
 		public override void Insert()
 		{
-			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro)";
+			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro,foto) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro,@foto)";
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert de un Articulo", DateTime.Now));
@@ -60,6 +60,7 @@ namespace DAL
 				cmd.Parameters.AddWithValue("@idCategoria", art.IdCategoria);
 				cmd.Parameters.AddWithValue("@idProvedor", art.IdProvedor);
 				cmd.Parameters.AddWithValue("@fechaHoraRegistro", art.FechaHoraRegistro);			
+				cmd.Parameters.AddWithValue("@foto", art.Foto);
 				Methods.ExecuteBasicCommand(cmd);
 
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Articulo: {1}, Usuario:{2}", DateTime.Now, art.NombreArticulo, Sesion.usuarioSesion));
@@ -95,7 +96,7 @@ namespace DAL
 
 		public override void Update()
 		{
-			string query = "UPDATE Articulo SET nombreArticulo=@nombreArticulo,fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP, idCategoria=@idCategoria,idProvedor=@idProvedor WHERE idArticulo = @idArticulo";
+			string query = "UPDATE Articulo SET nombreArticulo=@nombreArticulo,fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP, idCategoria=@idCategoria,idProvedor=@idProvedor,foto=1 WHERE idArticulo = @idArticulo";
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de un Articulo", DateTime.Now));
@@ -118,7 +119,7 @@ namespace DAL
 			Articulo res = null;
 			SqlCommand cmd = null;
 			SqlDataReader dr = null;
-			string query = "SELECT idArticulo,nombreArticulo,estadoArticulo,fechaHoraActualizacionArticulo,idCategoria,idProvedor,fechaHoraRegistro FROM Articulo WHERE idArticulo=@idArticulo";
+			string query = "SELECT idArticulo,nombreArticulo,estadoArticulo,fechaHoraActualizacionArticulo,idCategoria,idProvedor,fechaHoraRegistro,foto FROM Articulo WHERE idArticulo=@idArticulo";
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Get de un Articulo", DateTime.Now));
@@ -128,7 +129,7 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Conseguido, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 				while (dr.Read())
 				{
-					res = new Articulo(int.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()), byte.Parse(dr[4].ToString()), int.Parse(dr[5].ToString()), DateTime.Parse(dr[6].ToString()));
+					res = new Articulo(int.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()), byte.Parse(dr[4].ToString()), int.Parse(dr[5].ToString()), DateTime.Parse(dr[6].ToString()),byte.Parse(dr[7].ToString()));
 				}
 			}
 			catch (Exception ex)

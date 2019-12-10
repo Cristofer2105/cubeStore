@@ -10,7 +10,7 @@
   <Class Name="BRL.CategoriaBRL">
     <Position X="0.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQgBEAAIAQAAABAAAAAAAAAAQEAAAAAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAQgBEAAIAQIAABAAAAAAAAAAQEAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>CategoriaBRL.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -25,21 +25,21 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAQgAEAAIAAAAABAAAAAAAAAgAEAAIAAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAQgAEAAIAAAAABAAAAAAAAAgAEABIAAAAAAQAAAAAA=</HashCode>
       <FileName>ArticuloBRL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BRL.ProvedorBRL">
     <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQgAEAAIAAAAABAgAAAAAAAAAEAAEAAEABAQAAAAAA=</HashCode>
+      <HashCode>AAQgAEgAIAAAAABAgAAAAAAAAAEAAEAAEABAQAAAAAA=</HashCode>
       <FileName>ProvedorBRL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BRL.ItemBRL">
     <Position X="5.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAUgAEAAIAAAAABAAAAAAAAAAIEAAACAAAAAQAAAIAA=</HashCode>
+      <HashCode>AAUgAEAAIBAAAERAAAAAAAAAAIEAAACAAAAAQAAAJAQ=</HashCode>
       <FileName>ItemBRL.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -53,8 +53,15 @@
   <Class Name="BRL.VentaBRL">
     <Position X="3.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQgCEAAIAAAAABAAAAAEAAAIAEAAKCBACAAQAAgARA=</HashCode>
       <FileName>VentaBRL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BRL.ConfigBRL">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConfigBRL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

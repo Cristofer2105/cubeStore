@@ -3,7 +3,7 @@
   <Class Name="DAL.Methods">
     <Position X="8.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAgAAAAEAAAAAAAAABgAAAAAAAEAAAA=</HashCode>
+      <HashCode>AQAEAAAAAAIAAAgAAAAEAgAAAAAAABgAAIAAABEAAAA=</HashCode>
       <FileName>Methods.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,28 +17,28 @@
   <Class Name="DAL.CategoriaDAL">
     <Position X="0.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQABEAAAAQAAABAAAAAAAAAAQEAAAAAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAQABEAAAAQIAABAAAAAAAAAAQEAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>CategoriaDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DAL.ArticuloDAL">
     <Position X="3.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAEAAAAAAAABAAAAAAAAAgAEAAIAAAAAAQAAAAAA=</HashCode>
+      <HashCode>AAQAAEAAAAAAAABAAAAAAAAAgAEABIAAAAAAQAAAAAA=</HashCode>
       <FileName>ArticuloDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DAL.UsuarioDal">
     <Position X="6.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQBAEAAAAQAAABAAAAAAAAAAAEAABAAAAARQAAAAQA=</HashCode>
+      <HashCode>BAQBBEAAAAQAAABAAAAAAAAAAAEAAhAAAAARQAAAAQA=</HashCode>
       <FileName>UsuarioDal.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DAL.ItemDAL">
     <Position X="3.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAUAAEAAAAAAAABAAAAAAAAAAAEAAICAAAAAQAAAIAA=</HashCode>
+      <HashCode>AAUAAEAAABAAAERAAAAAAAAAAAEAAICAAAAAQAAAJAQ=</HashCode>
       <FileName>ItemDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -52,8 +52,15 @@
   <Class Name="DAL.VentaDAL">
     <Position X="9.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABQACEAAAAAAAABAAAAAEAAAIAEAAKCBACAAQAAgARA=</HashCode>
       <FileName>VentaDAL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAL.ConfigDAL">
+    <Position X="5.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConfigDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

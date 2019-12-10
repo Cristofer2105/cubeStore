@@ -49,6 +49,7 @@
     <Compile Include="ArticuloDAL.cs" />
     <Compile Include="CategoriaDAL.cs" />
     <Compile Include="ClienteDAL.cs" />
+    <Compile Include="ConfigDAL.cs" />
     <Compile Include="DBcubestoreDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

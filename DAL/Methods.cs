@@ -39,7 +39,23 @@ namespace DAL
 			
 			return res;
 		}
+		public static int GetMaxIDTable(string id,string tabla)
+		{
+			int res = -1;
+			string query = "SELECT MAX("+id+") FROM " + tabla;
+			try
+			{
+				SqlCommand cmd = CreateBasicCommand(query);
+				res = int.Parse(ExecuteScalarCommand(cmd));
+			}
+			catch (Exception)
+			{
 
+				throw;
+			}
+
+			return res;
+		}
 		#region Creacion de SqlCommanmd
 		/// <summary>
 		/// Crea un sqlCommand y relaciona a una conexion
