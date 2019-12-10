@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Common;
@@ -172,6 +173,16 @@ namespace DAL
 		}
 		public DataTable Login(string usuario, string contrasenia)
 		{
+			TraceSource dataSource = new TraceSource("DataSource");
+			foreach (TraceListener listener in dataSource.Listeners)
+			{
+				listener.WriteLine("DataSource");
+			}
+			TraceSource errorSource = new TraceSource("ErrorSource");
+			foreach (TraceListener listener in errorSource.Listeners)
+			{
+				listener.WriteLine("Errors");
+			}
 			DataTable dt = new DataTable();
 			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
 			try

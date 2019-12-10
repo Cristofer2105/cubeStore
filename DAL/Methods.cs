@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using System.Diagnostics;
 
 namespace DAL
 {
@@ -15,6 +16,8 @@ namespace DAL
 		/// Cadena de conexion obtenida del app config
 		/// </summary>
 		private static string connectionString = ConfigurationManager.ConnectionStrings["BDDConectionStrings"].ConnectionString;
+		public static TraceSource dataSource = new TraceSource("DataSource");
+		public static TraceSource errorSource = new TraceSource("ErrorSource");
 
 		public static SqlConnection GetConnection()
 		{
@@ -248,6 +251,9 @@ namespace DAL
 			return res;
 		}
 
+		#endregion
+
+		#region log
 		#endregion
 	}
 }

@@ -165,5 +165,24 @@ namespace DAL
 			return res;
 		}
 		
+		public DataTable VerificarArticulo(string articulo)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT * FROM Articulo WHERE nombreArticulo=@nombreArticulo";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@nombreArticulo", articulo);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
+
 	}
 }

@@ -137,8 +137,7 @@ namespace cubeStore
 						catch (Exception)
 						{
 							imgArticulo.Source = null;
-							pathImagen = string.Empty
-								;
+							pathImagen = string.Empty;
 							MessageBox.Show("No se pudo cargar la imagen comuniquese con el administrador de sistemas");
 
 						}
@@ -162,7 +161,6 @@ namespace cubeStore
 			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 			Habilitar(2);
 			opcion = 1;
-			imgArticulo.Source = null;
 		}
 
 		private void BtnAgregar_Click(object sender, RoutedEventArgs e)
@@ -212,22 +210,24 @@ namespace cubeStore
 			{
 				case 1:
 					//Insertar
+					
 					if (txtnombreArticulo.Text == "")
 					{
-						MessageBox.Show("Debe completar todos los campos del formulario");
+						MessageBox.Show("Complete correctamente el formulario");
 					}
 					else
 					{
-						dgdDatos.IsEnabled = false;
-						txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();
-						
+							dgdDatos.IsEnabled = false;
+							txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();
+						brl = new ArticuloBRL();
+						DataTable dt = brl.VerificarArticulo(txtnombreArticulo.Text);
+						if (dt.Rows.Count==0)
+						{
 							try
 							{
 								//Insertar
-								
-
-							//cAPTURAMOS EL NOMBRE DE LA IMAGEN A TRAVEZ DEL ID
-								if (imgArticulo.Source!=null)
+								//CAPTURAMOS EL NOMBRE DE LA IMAGEN A TRAVEZ DEL ID
+								if (imgArticulo.Source != null)
 								{
 									DateTime fecha = DateTime.Now;
 									articulo = new Articulo(txtnombreArticulo.Text, byte.Parse(cbxCategoria.SelectedValue.ToString()), int.Parse(cbxProvedor.SelectedValue.ToString()), fecha, 1);
@@ -244,21 +244,25 @@ namespace cubeStore
 									LoadDataGrid();
 									dgdDatos.IsEnabled = true;
 									DesHabilitar();
-							}
-							else
-							{
-								MessageBox.Show("Elija una imagen por favor");
-							}
+								}
+								else
+								{
+									MessageBox.Show("Elija una imagen por favor");
+								}
 
-								
+
 							}
 							catch (Exception ex)
 							{
 
 								MessageBox.Show("Error al agregar Articulo comuniquese con el administrador de sistemas ");
 							}
-
-					
+						}
+						else
+						{
+							MessageBox.Show("El Articulo ya existe");
+						}	
+						
 						
 					}
 				break;
