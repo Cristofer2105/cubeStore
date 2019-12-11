@@ -139,6 +139,21 @@
     <Compile Include="Provedores.xaml.cs">
       <DependentUpon>Provedores.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Reportes.xaml.cs">
+      <DependentUpon>Reportes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteVentas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVentas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReporteVentasEmpleados.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVentasEmpleados.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RestablecerContraseña.xaml.cs">
       <DependentUpon>RestablecerContraseña.xaml</DependentUpon>
     </Compile>
@@ -147,6 +162,12 @@
     </Compile>
     <Compile Include="Vender.xaml.cs">
       <DependentUpon>Vender.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VerReporteEmpleados.xaml.cs">
+      <DependentUpon>VerReporteEmpleados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VerReporteVentas.xaml.cs">
+      <DependentUpon>VerReporteVentas.xaml</DependentUpon>
     </Compile>
     <Compile Include="VistaReporteRercibo.xaml.cs">
       <DependentUpon>VistaReporteRercibo.xaml</DependentUpon>
@@ -253,6 +274,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Reportes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RestablecerContraseña.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -262,6 +287,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vender.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VerReporteEmpleados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VerReporteVentas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -295,6 +328,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReporteVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteVentas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReporteVentasEmpleados.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteVentasEmpleados.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -326,6 +367,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{5d3833a6-e631-49a9-b7ec-a21d8f5137f3}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{96c1e129-2427-4323-a25f-f3ce59e474b2}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -414,8 +459,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reportes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

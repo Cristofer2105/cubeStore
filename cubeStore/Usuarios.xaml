@@ -18,7 +18,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}"  x:Name="btnVolver" Click="BtnVolver_Click">
                     <materialDesign:PackIcon Kind="ArrowLeft" Width="30" Height="30"/>
                 </Button>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}"  x:Name="btnMenuUser">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Click="BtnMenuUser_Click" x:Name="btnMenuUser">
                     <materialDesign:PackIcon Kind="Account" Width="30" Height="30"/>
                 </Button>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" x:Name="btnSalir" Click="BtnSalir_Click">

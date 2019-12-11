@@ -398,5 +398,12 @@ namespace cubeStore
 				LoadDataGrid();
 			}
 		}
+
+		private void BtnMenuUser_Click(object sender, RoutedEventArgs e)
+		{
+			PerfilAdministrador perfilAdministrador = new PerfilAdministrador();
+			this.Close();
+			perfilAdministrador.Show();
+		}
 	}
 }

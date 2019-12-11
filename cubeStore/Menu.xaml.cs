@@ -67,5 +67,12 @@ namespace cubeStore
 			MenuVentas menuVentas = new MenuVentas();
 			menuVentas.ShowDialog();
 		}
+
+		private void BtnReportes_Click(object sender, RoutedEventArgs e)
+		{
+			Reportes reportes = new Reportes();
+			this.Close();
+			reportes.Show();
+		}
 	}
 }

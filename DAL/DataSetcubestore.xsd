@@ -43,7 +43,7 @@ SELECT idArticulo, nombreArticulo, estadoArticulo, fechaHoraActualizacionArticul
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT idArticulo, nombreArticulo, estadoArticulo, fechaHoraActualizacionArticulo, idCategoria, idProvedor, fechaHoraRegistro, foto FROM dbo.Articulo</CommandText>
+                    <CommandText>SELECT idArticulo, nombreArticulo, estadoArticulo, fechaHoraActualizacionArticulo, idCategoria, idProvedor, fechaHoraRegistro, foto FROM Articulo</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -809,6 +809,55 @@ SELECT idVenta, idItem, precioUnitario FROM VentaItem WHERE (idItem = @idItem) A
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmpleadoListReportTableAdapter" GeneratorDataComponentClassName="EmpleadoListReportTableAdapter" Name="EmpleadoListReport" UserDataComponentName="EmpleadoListReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DBcubestoreConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Empleado.nombres, Empleado.primerApellido, Empleado.segundoApellido, Empleado.usuario, Empleado.rolEmpleado, Venta.total, Venta.fechaRegistro
+FROM            Empleado INNER JOIN
+                         Venta ON Empleado.idEmpleado = Venta.idEmpleado
+WHERE        (Empleado.estadoEmpleado = 1) AND (Venta.estadoVenta = 1)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nombres" DataSetColumn="nombres" />
+              <Mapping SourceColumn="primerApellido" DataSetColumn="primerApellido" />
+              <Mapping SourceColumn="segundoApellido" DataSetColumn="segundoApellido" />
+              <Mapping SourceColumn="usuario" DataSetColumn="usuario" />
+              <Mapping SourceColumn="rolEmpleado" DataSetColumn="rolEmpleado" />
+              <Mapping SourceColumn="total" DataSetColumn="total" />
+              <Mapping SourceColumn="fechaRegistro" DataSetColumn="fechaRegistro" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VentasListReportTableAdapter" GeneratorDataComponentClassName="VentasListReportTableAdapter" Name="VentasListReport" UserDataComponentName="VentasListReportTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DBcubestoreConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Articulo.nombreArticulo, Item.codigoItem, VentaItem.precioUnitario, Venta.fechaRegistro
+FROM            Venta INNER JOIN
+                         VentaItem ON Venta.idVenta = VentaItem.idVenta INNER JOIN
+                         Item ON VentaItem.idItem = Item.idItem INNER JOIN
+                         Articulo ON Item.idArticulo = Articulo.idArticulo
+WHERE        (Venta.estadoVenta = 1) AND (Item.estadoItem = 3)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nombreArticulo" DataSetColumn="nombreArticulo" />
+              <Mapping SourceColumn="codigoItem" DataSetColumn="codigoItem" />
+              <Mapping SourceColumn="precioUnitario" DataSetColumn="precioUnitario" />
+              <Mapping SourceColumn="fechaRegistro" DataSetColumn="fechaRegistro" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -1047,6 +1096,71 @@ SELECT idVenta, idItem, precioUnitario FROM VentaItem WHERE (idItem = @idItem) A
               <xs:element name="idVenta" msprop:Generator_ColumnVarNameInTable="columnidVenta" msprop:Generator_ColumnPropNameInRow="idVenta" msprop:Generator_ColumnPropNameInTable="idVentaColumn" msprop:Generator_UserColumnName="idVenta" type="xs:int" />
               <xs:element name="idItem" msprop:Generator_ColumnVarNameInTable="columnidItem" msprop:Generator_ColumnPropNameInRow="idItem" msprop:Generator_ColumnPropNameInTable="idItemColumn" msprop:Generator_UserColumnName="idItem" type="xs:int" />
               <xs:element name="precioUnitario" msprop:Generator_ColumnVarNameInTable="columnprecioUnitario" msprop:Generator_ColumnPropNameInRow="precioUnitario" msprop:Generator_ColumnPropNameInTable="precioUnitarioColumn" msprop:Generator_UserColumnName="precioUnitario" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmpleadoListReport" msprop:Generator_TableClassName="EmpleadoListReportDataTable" msprop:Generator_TableVarName="tableEmpleadoListReport" msprop:Generator_RowChangedName="EmpleadoListReportRowChanged" msprop:Generator_TablePropName="EmpleadoListReport" msprop:Generator_RowDeletingName="EmpleadoListReportRowDeleting" msprop:Generator_RowChangingName="EmpleadoListReportRowChanging" msprop:Generator_RowEvHandlerName="EmpleadoListReportRowChangeEventHandler" msprop:Generator_RowDeletedName="EmpleadoListReportRowDeleted" msprop:Generator_RowClassName="EmpleadoListReportRow" msprop:Generator_UserTableName="EmpleadoListReport" msprop:Generator_RowEvArgName="EmpleadoListReportRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombres" msprop:Generator_ColumnVarNameInTable="columnnombres" msprop:Generator_ColumnPropNameInRow="nombres" msprop:Generator_ColumnPropNameInTable="nombresColumn" msprop:Generator_UserColumnName="nombres">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="primerApellido" msprop:Generator_ColumnVarNameInTable="columnprimerApellido" msprop:Generator_ColumnPropNameInRow="primerApellido" msprop:Generator_ColumnPropNameInTable="primerApellidoColumn" msprop:Generator_UserColumnName="primerApellido" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="segundoApellido" msprop:Generator_ColumnVarNameInTable="columnsegundoApellido" msprop:Generator_ColumnPropNameInRow="segundoApellido" msprop:Generator_ColumnPropNameInTable="segundoApellidoColumn" msprop:Generator_UserColumnName="segundoApellido" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="usuario" msprop:Generator_ColumnVarNameInTable="columnusuario" msprop:Generator_ColumnPropNameInRow="usuario" msprop:Generator_ColumnPropNameInTable="usuarioColumn" msprop:Generator_UserColumnName="usuario">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="rolEmpleado" msprop:Generator_ColumnVarNameInTable="columnrolEmpleado" msprop:Generator_ColumnPropNameInRow="rolEmpleado" msprop:Generator_ColumnPropNameInTable="rolEmpleadoColumn" msprop:Generator_UserColumnName="rolEmpleado">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="total" msprop:Generator_ColumnVarNameInTable="columntotal" msprop:Generator_ColumnPropNameInRow="total" msprop:Generator_ColumnPropNameInTable="totalColumn" msprop:Generator_UserColumnName="total" type="xs:decimal" />
+              <xs:element name="fechaRegistro" msprop:Generator_ColumnVarNameInTable="columnfechaRegistro" msprop:Generator_ColumnPropNameInRow="fechaRegistro" msprop:Generator_ColumnPropNameInTable="fechaRegistroColumn" msprop:Generator_UserColumnName="fechaRegistro" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VentasListReport" msprop:Generator_TableClassName="VentasListReportDataTable" msprop:Generator_TableVarName="tableVentasListReport" msprop:Generator_RowChangedName="VentasListReportRowChanged" msprop:Generator_TablePropName="VentasListReport" msprop:Generator_RowDeletingName="VentasListReportRowDeleting" msprop:Generator_RowChangingName="VentasListReportRowChanging" msprop:Generator_RowEvHandlerName="VentasListReportRowChangeEventHandler" msprop:Generator_RowDeletedName="VentasListReportRowDeleted" msprop:Generator_RowClassName="VentasListReportRow" msprop:Generator_UserTableName="VentasListReport" msprop:Generator_RowEvArgName="VentasListReportRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nombreArticulo" msprop:Generator_ColumnVarNameInTable="columnnombreArticulo" msprop:Generator_ColumnPropNameInRow="nombreArticulo" msprop:Generator_ColumnPropNameInTable="nombreArticuloColumn" msprop:Generator_UserColumnName="nombreArticulo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="70" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="codigoItem" msprop:Generator_ColumnVarNameInTable="columncodigoItem" msprop:Generator_ColumnPropNameInRow="codigoItem" msprop:Generator_ColumnPropNameInTable="codigoItemColumn" msprop:Generator_UserColumnName="codigoItem" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="60" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="precioUnitario" msprop:Generator_ColumnVarNameInTable="columnprecioUnitario" msprop:Generator_ColumnPropNameInRow="precioUnitario" msprop:Generator_ColumnPropNameInTable="precioUnitarioColumn" msprop:Generator_UserColumnName="precioUnitario" type="xs:decimal" />
+              <xs:element name="fechaRegistro" msprop:Generator_ColumnVarNameInTable="columnfechaRegistro" msprop:Generator_ColumnPropNameInRow="fechaRegistro" msprop:Generator_ColumnPropNameInTable="fechaRegistroColumn" msprop:Generator_UserColumnName="fechaRegistro" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -50,11 +50,15 @@
     <Compile Include="CategoriaDAL.cs" />
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="ConfigDAL.cs" />
+    <Compile Include="DataSetcubestore.cs">
+      <DependentUpon>DataSetcubestore.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetcubestore.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetcubestore.xsd</DependentUpon>
     </Compile>
+    <Compile Include="EmpleadoListDal.cs" />
     <Compile Include="ItemDAL.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +71,7 @@
     <Compile Include="SesionDAL.cs" />
     <Compile Include="UsuarioDal.cs" />
     <Compile Include="VentaDAL.cs" />
+    <Compile Include="VentasListDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

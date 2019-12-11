@@ -49,6 +49,7 @@
     <Compile Include="CategoriaBRL.cs" />
     <Compile Include="ClienteBRL.cs" />
     <Compile Include="ConfigBRL.cs" />
+    <Compile Include="EmpleadoListBRL.cs" />
     <Compile Include="ItemBRL.cs" />
     <Compile Include="MethodsBRL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="SessionBRL.cs" />
     <Compile Include="UsuarioBRL.cs" />
     <Compile Include="VentaBRL.cs" />
+    <Compile Include="VentasListBRL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

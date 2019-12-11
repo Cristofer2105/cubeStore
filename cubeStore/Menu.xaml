@@ -61,7 +61,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="30" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Height="180">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}"  Click="BtnReportes_Click" x:Name="btnReportes" Height="180">
                     <Grid Width="180">
                         <materialDesign:PackIcon Kind="Paper" Width="40" Height="40" IsEnabled="False" Margin="58,46,0,0" RenderTransformOrigin="0.325,0.1"/>
                         <TextBlock Text="Reportes" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="18" Margin="41,86,50,54" Width="89" Height="32" IsEnabled="False"/>
