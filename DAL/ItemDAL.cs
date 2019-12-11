@@ -8,6 +8,9 @@ using Common;
 
 namespace DAL
 {
+	/// <summary>
+	/// Clase ItemDAL
+	/// </summary>
 	public class ItemDAL : AbstractDAL
 	{
 		#region Atributos Propiedades y Constructores de clase
@@ -29,6 +32,9 @@ namespace DAL
 
 		#endregion
 		#region metodos de la clase
+		/// <summary>
+		/// Metodo Delete ItemDAL
+		/// </summary>
 		public override void Delete()
 		{
 			string query = "UPDATE Item SET estadoItem=0 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
@@ -48,7 +54,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-
+		/// <summary>
+		/// Metodo Insert ItemDAL
+		/// </summary>
 		public override void Insert()
 		{
 			string query = "INSERT INTO Item(codigoItem,idArticulo,precioBase,fechaRegistro) VALUES(@codigoItem,@idArticulo,@precioBase,@fechaRegistro)";
@@ -70,7 +78,10 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-
+		/// <summary>
+		/// Metodo Select ItemDAL
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public override DataTable Select()
 		{
 			DataTable res = new DataTable();
@@ -80,7 +91,6 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de Items", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)
@@ -89,7 +99,9 @@ namespace DAL
 			}
 			return res;
 		}
-
+		/// <summary>
+		/// Metodo Update ItemDAL
+		/// </summary>
 		public override void Update()
 		{
 			string query = "UPDATE Item SET codigoItem=@codigoItem,precioBase=@precioBase WHERE idItem = @idItem";
@@ -108,6 +120,11 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo Get ItemDAL
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Item</returns>
 		public Item Get(int id)
 		{
 			Item res = null;
@@ -139,6 +156,11 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo SelectArticulos ItemDAL
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectArticulos(string texto)
 		{
 			DataTable res = new DataTable();
@@ -151,7 +173,6 @@ namespace DAL
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%"+texto+"%");
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)
@@ -160,6 +181,11 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo SelectItems
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectItems(string texto)
 		{
 			DataTable res = new DataTable();
@@ -172,7 +198,6 @@ namespace DAL
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)
@@ -181,6 +206,10 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo SelectItemsComprar
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable SelectItemsComprar()
 		{
 			DataTable res = new DataTable();
@@ -191,7 +220,6 @@ namespace DAL
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)
@@ -200,6 +228,9 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo UpdateEstadoParaComprar
+		/// </summary>
 		public void UpdateEstadoParaComprar()
 		{
 
@@ -219,6 +250,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo UpdateEstadoQuitarComprar
+		/// </summary>
 		public void UpdateEstadoQuitarCompra()
 		{
 			string query = "UPDATE Item SET estadoItem=1 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
@@ -237,6 +271,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo UpdateEstadoNormalItem
+		/// </summary>
 		public void UpdateEstadoNormalItem()
 		{
 			string query = "UPDATE Item SET estadoItem=1 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE estadoItem = 2";
@@ -253,6 +290,10 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo TotalVenta
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable TotalVenta()
 		{
 			DataTable res = new DataTable();
@@ -262,7 +303,6 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Total Venta de Items", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Total Venta Conseguido, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 			}
 			catch (Exception ex)
 			{
@@ -270,7 +310,10 @@ namespace DAL
 			}
 			return res;
 		}
-	
+		/// <summary>
+		/// Metodo CantidadVenta ItemDAL
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable CantidadVenta()
 		{
 			DataTable res = new DataTable();
@@ -290,6 +333,11 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo VerificarItem ItemDAL
+		/// </summary>
+		/// <param name="item"></param>
+		/// <returns>DataTable</returns>
 		public DataTable VerificarItem(string item)
 		{
 			DataTable dt = new DataTable();
@@ -308,8 +356,6 @@ namespace DAL
 			}
 			return dt;
 		}
-
-
 		#endregion
 	}
 }

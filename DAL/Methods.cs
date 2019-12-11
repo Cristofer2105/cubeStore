@@ -10,6 +10,9 @@ using System.Diagnostics;
 
 namespace DAL
 {
+	/// <summary>
+	/// Clase Methods DAL
+	/// </summary>
 	public sealed class Methods
 	{
 		/// <summary>
@@ -18,13 +21,20 @@ namespace DAL
 		private static string connectionString = ConfigurationManager.ConnectionStrings["BDDConectionStrings"].ConnectionString;
 		public static TraceSource dataSource = new TraceSource("DataSource");
 		public static TraceSource errorSource = new TraceSource("ErrorSource");
-
+		/// <summary>
+		/// Metodo Get Connection Methods
+		/// </summary>
+		/// <returns>SqlConnection</returns>
 		public static SqlConnection GetConnection()
 		{
 			SqlConnection connection = new SqlConnection(connectionString);
 			return connection;
 		}
-
+		/// <summary>
+		/// Metodo GetCurrentValueIDTable
+		/// </summary>
+		/// <param name="tabla"></param>
+		/// <returns>int</returns>
 		public static int GetCurrentValueIDTable(string tabla)
 		{
 			int res = -1;
@@ -42,6 +52,12 @@ namespace DAL
 			
 			return res;
 		}
+		/// <summary>
+		/// Metodo GetMaxIDTable
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="tabla"></param>
+		/// <returns>int</returns>
 		public static int GetMaxIDTable(string id,string tabla)
 		{
 			int res = -1;

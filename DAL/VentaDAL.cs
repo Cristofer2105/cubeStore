@@ -76,7 +76,7 @@ namespace DAL
 			throw new NotImplementedException();
 		}
 		/// <summary>
-		/// Metodo Insert Ventas con transacciones
+		/// Metodo Insert Venta con transacciones
 		/// </summary>
 		public void InsertVentas()
 		{
@@ -142,6 +142,13 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo Anular Venta 
+		/// </summary>
+		/// <param name="venta"></param>
+		/// <param name="garantia"></param>
+		/// <param name="items"></param>
+		/// <param name="ventaAnulada"></param>
 		public void AnularVenta(Venta venta, Garantia garantia, List<Item> items, VentaAnulada ventaAnulada)
 		{
 			SqlConnection connection = Methods.GetConnection();
@@ -203,6 +210,10 @@ namespace DAL
 
 
 		}
+		/// <summary>
+		/// Metodo Select Ventas
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public override DataTable Select()
 		{
 			DataTable res = new DataTable();
@@ -220,6 +231,11 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo SelectItemsAnular
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectIdItemsAnular(int id)
 		{
 			DataTable res = new DataTable();
@@ -238,7 +254,11 @@ namespace DAL
 			}
 			return res;
 		}
-
+		/// <summary>
+		/// Metodo SelectBusquedaVentas
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectBusquedaVenta(string texto)
 		{
 			DataTable res = new DataTable();
@@ -260,13 +280,17 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo SelectUltimoIdVenta
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable SelectMaxIdVenta()
 		{
 			DataTable res = new DataTable();
 			string query = "SELECT MAX(idVenta)  FROM Venta";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de Venta", DateTime.Now));
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select Max id de Venta", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Seleccionado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
@@ -278,7 +302,11 @@ namespace DAL
 			}
 			return res;
 		}
-		
+		/// <summary>
+		/// Metodo Get VentaDAL
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Venta</returns>
 		public Venta Get(int id)
 		{
 			Venta res = null;
@@ -308,11 +336,16 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo Update VentaDAL
+		/// </summary>
 		public override void Update()
 		{
 			throw new NotImplementedException();
 		}
-
+		/// <summary>
+		/// Metodo Insert VentaDAL
+		/// </summary>
 		public override void Insert()
 		{
 			throw new NotImplementedException();

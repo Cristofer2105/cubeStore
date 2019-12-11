@@ -9,6 +9,9 @@ using Common;
 
 namespace DAL
 {
+	/// <summary>
+	/// Clase UsuarioDAL
+	/// </summary>
 	public class UsuarioDal : AbstractDAL
 	{
 		private Usuario user;
@@ -28,6 +31,9 @@ namespace DAL
 			this.user = user;
 		}
 		#region metodos de la clase
+		/// <summary>
+		/// Metodo Delete UsuarioDAL
+		/// </summary>
 		public override void Delete()
 		{
 			string query = "UPDATE Empleado SET estadoEmpleado=0 WHERE idEmpleado = @idEmpleado";
@@ -44,7 +50,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-
+		/// <summary>
+		/// Metodo Insert UsuarioDAL
+		/// </summary>
 		public override void Insert()
 		{
 			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,usuario,contrasenia,rolEmpleado,email,fechaRegistro) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@usuario,HASHBYTES('md5',@contrasenia),@rolEmpleado,@email,@fechaRegistro)";
@@ -69,7 +77,10 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-
+		/// <summary>
+		/// Metodo Select UsuarioDAL
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public override DataTable Select()
 		{
 			DataTable res = new DataTable();
@@ -87,7 +98,9 @@ namespace DAL
 			}
 			return res;
 		}
-
+		/// <summary>
+		/// Metodo Update UsuarioDAL
+		/// </summary>
 		public override void Update()
 		{
 			string query = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,email=@email WHERE idEmpleado=@idEmpleado";
@@ -109,7 +122,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-
+		/// <summary>
+		/// Metodo UpdateDatosPerfil
+		/// </summary>
 		public void UpdateDatosPerfil()
 		{
 			string query = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,contrasenia=HASHBYTES('md5',@contrasenia) WHERE idEmpleado=@idEmpleado";
@@ -132,6 +147,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo UpdateContrasenias
+		/// </summary>
 		public void UpdateContrasenia()
 		{
 			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=0 WHERE usuario=@usuario";
@@ -151,6 +169,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo UpdateContraseniaRestablecida
+		/// </summary>
 		public void UpdateContraseniaRestablecida()
 		{
 			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=1 WHERE usuario=@usuario";
@@ -171,18 +192,14 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo Login Usuario DAL
+		/// </summary>
+		/// <param name="usuario"></param>
+		/// <param name="contrasenia"></param>
+		/// <returns>DataTable</returns>
 		public DataTable Login(string usuario, string contrasenia)
 		{
-			TraceSource dataSource = new TraceSource("DataSource");
-			foreach (TraceListener listener in dataSource.Listeners)
-			{
-				listener.WriteLine("DataSource");
-			}
-			TraceSource errorSource = new TraceSource("ErrorSource");
-			foreach (TraceListener listener in errorSource.Listeners)
-			{
-				listener.WriteLine("Errors");
-			}
 			DataTable dt = new DataTable();
 			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
 			try
@@ -203,6 +220,12 @@ namespace DAL
 			}
 			return dt;
 		}
+		/// <summary>
+		/// Metodo Verificar Usuarios
+		/// </summary>
+		/// <param name="usuario"></param>
+		/// <param name="correo"></param>
+		/// <returns>DataTable</returns>
 		public DataTable VerificarUser(string usuario, string correo)
 		{
 			DataTable dt = new DataTable();
@@ -225,6 +248,11 @@ namespace DAL
 			}
 			return dt;
 		}
+		/// <summary>
+		/// Metodo RestablecerContrasenia UsuarioDAL
+		/// </summary>
+		/// <param name="usuario"></param>
+		/// <returns>DataTable</returns>
 		public DataTable RestablecerContrasenia(string usuario)
 		{
 
@@ -247,6 +275,11 @@ namespace DAL
 			}
 			return dt;
 		}
+		/// <summary>
+		/// Metodo Get UsuarioDAL
+		/// </summary>
+		/// <param name="idUsuario"></param>
+		/// <returns>Usuario</returns>
 		public Usuario Get(int idUsuario)
 		{
 			Usuario res = null;
@@ -278,7 +311,11 @@ namespace DAL
 			}
 			return res;
 		}
-		
+		/// <summary>
+		/// Metodo SelectBusquedaUsuarios
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectBusquedaUsarios(string texto)
 		{
 			DataTable res = new DataTable();

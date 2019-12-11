@@ -8,6 +8,9 @@ using Common;
 
 namespace DAL
 {
+	/// <summary>
+	/// Clase ClienteDAL
+	/// </summary>
 	public class ClienteDAL : AbstractDAL
 	{
 		#region Atributos Propiedades y Constructores de clase
@@ -29,7 +32,7 @@ namespace DAL
 		#endregion
 		#region metodos de la clase
 		/// <summary>
-		/// metodo que elimina un cliente
+		/// Metodo Delete ClienteDAL
 		/// </summary>
 		public override void Delete()
 		{
@@ -49,7 +52,7 @@ namespace DAL
 			}
 		}
 		/// <summary>
-		/// Metodo que inserta un cliente
+		/// Metodo Insert ClienteDAL
 		/// </summary>
 		public override void Insert()
 		{
@@ -72,7 +75,7 @@ namespace DAL
 			}
 		}
 		/// <summary>
-		/// Metodo que selecciona datos de cliente
+		/// Metodo Select ClienteDAL
 		/// </summary>
 		/// <returns>DataTable</returns>
 		public override DataTable Select()
@@ -84,8 +87,6 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de Clientes", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros seleccionados Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
-
 			}
 			catch (Exception ex)
 			{
@@ -94,7 +95,7 @@ namespace DAL
 			return res;
 		}
 		/// <summary>
-		/// Metodo para actualizar cliente
+		/// Metodo Update ClienteDAL
 		/// </summary>
 		public override void Update()
 		{
@@ -117,6 +118,11 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo Get ClienteDAL
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Cliente</returns>
 		public Cliente Get(int id)
 		{
 			Cliente res = null;
@@ -148,6 +154,11 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo SelectClientesBusquedaDAL
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectClientesBusqueda(string texto)
 		{
 			DataTable res = new DataTable();
@@ -161,7 +172,6 @@ namespace DAL
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)

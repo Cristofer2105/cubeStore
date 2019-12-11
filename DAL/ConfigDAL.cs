@@ -7,8 +7,15 @@ using System.Text;
 
 namespace DAL
 {
+	/// <summary>
+	/// Clase ConfigDAL
+	/// </summary>
 	public sealed class ConfigDAL
 	{
+		/// <summary>
+		/// Metodo Select ConfigDAL
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable Select()
 		{
 			DataTable dt = new DataTable();

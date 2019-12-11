@@ -8,6 +8,9 @@ using System.Text;
 
 namespace DAL
 {
+	/// <summary>
+	/// Clase ArticuloDAL
+	/// </summary>
 	public class ArticuloDAL : AbstractDAL
 	{
 		#region Atributos Propiedades y Constructores de clase
@@ -28,6 +31,9 @@ namespace DAL
 		}
 
 		#endregion
+		/// <summary>
+		/// Metodo Delete Articulo
+		/// </summary>
 		public override void Delete()
 		{
 			string query = "UPDATE Articulo SET estadoArticulo=0 , fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP WHERE idArticulo = @idArticulo";
@@ -47,7 +53,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-
+		/// <summary>
+		/// Metodo Insert Articulo
+		/// </summary>
 		public override void Insert()
 		{
 			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro,foto) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro,@foto)";
@@ -72,7 +80,10 @@ namespace DAL
 
 			}
 		}
-
+		/// <summary>
+		/// Metodo Select Articulo
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public override DataTable Select()
 		{
 			DataTable res = new DataTable();
@@ -80,10 +91,8 @@ namespace DAL
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de un Articulo", DateTime.Now));
-
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)
@@ -93,7 +102,9 @@ namespace DAL
 			}
 			return res;
 		}
-
+		/// <summary>
+		/// Metodo Update Articulo
+		/// </summary>
 		public override void Update()
 		{
 			string query = "UPDATE Articulo SET nombreArticulo=@nombreArticulo,fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP, idCategoria=@idCategoria,idProvedor=@idProvedor,foto=1 WHERE idArticulo = @idArticulo";
@@ -114,6 +125,11 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
+		/// <summary>
+		/// Metodo Get Articulo
+		/// </summary>
+		/// <param name="idArticulo"></param>
+		/// <returns>Articulo</returns>
 		public Articulo Get(int idArticulo)
 		{
 			Articulo res = null;
@@ -143,6 +159,11 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo SelectBusquedaArticulo 
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectBusquedaArticulos(string texto)
 		{
 			DataTable res = new DataTable();
@@ -155,7 +176,6 @@ namespace DAL
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)
@@ -164,18 +184,23 @@ namespace DAL
 			}
 			return res;
 		}
-		
+		/// <summary>
+		/// Metodo VerificarArticulo
+		/// </summary>
+		/// <param name="articulo"></param>
+		/// <returns>DataTable</returns>
 		public DataTable VerificarArticulo(string articulo)
 		{
 			DataTable dt = new DataTable();
 			string query = "SELECT * FROM Articulo WHERE nombreArticulo=@nombreArticulo";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Articulos", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombreArticulo", articulo);
 				dt = Methods.ExecuteDataTableCommand(cmd);
+
 			}
 			catch (Exception ex)
 			{
@@ -183,17 +208,23 @@ namespace DAL
 			}
 			return dt;
 		}
+		/// <summary>
+		/// Metodo VerificarArticuloEliminar
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>DataTable</returns>
 		public DataTable VerificarArticuloEliminar(int id)
 		{
 			DataTable dt = new DataTable();
 			string query = "SELECT * FROM Articulo A INNER JOIN Item I ON I.idArticulo=A.idArticulo WHERE A.idArticulo=@id AND I.estadoItem=1";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Articulo para Eliminar", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@id", id);
 				dt = Methods.ExecuteDataTableCommand(cmd);
+
 			}
 			catch (Exception ex)
 			{

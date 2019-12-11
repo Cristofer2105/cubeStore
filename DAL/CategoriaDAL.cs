@@ -8,6 +8,9 @@ using Common;
 
 namespace DAL
 {
+	/// <summary>
+	/// Clase CategoriaDAL
+	/// </summary>
 	public sealed class CategoriaDAL : AbstractDAL
 	{
 		#region Atributos Propiedades y Constructores de clase
@@ -28,6 +31,9 @@ namespace DAL
 		}
 
 		#endregion
+		/// <summary>
+		/// Metodo Delete Categoria
+		/// </summary>
 		public override void Delete()
 		{
 			string query = "UPDATE Categoria SET estadoCategoria=0 , fechaHoraActualizacionCategoria=CURRENT_TIMESTAMP WHERE idCategoria = @idCategoria";
@@ -45,7 +51,9 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
 			}
 		}
-		
+		/// <summary>
+		/// Metodo Insert Categoria
+		/// </summary>
 		public override void Insert()
 		{
 			string query = "INSERT INTO Categoria(nombreCategoria,fechaRegistro) VALUES(@nombreCategoria,@fechaRegistro)";
@@ -65,7 +73,10 @@ namespace DAL
 				throw ex;
 			}
 		}
-
+		/// <summary>
+		/// Metodo Select Categoria
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public override DataTable Select()
 		{
 			DataTable res = new DataTable();
@@ -83,7 +94,9 @@ namespace DAL
 			}
 			return res;
 		}
-
+		/// <summary>
+		/// Metodo Update Categoria
+		/// </summary>
 		public override void Update()
 		{
 			string query = "UPDATE Categoria SET nombreCategoria=@nombreCategoria,fechaHoraActualizacionCategoria=CURRENT_TIMESTAMP WHERE idCategoria = @idCategoria";
@@ -102,6 +115,11 @@ namespace DAL
 				throw ex;
 			}
 		}
+		/// <summary>
+		/// Metodo Get Categoria
+		/// </summary>
+		/// <param name="idCategoria"></param>
+		/// <returns>Categoria</returns>
 		public Categoria Get(byte idCategoria)
 		{
 			Categoria res = null;
@@ -132,6 +150,10 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo Select Categorias
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable SelectCategorias()
 		{
 			DataTable res = new DataTable();
@@ -141,7 +163,6 @@ namespace DAL
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Seleccion de una Categoria", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Seleccionado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)
@@ -151,6 +172,11 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo SelectBusquedaCategoria
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectBusquedaCategorias(string texto)
 		{
 			DataTable res = new DataTable();
@@ -163,7 +189,6 @@ namespace DAL
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 			}
 			catch (Exception ex)
@@ -172,13 +197,18 @@ namespace DAL
 			}
 			return res;
 		}
+		/// <summary>
+		/// Metodo VerificarCategoria
+		/// </summary>
+		/// <param name="categoria"></param>
+		/// <returns>DataTable</returns>
 		public DataTable VerificarCategoria(string categoria)
 		{
 			DataTable dt = new DataTable();
 			string query = "SELECT * FROM Categoria WHERE nombreCategoria=@nombreCategoria";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Categoria", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombreCategoria", categoria);
@@ -190,13 +220,18 @@ namespace DAL
 			}
 			return dt;
 		}
+		/// <summary>
+		/// Metodo VerificarCategoriaEliminar
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>DataTable</returns>
 		public DataTable VerificarCategoriaEliminar(int id)
 		{
 			DataTable dt = new DataTable();
 			string query = "SELECT * FROM Categoria C INNER JOIN Articulo A ON A.idCategoria=C.idCategoria WHERE C.idCategoria=@id AND A.estadoArticulo=1";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Categoria para Eliminar", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@id", id);
