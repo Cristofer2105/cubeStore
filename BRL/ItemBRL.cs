@@ -8,6 +8,9 @@ using DAL;
 
 namespace BRL
 {
+	/// <summary>
+	/// Clase ItemBRL
+	/// </summary>
 	public class ItemBRL : AbstractBRL
 	{
 		#region Atributos propiedades y constructores
@@ -37,69 +40,119 @@ namespace BRL
 		}
 		#endregion
 		#region Metodos de la clase
+		/// <summary>
+		/// Metodo Delete ItemBRL
+		/// </summary>
 		public override void Delete()
 		{
 			dal.Delete();
 		}
-
+		/// <summary>
+		/// Metodo Insert ItemBRL
+		/// </summary>
 		public override void Insert()
 		{
 			dal.Insert();
 		}
-
+		/// <summary>
+		/// Metodo Select ItemBRL
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public override DataTable Select()
 		{
 			dal = new ItemDAL();
 			return dal.Select();
 		}
-
+		/// <summary>
+		/// Metodo Update ItemBRL
+		/// </summary>
 		public override void Update()
 		{
 			dal.Update();
 		}
+		/// <summary>
+		/// Metodo Get ItemBRL
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Item</returns>
 		public Item Get(int id)
 		{
 			dal = new ItemDAL();
 			return dal.Get(id);
 		}
+		/// <summary>
+		/// Metodo SelectArticulos ItemBRL
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectArticulos(string texto)
 		{
 			dal = new ItemDAL();
 			return dal.SelectArticulos(texto);
 		}
+		/// <summary>
+		/// Metodo SelectItems ItemBRL
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectItems(string texto)
 		{
 			dal = new ItemDAL();
 			return dal.SelectItems(texto);
 		}
+		/// <summary>
+		/// Metodo UpdateEstadoParaComprar ItemBRL
+		/// </summary>
 		public void UpdateEstadoParaComprar()
 		{
 			dal.UpdateEstadoParaComprar();
 		}
+		/// <summary>
+		/// Metodo UpdateEstadoNormalItem
+		/// </summary>
 		public void UpdateEstadoNormalItem()
 		{
 			dal.UpdateEstadoNormalItem();
 		}
-			public void UpdateEstadoQuitarCompra()
+		/// <summary>
+		/// Metodo UpdateEstadoQuitarCompra
+		/// </summary>
+		public void UpdateEstadoQuitarCompra()
 		{
 			dal.UpdateEstadoQuitarCompra();
 		}
-		
+		/// <summary>
+		/// Metodo SelectItemsComprar ItemBRL
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable SelectItemsComprar()
 		{
 			dal = new ItemDAL();
 			return dal.SelectItemsComprar();
 		}
+		/// <summary>
+		/// Metodo TotalVenta ItemBRL
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable TotalVenta()
 		{
 			dal = new ItemDAL();
 			return dal.TotalVenta();
 		}
+		/// <summary>
+		/// Metodo CantidadVenta ItemBRL
+		/// </summary>
+		/// <returns>DataTable</returns>
 		public DataTable CantidadVenta()
 		{
 			dal = new ItemDAL();
 			return dal.CantidadVenta();
 		}
+		/// <summary>
+		/// Metodo VerificarItem ItemBRL
+		/// </summary>
+		/// <param name="item"></param>
+		/// <returns>DataTable</returns>
 		public DataTable VerificarItem(string item)
 		{
 			dal = new ItemDAL();

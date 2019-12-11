@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Garantia
+	/// </summary>
 	public class Garantia
 	{
 		#region Atributos y Propiedades de la clase
@@ -53,10 +56,22 @@ namespace Common
 		}
 		#endregion
 		#region Constructores de la Clase
+		/// <summary>
+		/// Clase Garantia
+		/// </summary>
 		public Garantia()
 		{
 
 		}
+		/// <summary>
+		/// Constructor para seleccionar todo Garantia
+		/// </summary>
+		/// <param name="idGarantia"></param>
+		/// <param name="fechaInicio"></param>
+		/// <param name="fechaFin"></param>
+		/// <param name="estado"></param>
+		/// <param name="fechaActualizacion"></param>
+		/// <param name="fechaRegistro"></param>
 		public Garantia(int idGarantia, DateTime fechaInicio, DateTime fechaFin, byte estado, DateTime fechaActualizacion, DateTime fechaRegistro)
 		{
 			this.idGarantia = idGarantia;
@@ -66,6 +81,12 @@ namespace Common
 			this.fechaActualizacion = fechaActualizacion;
 			this.fechaRegistro = fechaRegistro;
 		}
+		/// <summary>
+		/// Constructor para insertar Garantia
+		/// </summary>
+		/// <param name="fechaInicio"></param>
+		/// <param name="fechaFin"></param>
+		/// <param name="fechaRegistro"></param>
 		public Garantia(DateTime fechaInicio, DateTime fechaFin, DateTime fechaRegistro)
 		{
 			this.fechaInicio = fechaInicio;

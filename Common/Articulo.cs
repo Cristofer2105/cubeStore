@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Articulo
+	/// </summary>
 	public class Articulo
 	{
 		#region Atributos y Propiedades
@@ -70,7 +73,7 @@ namespace Common
 
 		#region Constructores de la clase
 		/// <summary>
-		/// Constructor para seleccionar todo
+		/// Constructor para seleccionar todo Articulo
 		/// </summary>
 		/// <param name="idArticulo"></param>
 		/// <param name="nombreArticulo"></param>
@@ -91,7 +94,7 @@ namespace Common
 			this.foto = foto;
 		}
 		/// <summary>
-		/// Constructor para Insertar
+		/// Constructor para Insertar Articulo
 		/// </summary>
 		/// <param name="nombreArticulo"></param>
 		/// <param name="idCategoria"></param>
@@ -106,7 +109,7 @@ namespace Common
 			this.foto = foto;
 		}
 		/// <summary>
-		/// Constructor por defecto
+		/// Constructor por defecto Articulo
 		/// </summary>
 		public Articulo()
 		{

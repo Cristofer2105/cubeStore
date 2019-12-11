@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Config
+	/// </summary>
 	public static class Config
 	{
 		public static string configpathImagenArticulo;

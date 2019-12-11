@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Usuario
+	/// </summary>
 	public class Usuario
 	{
 		private int idUsuario;
@@ -99,11 +102,29 @@ namespace Common
 			get { return fechaRegistro; }
 			set { fechaRegistro = value; }
 		}
-
+		/// <summary>
+		/// Constructor por defecto
+		/// </summary>
 		public Usuario()
 		{
 
 		}
+		/// <summary>
+		/// Constructor que inicializa todo Usuario
+		/// </summary>
+		/// <param name="idUsuario"></param>
+		/// <param name="nombres"></param>
+		/// <param name="primerApellido"></param>
+		/// <param name="segundoApellido"></param>
+		/// <param name="sexo"></param>
+		/// <param name="estadoUsuario"></param>
+		/// <param name="fechaHoraActualizacion"></param>
+		/// <param name="nombreUsuario"></param>
+		/// <param name="contrasenia"></param>
+		/// <param name="rol"></param>
+		/// <param name="contraseniaInicaial"></param>
+		/// <param name="correo"></param>
+		/// <param name="fechaRegistro"></param>
 		public Usuario(int idUsuario, string nombres, string primerApellido, string segundoApellido, byte sexo, byte estadoUsuario, DateTime fechaHoraActualizacion, string nombreUsuario, string contrasenia, string rol, byte contraseniaInicaial, string correo,DateTime fechaRegistro)
 		{
 			this.idUsuario = idUsuario;
@@ -120,6 +141,18 @@ namespace Common
 			this.correo = correo;
 			this.fechaRegistro = fechaRegistro;
 		}
+		/// <summary>
+		/// Constructor para Insertar Usuario
+		/// </summary>
+		/// <param name="nombres"></param>
+		/// <param name="primerApellido"></param>
+		/// <param name="segundoApellido"></param>
+		/// <param name="sexo"></param>
+		/// <param name="nombreUsuario"></param>
+		/// <param name="contrasenia"></param>
+		/// <param name="rol"></param>
+		/// <param name="correo"></param>
+		/// <param name="fechaRegistro"></param>
 		public Usuario(string nombres, string primerApellido, string segundoApellido, byte sexo, string nombreUsuario, string contrasenia, string rol, string correo,DateTime fechaRegistro)
 		{
 		
@@ -133,6 +166,7 @@ namespace Common
 			this.correo = correo;
 			this.fechaRegistro = fechaRegistro;
 		}
+
 		public Usuario(int idUsuario, string nombres, string primerApellido, string segundoApellido, string correo)
 		{
 			this.idUsuario = idUsuario;

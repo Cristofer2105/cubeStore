@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase VentaItem
+	/// </summary>
 	public class VentaItem
 	{
 		#region Atributos y Propiedades de la Clase
@@ -32,10 +35,18 @@ namespace Common
 		}
 		#endregion
 		#region Constructores de la clase
+		/// <summary>
+		/// Constructor por defecto VentaItem
+		/// </summary>
 		public VentaItem()
 		{
 
 		}
+		/// <summary>
+		/// Constructor para insertar VentaItem
+		/// </summary>
+		/// <param name="idItem"></param>
+		/// <param name="precioUnitario"></param>
 		public VentaItem(int idItem,double precioUnitario)
 		{
 			this.idItem = idItem;			

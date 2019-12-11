@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Validate
+	/// </summary>
 	public class Validate
 	{
+		/// <summary>
+		/// Validar OnlyLettersAndSpaces
+		/// </summary>
+		/// <param name="cad"></param>
+		/// <returns>bool</returns>
 		public static bool OnlyLettersAndSpaces(string cad)
 		{
 			for (int i = 0; i < cad.Length; i++)
@@ -20,6 +28,11 @@ namespace Common
 			}
 			return true;
 		}
+		/// <summary>
+		/// Validar SoloTexto
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns>bool</returns>
 		public static bool SoloTexto(string value)
 		{
 			string regular_expression = "^[a-zA-Z_áéíóúÁÉÍÓÚ  ]*$";
@@ -30,6 +43,11 @@ namespace Common
 			}
 			return true;
 		}
+		/// <summary>
+		/// Validar Numeros
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns>bool</returns>
 		public static bool Numeros(string value)
 		{
 			string regular_expression = "/^[0-9a]+$/"; 
@@ -40,6 +58,11 @@ namespace Common
 			}
 			return true;
 		}
+		/// <summary>
+		/// Validar NitText
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns>bool</returns>
 		public static bool NitText(string value)
 		{
 			string regular_expression = "^[0-9_ ]*$";

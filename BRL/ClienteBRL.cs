@@ -8,6 +8,9 @@ using DAL;
 
 namespace BRL
 {
+	/// <summary>
+	/// Clase ClienteBRL
+	/// </summary>
 	public class ClienteBRL : AbstractBRL
 	{
 		#region Atributos propiedades y constructores
@@ -38,31 +41,51 @@ namespace BRL
 		}
 		#endregion
 		#region metodos de la clase
+		/// <summary>
+		/// Metodo Delete ClienteBRL
+		/// </summary>
 		public override void Delete()
 		{
 			dal.Delete();
 		}
-
+		/// <summary>
+		/// Metodo Insert ClienteBRL
+		/// </summary>
 		public override void Insert()
 		{
 			dal.Insert();
 		}
-
+		/// <summary>
+		/// Metodo Select ClienteBRL
+		/// </summary>
+		/// <returns></returns>
 		public override DataTable Select()
 		{
 			dal = new ClienteDAL();
 			return dal.Select();
 		}
-
+		/// <summary>
+		/// Metodo Update ClienteBRL
+		/// </summary>
 		public override void Update()
 		{
 			dal.Update();
 		}
+		/// <summary>
+		/// Metodo Get ClienteBRL
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>Cliente</returns>
 		public Cliente Get(int id)
 		{
 			dal = new ClienteDAL();
 			return dal.Get(id);
 		}
+		/// <summary>
+		/// Metodo SelectClientesBusqueda ClienteBRL
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
 		public DataTable SelectClientesBusqueda(string texto)
 		{
 			dal = new ClienteDAL();

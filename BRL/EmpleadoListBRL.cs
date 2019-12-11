@@ -12,6 +12,10 @@ namespace BRL
 	/// </summary>
 	public class EmpleadoListBRL
 	{
+		/// <summary>
+		/// Metodo ObtenerListaEmpleadosReporte EmpleadoListBRL
+		/// </summary>
+		/// <returns>DataSetcubestore</returns>
 		public static DataSetcubestore ObtenerListaEmpleadosReporte()
 		{
 			DataSetcubestore dataSetcubestore = null;

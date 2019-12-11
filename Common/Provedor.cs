@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Provedor
+	/// </summary>
 	public class Provedor
 	{
 		private int idProvedor;
@@ -74,7 +77,16 @@ namespace Common
 		{
 
 		}
-
+		/// <summary>
+		/// Constructor que inicializa todo Provedor
+		/// </summary>
+		/// <param name="idProvedor"></param>
+		/// <param name="razonSocial"></param>
+		/// <param name="estado"></param>
+		/// <param name="fechaHoraActualizacion"></param>
+		/// <param name="latitud"></param>
+		/// <param name="longitud"></param>
+		/// <param name="fechaHoraRegistro"></param>
 		public Provedor(int idProvedor,string razonSocial, byte estado, DateTime fechaHoraActualizacion, double latitud, double longitud, DateTime fechaHoraRegistro)
 		{
 			this.idProvedor=idProvedor;
@@ -87,7 +99,7 @@ namespace Common
 
 		}
 		/// <summary>
-		/// Constructor para Insertar
+		/// Constructor para Insertar Provedor
 		/// </summary>
 		/// <param name="razonSocial"></param>
 		/// <param name="latitud"></param>

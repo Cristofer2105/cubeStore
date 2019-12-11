@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Session 
+	/// </summary>
 	public class Session
 	{
 		#region atributos y propiedades
@@ -40,6 +43,11 @@ namespace Common
 		{
 
 		}
+		/// <summary>
+		/// Constructor para insertar Session
+		/// </summary>
+		/// <param name="inicioSesion"></param>
+		/// <param name="idEmpleado"></param>
 		public Session(DateTime inicioSesion, int idEmpleado)
 		{
 			this.inicioSesion = inicioSesion;

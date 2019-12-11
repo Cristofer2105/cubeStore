@@ -5,9 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Common
-{
+{		
+	/// <summary>
+	/// Clase Item
+	/// </summary>
 	public class Item
 	{
+		
 		#region Atributos y Propiedades
 		private int idItem;
 
@@ -65,7 +69,7 @@ namespace Common
 
 		}
 		/// <summary>
-		/// Constructor para seleccionar todo
+		/// Constructor para seleccionar todo Item
 		/// </summary>
 		/// <param name="idItem"></param>
 		/// <param name="codigoItem"></param>
@@ -85,7 +89,7 @@ namespace Common
 			this.fehaRegistroItem = fehaRegistroItem;
 		}
 		/// <summary>
-		/// Constructor para insertar
+		/// Constructor para insertar Item
 		/// </summary>
 		/// <param name="codigoItem"></param>
 		/// <param name="idArticulo"></param>

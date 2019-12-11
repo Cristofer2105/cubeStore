@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace BRL
 {
+	/// <summary>
+	/// Clase VentasListBRL
+	/// </summary>
 	public class VentasListBRL
 	{
+		/// <summary>
+		/// Metodo ObtenerListaVentasReporte VentasListBRL
+		/// </summary>
+		/// <returns>DataSetcubestore</returns>
 		public static DataSetcubestore ObtenerListaVentasReporte()
 		{
 			DataSetcubestore dataSetcubestore = null;

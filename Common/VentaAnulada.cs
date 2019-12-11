@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase VentaAnulada
+	/// </summary>
 	public class VentaAnulada
 	{
 		#region Atributos y Popiedades
@@ -39,10 +42,21 @@ namespace Common
 		}
 		#endregion
 		#region Constructores
+		/// <summary>
+		/// Constructor por defecto VentaAnulada
+		/// </summary>
 		public VentaAnulada()
 		{
 
 		}
+
+		/// <summary>
+		/// Constructor para insertar VentaAnulada
+		/// </summary>
+		/// <param name="idVentaAnulada"></param>
+		/// <param name="idEmpleado"></param>
+		/// <param name="fechaRegistro"></param>
+		/// <param name="motivo"></param>
 		public VentaAnulada(int idVentaAnulada, int idEmpleado, DateTime fechaRegistro, string motivo)
 		{
 			this.idVentaAnulada = idVentaAnulada;

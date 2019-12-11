@@ -8,8 +8,14 @@ using DAL;
 
 namespace BRL
 {
+	/// <summary>
+	/// Clase SessionBRL 
+	/// </summary>
 	public class SessionBRL
 	{
+		/// <summary>
+		/// atributos, propiedades, constructores SessionBRL
+		/// </summary>
 		#region atributos, propiedades, constructores
 		private SesionDAL dal;
 

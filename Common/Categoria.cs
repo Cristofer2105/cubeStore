@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Categoria
+	/// </summary>
     public class Categoria
     {
 		#region Atributos y Propiedades
@@ -49,6 +52,13 @@ namespace Common
 		#endregion
 
 		#region Constructores de la clase
+		/// <summary>
+		/// Constructor que inicializa todo Categoria
+		/// </summary>
+		/// <param name="idCategoria"></param>
+		/// <param name="nombreCategoria"></param>
+		/// <param name="estadoCategoria"></param>
+		/// <param name="fechaHoraActualizacionCategoria"></param>
 		public Categoria(byte idCategoria, string nombreCategoria, byte estadoCategoria, DateTime fechaHoraActualizacionCategoria)
 		{
 			this.idCategoria = idCategoria;
@@ -57,7 +67,7 @@ namespace Common
 			this.fechaHoraActualizacionCategoria = fechaHoraActualizacionCategoria;
 		}
 		/// <summary>
-		/// Constructor para el metodo Insert
+		/// Constructor para el metodo Insert Categoria
 		/// </summary>
 		/// <param name="nombreCategoria"></param>
 		public Categoria(string nombreCategoria,DateTime fechaHoraRegistroCat)

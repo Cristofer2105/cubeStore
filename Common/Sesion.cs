@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Sesion
+	/// </summary>
 	public static class Sesion
 	{
 		public static int idSesion;

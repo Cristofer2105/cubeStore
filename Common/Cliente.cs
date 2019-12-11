@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+	/// <summary>
+	/// Clase Cliente
+	/// </summary>
 	public class Cliente
 	{
 		#region atributos y propiedades
@@ -61,14 +64,14 @@ namespace Common
 		#endregion
 		#region constructores
 		/// <summary>
-		/// Constructor por defecto
+		/// Constructor por defecto Cliente
 		/// </summary>
 		public Cliente()
 		{
 
 		}
 		/// <summary>
-		/// Constructor para seleccionar todo
+		/// Constructor para seleccionar todo Cliente
 		/// </summary>
 		/// <param name="idCliente"></param>
 		/// <param name="nombres"></param>
@@ -88,7 +91,7 @@ namespace Common
 			this.fechaHoraRegistro=fechaHoraRegistro;
 		}
 		/// <summary>
-		/// Constructor para insertar
+		/// Constructor para insertar Cliente
 		/// </summary>
 		/// <param name="nombres"></param>
 		/// <param name="primerApellido"></param>
