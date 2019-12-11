@@ -91,6 +91,11 @@ namespace BRL
 			dal = new VentaDAL();
 			return dal.Select();
 		}
+		public DataTable SelectMaxIdVenta()
+		{
+			dal = new VentaDAL();
+			return dal.SelectMaxIdVenta();
+		}		
 		public DataTable SelectBusquedaVenta(string texto)
 		{
 			dal = new VentaDAL();

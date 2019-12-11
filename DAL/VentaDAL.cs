@@ -260,6 +260,25 @@ namespace DAL
 			}
 			return res;
 		}
+		public DataTable SelectMaxIdVenta()
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT MAX(idVenta)  FROM Venta";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de Venta", DateTime.Now));
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				res = Methods.ExecuteDataTableCommand(cmd);
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Seleccionado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return res;
+		}
+		
 		public Venta Get(int id)
 		{
 			Venta res = null;

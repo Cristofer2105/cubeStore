@@ -1,5 +1,7 @@
 ﻿using BRL;
 using Common;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,6 +31,7 @@ namespace cubeStore
 		ClienteBRL brlcli;
 		Cliente cliente;
 		Venta venta;
+		
 		VentaItem ventaitem;
 		Garantia garantia;
 		DataTable dtItemsComprar;
@@ -281,11 +284,31 @@ namespace cubeStore
 						{
 							brlventa.InsertVentas();
 							LoadDataGridItemsComprar();
-							MessageBox.Show("Venta realizada con exito");
 							txttotalVenta.Text = "";
 							txtCantidadArticulos.Text = "";
 							txtnombre.Text = "";
-						}
+							MessageBox.Show("Venta realizada con exito");
+
+							CrystalReport1 reporte = new CrystalReport1();
+							VentaBRL ventabrl = new VentaBRL();
+							DataTable dtid = ventabrl.SelectMaxIdVenta();
+							int idVenta = int.Parse(dtid.Rows[0][0].ToString());
+							ReportDocument oRep = new ReportDocument();
+							ParameterField pf = new ParameterField();
+							ParameterFields pfs = new ParameterFields();
+							ParameterDiscreteValue pdv = new ParameterDiscreteValue();
+							pf.Name = "@id"; // variable del store procedure
+							pdv.Value = idVenta; // variable donde se  guarda el numero de factura
+							pf.CurrentValues.Add(pdv);
+							pfs.Add(pf);
+							VistaReporteRercibo form = new VistaReporteRercibo();
+							form.crReciboViewer.ViewerCore.ParameterFieldInfo = pfs;
+							oRep.Load(@"D:\Univalle\Base de Datos 3\Proyecto\cubeStore\cubeStore\CrystalReport1.rpt");
+							oRep.SetParameterValue("@id", idVenta);
+
+							form.crReciboViewer.ViewerCore.ReportSource = oRep;
+							form.Show();
+					}
 
 					}
 					catch (Exception)

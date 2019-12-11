@@ -6,6 +6,7 @@ using System.Text;
 
 namespace DAL
 {
+
 	public abstract class AbstractDAL
 	{
 		public abstract void Insert();

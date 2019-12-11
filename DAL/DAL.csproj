@@ -50,10 +50,10 @@
     <Compile Include="CategoriaDAL.cs" />
     <Compile Include="ClienteDAL.cs" />
     <Compile Include="ConfigDAL.cs" />
-    <Compile Include="DBcubestoreDataSet.Designer.cs">
+    <Compile Include="DataSetcubestore.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBcubestoreDataSet.xsd</DependentUpon>
+      <DependentUpon>DataSetcubestore.xsd</DependentUpon>
     </Compile>
     <Compile Include="ItemDAL.cs" />
     <Compile Include="Methods.cs" />
@@ -77,16 +77,16 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="DALClassDiagram.cd" />
-    <None Include="DBcubestoreDataSet.xsc">
-      <DependentUpon>DBcubestoreDataSet.xsd</DependentUpon>
+    <None Include="DataSetcubestore.xsc">
+      <DependentUpon>DataSetcubestore.xsd</DependentUpon>
     </None>
-    <None Include="DBcubestoreDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DBcubestoreDataSet.Designer.cs</LastGenOutput>
+    <None Include="DataSetcubestore.xsd">
       <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetcubestore.Designer.cs</LastGenOutput>
     </None>
-    <None Include="DBcubestoreDataSet.xss">
-      <DependentUpon>DBcubestoreDataSet.xsd</DependentUpon>
+    <None Include="DataSetcubestore.xss">
+      <DependentUpon>DataSetcubestore.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -14,6 +14,10 @@ using System.Windows.Shapes;
 using Common;
 using BRL;
 using System.Data;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using CrystalDecisions.ReportAppServer; 
+
 
 namespace cubeStore
 {
@@ -94,7 +98,22 @@ namespace cubeStore
 					venta = brl.Get(idVen);
 
 					//Cargar Datos
-					MessageBox.Show("Ver mas Detalles" + idVen + " " + venta.Total);
+					CrystalReport1 reporte = new CrystalReport1();
+					VistaReporteRercibo form = new VistaReporteRercibo();
+					ReportDocument oRep = new ReportDocument();
+					ParameterField pf = new ParameterField();
+					ParameterFields pfs = new ParameterFields();
+					ParameterDiscreteValue pdv = new ParameterDiscreteValue();
+					pf.Name = "@id"; // variable del store procedure
+					pdv.Value = idVen; // variable donde se  guarda el numero de factura
+					pf.CurrentValues.Add(pdv);
+					pfs.Add(pf);
+
+					oRep.Load(@"D:\Univalle\Base de Datos 3\Proyecto\cubeStore\cubeStore\CrystalReport1.rpt");
+					oRep.SetParameterValue("@id",idVen);
+
+					form.crReciboViewer.ViewerCore.ReportSource = oRep;
+					form.Show();
 
 				}
 				catch (Exception ex)
