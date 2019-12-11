@@ -37,7 +37,7 @@ namespace cubeStore
 			{
 				brl = new ItemBRL();
 				dgdbusqueda.ItemsSource = brl.SelectArticulos(txtnombreproductobuscado.Text).DefaultView;
-				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
+				dgdbusqueda.Columns[0].Visibility = Visibility.Hidden;
 			}
 			catch (Exception ex)
 			{

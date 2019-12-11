@@ -137,7 +137,7 @@ namespace cubeStore
 						}
 						catch (Exception)
 						{
-							imgArticulo.Source = null;
+					
 							pathImagen = string.Empty;
 							MessageBox.Show("No se pudo cargar la imagen comuniquese con el administrador de sistemas");
 
@@ -170,7 +170,6 @@ namespace cubeStore
 			dgdDatos.IsEnabled = false;
 			Habilitar(1);
 			LimpiarCampos();
-			imgArticulo.Source = null;
 			opcion = 0;
 			txtBuscarArticulo.Text = "";
 		}
@@ -250,7 +249,7 @@ namespace cubeStore
 
 
 									MessageBox.Show("Registro Exitoso");
-									imgArticulo.Source = null;
+	
 									LoadDataGrid();
 									dgdDatos.IsEnabled = true;
 									DesHabilitar();
@@ -301,18 +300,22 @@ namespace cubeStore
 								//Cambiamos imagen
 								if (pathImagen != pathFotoCarteroServer)
 								{
+									brl.Update();
+									MessageBox.Show("Registro Modificado Exitosamente");
+									LoadDataGrid();
+									DesHabilitar();
+									LimpiarCampos();
 									System.GC.Collect();
 									System.GC.WaitForPendingFinalizers();
 									File.Delete(pathFotoCarteroServer);
 									File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
 								}
+								else
+								{
+									MessageBox.Show("Error al modificar");
+								}
 
-								brl.Update();
-								MessageBox.Show("Registro Modificado Exitosamente");
-								LoadDataGrid();
-								DesHabilitar();
-								LimpiarCampos();
-								imgArticulo.Source = null;
+								
 
 							}
 							catch (Exception ex)

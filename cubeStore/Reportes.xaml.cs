@@ -19,6 +19,9 @@ namespace cubeStore
 	/// </summary>
 	public partial class Reportes : Window
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public Reportes()
 		{
 			InitializeComponent();
@@ -26,7 +29,8 @@ namespace cubeStore
 
 		private void BtnReporte3_Click(object sender, RoutedEventArgs e)
 		{
-
+			EmpleaosActivos empleaosActivos = new EmpleaosActivos();
+			empleaosActivos.Show();
 		}
 
 		private void BtnReporteDos_Click(object sender, RoutedEventArgs e)

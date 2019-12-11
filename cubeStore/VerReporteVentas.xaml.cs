@@ -21,6 +21,9 @@ namespace cubeStore
 	/// </summary>
 	public partial class VerReporteVentas : Window
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public VerReporteVentas()
 		{
 			InitializeComponent();

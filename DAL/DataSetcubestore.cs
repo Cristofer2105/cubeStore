@@ -27,3 +27,10 @@ namespace DAL {
     public partial class DataSetcubestore {
     }
 }
+
+namespace DAL.DataSetcubestoreTableAdapters {
+    
+    
+    public partial class EmpleadoActivoTableAdapter {
+    }
+}

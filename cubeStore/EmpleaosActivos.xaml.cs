@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BRL;
+using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,33 +13,31 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BRL;
-using DAL;
 
 namespace cubeStore
 {
 	/// <summary>
-	/// Interaction logic for VerReporteEmpleados.xaml
+	/// Interaction logic for EmpleaosActivos.xaml
 	/// </summary>
-	public partial class VerReporteEmpleados : Window
+	public partial class EmpleaosActivos : Window
 	{
 		/// <summary>
 		/// 
 		/// </summary>
-		public VerReporteEmpleados()
+		public EmpleaosActivos()
 		{
 			InitializeComponent();
 		}
 
-		private void CrystalViewerEmpleados_Loaded(object sender, RoutedEventArgs e)
+		private void ViewerActivos_Loaded(object sender, RoutedEventArgs e)
 		{
-			ReporteVentasEmpleados reporte = new ReporteVentasEmpleados();
-			DataSetcubestore dataset = EmpleadoListBRL.ObtenerListaEmpleadosReporte();
+			VerReporteEmpleadosActivos reporte = new VerReporteEmpleadosActivos();
+			DataSetcubestore dataset = EmpleadoActivoListBRL.ObtenerListaEmpleadosActivosReporte();
 
 
-			reporte.Load("../../ReporteVentasEmpleados.rpt");
+			reporte.Load("../../VerReporteEmpleadosActivos.rpt");
 			reporte.SetDataSource(dataset);
-			crystalViewerEmpleados.ViewerCore.ReportSource = reporte;
+			viewerActivos.ViewerCore.ReportSource = reporte;
 		}
 	}
 }

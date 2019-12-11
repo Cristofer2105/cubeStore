@@ -49,6 +49,7 @@
     <Compile Include="CategoriaBRL.cs" />
     <Compile Include="ClienteBRL.cs" />
     <Compile Include="ConfigBRL.cs" />
+    <Compile Include="EmpleadoActivoListBRL.cs" />
     <Compile Include="EmpleadoListBRL.cs" />
     <Compile Include="ItemBRL.cs" />
     <Compile Include="MethodsBRL.cs" />

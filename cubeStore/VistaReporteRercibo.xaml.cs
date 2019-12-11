@@ -19,6 +19,9 @@ namespace cubeStore
 	/// </summary>
 	public partial class VistaReporteRercibo : Window
 	{
+		/// <summary>
+		/// 
+		/// </summary>
 		public VistaReporteRercibo()
 		{
 			InitializeComponent();
