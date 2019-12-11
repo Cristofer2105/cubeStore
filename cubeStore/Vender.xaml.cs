@@ -303,7 +303,7 @@ namespace cubeStore
 							pfs.Add(pf);
 							VistaReporteRercibo form = new VistaReporteRercibo();
 							form.crReciboViewer.ViewerCore.ParameterFieldInfo = pfs;
-							oRep.Load(@"D:\Univalle\Base de Datos 3\Proyecto\cubeStore\cubeStore\CrystalReport1.rpt");
+							oRep.Load("../../CrystalReport1.rpt");
 							oRep.SetParameterValue("@id", idVenta);
 
 							form.crReciboViewer.ViewerCore.ReportSource = oRep;
