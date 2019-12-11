@@ -93,8 +93,8 @@ namespace cubeStore
 							catch (Exception ex)
 								{
 
-									throw ex;
-								}
+								MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+							}
 								
 							}
 							else
@@ -114,8 +114,8 @@ namespace cubeStore
 					catch (Exception ex)
 					{
 
-						MessageBox.Show("Error" + ex.Message);
-					}
+					MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+				}
 				}
 			else
 			{

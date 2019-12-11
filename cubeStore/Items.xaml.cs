@@ -42,7 +42,7 @@ namespace cubeStore
 			catch (Exception ex)
 			{
 
-				MessageBox.Show(ex.Message);
+				MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 			}
 		}
 		public void LoadDataGridItems()
@@ -57,7 +57,7 @@ namespace cubeStore
 			catch (Exception ex)
 			{
 
-				MessageBox.Show(ex.Message);
+				MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 			}
 		}
 		private void BtnCerrar_Click(object sender, RoutedEventArgs e)
@@ -103,7 +103,7 @@ namespace cubeStore
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.Message);
+					MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 				}
 			}
 		}
@@ -159,7 +159,7 @@ namespace cubeStore
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.Message);
+					MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 				}
 			}
 		}

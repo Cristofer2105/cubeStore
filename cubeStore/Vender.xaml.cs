@@ -50,7 +50,7 @@ namespace cubeStore
 			catch (Exception ex)
 			{
 
-				MessageBox.Show(ex.Message);
+				MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 			}
 		}
 		private void LoadCantidadVenta()
@@ -64,7 +64,7 @@ namespace cubeStore
 			catch (Exception ex)
 			{
 
-				MessageBox.Show(ex.Message);
+				MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 			}
 		}
 		private void LoadDataGrid()
@@ -108,7 +108,7 @@ namespace cubeStore
 			catch (Exception ex)
 			{
 
-				MessageBox.Show(ex.Message);
+				MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 			}
 		}
 		private void BtnSalirVender_Click(object sender, RoutedEventArgs e)
@@ -190,7 +190,7 @@ namespace cubeStore
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.Message);
+					MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 				}
 			}
 		}
@@ -216,7 +216,7 @@ namespace cubeStore
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.Message);
+					MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 				}
 			}
 		}
