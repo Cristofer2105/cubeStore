@@ -30,7 +30,7 @@ namespace cubeStore
 
 		private void BtnCambiarContrasenia_Click(object sender, RoutedEventArgs e)
 		{
-			if (txtUusario.Text==""&&txtContrasenia.Password=="")
+			if (txtusuarioCambiarContrasenia.Text==""&&txtContrasenia.Password=="")
 			{
 				MessageBox.Show("Debe ingresar los campos!");
 			}
@@ -39,7 +39,7 @@ namespace cubeStore
 				try
 				{
 					usuario = new Usuario();
-					usuario.NombreUsuario = txtUusario.Text;
+					usuario.NombreUsuario = txtusuarioCambiarContrasenia.Text;
 					usuario.Contrasenia = txtContrasenia.Password.Trim();
 					brl = new UsuarioBRL(usuario);
 					brl.UpdateContrasenia();
@@ -53,7 +53,7 @@ namespace cubeStore
 				{
 					MessageBox.Show("Verifique que los datos sean correctos");
 					txtContrasenia.Clear();
-					txtUusario.Clear();
+					txtusuarioCambiarContrasenia.Clear();
 				}
 			}
 		}

@@ -21,6 +21,9 @@ namespace cubeStore
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		/// <summary>
+		/// Clase capa de presentacion menu de administrador
+		/// </summary>
 		public MainWindow()
 		{
 			InitializeComponent();						

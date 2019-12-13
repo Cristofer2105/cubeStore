@@ -8,8 +8,6 @@
         mc:Ignorable="d"
         Title="VerReporteEmpleados">
     <Grid>
-
         <Viewer:CrystalReportsViewer Name="crystalViewerEmpleados" Loaded="CrystalViewerEmpleados_Loaded"/>
-
     </Grid>
 </Window>

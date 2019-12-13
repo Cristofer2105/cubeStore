@@ -39,7 +39,7 @@
         </Rectangle>
         <Grid VerticalAlignment="Bottom" Margin="35,80" Height="240">
             <StackPanel VerticalAlignment="Bottom" Margin="15,0,15,58">
-                <TextBox Margin="0,10" materialDesign:HintAssist.Hint="USUARIO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" x:Name="txtUusario"/>
+                <TextBox IsEnabled="False" Margin="0,10" materialDesign:HintAssist.Hint="USUARIO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" x:Name="txtusuarioCambiarContrasenia"/>
                 <PasswordBox Margin="0,10" materialDesign:HintAssist.Hint="CONTRASEÑA" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" x:Name="txtContrasenia"/>
             </StackPanel>
         </Grid>

@@ -27,6 +27,7 @@ namespace cubeStore
 		SessionBRL sesBRL;
 		UsuarioBRL brl;
 		Session ses;
+		byte intentos=3;
         public Login()
         {
             InitializeComponent();
@@ -37,45 +38,45 @@ namespace cubeStore
 		{
 			if (MessageBox.Show("Esta Seguro de Salir?", "Salir", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 			{
-				this.Close();
-
+				Application.Current.Shutdown();
 			}
 			
 		}
 
 		private void BtnIngresar_Click(object sender, RoutedEventArgs e)
 		{
-
-			txtUusario.Text = txtUusario.Text.Trim();
-			if (txtUusario.Text != "" && txtContrasenia.Password != "")
+			string usuario= txtUusario.Text.Trim();
+			string contrasenia = txtContrasenia.Password;
+			if (usuario!=""&&contrasenia!="")
 			{
 				try
 				{
 					brl = new UsuarioBRL();
-					DataTable dt = brl.Login(txtUusario.Text, txtContrasenia.Password);
+					DataTable dt = brl.Login(usuario,contrasenia);
 					if (dt.Rows.Count > 0)
 					{
+						//Iniciamos variables de sesion
+						Sesion.idSesion = int.Parse(dt.Rows[0][0].ToString());
+						Sesion.usuarioSesion = dt.Rows[0][1].ToString();
+						Sesion.rolSesion = dt.Rows[0][2].ToString();
+						Sesion.nombre = dt.Rows[0][4].ToString();
+						Sesion.primerapellido = dt.Rows[0][5].ToString();
+						Sesion.segundoapellido = dt.Rows[0][6].ToString();
+						Sesion.contrasenia = txtContrasenia.Password;
+
+						//Iniciamos variables de configuracion
+						ConfigBRL configBRL = new ConfigBRL();
+						DataTable dtConfig = configBRL.Select();
+						Config.configpathImagenArticulo = dtConfig.Rows[0][0].ToString();
 						if (byte.Parse(dt.Rows[0][3].ToString()) == 1)
 						{
 							CambiarContrasenia cambia = new CambiarContrasenia();
 							this.Close();
+							cambia.txtusuarioCambiarContrasenia.Text = txtUusario.Text;
 							cambia.Show();
 						}
 						else
-						{
-							//Iniciamos variable de sesion
-							Sesion.idSesion = int.Parse(dt.Rows[0][0].ToString());
-							Sesion.usuarioSesion = dt.Rows[0][1].ToString();
-							Sesion.rolSesion = dt.Rows[0][2].ToString();
-							Sesion.nombre = dt.Rows[0][4].ToString();
-							Sesion.primerapellido = dt.Rows[0][5].ToString();
-							Sesion.segundoapellido = dt.Rows[0][6].ToString();
-							Sesion.contrasenia = txtContrasenia.Password;
-
-							//Iniciamos variables de configuracion
-							ConfigBRL configBRL = new ConfigBRL();
-							DataTable dtConfig = configBRL.Select();
-							Config.configpathImagenArticulo = dtConfig.Rows[0][0].ToString();
+						{										
 							if (dt.Rows[0][2].ToString() == "Administrador")
 							{
 								//Insertar session
@@ -110,25 +111,34 @@ namespace cubeStore
 								menVend.Show();
 							}
 						}
-
-
 					}
 					else
 					{
-						MessageBox.Show("Usuario o contrasenia Incorrectos");
-						txtUusario.Text = "";
-						txtContrasenia.Password = "";
+						txtUusario.Focus();
+						txtUusario.Text = string.Empty;
+						txtContrasenia.Password = string.Empty;
+						txbAlertasLogin.Text="Usuario y/o contraseña incorrectos!";
+						txbalertasIntentos.Text = "Intentos: "+ (intentos - 1);
+						intentos--;
+						if (intentos==0)
+						{
+							Application.Current.Shutdown();
+						}
 					}
 				}
-				catch (Exception ex)
+				catch (Exception)
 				{
-
-					MessageBox.Show("Error" + ex.Message);
+					txtUusario.Focus();
+					txtUusario.Text = string.Empty;
+					txtContrasenia.Password = string.Empty;
+					MessageBox.Show("Hubo un error al iniciar sesion verifique su usuario y/o contraseña");				
 				}
 			}
 			else
 			{
-				MessageBox.Show("Tiene que llenar los campos para ingresar");
+				txtUusario.Text = string.Empty;
+				txtContrasenia.Password = string.Empty;
+				MessageBox.Show("Por favor ingrese su usuario y contraseña");
 			}
 		}
 
@@ -143,33 +153,38 @@ namespace cubeStore
 		{
 			if (e.Key == Key.Enter)
 			{
-				txtUusario.Text = txtUusario.Text.Trim();
-				if (txtUusario.Text != "" && txtContrasenia.Password != "")
+				string usuario = txtUusario.Text.Trim();
+				string contrasenia = txtContrasenia.Password;
+				if (usuario != "" && contrasenia != "")
 				{
 					try
 					{
 						brl = new UsuarioBRL();
-						DataTable dt = brl.Login(txtUusario.Text, txtContrasenia.Password);
+						DataTable dt = brl.Login(usuario, contrasenia);
 						if (dt.Rows.Count > 0)
 						{
+							//Iniciamos variables de sesion
+							Sesion.idSesion = int.Parse(dt.Rows[0][0].ToString());
+							Sesion.usuarioSesion = dt.Rows[0][1].ToString();
+							Sesion.rolSesion = dt.Rows[0][2].ToString();
+							Sesion.nombre = dt.Rows[0][4].ToString();
+							Sesion.primerapellido = dt.Rows[0][5].ToString();
+							Sesion.segundoapellido = dt.Rows[0][6].ToString();
+							Sesion.contrasenia = txtContrasenia.Password;
+
+							//Iniciamos variables de configuracion
+							ConfigBRL configBRL = new ConfigBRL();
+							DataTable dtConfig = configBRL.Select();
+							Config.configpathImagenArticulo = dtConfig.Rows[0][0].ToString();
 							if (byte.Parse(dt.Rows[0][3].ToString()) == 1)
 							{
 								CambiarContrasenia cambia = new CambiarContrasenia();
 								this.Close();
+								cambia.txtusuarioCambiarContrasenia.Text = txtUusario.Text;
 								cambia.Show();
 							}
 							else
 							{
-								//Iniciamos variable de sesion
-								Sesion.idSesion = int.Parse(dt.Rows[0][0].ToString());
-								Sesion.usuarioSesion = dt.Rows[0][1].ToString();
-								Sesion.rolSesion = dt.Rows[0][2].ToString();
-								Sesion.nombre = dt.Rows[0][4].ToString();
-								Sesion.primerapellido = dt.Rows[0][5].ToString();
-								Sesion.segundoapellido = dt.Rows[0][6].ToString();
-								Sesion.contrasenia = txtContrasenia.Password;
-								//Iniciamos variables de configuracion
-
 								if (dt.Rows[0][2].ToString() == "Administrador")
 								{
 									//Insertar session
@@ -204,27 +219,41 @@ namespace cubeStore
 									menVend.Show();
 								}
 							}
-
-
 						}
 						else
 						{
-							MessageBox.Show("Usuario o contrasenia Incorrectos");
-							txtUusario.Text = "";
-							txtContrasenia.Password = "";
+							txtUusario.Focus();
+							txtUusario.Text = string.Empty;
+							txtContrasenia.Password = string.Empty;
+							txbAlertasLogin.Text = "Usuario y/o contraseña incorrectos!";
+							txbalertasIntentos.Text = "Intentos: " + (intentos - 1);
+							intentos--;
+							if (intentos == 0)
+							{
+								Application.Current.Shutdown();
+							}
 						}
 					}
-					catch (Exception ex)
+					catch (Exception)
 					{
-
-						MessageBox.Show("Error" + ex.Message);
+						txtUusario.Focus();
+						txtUusario.Text = string.Empty;
+						txtContrasenia.Password = string.Empty;
+						MessageBox.Show("Hubo un error al iniciar sesion verifique su usuario y/o contraseña");
 					}
 				}
 				else
 				{
-					MessageBox.Show("Tiene que llenar los campos para ingresar");
+					txtUusario.Text = string.Empty;
+					txtContrasenia.Password = string.Empty;
+					MessageBox.Show("Por favor ingrese su usuario y contraseña");
 				}
 			}
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			txtUusario.Focus();
 		}
 	}
 }
