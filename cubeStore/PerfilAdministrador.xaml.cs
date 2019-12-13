@@ -103,15 +103,14 @@ namespace cubeStore
 						usuario.IdUsuario = Sesion.idSesion;
 						usbrl = new UsuarioBRL(usuario);
 						usbrl.UpdateDatosPerfil();
+						Sesion.contrasenia = txtContrasenia.Text.Trim();
 						MessageBox.Show("Perfil editado exitosamente");
 						DesHabilitar();
 					}
 					catch (Exception)
 					{
-
 						MessageBox.Show("No se pudo editar el perfil comuniquese con el administrador de sistemas");
 					}
-
 				}
 			}
 			else

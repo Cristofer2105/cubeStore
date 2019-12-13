@@ -102,6 +102,7 @@ namespace cubeStore
 						usuario.IdUsuario = Sesion.idSesion;
 						usbrl = new UsuarioBRL(usuario);
 						usbrl.UpdateDatosPerfil();
+						Sesion.contrasenia = txtContrasenia.Text;
 						MessageBox.Show("Perfil editado exitosamente");
 						DesHabilitar();
 					}

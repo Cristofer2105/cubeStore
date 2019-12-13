@@ -25,7 +25,7 @@
                     <materialDesign:PackIcon Kind="Power" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
-            <TextBlock FontWeight="Bold" Text="Usuarios" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="44" Margin="434,26,475,10" Width="91"/>
+            <TextBlock FontWeight="Bold" Text="Usuarios" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="44" Margin="386,26,430,10" Width="84"/>
         </Grid>
         <StackPanel Orientation="Horizontal" Height="618">
 
@@ -89,7 +89,17 @@
                             <TextBox TextChanged="TxtbuscarUsuarios_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Usuario" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtbuscarUsuarios" Width="300"/>
                             <materialDesign:PackIcon Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"  Kind="Search" IsEnabled="False" Height="30" Width="48"/>
                         </StackPanel>
-                        <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="373" VerticalAlignment="Top" Margin="0 10" x:Name="dgdDatos" SelectionChanged="DgdDatos_SelectionChanged"/>
+                        <DataGrid  CanUserAddRows="False" IsReadOnly="True" Height="373" VerticalAlignment="Top" Margin="0 10" x:Name="dgdDatos" SelectionChanged="DgdDatos_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Restablecer Contraseña" Width="160">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Background="#004E6F" x:Name="btnRestablecerContraseniaUsuario" Click="BtnRestablecerContraseniaUsuario_Click" Content="Restablecer"></Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </StackPanel>
 
                 </Grid>

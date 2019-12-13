@@ -86,6 +86,15 @@ namespace BRL
 		{
 			dal.UpdateContraseniaRestablecida();
 		}
+
+		/// <summary>
+		/// Metodo para restablecer la contraseña de empleado a travez del administrador
+		/// </summary>
+		public void UpdateContraseniaRestablecidaParaAdministrador()
+		{
+			dal.UpdateContraseniaRestablecidaParaAdministrador();
+		}
+		
 		/// <summary>
 		/// Metodo Login UsuarioBRL
 		/// </summary>
@@ -107,6 +116,16 @@ namespace BRL
 		{
 			dal = new UsuarioDal();
 			return dal.VerificarUser(usuario);
+		}
+		/// <summary>
+		/// Metodo para que el administrador pueda restablecer la contraseña del empleado UsuarioBRL
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>DataTable</returns>
+		public DataTable RestablecerContraseñaDesdeAdministrador(int id)
+		{
+			dal = new UsuarioDal();
+			return dal.RestablecerContraseñaDesdeAdministrador(id);
 		}
 		/// <summary>
 		/// Metodo RestablecerContrasenia UsuarioBRL

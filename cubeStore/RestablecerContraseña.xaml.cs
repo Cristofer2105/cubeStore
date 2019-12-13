@@ -45,7 +45,8 @@ namespace cubeStore
 					{						
 						try
 						{
-						correoUsuario= dt.Rows[0][7].ToString();
+							
+						correoUsuario = dt.Rows[0][7].ToString();
 						nombreUsuario = dt.Rows[0][1].ToString();
 						//Inicio Generando la contraseña nueva
 						Random rdn = new Random();
@@ -92,6 +93,7 @@ namespace cubeStore
 						this.Close();
 						login.Show();
 						//Fin Actualizando estado de contrasenia inicial
+						
 						}
 						catch (Exception )
 						{
@@ -229,7 +231,7 @@ namespace cubeStore
 				}
 				else
 				{
-					MessageBox.Show("Por favor ingrese su usario para el restablecimiento de contraseña");
+					MessageBox.Show("Por favor ingrese su usuario para el restablecimiento de contraseña");
 				}
 			}
 		}

@@ -193,6 +193,29 @@ namespace DAL
 			}
 		}
 		/// <summary>
+		/// Metodo para restablecer la contraseña de un empleado a travez del administrador Usuario DAL
+		/// </summary>
+		public void UpdateContraseniaRestablecidaParaAdministrador()
+		{
+			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=1 WHERE idEmpleado=@idEmpleado";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Restablecer Contrasenia de Usuarios", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
+				cmd.Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
+				Methods.ExecuteBasicCommand(cmd);
+
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Contrasenia Actualizada, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
+
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+		}
+		/// <summary>
 		/// Metodo Login Usuario DAL
 		/// </summary>
 		/// <param name="usuario"></param>
@@ -247,6 +270,33 @@ namespace DAL
 			}
 			return dt;
 		}
+		/// <summary>
+		///  Metodo para que el administrador pueda restablecer la contraseña del empleado UsuarioDAL
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns>DataTable</returns>
+		public DataTable RestablecerContraseñaDesdeAdministrador(int id)
+		{
+			DataTable dt = new DataTable();
+			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido,email FROM Empleado WHERE estadoEmpleado=1 AND idEmpleado=@idEmpleado";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@idEmpleado", id);
+				dt = Methods.ExecuteDataTableCommand(cmd);
+
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Login realizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
+
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return dt;
+		}
+		
 		/// <summary>
 		/// Metodo RestablecerContrasenia UsuarioDAL
 		/// </summary>

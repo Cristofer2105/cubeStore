@@ -39,12 +39,12 @@ namespace cubeStore
 				brl = new UsuarioBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
 				dgdDatos.ItemsSource = brl.SelectBusquedaUsarios(txtbuscarUsuarios.Text).DefaultView;
-				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
+				dgdDatos.Columns[1].Visibility = Visibility.Hidden;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 
-				MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+				MessageBox.Show("Ocurrio un error al recuperar los usuarios intente salir y volver a entrar de nuevo si el error persiste comuniquese con el administrador de sistemas por favor");
 			}
 
 		}
@@ -404,6 +404,29 @@ namespace cubeStore
 			PerfilAdministrador perfilAdministrador = new PerfilAdministrador();
 			this.Close();
 			perfilAdministrador.Show();
+		}
+
+		private void BtnRestablecerContraseniaUsuario_Click(object sender, RoutedEventArgs e)
+		{
+			if (dgdDatos.Items.Count > 0 && dgdDatos.SelectedItem != null)
+			{
+				try
+				{
+					DataRowView dataRow = (DataRowView)dgdDatos.SelectedItem;
+					int id = int.Parse(dataRow.Row.ItemArray[0].ToString());
+					brl = new UsuarioBRL();
+					brl.Get(id);
+					ConfirmarContraseña confirmarWin = new ConfirmarContraseña();
+					confirmarWin.txtidUsuarioRestablecimiento.Text = id.ToString();
+					confirmarWin.ShowDialog();
+				}
+				catch (Exception)
+				{
+					MessageBox.Show("Ocurrio un error al recuperar al empleado intente de nuevo si el error persiste comuniquese con el administrador de sistemas");
+				}
+				
+				
+			}
 		}
 	}
 }
