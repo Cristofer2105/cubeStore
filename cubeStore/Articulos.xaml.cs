@@ -108,7 +108,7 @@ namespace cubeStore
 				try
 				{
 					DataRowView dataRow = (DataRowView)dgdDatos.SelectedItem;
-					byte id = byte.Parse(dataRow.Row.ItemArray[0].ToString());
+					int id = int.Parse(dataRow.Row.ItemArray[0].ToString());
 					brl = new ArticuloBRL();
 					articulo = brl.Get(id);
 
