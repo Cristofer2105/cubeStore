@@ -201,7 +201,7 @@ namespace DAL
 		public DataTable Login(string usuario, string contrasenia)
 		{
 			DataTable dt = new DataTable();
-			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
+			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido,email FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Login de Usuarios", DateTime.Now));
@@ -221,22 +221,21 @@ namespace DAL
 			return dt;
 		}
 		/// <summary>
-		/// Metodo Verificar Usuarios
+		/// Metodo para verificar la existencia de un usuario habilitado en el sistema
 		/// </summary>
 		/// <param name="usuario"></param>
 		/// <param name="correo"></param>
 		/// <returns>DataTable</returns>
-		public DataTable VerificarUser(string usuario, string correo)
+		public DataTable VerificarUser(string usuario)
 		{
 			DataTable dt = new DataTable();
-			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND email=@email";
+			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido,email FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario";
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@usuario", usuario);
-				cmd.Parameters.AddWithValue("@email", correo);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Login realizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));

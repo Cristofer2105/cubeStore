@@ -10,6 +10,8 @@
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown"
         FontFamily="Segoe UI Emoji">
     <Grid  Background="#EA5555">
         <Grid Height="70" VerticalAlignment="Top" Background="#EA5555">
@@ -20,7 +22,7 @@
             <Image Source="imagenes/cubestore.png" HorizontalAlignment="Left" Margin="10 0" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
             </StackPanel>
-            <TextBlock Text="CAMBIE SU CONTRASEÑA" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="42" Margin="54,133,40,-105" Width="256" FontWeight="Bold"/>
+            <TextBlock Text="CAMBIE SU CONTRASEÑA" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Height="42" Margin="57,91,37,-63" Width="256" FontWeight="Bold"/>
         </Grid>
         <!--<Rectangle Height="280" VerticalAlignment="Top">
             <Rectangle.Fill>
@@ -32,7 +34,7 @@
             </Rectangle.Fill>
         </Rectangle>-->
 
-        <Rectangle Width="280" Height="240" VerticalAlignment="Bottom" Margin="0,80" RadiusY="10" RadiusX="10" Fill="White">
+        <Rectangle Width="280" Height="261" VerticalAlignment="Bottom" Margin="35,0,35,80" RadiusY="10" RadiusX="10" Fill="White">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
             </Rectangle.Effect>
@@ -40,9 +42,11 @@
         <Grid VerticalAlignment="Bottom" Margin="35,80" Height="240">
             <StackPanel VerticalAlignment="Bottom" Margin="15,0,15,58">
                 <TextBox IsEnabled="False" Margin="0,10" materialDesign:HintAssist.Hint="USUARIO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" x:Name="txtusuarioCambiarContrasenia"/>
-                <PasswordBox Margin="0,10" materialDesign:HintAssist.Hint="CONTRASEÑA" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" x:Name="txtContrasenia"/>
+                <PasswordBox Margin="0,10" materialDesign:HintAssist.Hint="NUEVA CONTRASEÑA" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" x:Name="txtContrasenia"/>
+                <PasswordBox Margin="0,10" materialDesign:HintAssist.Hint="REPITA SU CONTRASEÑA" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" x:Name="txtContraseniarepetir"/>
             </StackPanel>
         </Grid>
         <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="CAMBIAR" Background="#F69B2D" FontWeight="Bold" x:Name="btnCambiarContrasenia" Click="BtnCambiarContrasenia_Click" />
+        <TextBlock x:Name="txbalertasCambiarContraseña" Foreground="White" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="23,440,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="306" Height="37"/>
     </Grid>
 </Window>

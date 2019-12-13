@@ -26,34 +26,136 @@ namespace cubeStore
 		public CambiarContrasenia()
         {
             InitializeComponent();
+			txtusuarioCambiarContrasenia.Text = Sesion.usuarioSesion;
+			txtContrasenia.Focus();
         }
 
 		private void BtnCambiarContrasenia_Click(object sender, RoutedEventArgs e)
 		{
-			if (txtusuarioCambiarContrasenia.Text==""&&txtContrasenia.Password=="")
+			string nuevaContrasenia = txtContrasenia.Password;
+			string repetircontrasenia = txtContraseniarepetir.Password;
+			string email = Sesion.email;
+			string Nombreusuario = Sesion.usuarioSesion;
+			if (nuevaContrasenia!=""&&repetircontrasenia!="")
 			{
-				MessageBox.Show("Debe ingresar los campos!");
+				if (nuevaContrasenia==repetircontrasenia)
+				{
+					try
+					{
+						usuario = new Usuario();
+						usuario.NombreUsuario = Sesion.usuarioSesion;
+						usuario.Contrasenia = nuevaContrasenia;
+						brl = new UsuarioBRL(usuario);
+						brl.UpdateContrasenia();
+						//Inicio Enviando email
+						#region enviar correo
+						System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+						msg.To.Add(email);
+						msg.Subject = "Informacion Confidencial Sistema cubestore";
+						msg.SubjectEncoding = System.Text.Encoding.UTF8;
+
+						msg.Body = "Importante! No compartas esta informacion a cualquier persona "+"  Las credenciales para usar el sistema cubestore son: "+"Usuario: "+ Nombreusuario + ",    Contraseña:   " + nuevaContrasenia;
+						msg.BodyEncoding = System.Text.Encoding.UTF8;
+						msg.IsBodyHtml = true;
+						msg.From = new System.Net.Mail.MailAddress("cristoferhilaquita7@gmail.com");
+
+						System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+						client.Credentials = new System.Net.NetworkCredential("cristoferhilaquita7@gmail.com", "Cristofer246");
+						client.Port = 587;
+						client.EnableSsl = true;
+						client.Host = "smtp.gmail.com";
+						client.Send(msg);
+						#endregion
+						//Fin Enviando email
+						MessageBox.Show("El cambio de contraseña fue exitoso, Inicie sesion para comenzar por favor");
+						Login login = new Login();
+						this.Close();
+						login.Show();
+
+					}
+					catch (Exception)
+					{
+						MessageBox.Show("Ocurrio un error al cambiar la contraseña intente de nuevo si el error persiste comuniquese con el administrador de sistemas");
+						txtContrasenia.Clear();
+						txtusuarioCambiarContrasenia.Clear();
+					}
+				}
+				else
+				{
+					txbalertasCambiarContraseña.Text = "Ambas contraseñas deben ser iguales";
+				}
 			}
 			else
 			{
-				try
+				txbalertasCambiarContraseña.Text = "Por favor ingrese la nueva contraseña y/o repita la contraseña";
+			}		
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			txtContrasenia.Focus();
+		}
+
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				string nuevaContrasenia = txtContrasenia.Password;
+				string repetircontrasenia = txtContraseniarepetir.Password;
+				string email = Sesion.email;
+				string Nombreusuario = Sesion.usuarioSesion;
+				if (nuevaContrasenia != "" && repetircontrasenia != "")
 				{
-					usuario = new Usuario();
-					usuario.NombreUsuario = txtusuarioCambiarContrasenia.Text;
-					usuario.Contrasenia = txtContrasenia.Password.Trim();
-					brl = new UsuarioBRL(usuario);
-					brl.UpdateContrasenia();
-					MessageBox.Show("Contraseña actualizada correctamente");
-					Login login = new Login();
-					this.Close();
-					login.Show();
-					
+					if (nuevaContrasenia == repetircontrasenia)
+					{
+						try
+						{
+							usuario = new Usuario();
+							usuario.NombreUsuario = Sesion.usuarioSesion;
+							usuario.Contrasenia = nuevaContrasenia;
+							brl = new UsuarioBRL(usuario);
+							brl.UpdateContrasenia();
+							//Inicio Enviando email
+							#region enviar correo
+							System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+							msg.To.Add(email);
+							msg.Subject = "Informacion Confidencial Sistema cubestore";
+							msg.SubjectEncoding = System.Text.Encoding.UTF8;
+
+							msg.Body = "Importante! No compartas esta informacion a cualquier persona " + "  Las credenciales para usar el sistema cubestore son: " + "Usuario: " + Nombreusuario + ",    Contraseña:   " + nuevaContrasenia;
+							msg.BodyEncoding = System.Text.Encoding.UTF8;
+							msg.IsBodyHtml = true;
+							msg.From = new System.Net.Mail.MailAddress("cristoferhilaquita7@gmail.com");
+
+							System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+							client.Credentials = new System.Net.NetworkCredential("cristoferhilaquita7@gmail.com", "Cristofer246");
+							client.Port = 587;
+							client.EnableSsl = true;
+							client.Host = "smtp.gmail.com";
+							client.Send(msg);
+							#endregion
+							//Fin Enviando email
+							MessageBox.Show("El cambio de contraseña fue exitoso, Inicie sesion para comenzar por favor");
+							Login login = new Login();
+							this.Close();
+							login.Show();
+
+						}
+						catch (Exception)
+						{
+							MessageBox.Show("Ocurrio un error al cambiar la contraseña intente de nuevo si el error persiste comuniquese con el administrador de sistemas");
+							txtContrasenia.Clear();
+							txtusuarioCambiarContrasenia.Clear();
+						}
+					}
+					else
+					{
+						txbalertasCambiarContraseña.Text = "Ambas contraseñas deben ser iguales";
+					}
 				}
-				catch (Exception ex)
+				else
 				{
-					MessageBox.Show("Verifique que los datos sean correctos");
-					txtContrasenia.Clear();
-					txtusuarioCambiarContrasenia.Clear();
+					txbalertasCambiarContraseña.Text = "Por favor ingrese la nueva contraseña y/o repita la contraseña";
 				}
 			}
 		}

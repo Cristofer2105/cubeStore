@@ -63,6 +63,7 @@ namespace cubeStore
 						Sesion.primerapellido = dt.Rows[0][5].ToString();
 						Sesion.segundoapellido = dt.Rows[0][6].ToString();
 						Sesion.contrasenia = txtContrasenia.Password;
+						Sesion.email= dt.Rows[0][7].ToString();
 
 						//Iniciamos variables de configuracion
 						ConfigBRL configBRL = new ConfigBRL();
@@ -71,8 +72,7 @@ namespace cubeStore
 						if (byte.Parse(dt.Rows[0][3].ToString()) == 1)
 						{
 							CambiarContrasenia cambia = new CambiarContrasenia();
-							this.Close();
-							cambia.txtusuarioCambiarContrasenia.Text = txtUusario.Text;
+							this.Close();							
 							cambia.Show();
 						}
 						else

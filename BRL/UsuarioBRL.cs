@@ -103,10 +103,10 @@ namespace BRL
 		/// <param name="usuario"></param>
 		/// <param name="correo"></param>
 		/// <returns>DataTable</returns>
-		public DataTable VerificarUser(string usuario, string correo)
+		public DataTable VerificarUser(string usuario)
 		{
 			dal = new UsuarioDal();
-			return dal.VerificarUser(usuario, correo);
+			return dal.VerificarUser(usuario);
 		}
 		/// <summary>
 		/// Metodo RestablecerContrasenia UsuarioBRL

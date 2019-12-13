@@ -18,6 +18,8 @@ namespace Common
 		public static string primerapellido;
 		public static string segundoapellido;
 		public static string contrasenia;
+		public static string email;
+
 		public static string VerInfo()
 		{
 			return "Usuario:  " + usuarioSesion +"\n"+ "\n" + "Rol:  " + rolSesion;
