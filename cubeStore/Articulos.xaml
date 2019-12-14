@@ -64,7 +64,7 @@
                 <Grid.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
                 </Grid.Effect>
-                <Grid VerticalAlignment="Bottom" Margin="0,0,10,10" Height="550" Background="White">
+                <Grid VerticalAlignment="Bottom" Margin="10,0,10,24" Height="522" Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="17*"/>
                         <ColumnDefinition Width="26*"/>
@@ -73,21 +73,17 @@
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="447*"/>
                     </Grid.RowDefinitions>
-                    <Grid.Effect>
-                        <DropShadowEffect BlurRadius="20" ShadowDepth="1"/>
-                    </Grid.Effect>
+
                     <StackPanel Margin="15" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <StackPanel Background="#004E6F" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Height="Auto" Margin="0 50" Width="372">
                             <TextBox TextChanged="TxtBuscarArticulo_TextChanged" Foreground="Black" Background="White" materialDesign:HintAssist.Hint="Buscar Articulo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="17" x:Name="txtBuscarArticulo" Height="40" Width="324"/>
                             <materialDesign:PackIcon Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"  Kind="Search" IsEnabled="False" Height="30" Width="48"/>
                         </StackPanel>
-                        <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" Height="208" VerticalAlignment="Center" Margin="0" x:Name="dgdDatos" SelectionMode="Single">
-                          
-                        </DataGrid>
+                        <DataGrid  SelectionChanged="DgdDatos_SelectionChanged" CanUserAddRows="False" IsReadOnly="True" Height="158" VerticalAlignment="Center" Margin="0" x:Name="dgdDatos" SelectionMode="Single"/>
                     </StackPanel>
                     <TextBlock HorizontalAlignment="Left" Margin="15,15,0,0" TextWrapping="Wrap" FontSize="20"  FontWeight="Bold" Text="Lista de Articulos" VerticalAlignment="Top" Height="30" Width="178" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="15,329,0,0" TextWrapping="Wrap" FontSize="15"  FontWeight="Bold" Text="Imagen del Articulo" VerticalAlignment="Top" Height="30" Width="199" Grid.ColumnSpan="2" Grid.Row="1"/>
-                    <Image x:Name="imgArticulo" Stretch="Fill" HorizontalAlignment="Left" Height="142" Margin="120,364,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="15,294,0,0" TextWrapping="Wrap" FontSize="15"  FontWeight="Bold" Text="Imagen del Articulo" VerticalAlignment="Top" Height="30" Width="199" Grid.ColumnSpan="2" Grid.Row="1"/>
+                    <Image x:Name="imgArticulo" Stretch="Fill" HorizontalAlignment="Left" Height="142" Margin="124,329,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2"/>
                 </Grid>
             </Grid>
 

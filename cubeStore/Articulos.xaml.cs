@@ -57,10 +57,10 @@ namespace cubeStore
 				cbxProvedor.ItemsSource = provBRL.SelectProvedores().DefaultView;
 				cbxProvedor.SelectedIndex = 0;
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 
-				MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+				MessageBox.Show("Ocurrio un error al cargar los datos intente salir y volver a entrar si el error persiste comuniquese con el administrador de sistemas");
 			}
 
 		}
@@ -139,7 +139,7 @@ namespace cubeStore
 						{
 					
 							pathImagen = string.Empty;
-							MessageBox.Show("No se pudo cargar la imagen comuniquese con el administrador de sistemas");
+							MessageBox.Show("No se pudo cargar la imagen intente de nuevo si el error persiste comuniquese con el administrador de sistemas");
 
 						}
 					}
@@ -167,7 +167,7 @@ namespace cubeStore
 		private void BtnAgregar_Click(object sender, RoutedEventArgs e)
 		{
 			MessageBox.Show("Complete el formulario para agregar un nuevo articulo");
-			dgdDatos.IsEnabled = false;
+			imgArticulo.Source = null;
 			Habilitar(1);
 			LimpiarCampos();
 			opcion = 0;
@@ -338,6 +338,7 @@ namespace cubeStore
 			dgdDatos.IsEnabled = true;
 			DesHabilitar();
 			LimpiarCampos();
+			imgArticulo.Source = null;
 		}
 
 		private void TxtBuscarArticulo_TextChanged(object sender, TextChangedEventArgs e)
