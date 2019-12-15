@@ -78,59 +78,60 @@ namespace cubeStore
 			this.Close();
 
 		}
-
+		/// <summary>
+		/// Evento click que permite modificar una Categoria
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnModificar_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 			Habilitar(2);
 			dgdDatos.IsEnabled = true;
 		}
-
+		/// <summary>
+		/// Evento click que permite agregar una nueva Categoria
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
 		{			
 			Habilitar(1);
 			LimpiarCampos();
 			dgdDatos.IsEnabled = false;
 		}
-
+		/// <summary>
+		/// Evento Click para eliminar una categoria
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
 		{
 			
 			if (dtElim!=null)
-			{
-				try
-				{
-					brl = new CategoriaBRL();
-					dtElim = brl.VerificarCategoriaEliminar(categoria.IdCategoria);
-				}
-				catch (Exception)
-				{
-
-					MessageBox.Show("F");
-				}
-
+			{			
+				brl = new CategoriaBRL();
+				dtElim = brl.VerificarCategoriaEliminar(categoria.IdCategoria);			
 				if (dtElim.Rows.Count == 0 &&dgdDatos.Items.Count<1)
-			{
-				if (categoria != null && txtnombreCategoria.Text != "")
 				{
-					if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+					if (categoria != null && txtnombreCategoria.Text != "")
 					{
-						//Eliminacion Logica
-						try
+						if (MessageBox.Show("Esta Seguro de Eliminar la categoria?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 						{
-							brl = new CategoriaBRL(categoria);
-							brl.Delete();
-							MessageBox.Show("Eliminado Exitosamente");
-							LoadDataGrid();
-							LimpiarCampos();
-						}
-						catch (Exception ex)
-						{
-
-							MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+							//Eliminacion Logica
+							try
+							{
+								brl = new CategoriaBRL(categoria);
+								brl.Delete();
+								MessageBox.Show("Eliminado Exitosamente");
+								LoadDataGrid();
+								LimpiarCampos();
+							}
+							catch (Exception)
+							{
+								MessageBox.Show("Ocurrio un error al eliminar la categoria intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
+							}
 						}
 					}
-				}
 				else
 				{
 					MessageBox.Show("Tiene que seleccionar un registro de la lista para eliminarlo");
@@ -138,12 +139,12 @@ namespace cubeStore
 			}
 			else
 			{
-				MessageBox.Show("No puede Eliminar esta categoria");
+				MessageBox.Show("No puede eliminar esta Categoria por que tiene Articulos que estan asociados a ella");
 			}
 			}
 			else
 			{
-				MessageBox.Show("Seleccione");
+				MessageBox.Show("Seleccione un registro de la lista para poder eliminarlo");
 			}
 		}
 
@@ -201,7 +202,7 @@ namespace cubeStore
 					break;
 				case 2:
 					//Modificar
-					if (txtnombreCategoria.Text=="")
+					if (txtnombreCategoria.Text==""&&categoria==null)
 					{
 						MessageBox.Show("Tiene que seleccionar un registro de la lista para modificarlo");
 					}
@@ -256,13 +257,21 @@ namespace cubeStore
 			LimpiarCampos();
 			dgdDatos.IsEnabled = true;
 		}
-
+		/// <summary>
+		/// Evento Loaded para cargar al datagrid los registros de Articulos
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadDataGrid();
 			dgdDatos.IsEnabled = true;
 		}
-
+		/// <summary>
+		/// Evento SelectionChanged para poder seleccionar una Categoria de un DataGrid
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void DgdDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 
@@ -285,7 +294,11 @@ namespace cubeStore
 				}
 			}
 		}
-
+		/// <summary>
+		/// Evento TextChanged para realizar busquedas de Categorias
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void TxtBuscarCategorias_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			if (txtBuscarCategorias.Text == "")
