@@ -40,7 +40,7 @@ namespace cubeStore
 			//Modificar
 			if (txtcodigo.Text == "" && txtidItem.Text == "" && txtpreciobase.Text == "" )
 			{
-				MessageBox.Show("Tiene que llenar el formulario");
+				MessageBox.Show("El codigo y/o el precio del item no pueden ir vacios");
 			}
 			else
 			{
@@ -61,7 +61,7 @@ namespace cubeStore
 						item.IdItem = int.Parse(txtidItem.Text.ToString());
 						brl = new ItemBRL(item);
 						brl.Update();
-						MessageBox.Show("Registro Modificado Exitosamente");
+						MessageBox.Show("Item Modificado Exitosamente");
 						Items itemss = new Items();
 						txtidItem.Text = "";
 						txtcodigo.Text = "";
@@ -69,15 +69,34 @@ namespace cubeStore
 						this.Close();
 						itemss.Show();
 					}
-					catch (Exception ex)
+					catch (Exception)
 					{
 
-						MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+						MessageBox.Show("Ocurrio un error al modificar el Item intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
 					}
 				}
 				else
 				{
-					MessageBox.Show("El item ya existe");
+					if (txtcodigo.Text==""&&txtpreciobase.Text=="")
+					{
+						MessageBox.Show("Complete el codigo y/o el precio del Item");
+					}
+					else
+					{
+						item = new Item();
+						item.CodigoItem = txtcodigo.Text;
+						item.PrecioBaseItem = double.Parse(txtpreciobase.Text.ToString());
+						item.IdItem = int.Parse(txtidItem.Text.ToString());
+						brl = new ItemBRL(item);
+						brl.Update();
+						MessageBox.Show("El Item ya existe solo se modifico el precio");
+						Items itemss = new Items();
+						txtidItem.Text = "";
+						txtcodigo.Text = "";
+						txtpreciobase.Text = "";
+						this.Close();
+						itemss.Show();
+					}					
 				}
 			}		
 
@@ -87,7 +106,7 @@ namespace cubeStore
 		{
 			if (txtidItem.Text!="")
 			{
-				if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+				if (MessageBox.Show("Esta Seguro de Eliminar el Item?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 				{
 					//Eliminacion Logica
 					try
@@ -97,7 +116,7 @@ namespace cubeStore
 						item.IdItem = int.Parse(txtidItem.Text.ToString());
 						brl = new ItemBRL(item);
 						brl.Delete();
-						MessageBox.Show("Eliminado Exitosamente");
+						MessageBox.Show("Item eliminado Exitosamente");
 						Items items = new Items();
 						txtidItem.Text = "";
 						txtcodigo.Text = "";
@@ -108,13 +127,13 @@ namespace cubeStore
 					catch (Exception ex)
 					{
 
-						MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+						MessageBox.Show("Ocurrio un error al eliminar intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
 					}
 				}
 			}
 			else
 			{
-				MessageBox.Show("Debe seleccionar un registro de la lista");
+				MessageBox.Show("Debe seleccionar un registro de la lista de Items");
 			}
 		}
 	}

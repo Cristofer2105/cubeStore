@@ -68,7 +68,7 @@ namespace cubeStore
 			catch (Exception ex)
 			{
 
-				MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+				MessageBox.Show("Ocurrio un error al cargar los Provedores intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
 			}
 
 		}
@@ -87,7 +87,6 @@ namespace cubeStore
 		/// <param name="e"></param>
 		private void BtnModificar_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 			Habilitar(2);
 		}		
 		/// <summary>
@@ -103,7 +102,7 @@ namespace cubeStore
 			{
 				if (provedor != null && txtnombreprovedor.Text != "")
 				{
-					if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+					if (MessageBox.Show("Esta Seguro de Eliminar el Provedor?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 					{
 						//Eliminacion Logica
 						try
@@ -117,10 +116,10 @@ namespace cubeStore
 
 
 						}
-						catch (Exception ex)
+						catch (Exception)
 						{
 
-							MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+							MessageBox.Show("Ocurrio un error al eliminar el Provedor intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
 						}
 					}
 				}
@@ -131,7 +130,7 @@ namespace cubeStore
 			}
 			else
 			{
-				MessageBox.Show("No puedes Eliminar este provedor");
+				MessageBox.Show("No puedes Eliminar este Provedor por que existen articulos asociados al mismo");
 			}
 		}
 		/// <summary>
@@ -193,7 +192,6 @@ namespace cubeStore
 		/// <param name="e"></param>
 		private void BtnAgregar_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Complete el formulario para agregar un nuevo provedor");
 			Habilitar(1);
 			LimpiarCampos();
 			mapaProv.Children.Clear();
@@ -208,7 +206,7 @@ namespace cubeStore
 					//Insertar
 					if (txtnombreprovedor.Text == "")
 					{
-						MessageBox.Show("Debe Llenar los campos para poder agregar un registro");
+						MessageBox.Show("Debe ingresar el nombre del Provedor");
 					}
 					else
 					{					
@@ -226,7 +224,7 @@ namespace cubeStore
 									provedor = new Provedor(txtnombreprovedor.Text.Trim(), (float)pinUbicacion.Latitude, (float)pinUbicacion.Longitude, fecha);
 									brl = new ProvedorBRL(provedor);
 									brl.Insert();
-									MessageBox.Show("Registro Exitoso");
+									MessageBox.Show("Registro de Provedor exitoso");
 
 									mapaProv.Children.Clear();
 									LoadDataGrid();
@@ -238,17 +236,17 @@ namespace cubeStore
 								catch (Exception)
 								{
 
-									MessageBox.Show("Debe Elegir Una Ubicacion");
+									MessageBox.Show("Debe elegir la ubicacion del provedor en el mapa");
 								}
 							}
 							else
 							{
-								MessageBox.Show("Ingrese Correctamente los campos");
+								MessageBox.Show("Solo se permiten letras para el nombre del Provedor");
 							}
 						}
 						else
 						{
-							MessageBox.Show("El Provedor ya existe");
+							MessageBox.Show("El Provedor ya esta registrado");
 						}
 					}
 				break;
@@ -285,12 +283,12 @@ namespace cubeStore
 
 							catch (Exception)
 							{
-								MessageBox.Show("Debe Elegir Una Ubicacion");
+								MessageBox.Show("Por favor elija una nueva ubicacion para el Provedor");
 							}
 						}
 						else
 						{
-							MessageBox.Show("El provedor ya existe");
+							MessageBox.Show("El provedor ya esta registrado");
 						}
 					}
 					break;
@@ -350,6 +348,8 @@ namespace cubeStore
 					mapaProv.Children.Add(pushpin);
 					mapaProv.Center = location;				
 					txtnombreprovedor.Text = provedor.RazonSocial;
+					provedor.Latitud = aux;
+					provedor.Longitud = aux2;
 
 				}
 				catch (Exception ex)

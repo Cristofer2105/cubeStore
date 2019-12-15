@@ -134,7 +134,11 @@ namespace cubeStore
 				}
 			}
 		}
-
+		/// <summary>
+		/// Evento click que Permite Insertar o Modificar una Categoria
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnGuardarAccion_Click(object sender, RoutedEventArgs e)
 		{
 			switch (operacion)
@@ -143,7 +147,7 @@ namespace cubeStore
 					//Insertar
 					if (txtnombreCategoria.Text == "")
 					{
-						MessageBox.Show("Debe Llenar los campos para poder agregar un registro");
+						MessageBox.Show("Debe ingresar un nombre para poder agregar una Categoria");
 					}
 					else
 					{
@@ -171,13 +175,13 @@ namespace cubeStore
 								catch (Exception)
 								{
 
-									MessageBox.Show("Existe un problema al insertar el registro, comuniquese con el administrador de sistemas");
+									MessageBox.Show("Existe un problema al insertar la Categoria intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
 								}
 
 							}
 							else
 							{
-								MessageBox.Show("Ingrese Correctamente el nombre");
+								MessageBox.Show("Solo se permite letras no numeros u otros signos");
 								LimpiarCampos();
 							}
 						}
@@ -195,12 +199,12 @@ namespace cubeStore
 					}
 					else
 					{
-						txtnombreCategoria.Text = txtnombreCategoria.Text.Trim();
+						string nombreCategoria = categoria.NombreCategoria;
+						string nombreCambiado= txtnombreCategoria.Text.Trim();
 						brl = new CategoriaBRL();
 						DataTable dt = brl.VerificarCategoria(txtnombreCategoria.Text);
 						if (dt.Rows.Count == 0)
 						{
-
 							if (Validate.OnlyLettersAndSpaces(txtnombreCategoria.Text))
 							{
 								try
@@ -208,36 +212,45 @@ namespace cubeStore
 									dgdDatos.IsEnabled = true;
 									//Modificar
 									//categoria = new Categoria(txtnombreCategoria.Text);
-									categoria.NombreCategoria = txtnombreCategoria.Text;
-
+									categoria.NombreCategoria = nombreCambiado;						
 									brl = new CategoriaBRL(categoria);
 									brl.Update();
-									MessageBox.Show("Registro Modificado Exitosamente");
+									MessageBox.Show("Categoria modificado exitosamente");
 									LoadDataGrid();
 									DesHabilitar();
 									LimpiarCampos();
 								}
-								catch (Exception ex)
+								catch (Exception)
 								{
 
-									MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+									MessageBox.Show("Ocurrio un error al modificar la Categoria intente nuevamente si el persiste comuniquese con el administrador de sistemas");
 								}
 
 							}
 							else
 							{
-								MessageBox.Show("Ingrese Correctamente el nombre");
+								MessageBox.Show("Solo se permite letras no numeros u otros signos");
 							}
 						}
 						else
 						{
-							MessageBox.Show("La categoria ya existe");
+							MessageBox.Show("La Categoria ya existe no se guardo ningun cambio");
+							categoria.NombreCategoria = nombreCategoria;
+							brl = new CategoriaBRL(categoria);
+							brl.Update();
+							LoadDataGrid();
+							DesHabilitar();
+							LimpiarCampos();
 						}
 					}
 					break;
 			}
 		}
-
+		/// <summary>
+		/// Evento click que permite cancelar insertar modificar
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnCancelar_Click(object sender, RoutedEventArgs e)
 		{
 			DesHabilitar();

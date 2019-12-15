@@ -64,6 +64,16 @@ namespace BRL
 			return dal.Select();
 		}
 		/// <summary>
+		/// Metodo que permite la busqueda de items mediante el nombre del articulo
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns></returns>
+		public DataTable SelectBusquedaItems(string texto)
+		{
+			dal = new ItemDAL();
+			return dal.SelectBusquedaItems(texto);
+		}
+		/// <summary>
 		/// Metodo Update ItemBRL
 		/// </summary>
 		public override void Update()

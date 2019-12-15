@@ -160,7 +160,7 @@ namespace DAL
 			return res;
 		}
 		/// <summary>
-		/// Metodo SelectBusquedaArticulo 
+		/// Metodo SelectBusquedaArticulo permite buscar un Articulo mediante un texto
 		/// </summary>
 		/// <param name="texto"></param>
 		/// <returns>DataTable</returns>

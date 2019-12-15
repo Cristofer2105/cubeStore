@@ -100,6 +100,31 @@ namespace DAL
 			return res;
 		}
 		/// <summary>
+		/// Metodo que permite hacer busqueda de un item mediante el articulo 
+		/// </summary>
+		/// <param name="texto"></param>
+		/// <returns>DataTable</returns>
+		public DataTable SelectBusquedaItems(string texto)
+		{
+			DataTable res = new DataTable();
+			string query = "SELECT * FROM vwItemSelect ";
+			query = query + " WHERE  Articulo LIKE @texto ";
+			try
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Articulo", DateTime.Now));
+
+				SqlCommand cmd = Methods.CreateBasicCommand(query);
+				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
+				res = Methods.ExecuteDataTableCommand(cmd);
+
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+			}
+			return res;
+		}
+		/// <summary>
 		/// Metodo Update ItemDAL
 		/// </summary>
 		public override void Update()

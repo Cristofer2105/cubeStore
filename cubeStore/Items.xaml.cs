@@ -51,6 +51,7 @@ namespace cubeStore
 			{
 				brl = new ItemBRL();
 				dgdDatos.ItemsSource = brl.Select().DefaultView;
+				dgdDatos.ItemsSource = brl.SelectBusquedaItems(txtBuscarArticuloAdministrar.Text).DefaultView;
 				dgdDatos.Columns[0].Visibility = Visibility.Hidden;
 				dgdDatos.Columns[4].Visibility = Visibility.Hidden;
 			}
@@ -161,6 +162,18 @@ namespace cubeStore
 				{
 					MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 				}
+			}
+		}
+
+		private void TxtBuscarArticuloAdministrar_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (txtBuscarArticuloAdministrar.Text == "")
+			{
+				LoadDataGridItems();
+			}
+			else
+			{
+				LoadDataGridItems();
 			}
 		}
 	}

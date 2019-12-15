@@ -285,78 +285,75 @@ namespace cubeStore
 						MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 					}
 					else
-					{
-
-						txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();						
-							try
-							{
-								//Modificar
-								//categoria = new Categoria(txtnombreCategoria.Text);
-								string nombreArticulo = articulo.NombreArticulo;
-								string nombreCambiado = txtnombreArticulo.Text.Trim();
-								dgdDatos.IsEnabled = true;
-								DataTable dt = brl.VerificarArticulo(txtnombreArticulo.Text);
-								if (dt.Rows.Count>0)
-								{								
-									//Cambiamos imagen
-									if (pathImagen != pathFotoCarteroServer)
-									{
-										articulo.NombreArticulo=nombreArticulo;
-										brl = new ArticuloBRL(articulo);						
-										brl.Update();
-										MessageBox.Show("El Articulo ya existe solo se modifico la imagen");
-										imgArticulo.Source = null;
-										LoadDataGrid();
-										DesHabilitar();
-										LimpiarCampos();
-										System.GC.Collect();
-										System.GC.WaitForPendingFinalizers();
-										File.Delete(pathFotoCarteroServer);
-										File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
-									}
-									else
-									{
-										MessageBox.Show("El articulo ya existe no se modifico ningun cambio");
-										LoadDataGrid();
-										DesHabilitar();
-										LimpiarCampos();
-										imgArticulo.Source = null;
-									}
+					{							
+						try
+						{
+							//Modificar
+							//categoria = new Categoria(txtnombreCategoria.Text);
+							string nombreArticulo = articulo.NombreArticulo;
+							string nombreCambiado = txtnombreArticulo.Text.Trim();
+							dgdDatos.IsEnabled = true;
+							DataTable dt = brl.VerificarArticulo(txtnombreArticulo.Text);
+							if (dt.Rows.Count>0)
+							{								
+								//Cambiamos imagen
+								if (pathImagen != pathFotoCarteroServer)
+								{
+									articulo.NombreArticulo=nombreArticulo;
+									brl = new ArticuloBRL(articulo);						
+									brl.Update();
+									MessageBox.Show("El Articulo ya existe solo se modifico la imagen");
+									imgArticulo.Source = null;
+									LoadDataGrid();
+									DesHabilitar();
+									LimpiarCampos();
+									System.GC.Collect();
+									System.GC.WaitForPendingFinalizers();
+									File.Delete(pathFotoCarteroServer);
+									File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
 								}
 								else
 								{
-									articulo.NombreArticulo = nombreCambiado;
-									brl = new ArticuloBRL(articulo);
-									brl.Update();
-									MessageBox.Show("Articulo Modificado Exitosamente");
-									//Cambiamos imagen
-									if (pathImagen != pathFotoCarteroServer)
-									{
+									MessageBox.Show("El articulo ya existe no se modifico ningun cambio");
+									LoadDataGrid();
+									DesHabilitar();
+									LimpiarCampos();
+									imgArticulo.Source = null;
+								}
+							}
+							else
+							{
+								articulo.NombreArticulo = nombreCambiado;
+								brl = new ArticuloBRL(articulo);
+								brl.Update();
+								MessageBox.Show("Articulo Modificado Exitosamente");
+								//Cambiamos imagen
+								if (pathImagen != pathFotoCarteroServer)
+								{
 
-										LoadDataGrid();
-										DesHabilitar();
-										LimpiarCampos();
-										imgArticulo.Source = null;
-										System.GC.Collect();
-										System.GC.WaitForPendingFinalizers();
-										File.Delete(pathFotoCarteroServer);
-										File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
-									}
-									else
-									{
-										LoadDataGrid();
-										DesHabilitar();
-										LimpiarCampos();
-										imgArticulo.Source = null;
-
+									LoadDataGrid();
+									DesHabilitar();
+									LimpiarCampos();
+									imgArticulo.Source = null;
+									System.GC.Collect();
+									System.GC.WaitForPendingFinalizers();
+									File.Delete(pathFotoCarteroServer);
+									File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
+								}
+								else
+								{
+									LoadDataGrid();
+									DesHabilitar();
+									LimpiarCampos();
+									imgArticulo.Source = null;
 								}
 							}																
-							}
-							catch (Exception)
-							{
+						}
+						catch (Exception)
+						{
 
-								MessageBox.Show("Ocurrio un error al modificar el Articulo intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
-							}			
+							MessageBox.Show("Ocurrio un error al modificar el Articulo intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
+						}			
 					}
 					break;
 			}
