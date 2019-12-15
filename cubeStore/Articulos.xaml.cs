@@ -175,11 +175,12 @@ namespace cubeStore
 
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
 		{
-			brl = new ArticuloBRL();
-			DataTable dt = brl.VerificarArticuloEliminar(articulo.IdArticulo);
+			
 			
 			if (txtnombreArticulo.Text != "")
 			{
+				brl = new ArticuloBRL();
+				DataTable dt = brl.VerificarArticuloEliminar(articulo.IdArticulo);
 				if (dt.Rows.Count == 0)
 				{
 					if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -205,13 +206,13 @@ namespace cubeStore
 				}
 				else
 				{
-					MessageBox.Show("Debe seleccionar un registro de la lista");
+					MessageBox.Show("No puede eliminar el Articulo por que tiene Items asociados a la misma");
 				}
 
 			}
 			else
 			{
-				MessageBox.Show("No puede eliminar este Articulo");
+				MessageBox.Show("Seleccione un registro de la lista para eliminarlo");
 			}
 		}
 
@@ -286,51 +287,76 @@ namespace cubeStore
 					else
 					{
 
-						txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();
-						brl = new ArticuloBRL();
-						DataTable dt = brl.VerificarArticulo(txtnombreArticulo.Text);
-						if (dt.Rows.Count == 0)
-						{
+						txtnombreArticulo.Text = txtnombreArticulo.Text.Trim();						
 							try
 							{
 								//Modificar
 								//categoria = new Categoria(txtnombreCategoria.Text);
-								articulo.NombreArticulo = txtnombreArticulo.Text;
+								string nombreArticulo = articulo.NombreArticulo;
+								string nombreCambiado = txtnombreArticulo.Text.Trim();
 								dgdDatos.IsEnabled = true;
-								brl = new ArticuloBRL(articulo);
-
-								//Cambiamos imagen
-								if (pathImagen != pathFotoCarteroServer)
-								{
-									brl.Update();
-									MessageBox.Show("Registro Modificado Exitosamente");
-									LoadDataGrid();
-									DesHabilitar();
-									LimpiarCampos();
-									System.GC.Collect();
-									System.GC.WaitForPendingFinalizers();
-									File.Delete(pathFotoCarteroServer);
-									File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
+								DataTable dt = brl.VerificarArticulo(txtnombreArticulo.Text);
+								if (dt.Rows.Count>0)
+								{								
+									//Cambiamos imagen
+									if (pathImagen != pathFotoCarteroServer)
+									{
+										articulo.NombreArticulo=nombreArticulo;
+										brl = new ArticuloBRL(articulo);						
+										brl.Update();
+										MessageBox.Show("El Articulo ya existe solo se modifico la imagen");
+										imgArticulo.Source = null;
+										LoadDataGrid();
+										DesHabilitar();
+										LimpiarCampos();
+										System.GC.Collect();
+										System.GC.WaitForPendingFinalizers();
+										File.Delete(pathFotoCarteroServer);
+										File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
+									}
+									else
+									{
+										MessageBox.Show("El articulo ya existe no se modifico ningun cambio");
+										LoadDataGrid();
+										DesHabilitar();
+										LimpiarCampos();
+										imgArticulo.Source = null;
+									}
 								}
 								else
 								{
-									MessageBox.Show("Error al modificar");
+									articulo.NombreArticulo = nombreCambiado;
+									brl = new ArticuloBRL(articulo);
+									brl.Update();
+									MessageBox.Show("Articulo Modificado Exitosamente");
+									//Cambiamos imagen
+									if (pathImagen != pathFotoCarteroServer)
+									{
+
+										LoadDataGrid();
+										DesHabilitar();
+										LimpiarCampos();
+										imgArticulo.Source = null;
+										System.GC.Collect();
+										System.GC.WaitForPendingFinalizers();
+										File.Delete(pathFotoCarteroServer);
+										File.Copy(pathImagen, Config.configpathImagenArticulo + articulo.IdArticulo + ".jpg");
+									}
+									else
+									{
+										LoadDataGrid();
+										DesHabilitar();
+										LimpiarCampos();
+										imgArticulo.Source = null;
+
 								}
-
-								
-
+							}																
 							}
-							catch (Exception ex)
+							catch (Exception)
 							{
 
-								MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
-							}
-						}
-						else
-						{
-							MessageBox.Show("El Articulo ya existe");
-						}
-
+								MessageBox.Show("Ocurrio un error al modificar el Articulo intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
+							}			
 					}
 					break;
 			}

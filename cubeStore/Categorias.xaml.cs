@@ -106,45 +106,32 @@ namespace cubeStore
 		/// <param name="e"></param>
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
 		{
-			
-			if (dtElim!=null)
-			{			
-				brl = new CategoriaBRL();
-				dtElim = brl.VerificarCategoriaEliminar(categoria.IdCategoria);			
-				if (dtElim.Rows.Count == 0 &&dgdDatos.Items.Count<1)
+
+			if (txtnombreCategoria.Text == "")
+			{
+				MessageBox.Show("Seleccione un registro de la lista para eliminarlo");
+			}
+			else
+			{
+				if (MessageBox.Show("Esta Seguro de Eliminar la Categoria?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 				{
-					if (categoria != null && txtnombreCategoria.Text != "")
+					//Eliminacion Logica
+					try
 					{
-						if (MessageBox.Show("Esta Seguro de Eliminar la categoria?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-						{
-							//Eliminacion Logica
-							try
-							{
-								brl = new CategoriaBRL(categoria);
-								brl.Delete();
-								MessageBox.Show("Eliminado Exitosamente");
-								LoadDataGrid();
-								LimpiarCampos();
-							}
-							catch (Exception)
-							{
-								MessageBox.Show("Ocurrio un error al eliminar la categoria intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
-							}
-						}
+						brl = new CategoriaBRL(categoria);
+						brl.Delete();
+						LimpiarCampos();
+						MessageBox.Show("Eliminado Exitosamente");
+						txtnombreCategoria.IsEnabled = false;
+						LoadDataGrid();
+
 					}
-				else
-				{
-					MessageBox.Show("Tiene que seleccionar un registro de la lista para eliminarlo");
+					catch (Exception)
+					{
+
+						MessageBox.Show("Ocurrio un error al eliminar la Categoria intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
+					}
 				}
-			}
-			else
-			{
-				MessageBox.Show("No puede eliminar esta Categoria por que tiene Articulos que estan asociados a ella");
-			}
-			}
-			else
-			{
-				MessageBox.Show("Seleccione un registro de la lista para poder eliminarlo");
 			}
 		}
 
