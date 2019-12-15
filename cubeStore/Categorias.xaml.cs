@@ -22,6 +22,7 @@ namespace cubeStore
 	/// </summary>
 	public partial class Categorias : Window
 	{
+		DataTable dtElim;
 		byte operacion = 0;
 		CategoriaBRL brl;
 		Categoria categoria;
@@ -94,9 +95,21 @@ namespace cubeStore
 
 		private void BtnEliminar_Click(object sender, RoutedEventArgs e)
 		{
-			brl = new CategoriaBRL();
-			DataTable dt = brl.VerificarCategoriaEliminar(categoria.IdCategoria);
-			if (dt.Rows.Count == 0)
+			
+			if (dtElim!=null)
+			{
+				try
+				{
+					brl = new CategoriaBRL();
+					dtElim = brl.VerificarCategoriaEliminar(categoria.IdCategoria);
+				}
+				catch (Exception)
+				{
+
+					MessageBox.Show("F");
+				}
+
+				if (dtElim.Rows.Count == 0 &&dgdDatos.Items.Count<1)
 			{
 				if (categoria != null && txtnombreCategoria.Text != "")
 				{
@@ -126,6 +139,11 @@ namespace cubeStore
 			else
 			{
 				MessageBox.Show("No puede Eliminar esta categoria");
+			}
+			}
+			else
+			{
+				MessageBox.Show("Seleccione");
 			}
 		}
 

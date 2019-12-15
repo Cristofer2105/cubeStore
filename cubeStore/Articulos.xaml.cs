@@ -155,18 +155,17 @@ namespace cubeStore
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadDataGrid();
+			txtnombreArticulo.Focus ();
 		}
 
 		private void BtnModificar_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 			Habilitar(2);
 			opcion = 1;
 		}
 
 		private void BtnAgregar_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Complete el formulario para agregar un nuevo articulo");
 			imgArticulo.Source = null;
 			Habilitar(1);
 			LimpiarCampos();
@@ -178,9 +177,10 @@ namespace cubeStore
 		{
 			brl = new ArticuloBRL();
 			DataTable dt = brl.VerificarArticuloEliminar(articulo.IdArticulo);
-			if (dt.Rows.Count == 0)
+			
+			if (txtnombreArticulo.Text != "")
 			{
-				if (articulo != null && txtnombreArticulo.Text != "")
+				if (dt.Rows.Count == 0)
 				{
 					if (MessageBox.Show("Esta Seguro de Eliminar el Registro?", "Eliminar", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 					{
@@ -201,11 +201,13 @@ namespace cubeStore
 							MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
 						}
 					}
+			
 				}
 				else
 				{
 					MessageBox.Show("Debe seleccionar un registro de la lista");
 				}
+
 			}
 			else
 			{
