@@ -76,7 +76,7 @@ namespace DAL
 			throw new NotImplementedException();
 		}
 		/// <summary>
-		/// Metodo Insert Venta con transacciones
+		/// Metodo Insert para la venta de items con transacciones
 		/// </summary>
 		public void InsertVentas()
 		{
@@ -106,6 +106,7 @@ namespace DAL
 
 				//query Venta Item
 				command.CommandText = "INSERT INTO VentaItem(idVenta,idItem,precioUnitario) VALUES(@idVenta,@idItem,@precioUnitario)";
+				int cont = 0;
 				foreach (var producto in this.vti)
 				{
 					command.Parameters.AddWithValue("@idVenta", id);
@@ -113,7 +114,7 @@ namespace DAL
 					command.Parameters.AddWithValue("@precioUnitario", producto.PrecioUnitario);
 					command.ExecuteNonQuery();
 					command.Parameters.Clear();
-
+					cont++;
 				}
 
 				//query Garantia
@@ -122,6 +123,19 @@ namespace DAL
 				command.Parameters.AddWithValue("@fechaInicioGarantia", grt.FechaInicio);
 				command.Parameters.AddWithValue("@fechafinGarantia", grt.FechaFin);
 				command.Parameters.AddWithValue("@fechaRegistroGarantia", grt.FechaRegistro);
+				command.ExecuteNonQuery();
+
+
+
+				//query Auditoria Proceso principal
+				string descripcionVenta = "ID Venta: "+id+", ID Cliente: "+vtn.IdCliente+", Venta de: "+cont+" Items"+", Total: "+vtn.Total+", Fecha de Venta: "+vtn.FechaRegistroVenta+", ID Garantia: "+id+", Fecha Expiracion de Garantia: "+grt.FechaFin;
+				string tabla = "Venta";
+				char c = 'C';
+				command.CommandText = "INSERT INTO AuditoriaPrincipal (tabla,cd,descripcion,idUsuario)VALUES(@tabla,@cd,@descripcion,@idUsuario)";
+				command.Parameters.AddWithValue("@tabla", tabla);
+				command.Parameters.AddWithValue("@cd", c);
+				command.Parameters.AddWithValue("@descripcion", descripcionVenta);
+				command.Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
 				command.ExecuteNonQuery();
 
 				//qury estado
@@ -175,12 +189,13 @@ namespace DAL
 
 				//query Venta Item
 				command.CommandText = "UPDATE Item SET estadoItem=1 WHERE idItem=@idItem";
+				int cont = 0;
 				foreach (Item producto in items)
 				{
 					command.Parameters.AddWithValue("@idItem", producto.IdItem);
 					command.ExecuteNonQuery();
 					command.Parameters.Clear();
-
+					cont++;
 				}
 
 				//query Garantia
@@ -196,6 +211,16 @@ namespace DAL
 				command.Parameters.AddWithValue("@motivo", ventaAnulada.Motivo);
 				command.ExecuteNonQuery();
 
+				//query Auditoria Proceso principal
+				string descripcionVenta = "ID Venta:  " + venta.IdVenta + ",  Venta de: " + cont + "  Items" + ",  Total: " + venta.Total +",  ID Garantia: " + venta.IdVenta+",  Motivo de Anulacion: "+ventaAnulada.Motivo;
+				string tabla = "Venta";
+				char c = 'D';
+				command.CommandText = "INSERT INTO AuditoriaPrincipal (tabla,cd,descripcion,idUsuario)VALUES(@tabla,@cd,@descripcion,@idUsuario)";
+				command.Parameters.AddWithValue("@tabla", tabla);
+				command.Parameters.AddWithValue("@cd", c);
+				command.Parameters.AddWithValue("@descripcion", descripcionVenta);
+				command.Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+				command.ExecuteNonQuery();
 
 				// Attempt to commit the transaction.
 				transaction.Commit();
