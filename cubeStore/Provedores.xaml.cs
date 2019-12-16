@@ -26,11 +26,15 @@ namespace cubeStore
 		byte operacion = 0;
 		Provedor provedor;
 		ProvedorBRL brl;
-		Location pinUbicacion;
+		Location pinUbicacion;	
 		public Provedores()
 		{
 			InitializeComponent();
 		}
+		/// <summary>
+		/// Metodo que habilita controles para el usuario
+		/// </summary>
+		/// <param name="operacion"></param>
 		private void Habilitar(byte operacion)
 		{
 			btnGuardar.IsEnabled = true;
@@ -43,7 +47,9 @@ namespace cubeStore
 			btnEliminar.IsEnabled = false;
 			this.operacion = operacion;
 		}
-
+		/// <summary>
+		/// Metodo que deshabilita controles para el usuario
+		/// </summary>
 		private void DesHabilitar()
 		{
 			btnGuardar.IsEnabled = false;
@@ -54,6 +60,9 @@ namespace cubeStore
 			btnEliminar.IsEnabled = true;
 			
 		}
+		/// <summary>
+		/// Metodo que carga el datagrid de provedores
+		/// </summary>
 		private void LoadDataGrid()
 		{
 			try
@@ -72,6 +81,9 @@ namespace cubeStore
 			}
 
 		}
+		/// <summary>
+		/// Metodo para limpiar campos de texto
+		/// </summary>
 		private void LimpiarCampos()
 		{
 			txtnombreprovedor.Text="";
@@ -197,7 +209,11 @@ namespace cubeStore
 			mapaProv.Children.Clear();
 			dgdDatos.IsEnabled = false;
 		}
-
+		/// <summary>
+		/// Evento click que permite insertar o modificar un Provedor
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void BtnGuardar_Click(object sender, RoutedEventArgs e)
 		{
 			switch (operacion)
@@ -269,11 +285,10 @@ namespace cubeStore
 								//categoria = new Categoria(txtnombreCategoria.Text);						
 								provedor.RazonSocial = txtnombreprovedor.Text.Trim();
 								provedor.Latitud = (float)pinUbicacion.Latitude;
-								provedor.Longitud = (float)pinUbicacion.Longitude;
-								
+								provedor.Longitud = (float)pinUbicacion.Longitude;								
 								brl = new ProvedorBRL(provedor);
 								brl.Update();
-								MessageBox.Show("Registro Modificado Exitosamente");
+								MessageBox.Show("Provedor modificado exitosamente");
 								mapaProv.Children.Clear();
 								LoadDataGrid();
 								LimpiarCampos();
@@ -288,13 +303,30 @@ namespace cubeStore
 						}
 						else
 						{
-							MessageBox.Show("El provedor ya esta registrado");
+							string prov=provedor.RazonSocial;
+							var lat = provedor.Latitud;
+							var lon = provedor.Longitud;
+							provedor.RazonSocial = prov;
+							provedor.Latitud = (float)pinUbicacion.Latitude;
+							provedor.Longitud = (float)pinUbicacion.Longitude;
+							brl = new ProvedorBRL(provedor);
+							brl.Update();
+							MessageBox.Show("El provedor ya esta registrado solo se modifico la ubicacion");
+							mapaProv.Children.Clear();
+							LoadDataGrid();
+							LimpiarCampos();
+							DesHabilitar();
+							dgdDatos.IsEnabled = true;
 						}
 					}
 					break;
 			}
 		}
-
+		/// <summary>
+		/// Evento MouseDoubleClick permite marcar una ubicacion en el mapa
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void MapaProv_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			e.Handled = true;
@@ -310,7 +342,7 @@ namespace cubeStore
 			mapaProv.Children.Add(marcador);
 		}
 		/// <summary>
-		/// Carga los datos de provedor al Datagrid al cargar la ventana
+		/// Evento Loaded Carga los datos de provedor al Datagrid al cargar la ventana
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -319,7 +351,7 @@ namespace cubeStore
 			LoadDataGrid();
 		}
 		/// <summary>
-		/// Permite seleccionar registros del DataGrid 
+		/// Evento SelectionChanged Permite seleccionar registros del DataGrid 
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
@@ -352,14 +384,18 @@ namespace cubeStore
 					provedor.Longitud = aux2;
 
 				}
-				catch (Exception ex)
+				catch (Exception)
 				{
-					MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+					MessageBox.Show("Ocurrio un error al seleccionar el Provedor intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
 				}
 			}
 			
 		}
-
+		/// <summary>
+		/// Evento TextChanged que permite buscar un Provedor en el datagrid
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void TxtbuscarProvedor_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			if (txtbuscarProvedor.Text == "")
