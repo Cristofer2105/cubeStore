@@ -36,14 +36,30 @@ namespace DAL
 		/// </summary>
 		public override void Delete()
 		{
-			string query = "UPDATE Articulo SET estadoArticulo=0 , fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP WHERE idArticulo = @idArticulo";
+			string query1 = "UPDATE Articulo SET estadoArticulo=0 , fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP WHERE idArticulo = @idArticulo";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Delete de un Articulo", DateTime.Now));
 
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@idArticulo", art.IdArticulo);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@idArticulo", art.IdArticulo);
+
+				string tabla = "Articulo";
+				char cr = 'D';
+				string descripcion = "ID Articulo: " + art.IdArticulo + ", Se Elimino: " + art.NombreArticulo+ ", estadoArticulo=0";
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
 
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Articulo: {1}, Usuario:{2}", DateTime.Now, art.NombreArticulo, Sesion.usuarioSesion));
 
@@ -54,22 +70,38 @@ namespace DAL
 			}
 		}
 		/// <summary>
-		/// Metodo Insert Articulo
+		/// Metodo Insert para agragar un Articulo
 		/// </summary>
 		public override void Insert()
 		{
-			string query = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro,foto) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro,@foto)";
+			string query1 = "INSERT INTO Articulo(nombreArticulo,idCategoria,idProvedor,fechaHoraRegistro,foto) VALUES(@nombreCategoria,@idCategoria,@idProvedor,@fechaHoraRegistro,@foto)";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert de un Articulo", DateTime.Now));
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
 
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@nombreCategoria", art.NombreArticulo);
-				cmd.Parameters.AddWithValue("@idCategoria", art.IdCategoria);
-				cmd.Parameters.AddWithValue("@idProvedor", art.IdProvedor);
-				cmd.Parameters.AddWithValue("@fechaHoraRegistro", art.FechaHoraRegistro);			
-				cmd.Parameters.AddWithValue("@foto", art.Foto);
-				Methods.ExecuteBasicCommand(cmd);
+				cmdslist[0].Parameters.AddWithValue("@nombreCategoria", art.NombreArticulo);
+				cmdslist[0].Parameters.AddWithValue("@idCategoria", art.IdCategoria);
+				cmdslist[0].Parameters.AddWithValue("@idProvedor", art.IdProvedor);
+				cmdslist[0].Parameters.AddWithValue("@fechaHoraRegistro", art.FechaHoraRegistro);
+				cmdslist[0].Parameters.AddWithValue("@foto", art.Foto);
+
+				int idArt = Methods.GetCurrentValueIDTable("Articulo");
+				string tabla = "Articulo";
+				char cr = 'C';
+				string descripcion ="ID Articulo: "+idArt+", Se agrego: "+art.NombreArticulo+", ID Categoria: "+art.IdCategoria+", ID Provedor: "+art.IdProvedor;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
 
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Articulo: {1}, Usuario:{2}", DateTime.Now, art.NombreArticulo, Sesion.usuarioSesion));
 
@@ -107,16 +139,34 @@ namespace DAL
 		/// </summary>
 		public override void Update()
 		{
-			string query = "UPDATE Articulo SET nombreArticulo=@nombreArticulo,fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP, idCategoria=@idCategoria,idProvedor=@idProvedor,foto=1 WHERE idArticulo = @idArticulo";
+			string query1 = "UPDATE Articulo SET nombreArticulo=@nombreArticulo,fechaHoraActualizacionArticulo=CURRENT_TIMESTAMP, idCategoria=@idCategoria,idProvedor=@idProvedor,foto=1 WHERE idArticulo = @idArticulo";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de un Articulo", DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@nombreArticulo", art.NombreArticulo);
-				cmd.Parameters.AddWithValue("@idCategoria", art.IdCategoria);
-				cmd.Parameters.AddWithValue("@idArticulo", art.IdArticulo);
-				cmd.Parameters.AddWithValue("@idProvedor", art.IdProvedor);
-				Methods.ExecuteBasicCommand(cmd);
+
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@nombreArticulo", art.NombreArticulo);
+				cmdslist[0].Parameters.AddWithValue("@idCategoria", art.IdCategoria);
+				cmdslist[0].Parameters.AddWithValue("@idArticulo", art.IdArticulo);
+				cmdslist[0].Parameters.AddWithValue("@idProvedor", art.IdProvedor);
+
+				string tabla = "Articulo";
+				char cr = 'U';
+				string descripcion = "ID Articulo: " + art.IdArticulo + ", Se Modifico: " + art.NombreArticulo + ", ID Categoria: "+ art.IdCategoria+", ID Provedor: "+ art.IdProvedor;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
+
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Actualizado, Nombre Articulo: {1}, Usuario:{1}", DateTime.Now,art.NombreArticulo, Sesion.usuarioSesion));
 
 			}

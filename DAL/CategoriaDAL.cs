@@ -36,13 +36,31 @@ namespace DAL
 		/// </summary>
 		public override void Delete()
 		{
-			string query = "UPDATE Categoria SET estadoCategoria=0 , fechaHoraActualizacionCategoria=CURRENT_TIMESTAMP WHERE idCategoria = @idCategoria";
+			string query1 = "UPDATE Categoria SET estadoCategoria=0 , fechaHoraActualizacionCategoria=CURRENT_TIMESTAMP WHERE idCategoria = @idCategoria";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
+
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de eliminacion de una Categoria", DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@idCategoria", cat.IdCategoria);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@idCategoria", cat.IdCategoria);
+
+				string tabla = "Categoria";
+				char cr = 'D';
+				string descripcion = "ID Categoria: " + cat.IdCategoria + ", Se Elimino: " + cat.NombreCategoria + ", estadoArticulo=0";
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
+
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Categoria: {1}, Usuario:{2}", DateTime.Now, cat.NombreCategoria, Sesion.usuarioSesion));
 
 			}
@@ -56,14 +74,33 @@ namespace DAL
 		/// </summary>
 		public override void Insert()
 		{
-			string query = "INSERT INTO Categoria(nombreCategoria,fechaRegistro) VALUES(@nombreCategoria,@fechaRegistro)";
-			try 
+			string query1 = "INSERT INTO Categoria(nombreCategoria,fechaRegistro) VALUES(@nombreCategoria,@fechaRegistro)";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
+
+			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Insercion de una Categoria",DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@nombreCategoria",cat.NombreCategoria);
-				cmd.Parameters.AddWithValue("@fechaRegistro", cat.FechaHoraRegistroCat);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@nombreCategoria",cat.NombreCategoria);
+				cmdslist[0].Parameters.AddWithValue("@fechaRegistro", cat.FechaHoraRegistroCat);
+
+				int idCat = Methods.GetCurrentValueIDTable("Categoria");
+				string tabla = "Categoria";
+				char cr = 'C';
+				string descripcion = "ID Categoria: " + idCat + ", Se agrego: " + cat.NombreCategoria;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
+
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Categoria: {1}, Usuario:{2}", DateTime.Now,cat.NombreCategoria,Sesion.usuarioSesion));
 
 			}
@@ -95,18 +132,36 @@ namespace DAL
 			return res;
 		}
 		/// <summary>
-		/// Metodo Update Categoria
+		/// Metodo Update para modificar una Categoria
 		/// </summary>
 		public override void Update()
 		{
-			string query = "UPDATE Categoria SET nombreCategoria=@nombreCategoria,fechaHoraActualizacionCategoria=CURRENT_TIMESTAMP WHERE idCategoria = @idCategoria";
+			string query1 = "UPDATE Categoria SET nombreCategoria=@nombreCategoria,fechaHoraActualizacionCategoria=CURRENT_TIMESTAMP WHERE idCategoria = @idCategoria";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
+
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Actualizacion de una Categoria", DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@idCategoria", cat.IdCategoria);
-				cmd.Parameters.AddWithValue("@nombreCategoria", cat.NombreCategoria);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@idCategoria", cat.IdCategoria);
+				cmdslist[0].Parameters.AddWithValue("@nombreCategoria", cat.NombreCategoria);
+
+				string tabla = "Categoria";
+				char cr = 'U';
+				string descripcion = "ID Categoria: " + cat.IdCategoria + ", Se Modifico: " + cat.NombreCategoria;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
+
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Modificado,Nombre Categoria: {1}, Usuario:{2}", DateTime.Now,cat.NombreCategoria, Sesion.usuarioSesion));
 			}
 			catch (Exception ex)

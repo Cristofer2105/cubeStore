@@ -131,9 +131,9 @@ namespace DAL
 				string descripcionVenta = "ID Venta: "+id+", ID Cliente: "+vtn.IdCliente+", Venta de: "+cont+" Items"+", Total: "+vtn.Total+", Fecha de Venta: "+vtn.FechaRegistroVenta+", ID Garantia: "+id+", Fecha Expiracion de Garantia: "+grt.FechaFin;
 				string tabla = "Venta";
 				char c = 'C';
-				command.CommandText = "INSERT INTO AuditoriaPrincipal (tabla,cd,descripcion,idUsuario)VALUES(@tabla,@cd,@descripcion,@idUsuario)";
+				command.CommandText = "INSERT INTO AuditoriaPrincipal (tabla,creaDele,descripcion,idUsuario)VALUES(@tabla,@creaDele,@descripcion,@idUsuario)";
 				command.Parameters.AddWithValue("@tabla", tabla);
-				command.Parameters.AddWithValue("@cd", c);
+				command.Parameters.AddWithValue("@creaDele", c);
 				command.Parameters.AddWithValue("@descripcion", descripcionVenta);
 				command.Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
 				command.ExecuteNonQuery();
@@ -215,9 +215,9 @@ namespace DAL
 				string descripcionVenta = "ID Venta:  " + venta.IdVenta + ",  Venta de: " + cont + "  Items" + ",  Total: " + venta.Total +",  ID Garantia: " + venta.IdVenta+",  Motivo de Anulacion: "+ventaAnulada.Motivo;
 				string tabla = "Venta";
 				char c = 'D';
-				command.CommandText = "INSERT INTO AuditoriaPrincipal (tabla,cd,descripcion,idUsuario)VALUES(@tabla,@cd,@descripcion,@idUsuario)";
+				command.CommandText = "INSERT INTO AuditoriaPrincipal (tabla,creaDele,descripcion,idUsuario)VALUES(@tabla,@creaDele,@descripcion,@idUsuario)";
 				command.Parameters.AddWithValue("@tabla", tabla);
-				command.Parameters.AddWithValue("@cd", c);
+				command.Parameters.AddWithValue("@creaDele", c);
 				command.Parameters.AddWithValue("@descripcion", descripcionVenta);
 				command.Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
 				command.ExecuteNonQuery();

@@ -105,6 +105,72 @@ namespace DAL
 			return res;
 		}
 		/// <summary>
+		/// Crea n comandos para ejecutarlos despues recibiendo una lista de consultas
+		/// </summary>
+		/// <param name="lista"></param>
+		/// <returns></returns>
+		public static List<SqlCommand> CreateNCommands(List<string> lista)
+		{
+			List<SqlCommand> res = new List<SqlCommand>();
+			try
+			{
+				SqlConnection connection = new SqlConnection(connectionString);
+				for (int i = 0; i < lista.Count; i++)
+				{
+					SqlCommand cmd = new SqlCommand(lista[i]);
+					cmd.Connection = connection;
+					res.Add(cmd);
+				}
+
+				return res;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+
+		}
+
+		/// <summary>
+		/// Ejecuta n comandos en una transaccion
+		/// </summary>
+		/// <param name="cmds">lista de comandos a ejecutar</param>
+		public static void ExecuteNBasicCommand(List<SqlCommand> cmds)
+		{
+			SqlTransaction tran = null;
+			SqlCommand cmd1 = cmds[0];
+			try
+			{
+				cmd1.Connection.Open();
+				tran = cmd1.Connection.BeginTransaction();
+
+				foreach (SqlCommand cmd in cmds)
+				{
+					cmd.Transaction = tran;
+					cmd.ExecuteNonQuery();
+				}
+
+				tran.Commit();
+			}
+			catch (SqlException ex)
+			{
+				tran.Rollback();
+				// WriteLogsRelease("MetodosSQL", "SqlException in ExecuteNBasicCommand", string.Format("{0} {1}", ex.Message, ex.StackTrace));
+				throw new Exception("Se ha producido un error en el método ExecuteNBasicCommand(List<SqlCommand> cmds)", ex);
+			}
+			catch (Exception ex)
+			{
+				tran.Rollback();
+				// WriteLogsRelease("MetodosSQL", "Exception in ExecuteNBasicCommand", string.Format("{0} {1}", ex.Message, ex.StackTrace));
+				throw new Exception("Se ha producido un error en el método ExecuteNBasicCommand(List<SqlCommand> cmds)", ex);
+			}
+			finally
+			{
+				cmd1.Connection.Close();
+			}
+		}
+		/// <summary>
 		/// Crea un sqlCommand y relaciona a una conexion
 		/// </summary>
 		/// <param name="query">Una consulta sql</param>
