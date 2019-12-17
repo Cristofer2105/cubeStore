@@ -22,7 +22,7 @@ namespace DAL
 		public static TraceSource dataSource = new TraceSource("DataSource");
 		public static TraceSource errorSource = new TraceSource("ErrorSource");
 		/// <summary>
-		/// Metodo Get Connection Methods
+		/// Metodo Get Connection MethodsD:\Univalle\Base de Datos 3\Proyecto\cubeStore\DAL\Methods.cs
 		/// </summary>
 		/// <returns>SqlConnection</returns>
 		public static SqlConnection GetConnection()
@@ -336,6 +336,17 @@ namespace DAL
 		#endregion
 
 		#region log
+		public static void GenerateLogsActivities(DateTime fecha, string mensaje,string usuario)
+		{
+			Trace.Listeners[0].WriteLine(string.Format("Fecha: {0} Info: {1} Usuario:{2}", fecha, mensaje, usuario));
+			Trace.Flush();
+		}
+		public static void GenerateLogsErrors(DateTime fecha, string mensaje, string usuario)
+		{
+			Trace.Listeners[1].WriteLine(string.Format("Fecha: {0} Error: {1} Usuario: {2}", fecha, mensaje, usuario));
+			Trace.Flush();
+		}
 		#endregion
+
 	}
 }
