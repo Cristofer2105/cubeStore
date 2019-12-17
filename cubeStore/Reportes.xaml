@@ -39,8 +39,8 @@
                 </Grid.Effect>
                 <Button Click="BtnReporteUno_Click" x:Name="btnReporteUno" Background="{x:Null}" BorderBrush="{x:Null}" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300">
                     <Grid Width="385">
-                        <materialDesign:PackIcon  Kind="UserCardDetails" Width="40" Height="40" IsEnabled="False" Margin="157,142,0,0"/>
-                        <TextBlock Text="Ventas de Empleados" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="77,187,110,71" Width="198" Height="34" IsEnabled="False"/>
+                        <materialDesign:PackIcon  Kind="ShoppingCartOff" Width="40" Height="40" IsEnabled="False" Margin="157,142,0,0"/>
+                        <TextBlock Text="Ventas Anuldas" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20" Margin="101,187,131,71" Width="153" Height="34" IsEnabled="False" RenderTransformOrigin="0.753,0.378"/>
                     </Grid>
                 </Button>
             </Grid>
