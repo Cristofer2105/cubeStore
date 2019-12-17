@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{8E477D2F-DB04-
 		..\DBcubestore12082019.bak = ..\DBcubestore12082019.bak
 		..\DBcubestore12092019.bak = ..\DBcubestore12092019.bak
 		..\DBcubestore12102019.bak = ..\DBcubestore12102019.bak
+		..\DBcubestore12172019.bak = ..\DBcubestore12172019.bak
 	EndProjectSection
 EndProject
 Global
