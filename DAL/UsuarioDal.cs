@@ -32,7 +32,7 @@ namespace DAL
 		}
 		#region metodos de la clase
 		/// <summary>
-		/// Metodo Delete UsuarioDAL
+		/// Metodo Delete UsuarioDAL cambia el estado de un usuario a inactivo 0
 		/// </summary>
 		public override void Delete()
 		{
@@ -41,7 +41,7 @@ namespace DAL
 			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de eliminacion de un Usuario", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Delete de un Empleado"+", Usuario: "+user.NombreUsuario+", Rol: "+user.Rol, Sesion.usuarioSesion);
 				List<string> querys = new List<string>();
 				querys.Add(query1);
 				querys.Add(query2);
@@ -61,15 +61,19 @@ namespace DAL
 
 				Methods.ExecuteNBasicCommand(cmdslist);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Empleado Eliminado: " + ", Usuario: " + user.NombreUsuario + ", Rol: " + user.Rol, Sesion.usuarioSesion);
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Insert UsuarioDAL
+		/// Metodo Insert UsuarioDAL permite agregar un nuevo empleado
 		/// </summary>
 		public override void Insert()
 		{
@@ -78,7 +82,8 @@ namespace DAL
 			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Insertar un Usuario", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Insert de un Empleado" + ", Usuario: " + user.NombreUsuario + ", Rol: " + user.Rol, Sesion.usuarioSesion);
+
 				List<string> querys = new List<string>();
 				querys.Add(query1);
 				querys.Add(query2);
@@ -105,15 +110,19 @@ namespace DAL
 
 
 				Methods.ExecuteNBasicCommand(cmdslist);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Empleado Insertado: " + ", Usuario: " + user.NombreUsuario + ", Rol: " + user.Rol, Sesion.usuarioSesion);
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Select UsuarioDAL
+		/// Metodo Select UsuarioDAL recupera todos los usuarios activos 1
 		/// </summary>
 		/// <returns>DataTable</returns>
 		public override DataTable Select()
@@ -122,19 +131,21 @@ namespace DAL
 			string query = "SELECT * FROM vwEmpleadoSelect";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Select de Usuarios", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo Update UsuarioDAL
+		/// Metodo Update UsuarioDAL actualiza datos del empleado
 		/// </summary>
 		public override void Update()
 		{
@@ -143,7 +154,7 @@ namespace DAL
 			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Update de Usuarios", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Update de un Empleado" + ", Usuario: " + user.NombreUsuario + ", Rol: " + user.Rol, Sesion.usuarioSesion);
 
 				List<string> querys = new List<string>();
 				querys.Add(query1);
@@ -166,21 +177,26 @@ namespace DAL
 
 
 				Methods.ExecuteNBasicCommand(cmdslist);
+				Methods.GenerateLogsActivities(DateTime.Now, "Empleado Actualizado: " + ", Usuario: " + user.NombreUsuario + ", Rol: " + user.Rol, Sesion.usuarioSesion);
+
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo UpdateDatosPerfil
+		/// Metodo UpdateDatosPerfil actualiza datos del perfil del empleado
 		/// </summary>
 		public void UpdateDatosPerfil()
 		{
 			string query = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,contrasenia=HASHBYTES('md5',@contrasenia) WHERE idEmpleado=@idEmpleado";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Update de Perfil de Usuarios", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombres", user.Nombres);
 				cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
@@ -188,58 +204,65 @@ namespace DAL
 				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
 				cmd.Parameters.AddWithValue("@idEmpleado", Sesion.idSesion);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Actualizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 
 				Methods.ExecuteBasicCommand(cmd);
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo UpdateContrasenias
+		/// Metodo UpdateContrasenias actualiza la contrasenia del usuario
 		/// </summary>
 		public void UpdateContrasenia()
 		{
 			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=0 WHERE usuario=@usuario";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Update Contrasenia de Usuarios", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
 				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);				
 				Methods.ExecuteBasicCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Contrasenia Actualizada, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo UpdateContraseniaRestablecida
+		/// Metodo UpdateContraseniaRestablecida actualiza la contraseña cuando se restablece
 		/// </summary>
 		public void UpdateContraseniaRestablecida()
 		{
 			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=1 WHERE usuario=@usuario";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Restablecer Contrasenia de Usuarios", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
 				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
 				Methods.ExecuteBasicCommand(cmd);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Contrasenia Actualizada, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
@@ -250,23 +273,25 @@ namespace DAL
 			string query = "UPDATE Empleado SET contrasenia=HASHBYTES('md5',@contrasenia),contraseniaInicial=1 WHERE idEmpleado=@idEmpleado";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Restablecer Contrasenia de Usuarios", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
 				cmd.Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
 				Methods.ExecuteBasicCommand(cmd);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Contrasenia Actualizada, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Login Usuario DAL
+		/// Metodo Login Usuario DAL permite el ingreso al sistema
 		/// </summary>
 		/// <param name="usuario"></param>
 		/// <param name="contrasenia"></param>
@@ -277,19 +302,22 @@ namespace DAL
 			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido,email FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario AND contrasenia=HASHBYTES('md5',@contrasenia)";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Login de Usuarios", DateTime.Now));
-
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Login de un Empleado", Sesion.usuarioSesion);
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@usuario", usuario);
 				cmd.Parameters.AddWithValue("@contrasenia", contrasenia).SqlDbType=SqlDbType.VarChar;
 				dt = Methods.ExecuteDataTableCommand(cmd);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Login realizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Login Aprobado: " + ", Usuario: " + usuario, Sesion.usuarioSesion);
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}
@@ -305,18 +333,20 @@ namespace DAL
 			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido,email FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@usuario", usuario);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Login realizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}
@@ -331,24 +361,26 @@ namespace DAL
 			string query = "SELECT idEmpleado, usuario,rolEmpleado,contraseniaInicial,nombres,primerApellido,segundoApellido,email FROM Empleado WHERE estadoEmpleado=1 AND idEmpleado=@idEmpleado";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Usuarios", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idEmpleado", id);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Login realizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}
 		
 		/// <summary>
-		/// Metodo RestablecerContrasenia UsuarioDAL
+		/// Metodo RestablecerContrasenia UsuarioDAL 
 		/// </summary>
 		/// <param name="usuario"></param>
 		/// <returns>DataTable</returns>
@@ -359,23 +391,25 @@ namespace DAL
 			string query = "SELECT idEmpleado,usuario,rolEmpleado,contraseniaInicial,contrasenia FROM Empleado WHERE estadoEmpleado=1 AND usuario=@usuario";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Restablecer Contrasenia de Usuarios", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@usuario", usuario);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Restablecer Contrasenia Realizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}
 		/// <summary>
-		/// Metodo Get UsuarioDAL
+		/// Metodo Get UsuarioDAL recupera un Usuario mediante su id
 		/// </summary>
 		/// <param name="idUsuario"></param>
 		/// <returns>Usuario</returns>
@@ -387,21 +421,23 @@ namespace DAL
 			string query = "SELECT idEmpleado,nombres,primerApellido,segundoApellido,sexo,estadoEmpleado,fechaHoraActualizacionEmpleado,usuario,contrasenia,rolEmpleado,contraseniaInicial,email,fechaRegistro FROM Empleado WHERE idEmpleado=@idEmpleado";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Get de Usuarios", DateTime.Now));
 
 				cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idEmpleado", idUsuario);
 				dr = Methods.ExecuteDataReaderCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Get Usuarios Realizado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 				while (dr.Read())
 				{
 					res = new Usuario(int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), byte.Parse(dr[4].ToString()), byte.Parse(dr[5].ToString()),Convert.ToDateTime(dr[6].ToString()),dr[7].ToString(),dr[8].ToString(),dr[9].ToString(), byte.Parse(dr[10].ToString()),dr[11].ToString(), Convert.ToDateTime(dr[12].ToString()));
 				}
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			finally
 			{
@@ -411,7 +447,7 @@ namespace DAL
 			return res;
 		}
 		/// <summary>
-		/// Metodo SelectBusquedaUsuarios
+		/// Metodo SelectBusquedaUsuarios permite la busqueda de empleados mediante texto
 		/// </summary>
 		/// <param name="texto"></param>
 		/// <returns>DataTable</returns>
@@ -422,17 +458,19 @@ namespace DAL
 			query = query + " WHERE  [Nombre Completo] LIKE @texto ";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Articulo", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}

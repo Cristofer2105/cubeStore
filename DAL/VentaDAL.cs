@@ -94,7 +94,7 @@ namespace DAL
 			{
 				int id = Methods.GetCurrentValueIDTable("Venta");
 				//query 1 Venta
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert con Transacciones de una Venta", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Insert Venta con transacciones", Sesion.usuarioSesion);
 				command.CommandText = "INSERT INTO Venta(idCliente,total,idEmpleado,fechaRegistro) VALUES(@idCliente,@total,@idEmpleado,@fechaRegistro)";
 				command.Parameters.AddWithValue("@idCliente", vtn.IdCliente);
 				command.Parameters.AddWithValue("@total", vtn.Total);
@@ -144,8 +144,13 @@ namespace DAL
 
 				// Attempt to commit the transaction.
 				transaction.Commit();
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro con Transacciones Insertado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Venta con transacciones Realizada", Sesion.usuarioSesion);
 
+
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
@@ -153,7 +158,7 @@ namespace DAL
 				string query = "UPDATE Item SET estadoItem=1 WHERE estadoItem=2";
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				Methods.ExecuteBasicCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
@@ -179,11 +184,10 @@ namespace DAL
 			try
 			{
 				//query 1 Venta
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo AnularVenta con Transacciones de una Venta", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Anular Venta con transacciones", Sesion.usuarioSesion);
 				command.CommandText = "UPDATE Venta SET estadoVenta=0, total=0 WHERE idVenta=@idVenta";
 				command.Parameters.AddWithValue("@idVenta", venta.IdVenta);
 				command.ExecuteNonQuery();
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Venta Anulado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 
 
@@ -224,19 +228,23 @@ namespace DAL
 
 				// Attempt to commit the transaction.
 				transaction.Commit();
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro con Transacciones Anulado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Anular Venta con transacciones Realizada", Sesion.usuarioSesion);
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
 				transaction.Rollback();
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 
 
 		}
 		/// <summary>
-		/// Metodo Select Ventas
+		/// Metodo Select Ventas recupera todas las ventas actualmente activas
 		/// </summary>
 		/// <returns>DataTable</returns>
 		public override DataTable Select()
@@ -245,19 +253,21 @@ namespace DAL
 			string query = "SELECT * FROM vwSelectVentas";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Select de Ventas", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo SelectItemsAnular
+		/// Metodo SelectItemsAnular recupera el id de los items para anular la venta
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns>DataTable</returns>
@@ -267,20 +277,22 @@ namespace DAL
 			string query = "SELECT VI.idItem FROM VentaItem VI INNER JOIN Venta V ON VI.idVenta= V.idVenta WHERE VI.idVenta=@id";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Select de Ventas", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@id", id);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Seleccionados, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo SelectBusquedaVentas
+		/// Metodo SelectBusquedaVentas permite la busqueda de ventas mediante texto
 		/// </summary>
 		/// <param name="texto"></param>
 		/// <returns>DataTable</returns>
@@ -291,22 +303,24 @@ namespace DAL
 			query = query + " WHERE Cliente LIKE @texto ";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Items", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Buscado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo SelectUltimoIdVenta
+		/// Metodo SelectUltimoIdVenta recupera el ultimo id de la venta
 		/// </summary>
 		/// <returns>DataTable</returns>
 		public DataTable SelectMaxIdVenta()
@@ -315,20 +329,22 @@ namespace DAL
 			string query = "SELECT MAX(idVenta)  FROM Venta";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select Max id de Venta", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Seleccionado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo Get VentaDAL
+		/// Metodo Get VentaDAL recupera una venta mediante el id del mismo
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns>Venta</returns>
@@ -349,10 +365,13 @@ namespace DAL
 					res = new Venta(int.Parse(dr[0].ToString()), int.Parse(dr[1].ToString()), double.Parse(dr[2].ToString()), byte.Parse(dr[3].ToString()), DateTime.Parse(dr[4].ToString()), int.Parse(dr[5].ToString()), DateTime.Parse(dr[6].ToString()));
 				}
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-
-				throw ex;
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			finally
 			{

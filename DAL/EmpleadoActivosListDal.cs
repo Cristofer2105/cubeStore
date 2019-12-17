@@ -22,13 +22,12 @@ namespace DAL
 			EmpleadoActivoTableAdapter empleadoActivoTableAdapter = new EmpleadoActivoTableAdapter();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: ObtenerListaEmpleadosReporte", DateTime.Now));
 
 				empleadoActivoTableAdapter.Fill(dataSetcubestore.Tables["EmpleadoActivo"] as DataSetcubestore.EmpleadoActivoDataTable);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dataSetcubestore;
 		}

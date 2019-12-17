@@ -19,13 +19,12 @@ namespace DAL
 			EmpleadoListReportTableAdapter empleadoTableAdapter = new EmpleadoListReportTableAdapter();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: ObtenerListaEmpleadosReporte", DateTime.Now));
 
 				empleadoTableAdapter.Fill(dataSetcubestore.Tables["EmpleadoListReport"] as DataSetcubestore.EmpleadoListReportDataTable);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dataSetcubestore;
 		}

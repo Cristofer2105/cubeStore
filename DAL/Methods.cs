@@ -341,9 +341,9 @@ namespace DAL
 			Trace.Listeners[0].WriteLine(string.Format("Fecha: {0} Info: {1} Usuario:{2}", fecha, mensaje, usuario));
 			Trace.Flush();
 		}
-		public static void GenerateLogsErrors(DateTime fecha, string mensaje, string usuario)
+		public static void GenerateLogsErrors(DateTime fecha, string mensaje)
 		{
-			Trace.Listeners[1].WriteLine(string.Format("Fecha: {0} Error: {1} Usuario: {2}", fecha, mensaje, usuario));
+			Trace.Listeners[1].WriteLine(string.Format("Fecha: {0} Error: {1}", fecha, mensaje));
 			Trace.Flush();
 		}
 		#endregion

@@ -32,7 +32,7 @@ namespace DAL
 
 		#endregion
 		/// <summary>
-		/// Metodo Delete Articulo
+		/// Metodo Delete Articulo para cambiar el estado de un Articulo a Inactivo 0
 		/// </summary>
 		public override void Delete()
 		{
@@ -41,8 +41,7 @@ namespace DAL
 			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Delete de un Articulo", DateTime.Now));
-
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Delete de un Articulo"+", Articulo: "+art.NombreArticulo, Sesion.usuarioSesion);
 				List<string> querys = new List<string>();
 				querys.Add(query1);
 				querys.Add(query2);
@@ -60,13 +59,15 @@ namespace DAL
 
 
 				Methods.ExecuteNBasicCommand(cmdslist);
-
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Articulo: {1}, Usuario:{2}", DateTime.Now, art.NombreArticulo, Sesion.usuarioSesion));
-
+				Methods.GenerateLogsActivities(DateTime.Now, "Articulo Eliminado: " + ", Articulo: " + art.NombreArticulo, Sesion.usuarioSesion);
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
@@ -79,7 +80,7 @@ namespace DAL
 			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert de un Articulo", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Insert de un Articulo" + ", Articulo: " + art.NombreArticulo, Sesion.usuarioSesion);
 				List<string> querys = new List<string>();
 				querys.Add(query1);
 				querys.Add(query2);
@@ -103,17 +104,20 @@ namespace DAL
 
 				Methods.ExecuteNBasicCommand(cmdslist);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Articulo: {1}, Usuario:{2}", DateTime.Now, art.NombreArticulo, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Articulo Insertado: " + ", Articulo: " + art.NombreArticulo, Sesion.usuarioSesion);
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
-
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Select Articulo
+		/// Metodo Select Articulo recupera todos los articulos activos
 		/// </summary>
 		/// <returns>DataTable</returns>
 		public override DataTable Select()
@@ -121,21 +125,23 @@ namespace DAL
 			DataTable res = new DataTable();
 			string query = "SELECT * FROM vwArticuloSelect ORDER BY 2";
 			try
-			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de un Articulo", DateTime.Now));
+			{	
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
 
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
-
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo Update Articulo
+		/// Metodo Update Articulo permite actualizar datos de un Articulo
 		/// </summary>
 		public override void Update()
 		{
@@ -144,8 +150,7 @@ namespace DAL
 			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de un Articulo", DateTime.Now));
-
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Update de un Articulo" + ", Articulo: " + art.NombreArticulo, Sesion.usuarioSesion);
 				List<string> querys = new List<string>();
 				querys.Add(query1);
 				querys.Add(query2);
@@ -166,17 +171,19 @@ namespace DAL
 
 
 				Methods.ExecuteNBasicCommand(cmdslist);
-
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Actualizado, Nombre Articulo: {1}, Usuario:{1}", DateTime.Now,art.NombreArticulo, Sesion.usuarioSesion));
-
+				Methods.GenerateLogsActivities(DateTime.Now, "Articulo Actualizado: " + ", Articulo: " + art.NombreArticulo, Sesion.usuarioSesion);
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Get Articulo
+		/// Metodo Get Articulo permite recuperar un Articulo mediante el id del Articulo
 		/// </summary>
 		/// <param name="idArticulo"></param>
 		/// <returns>Articulo</returns>
@@ -188,19 +195,21 @@ namespace DAL
 			string query = "SELECT idArticulo,nombreArticulo,estadoArticulo,fechaHoraActualizacionArticulo,idCategoria,idProvedor,fechaHoraRegistro,foto FROM Articulo WHERE idArticulo=@idArticulo";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Get de un Articulo", DateTime.Now));
 				cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idArticulo", idArticulo);
 				dr = Methods.ExecuteDataReaderCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Conseguido, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 				while (dr.Read())
 				{
 					res = new Articulo(int.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()), byte.Parse(dr[4].ToString()), int.Parse(dr[5].ToString()), DateTime.Parse(dr[6].ToString()),byte.Parse(dr[7].ToString()));
 				}
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			finally
 			{
@@ -221,21 +230,24 @@ namespace DAL
 			query = query + " WHERE  [Nombre del Articulo] LIKE @texto ";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Articulo", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
 
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo VerificarArticulo
+		/// Metodo VerificarArticulo permite verificar si el nombre de un articulo ya existe
 		/// </summary>
 		/// <param name="articulo"></param>
 		/// <returns>DataTable</returns>
@@ -245,21 +257,23 @@ namespace DAL
 			string query = "SELECT * FROM Articulo WHERE nombreArticulo=@nombreArticulo";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Articulos", DateTime.Now));
-
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombreArticulo", articulo);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}
 		/// <summary>
-		/// Metodo VerificarArticuloEliminar
+		/// Metodo VerificarArticuloEliminar permite verificar si el articulo tiene items activos
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns>DataTable</returns>
@@ -269,16 +283,19 @@ namespace DAL
 			string query = "SELECT * FROM Articulo A INNER JOIN Item I ON I.idArticulo=A.idArticulo WHERE A.idArticulo=@id AND I.estadoItem=1";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Articulo para Eliminar", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@id", id);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}

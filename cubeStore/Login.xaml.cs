@@ -255,16 +255,7 @@ namespace cubeStore
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			txtUusario.Focus();
-
-			//TextWriterTraceListener myListener1 = new TextWriterTraceListener("Log1.log", "myListener1");
-			//myListener1.WriteLine("mensaje de log 1");
-			Methods.GenerateLogsActivities(DateTime.Now,"Insert Tabka","admin");
-			Methods.GenerateLogsErrors(DateTime.Now,"Error Tabka","admin");
-
-
-
-
+			txtUusario.Focus();						
 		}
 	}
 }

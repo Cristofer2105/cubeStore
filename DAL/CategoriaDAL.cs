@@ -32,7 +32,7 @@ namespace DAL
 
 		#endregion
 		/// <summary>
-		/// Metodo Delete Categoria
+		/// Metodo Delete Categoria cambia el estado de una Categoria a inactivo 0
 		/// </summary>
 		public override void Delete()
 		{
@@ -42,7 +42,8 @@ namespace DAL
 
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de eliminacion de una Categoria", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Delete de una Categoria" + ", Categoria: " + cat.NombreCategoria, Sesion.usuarioSesion);
+
 				List<string> querys = new List<string>();
 				querys.Add(query1);
 				querys.Add(query2);
@@ -61,16 +62,20 @@ namespace DAL
 
 				Methods.ExecuteNBasicCommand(cmdslist);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Categoria: {1}, Usuario:{2}", DateTime.Now, cat.NombreCategoria, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Categoria Eliminada: " + ", Categoria: " + cat.NombreCategoria, Sesion.usuarioSesion);
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Insert Categoria
+		/// Metodo Insert Categoria para agregar una nueva Categoria
 		/// </summary>
 		public override void Insert()
 		{
@@ -80,7 +85,7 @@ namespace DAL
 
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Insercion de una Categoria",DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Insert de una Categoria" + ", Categoria: " + cat.NombreCategoria, Sesion.usuarioSesion);
 				List<string> querys = new List<string>();
 				querys.Add(query1);
 				querys.Add(query2);
@@ -101,17 +106,20 @@ namespace DAL
 
 				Methods.ExecuteNBasicCommand(cmdslist);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Categoria: {1}, Usuario:{2}", DateTime.Now,cat.NombreCategoria,Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Categoria Insertada: " + ", Categoria: " + cat.NombreCategoria, Sesion.usuarioSesion);
 
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
-			{				
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
-				throw ex;
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Select Categoria
+		/// Metodo Select Categoria para recuperar todas las categorias activas
 		/// </summary>
 		/// <returns>DataTable</returns>
 		public override DataTable Select()
@@ -120,14 +128,16 @@ namespace DAL
 			string query = "SELECT * FROM vwCategoriaSelect ORDER BY 2";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Seleccion de una Categoria", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res=Methods.ExecuteDataTableCommand(cmd);
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
-				throw ex;
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
@@ -142,7 +152,7 @@ namespace DAL
 
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Actualizacion de una Categoria", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Update de una Categoria" + ", Categoria: " + cat.NombreCategoria, Sesion.usuarioSesion);
 				List<string> querys = new List<string>();
 				querys.Add(query1);
 				querys.Add(query2);
@@ -162,16 +172,19 @@ namespace DAL
 
 				Methods.ExecuteNBasicCommand(cmdslist);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Modificado,Nombre Categoria: {1}, Usuario:{2}", DateTime.Now,cat.NombreCategoria, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Categoria Actualizada: " + ", Categoria: " + cat.NombreCategoria, Sesion.usuarioSesion);
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
-				throw ex;
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Get Categoria
+		/// Metodo Get Categoria recupera una Categoria mediante el id de la Categoria
 		/// </summary>
 		/// <param name="idCategoria"></param>
 		/// <returns>Categoria</returns>
@@ -183,20 +196,21 @@ namespace DAL
 			string query = "SELECT idCategoria,nombreCategoria,estadoCategoria,fechaHoraActualizacionCategoria FROM Categoria WHERE idCategoria=@idCategoria";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Get de una Categoria", DateTime.Now));
 				cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idCategoria", idCategoria);
 				dr = Methods.ExecuteDataReaderCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Conseguido, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 				while (dr.Read())
 				{
 					res = new Categoria(byte.Parse(dr[0].ToString()), dr[1].ToString(), byte.Parse(dr[2].ToString()), DateTime.Parse(dr[3].ToString()));
 				}
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
-				throw ex;
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			finally
 			{
@@ -206,7 +220,7 @@ namespace DAL
 			return res;
 		}
 		/// <summary>
-		/// Metodo Select Categorias
+		/// Metodo Select Categorias recupera las categorias activas
 		/// </summary>
 		/// <returns>DataTable</returns>
 		public DataTable SelectCategorias()
@@ -215,15 +229,17 @@ namespace DAL
 			string query = "SELECT idCategoria,nombreCategoria FROM Categoria WHERE estadoCategoria=1";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Seleccion de una Categoria", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
 
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
-				throw ex;
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
@@ -239,21 +255,24 @@ namespace DAL
 			query = query + " WHERE  [Nombre de la Categoria] LIKE @texto ";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Busqueda de Articulo", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
 
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo VerificarCategoria
+		/// Metodo VerificarCategoria permite verificar la existencia de una categoria
 		/// </summary>
 		/// <param name="categoria"></param>
 		/// <returns>DataTable</returns>
@@ -263,20 +282,23 @@ namespace DAL
 			string query = "SELECT * FROM Categoria WHERE nombreCategoria=@nombreCategoria";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Categoria", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@nombreCategoria", categoria);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}
 		/// <summary>
-		/// Metodo VerificarCategoriaEliminar
+		/// Metodo VerificarCategoriaEliminar permite verificar si la categoria tiene articulos que le pertenecen
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns>DataTable</returns>
@@ -286,15 +308,18 @@ namespace DAL
 			string query = "SELECT * FROM Categoria C INNER JOIN Articulo A ON A.idCategoria=C.idCategoria WHERE C.idCategoria=@id AND A.estadoArticulo=1";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo verificar Categoria para Eliminar", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@id", id);
 				dt = Methods.ExecuteDataTableCommand(cmd);
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}

@@ -1,12 +1,16 @@
 ﻿using DAL.DataSetcubestoreTableAdapters;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
 {
+	/// <summary>
+	/// Clase VentasListDAL
+	/// </summary>
 	public class VentasListDAL
 	{
 		public static DataSetcubestore ObtenerListaVentasReporte()
@@ -15,13 +19,12 @@ namespace DAL
 			VentasListReportTableAdapter ventaTableAdapter = new VentasListReportTableAdapter();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: ObtenerListaVentasReporte", DateTime.Now));
 
 				ventaTableAdapter.Fill(dataSetcubestore.Tables["VentasListReport"] as DataSetcubestore.VentasListReportDataTable);
-			}
+			}			
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dataSetcubestore;
 		}

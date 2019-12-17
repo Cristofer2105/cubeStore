@@ -32,7 +32,7 @@ namespace DAL
 		#endregion
 		#region metodos de la clase
 		/// <summary>
-		/// Metodo Delete ClienteDAL
+		/// Metodo Delete ClienteDAL cambia el estado de un cliente a inactivo 0
 		/// </summary>
 		public override void Delete()
 		{
@@ -42,7 +42,7 @@ namespace DAL
 
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Delete de un Cliente", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Delete de un Cliente" + ", Cliente: " + cli.Nombres+" "+cli.PrimerApellido+" "+cli.SegundoApellido, Sesion.usuarioSesion);
 
 				List<string> querys = new List<string>();
 				querys.Add(query1);
@@ -62,16 +62,20 @@ namespace DAL
 
 				Methods.ExecuteNBasicCommand(cmdslist);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Cliente: {1}, Usuario:{2}", DateTime.Now, cli.Nombres+" "+cli.PrimerApellido+" "+cli.SegundoApellido, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Cliente Eliminado: " + ", Cliente: " + cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion);
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Insert ClienteDAL
+		/// Metodo Insert ClienteDAL inserta un nuevo cliente
 		/// </summary>
 		public override void Insert()
 		{
@@ -80,7 +84,8 @@ namespace DAL
 			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert de un Cliente", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Insert de un Cliente" + ", Cliente: " + cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion);
+
 
 				List<string> querys = new List<string>();
 				querys.Add(query1);
@@ -104,16 +109,20 @@ namespace DAL
 
 				Methods.ExecuteNBasicCommand(cmdslist);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Cliente: {1}, Usuario:{2}", DateTime.Now, cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Cliente Insertado: " + ", Cliente: " + cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion);
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Select ClienteDAL
+		/// Metodo Select ClienteDAL recupera todos los clientes activos
 		/// </summary>
 		/// <returns>DataTable</returns>
 		public override DataTable Select()
@@ -122,18 +131,21 @@ namespace DAL
 			string query = "SELECT * FROM vwClientsSel ORDER BY 2";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select de Clientes", DateTime.Now));
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				res = Methods.ExecuteDataTableCommand(cmd);
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}
 		/// <summary>
-		/// Metodo Update ClienteDAL
+		/// Metodo Update ClienteDAL actualiza datos del cliente
 		/// </summary>
 		public override void Update()
 		{
@@ -143,7 +155,7 @@ namespace DAL
 
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de un Cliente", DateTime.Now));
+				Methods.GenerateLogsActivities(DateTime.Now, "Inicio del Metodo Update de un Cliente" + ", Cliente: " + cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion);
 
 				List<string> querys = new List<string>();
 				querys.Add(query1);
@@ -166,16 +178,20 @@ namespace DAL
 
 				Methods.ExecuteNBasicCommand(cmdslist);
 
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registros Actualizado Nombre Cliente: {1} Usuario:{2}", DateTime.Now, cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion));
+				Methods.GenerateLogsActivities(DateTime.Now, "Cliente Actualizado: " + ", Cliente: " + cli.Nombres + " " + cli.PrimerApellido + " " + cli.SegundoApellido, Sesion.usuarioSesion);
 
+			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 		}
 		/// <summary>
-		/// Metodo Get ClienteDAL
+		/// Metodo Get ClienteDAL recupera un Cliente mediante el id del Cliente
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns>Cliente</returns>
@@ -187,21 +203,23 @@ namespace DAL
 			string query = "SELECT idCliente,nombres,primerApellido,segundoApellido,estadoCliente,fechaHoraActualizacionCliente,fechaHoraRegistro FROM Cliente WHERE idCliente=@idCliente";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Get de un Cliente", DateTime.Now));
 
 				cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@idCliente", id);
 				dr = Methods.ExecuteDataReaderCommand(cmd);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Conseguido Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 
 				while (dr.Read())
 				{
 					res = new Cliente(int.Parse(dr[0].ToString()), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), byte.Parse(dr[4].ToString()), DateTime.Parse(dr[5].ToString()), DateTime.Parse(dr[6].ToString()));
 				}
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			finally
 			{
@@ -211,7 +229,7 @@ namespace DAL
 			return res;
 		}
 		/// <summary>
-		/// Metodo SelectClientesBusquedaDAL
+		/// Metodo SelectClientesBusquedaDAL permite la busqueda de un Cliente mediante texto
 		/// </summary>
 		/// <param name="texto"></param>
 		/// <returns>DataTable</returns>
@@ -223,16 +241,19 @@ namespace DAL
 			query = query + " ORDER BY 3 DESC ";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Select Busqueda de Clientes", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
 				res = Methods.ExecuteDataTableCommand(cmd);
 
 			}
+			catch (SqlException ex)
+			{
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
+			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return res;
 		}

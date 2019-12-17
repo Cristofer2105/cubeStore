@@ -22,7 +22,6 @@ namespace DAL
 			string query = "SELECT pathImagen FROM Config";
 			try
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Login de Usuarios", DateTime.Now));
 
 				SqlCommand cmd = Methods.CreateBasicCommand(query);
 				dt = Methods.ExecuteDataTableCommand(cmd);
@@ -31,7 +30,7 @@ namespace DAL
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Error: {1}", DateTime.Now, ex.Message));
+				Methods.GenerateLogsErrors(DateTime.Now, ex.Message);
 			}
 			return dt;
 		}
