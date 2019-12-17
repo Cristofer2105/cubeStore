@@ -118,7 +118,6 @@ namespace cubeStore
 		}
 		private void BtnAgregarUsuario_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Complete los campos para agregar un usuario");
 			Habilitar(1);
 			LimpiarCamposAg();
 			txtcorreoAg.IsEnabled = true;
@@ -167,7 +166,7 @@ namespace cubeStore
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+					MessageBox.Show("Ocurrio un error al seleccionar el usuario intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
 				}
 			}
 		}
@@ -190,15 +189,15 @@ namespace cubeStore
 						brl = new UsuarioBRL(usuario);
 						brl.Delete();
 						LimpiarCamposAg();
-						MessageBox.Show("Eliminado Exitosamente");
+						MessageBox.Show("Usuario eliminado Exitosamente");
 						txtcorreoAg.IsEnabled = false;
 						LoadDataGrid();
 		
 					}
-					catch (Exception ex)
+					catch (Exception )
 					{
 
-						MessageBox.Show("Ocurrio un error comuniquese con el administrador de sistemas");
+						MessageBox.Show("Ocurrio un error al eliminar intente nuevamente si el error persiste comuniquese con el administrador de sistemas");
 					}
 				}
 			}
@@ -206,9 +205,7 @@ namespace cubeStore
 
 		private void BtnModificar_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Seleccione un registro de la lista para modificarlo");
 			Habilitar(2);
-			LimpiarCamposAg();
 			txtcorreoAg.IsEnabled = false;
 		}
 
@@ -330,7 +327,7 @@ namespace cubeStore
 							catch (Exception)
 							{
 
-								MessageBox.Show("Error al Enviar");
+								MessageBox.Show("Error al enviar el correo intente nuevamente");
 							}
 						}
 						else

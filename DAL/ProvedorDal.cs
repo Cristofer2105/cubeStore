@@ -33,14 +33,31 @@ namespace DAL
 		/// </summary>
 		public override void Delete()
 		{
-			string query = "UPDATE Provedor SET estadoProvedor=0 , fechaHoraActualizacionProvedor=CURRENT_TIMESTAMP WHERE idProvedor = @idProvedor";
+			string query1 = "UPDATE Provedor SET estadoProvedor=0 , fechaHoraActualizacionProvedor=CURRENT_TIMESTAMP WHERE idProvedor = @idProvedor";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Delete Provedor", DateTime.Now));
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
 
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@idProvedor", prov.IdProvedor);
-				Methods.ExecuteBasicCommand(cmd);
+				cmdslist[0].Parameters.AddWithValue("@idProvedor", prov.IdProvedor);
+
+				string tabla = "Provedor";
+				char cr = 'D';
+				string descripcion = "ID Provedor: " + prov.IdProvedor + ", Se Elimino: " + prov.RazonSocial + ", estadoProvedor=0";
+
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
+
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Fin del metodo Delete Provedor", DateTime.Now));
 
 			}
@@ -54,16 +71,33 @@ namespace DAL
 		/// </summary>
 		public override void Insert()
 		{
-			string query = "INSERT INTO Provedor(razonSocialProvedor,latitud,longitud,fechaRegistro) VALUES(@razonSocialProvedor,@latitud,@longitud,@fechaRegistro)";
+			string query1 = "INSERT INTO Provedor(razonSocialProvedor,latitud,longitud,fechaRegistro) VALUES(@razonSocialProvedor,@latitud,@longitud,@fechaRegistro)";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert Provedor", DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@razonSocialProvedor", prov.RazonSocial);
-				cmd.Parameters.AddWithValue("@latitud", prov.Latitud);
-				cmd.Parameters.AddWithValue("@longitud", prov.Longitud);
-				cmd.Parameters.AddWithValue("@fechaRegistro", prov.FechaHoraRegistro);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@razonSocialProvedor", prov.RazonSocial);
+				cmdslist[0].Parameters.AddWithValue("@latitud", prov.Latitud);
+				cmdslist[0].Parameters.AddWithValue("@longitud", prov.Longitud);
+				cmdslist[0].Parameters.AddWithValue("@fechaRegistro", prov.FechaHoraRegistro);
+
+				int idPro = Methods.GetCurrentValueIDTable("Provedor");
+				string tabla = "Provedor";
+				char cr = 'C';
+				string descripcion = "ID Provedor: " + idPro + ", Se agrego: " + prov.RazonSocial;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Fin del metodo Insert Provedor", DateTime.Now));
 
 			}
@@ -117,17 +151,33 @@ namespace DAL
 		/// </summary>
 		public override void Update()
 		{
-			string query = "UPDATE Provedor SET razonSocialProvedor=@razonSocialProvedor,latitud=@latitud,longitud=@longitud,fechaHoraActualizacionProvedor=CURRENT_TIMESTAMP WHERE idProvedor = @idProvedor";
+			string query1 = "UPDATE Provedor SET razonSocialProvedor=@razonSocialProvedor,latitud=@latitud,longitud=@longitud,fechaHoraActualizacionProvedor=CURRENT_TIMESTAMP WHERE idProvedor = @idProvedor";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update Provedor", DateTime.Now));
 
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@idProvedor", prov.IdProvedor);		
-				cmd.Parameters.AddWithValue("@razonSocialProvedor", prov.RazonSocial);
-				cmd.Parameters.AddWithValue("@latitud", prov.Latitud);
-				cmd.Parameters.AddWithValue("@longitud", prov.Longitud);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@idProvedor", prov.IdProvedor);
+				cmdslist[0].Parameters.AddWithValue("@razonSocialProvedor", prov.RazonSocial);
+				cmdslist[0].Parameters.AddWithValue("@latitud", prov.Latitud);
+				cmdslist[0].Parameters.AddWithValue("@longitud", prov.Longitud);
+
+				string tabla = "Provedor";
+				char cr = 'U';
+				string descripcion = "ID Provedor: " + prov.IdProvedor + ", Se Modifico: " + prov.RazonSocial;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Fin del metodo Update Provedor", DateTime.Now));
 
 			}

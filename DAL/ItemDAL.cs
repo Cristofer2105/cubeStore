@@ -37,14 +37,31 @@ namespace DAL
 		/// </summary>
 		public override void Delete()
 		{
-			string query = "UPDATE Item SET estadoItem=0 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
+			string query1 = "UPDATE Item SET estadoItem=0 , fechaHoraActualizacionItem=CURRENT_TIMESTAMP WHERE idItem = @idItem";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
+
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Delete de un Item", DateTime.Now));
 
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@idItem", itm.IdItem);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@idItem", itm.IdItem);
+
+				string tabla = "Item";
+				char cr = 'D';
+				string descripcion = "ID Item: " + itm.IdItem + ", Se elimino"+", estadoItem=0";
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
 
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Codigo Item: {1}, Usuario:{2}", DateTime.Now, itm.CodigoItem, Sesion.usuarioSesion));
 
@@ -59,17 +76,34 @@ namespace DAL
 		/// </summary>
 		public override void Insert()
 		{
-			string query = "INSERT INTO Item(codigoItem,idArticulo,precioBase,fechaRegistro) VALUES(@codigoItem,@idArticulo,@precioBase,@fechaRegistro)";
+			string query1 = "INSERT INTO Item(codigoItem,idArticulo,precioBase,fechaRegistro) VALUES(@codigoItem,@idArticulo,@precioBase,@fechaRegistro)";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Insert de un Item", DateTime.Now));
 
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@codigoItem", itm.CodigoItem);
-				cmd.Parameters.AddWithValue("@idArticulo", itm.IdArticulo);
-				cmd.Parameters.AddWithValue("@precioBase", itm.PrecioBaseItem);
-				cmd.Parameters.AddWithValue("@fechaRegistro", itm.FehaRegistroItem);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@codigoItem", itm.CodigoItem);
+				cmdslist[0].Parameters.AddWithValue("@idArticulo", itm.IdArticulo);
+				cmdslist[0].Parameters.AddWithValue("@precioBase", itm.PrecioBaseItem);
+				cmdslist[0].Parameters.AddWithValue("@fechaRegistro", itm.FehaRegistroItem);
+
+				int idIte = Methods.GetCurrentValueIDTable("Item");
+				string tabla = "Item";
+				char cr = 'C';
+				string descripcion = "ID Item: " + idIte + ", Se agrego: " + itm.CodigoItem+ ", Precio: " + itm.PrecioBaseItem +", ID Articulo: " + itm.IdArticulo;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Codigo Item: {1}, Usuario:{2}", DateTime.Now, itm.CodigoItem, Sesion.usuarioSesion));
 
 			}
@@ -129,15 +163,32 @@ namespace DAL
 		/// </summary>
 		public override void Update()
 		{
-			string query = "UPDATE Item SET codigoItem=@codigoItem,precioBase=@precioBase WHERE idItem = @idItem";
+			string query1 = "UPDATE Item SET codigoItem=@codigoItem,precioBase=@precioBase WHERE idItem = @idItem";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo Update de Item", DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@codigoItem", itm.CodigoItem);
-				cmd.Parameters.AddWithValue("@precioBase", itm.PrecioBaseItem);
-				cmd.Parameters.AddWithValue("@idItem", itm.IdItem);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@codigoItem", itm.CodigoItem);
+				cmdslist[0].Parameters.AddWithValue("@precioBase", itm.PrecioBaseItem);
+				cmdslist[0].Parameters.AddWithValue("@idItem", itm.IdItem);
+
+				string tabla = "Item";
+				char cr = 'U';
+				string descripcion = "ID Item: " + itm.IdItem + ", Se Modifico: " + itm.CodigoItem + ", Precio: " + itm.PrecioBaseItem;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
+
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Actualizado, Usuario:{1}", DateTime.Now, Sesion.usuarioSesion));
 			}
 			catch (Exception ex)

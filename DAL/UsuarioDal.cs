@@ -36,13 +36,31 @@ namespace DAL
 		/// </summary>
 		public override void Delete()
 		{
-			string query = "UPDATE Empleado SET estadoEmpleado=0 WHERE idEmpleado = @idEmpleado";
+			string query1 = "UPDATE Empleado SET estadoEmpleado=0 WHERE idEmpleado = @idEmpleado";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de eliminacion de un Usuario", DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
+
+				string tabla = "Empleado";
+				char cr = 'D';
+				string descripcion = "ID Empleado: " + user.IdUsuario + ", Se Elimino: " + user.NombreUsuario + ", estadoEmpleado=0";
+
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
+
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Eliminado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 			}
 			catch (Exception ex)
@@ -55,21 +73,38 @@ namespace DAL
 		/// </summary>
 		public override void Insert()
 		{
-			string query = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,usuario,contrasenia,rolEmpleado,email,fechaRegistro) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@usuario,HASHBYTES('md5',@contrasenia),@rolEmpleado,@email,@fechaRegistro)";
+			string query1 = "INSERT INTO Empleado(nombres,primerApellido,segundoApellido,sexo,usuario,contrasenia,rolEmpleado,email,fechaRegistro) VALUES(@nombres,@primerApellido,@segundoApellido,@sexo,@usuario,HASHBYTES('md5',@contrasenia),@rolEmpleado,@email,@fechaRegistro)";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Insertar un Usuario", DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@nombres", user.Nombres);
-				cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
-				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
-				cmd.Parameters.AddWithValue("@sexo", user.Sexo);
-				cmd.Parameters.AddWithValue("@usuario", user.NombreUsuario);
-				cmd.Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
-				cmd.Parameters.AddWithValue("@rolEmpleado", user.Rol);
-				cmd.Parameters.AddWithValue("@email", user.Correo);
-				cmd.Parameters.AddWithValue("@fechaRegistro", user.FechaRegistro);
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@nombres", user.Nombres);
+				cmdslist[0].Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
+				cmdslist[0].Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
+				cmdslist[0].Parameters.AddWithValue("@sexo", user.Sexo);
+				cmdslist[0].Parameters.AddWithValue("@usuario", user.NombreUsuario);
+				cmdslist[0].Parameters.AddWithValue("@contrasenia", user.Contrasenia).SqlDbType = SqlDbType.VarChar;
+				cmdslist[0].Parameters.AddWithValue("@rolEmpleado", user.Rol);
+				cmdslist[0].Parameters.AddWithValue("@email", user.Correo);
+				cmdslist[0].Parameters.AddWithValue("@fechaRegistro", user.FechaRegistro);
+
+				int idEmp = Methods.GetCurrentValueIDTable("Empleado");
+				string tabla = "Empleado";
+				char cr = 'C';
+				string descripcion = "ID Empleado: " + idEmp + ", Se agrego: " + user.NombreUsuario+", Rol: "+user.Rol;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Insertado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now, user.NombreUsuario, Sesion.usuarioSesion));
 			}
 			catch (Exception ex)
@@ -103,19 +138,34 @@ namespace DAL
 		/// </summary>
 		public override void Update()
 		{
-			string query = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,email=@email WHERE idEmpleado=@idEmpleado";
+			string query1 = "UPDATE Empleado SET nombres=@nombres,primerApellido=@primerApellido,segundoApellido=@segundoApellido,email=@email WHERE idEmpleado=@idEmpleado";
+			string query2 = "INSERT INTO Auditoria(tabla,creaUpdDel,descripcion,idUsuario)VALUES(@tabla,@creaUpdDel,@descripcion,@idUsuario)";
+			List<SqlCommand> cmdslist = new List<SqlCommand>();
 			try
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Inicio del metodo de Update de Usuarios", DateTime.Now));
-				SqlCommand cmd = Methods.CreateBasicCommand(query);
-				cmd.Parameters.AddWithValue("@nombres", user.Nombres);
-				cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
-				cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);												
-				cmd.Parameters.AddWithValue("@email", user.SegundoApellido);
-				cmd.Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
-				System.Diagnostics.Debug.WriteLine(string.Format("{0} Info: Registro Actualizado, Nombre Usuario: {1}, Usuario:{2}", DateTime.Now,user.NombreUsuario, Sesion.usuarioSesion));
 
-				Methods.ExecuteBasicCommand(cmd);
+				List<string> querys = new List<string>();
+				querys.Add(query1);
+				querys.Add(query2);
+				cmdslist = Methods.CreateNCommands(querys);
+
+				cmdslist[0].Parameters.AddWithValue("@nombres", user.Nombres);
+				cmdslist[0].Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
+				cmdslist[0].Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
+				cmdslist[0].Parameters.AddWithValue("@email", user.Correo);
+				cmdslist[0].Parameters.AddWithValue("@idEmpleado", user.IdUsuario);
+
+				string tabla = "Empleado";
+				char cr = 'U';
+				string descripcion = "ID Empleado: " + user.IdUsuario + ", Se Modifico: " + user.Nombres+" "+user.PrimerApellido+" "+user.SegundoApellido+", Rol: "+user.Rol;
+				cmdslist[1].Parameters.AddWithValue("@tabla", tabla);
+				cmdslist[1].Parameters.AddWithValue("@creaUpdDel", cr);
+				cmdslist[1].Parameters.AddWithValue("@descripcion", descripcion);
+				cmdslist[1].Parameters.AddWithValue("@idUsuario", Sesion.idSesion);
+
+
+				Methods.ExecuteNBasicCommand(cmdslist);
 			}
 			catch (Exception ex)
 			{
